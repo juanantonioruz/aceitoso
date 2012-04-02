@@ -1,0 +1,10 @@
+class Generica < ActiveRecord::Base
+    mount_uploader :imagen,ImagenUploader
+    def verimagen
+        if self.imagen_url.to_s!=''
+             "image_tag 'self.imagen_url.to_s'"
+        else
+            ""
+        end
+    end
+end
