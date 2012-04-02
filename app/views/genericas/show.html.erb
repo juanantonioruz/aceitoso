@@ -1,0 +1,7 @@
+<h1>Mostrando: <%=@generica.titulo%></h1>
+<label class='label'>Descripción</label>
+<p><%=@generica.descripcion%></p>
+<label class='label'>Imagen</label>
+<%=render :partial=>'shared/imagen',:locals=>{:model=>@generica,:size=>'124x124'}%>
+<br/>
+<%=link_to 'Editar',edit_generica_path(@generica),:class=>'btn'%> o <%=link_to 'Ir al listado',genericas_path%>
