@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,12 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402220102) do
-
-  create_table "etiquetas", :force => true do |t|
-    t.string  "nombre"
-    t.integer "etiqueta_id"
-  end
+ActiveRecord::Schema.define(:version => 20120403122635) do
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"
@@ -25,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20120402220102) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "genericas_labels", :id => false, :force => true do |t|
+    t.integer "generica_id"
+    t.integer "label_id"
+  end
+
+  add_index "genericas_labels", ["generica_id", "label_id"], :name => "index_genericas_labels_on_generica_id_and_label_id"
+  add_index "genericas_labels", ["label_id", "generica_id"], :name => "index_genericas_labels_on_label_id_and_generica_id"
 
   create_table "labels", :force => true do |t|
     t.string  "nombre"
