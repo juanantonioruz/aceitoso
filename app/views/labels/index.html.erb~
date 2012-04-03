@@ -1,14 +1,16 @@
-<h1> <%if !@label.nil?%>Etiquetas hijas de <%= @label.nombre%><%end%></h1>
+<h1> <%if !@label.nil?%>Etiquetas hijas de <%= @label.nombre%><%else%>Listado de etiquetas<%end%></h1>
 
 <table class='table zebra-striped'>
 <tr>
 <th>Nombre</th>
+<th>Jerarquía</th>
 <th>Etiquetas hijas</th>
 <th>Acciones</th>
 </tr>
 <%@labels.each do |label|%>
     <tr>
     <td><%=label.nombre%></td>
+    <td><%=genealogia(label)%></td>
     <td><%label.labels.each do |l|%><%=l.nombre%>&nbsp;<%end%></td>
     <td>
     <%= link_to 'Ver',label,:class=>'btn btn-success'%>

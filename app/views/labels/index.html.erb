@@ -2,12 +2,14 @@
 
 <table class='table zebra-striped'>
 <tr>
+<th>Jerarquía</th>
 <th>Nombre</th>
 <th>Etiquetas hijas</th>
 <th>Acciones</th>
 </tr>
 <%@labels.each do |label|%>
     <tr>
+    <td><%=genealogia(label)%></td>
     <td><%=label.nombre%></td>
     <td><%label.labels.each do |l|%><%=l.nombre%>&nbsp;<%end%></td>
     <td>
