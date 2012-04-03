@@ -1,9 +1,16 @@
+include ImagenUploader
 class Generica < ActiveRecord::Base
+    
     mount_uploader :imagen,ImagenUploader
     has_and_belongs_to_many :labels
     
     def etiquetas
        self.labels.collect { |l| l.nombre+' ' } 
-
     end
+    def img
+       if self.imagen_url.to_s!=''
+           ActionController::Base.helpers.image_tag(self.imagen_url_to_s)
+       end
+    end
+    
 end

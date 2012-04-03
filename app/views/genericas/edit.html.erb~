@@ -1,2 +1,2 @@
-<h1>Nueva información</h1>
+<h1>Editar información</h1>
 <%=render 'form'%>

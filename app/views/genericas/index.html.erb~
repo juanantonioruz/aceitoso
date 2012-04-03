@@ -11,8 +11,8 @@
 <tr>
 <td><%=generica.titulo%></td>
 <td><%=generica.descripcion%></td>
-<td><%=generica.labels.collection_singular_ids%></td>
-<td><%=render :partial=>'shared/imagen',:locals=>{:model=>generica,:size=>'64x64'}%></td>
+<td><%=generica.etiquetas%><%=imagen(generica)%></td>
+<td><%=imagentam(generica,'64x64')%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>
