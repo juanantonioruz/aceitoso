@@ -11,7 +11,7 @@
 <tr>
 <td><%=generica.titulo%></td>
 <td><%=generica.descripcion%></td>
-<td><%=generica.etiquetas%><%=imagen(generica)%></td>
+<td><%=generica.etiquetas%></td>
 <td><%=imagentam(generica,'64x64')%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>

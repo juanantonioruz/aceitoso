@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403122635) do
+ActiveRecord::Schema.define(:version => 20120403191641) do
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"
@@ -34,5 +34,9 @@ ActiveRecord::Schema.define(:version => 20120403122635) do
   end
 
   add_index "labels", ["label_id"], :name => "index_labels_on_label_id"
+
+  create_table "museos", :force => true do |t|
+    t.string "nombre"
+  end
 
 end
