@@ -1,0 +1,18 @@
+<%= form_for([ @generica.labels.build]) do |h| %>
+
+ <!--   <%= h.collection_select(:label_id, Label.all, :id,:nombre, :prompt => 'Elija... ')%>
+    <%= h.label :generica %>-->
+<% for label in Label.find(:all) %>  
+    <div>  
+      <%= check_box_tag "generica[label_ids][]", label.id, @generica.labels.include?(label) %>  
+      <%= label.name %>  
+    </div>  
+<% end %>  
+    
+  
+  
+  <div class="actions">
+    <%= h.submit 'Añadir etiqueta',:class=>'btn' %>
+  </div>
+
+  <%end%>

@@ -3,6 +3,7 @@
 <tr>
 <th>Titulo</th>
 <th>Descripcion</th>
+<th>Etiquetas</th>
 <th>Imagen</th>
 <th>Acciones</th>
 </tr>
@@ -10,6 +11,7 @@
 <tr>
 <td><%=generica.titulo%></td>
 <td><%=generica.descripcion%></td>
+<td><%=generica.etiquetas%></td>
 <td><%=render :partial=>'shared/imagen',:locals=>{:model=>generica,:size=>'64x64'}%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>

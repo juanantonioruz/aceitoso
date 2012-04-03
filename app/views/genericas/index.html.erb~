@@ -3,6 +3,7 @@
 <tr>
 <th>Titulo</th>
 <th>Descripcion</th>
+<th>Etiquetas</th>
 <th>Imagen</th>
 <th>Acciones</th>
 </tr>
@@ -10,13 +11,13 @@
 <tr>
 <td><%=generica.titulo%></td>
 <td><%=generica.descripcion%></td>
+<td><%=generica.labels.collection_singular_ids%></td>
 <td><%=render :partial=>'shared/imagen',:locals=>{:model=>generica,:size=>'64x64'}%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>
 <%= link_to 'Borrar',generica_path(generica),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion?',:class=>'btn btn-danger'%>
-%= link_to  product_path(product), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}",:class=>"btn btn-danger " do %>
-     	 <i class="icon-trash "></i> Borrar
+
 </td>
 </tr>
 <%end%>

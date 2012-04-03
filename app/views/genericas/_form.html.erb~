@@ -4,16 +4,23 @@
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x10'%>
     <%=f.label :imagen,:class=>'label'%>
-    <%=render :partial=>'shared/imagen',:locals=>{:model=>@generica}%>
-     <%if @generica.imagen_url.to_s!='' %>
+    
+    <%if @generica.imagen_url.to_s!='' %>
         <%= image_tag @generica.imagen_url.to_s,:size=>'64x64' %>
         <%= f.check_box :remove_imagen %>
         Borrar imagen
     <%end%>
-   
-     
-        <%= f.file_field :imagen %>
-    
     <br/>
+    <%= f.file_field :imagen %>  
+    <br/>
+    <label class='label'>Etiquetas</label>
+   <% for label in Label.find(:all) %>  
+    <span>  
+      <%= check_box_tag "generica[label_ids][]", label.id, @generica.labels.include?(label) %>  
+      <%= label.nombre %>  
+    </span>
+<br/>  
+<% end %>  
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',genericas_path%>
 <%end%>
+

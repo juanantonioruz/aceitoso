@@ -7,7 +7,7 @@ module GenericasHelper
         else
             padre=Label.find(label.label_id)
                        
-            return link_to()genealogia(padre),label_path(padre)) +' > '+ link_to(label.nombre,label_path(label))            
+            return link_to(genealogia(padre),label_path(padre)) +' > '+ link_to(label.nombre,label_path(label))            
             
             
         end

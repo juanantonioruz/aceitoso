@@ -2,21 +2,23 @@
 
 <table class='table zebra-striped' id='ordenar'>
 <thead>
-<th class='header'>Jerarquía</th>
+
 <th>Nombre</th>
+<th>Jerarquía</th>
 <th>Etiquetas hijas</th>
+
 <th>Acciones</th>
 </thead>
 <tbody>
 <%@labels.each do |label|%>
     <tr>
-    <td><%=genealogia(label)%></td>
     <td><%=label.nombre%></td>
+     <td><%=genealogia(label)%></td>
     <td><%label.labels.each do |l|%><%=l.nombre%>&nbsp;<%end%></td>
     <td>
     <%= link_to 'Ver',label,:class=>'btn btn-success'%>
     <%= link_to 'Editar',edit_label_path(label),:class=>'btn btn-warning'%>
-    <%= link_to 'Borrar',label_path(label,:index=>'true'),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion?',:class=>'btn btn-danger'%>
+    <%= link_to 'Borrar',label_path(label,:index=>'true'),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion? Las etiquetas hijas se eliminaran',:class=>'btn btn-danger'%>
 
     </td>
     </tr>
