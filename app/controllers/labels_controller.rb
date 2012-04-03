@@ -53,7 +53,8 @@ class LabelsController < ApplicationController
             redirect_to labels_url
         else
             destino=@label.label_id  
-            @label.destroy
+            @label.label_id=nil
+            @label.save
             redirect_to label_path(params[:label_id])
          end
    

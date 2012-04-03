@@ -1,4 +1,4 @@
-  <label class='label'>Etiquetas hijas</label>
+
 
 <%= form_for([@label, @label.labels.build]) do |h| %>
 

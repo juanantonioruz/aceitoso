@@ -1,4 +1,4 @@
-<h1>Listado de etiquetas</h1>
+<h1> <%if !@label.nil?%>Etiquetas hijas de <%= @label.nombre%><%else%>Listado de etiquetas<%end%></h1>
 
 <table class='table zebra-striped'>
 <tr>
@@ -9,9 +9,7 @@
 <%@labels.each do |label|%>
     <tr>
     <td><%=label.nombre%></td>
-    <td><%label.labels.each do |l|%>
-     <%=l.nombre%>&nbsp;<%end%>
-    </td>
+    <td><%label.labels.each do |l|%><%=l.nombre%>&nbsp;<%end%></td>
     <td>
     <%= link_to 'Ver',label,:class=>'btn btn-success'%>
     <%= link_to 'Editar',edit_label_path(label),:class=>'btn btn-warning'%>

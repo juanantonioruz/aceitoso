@@ -48,12 +48,12 @@ class LabelsController < ApplicationController
     def destroy
         
        @label=Label.find(params[:id])
-        if @label.label_id.nil? 
+        if @label.label_id.nil? || params[:index]
             @label.destroy
             redirect_to labels_url
         else
             destino=@label.label_id  
-            @label.destroy
+            @label.label_id=nil
             redirect_to label_path(params[:label_id])
          end
    
