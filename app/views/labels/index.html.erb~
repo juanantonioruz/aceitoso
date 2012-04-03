@@ -1,16 +1,17 @@
 <h1> <%if !@label.nil?%>Etiquetas hijas de <%= @label.nombre%><%else%>Listado de etiquetas<%end%></h1>
 
-<table class='table zebra-striped'>
-<tr>
+<table class='table zebra-striped' id='ordenar'>
+<thead>
+<th class='header headerSortUp'>Jerarquía</th>
 <th>Nombre</th>
-<th>Jerarquía</th>
 <th>Etiquetas hijas</th>
 <th>Acciones</th>
-</tr>
+</thead>
+<tbody>
 <%@labels.each do |label|%>
     <tr>
-    <td><%=label.nombre%></td>
     <td><%=genealogia(label)%></td>
+    <td><%=label.nombre%></td>
     <td><%label.labels.each do |l|%><%=l.nombre%>&nbsp;<%end%></td>
     <td>
     <%= link_to 'Ver',label,:class=>'btn btn-success'%>
@@ -20,7 +21,13 @@
     </td>
     </tr>
 <%end%>
+</tbody>
 </table>
 <%= link_to 'Añadir etiqueta',new_label_path,:class=>'btn'%>
 
 
+<script >
+  $(function() {
+    $("#ordenar").tablesorter({ sortList: [[1,0]] });
+  });
+</script>
