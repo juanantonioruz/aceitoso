@@ -1,0 +1,12 @@
+<h1>Mostrando etiqueta</h1>
+<label class='label'>Nombre</label>
+<p><%=@label.nombre%></p>
+
+<label class='label'>Etiquetas hijas</label>
+<%@label.labels.each do |label|%>
+   <p><b><%=label.nombre%></b> <%= link_to 'Borrar', [label.label, label], :confirm => 'Seguro?',    :method => :delete,:class=>'btn btn-mini btn-danger' %></p>
+<%end%>
+
+<%=render 'formhijas'%>
+<br/>
+<%=link_to 'Editar',edit_label_path(@generica),:class=>'btn'%> o <%=link_to 'Ir al listado',labels_path%>

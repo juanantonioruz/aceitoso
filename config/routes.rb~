@@ -1,7 +1,10 @@
 Olearum::Application.routes.draw do
   
-  resources :information
-
+  resources :labels do
+    resources :labels
+  end
+  resources :genericas
+  
   #resources :informations
   
   get "admin/index"

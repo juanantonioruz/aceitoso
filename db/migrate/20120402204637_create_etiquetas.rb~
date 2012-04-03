@@ -1,0 +1,9 @@
+class CreateEtiquetas < ActiveRecord::Migration
+  def change
+    create_table :etiquetas do |t|
+      t.string :nombre
+      t.integer :etiqueta_id
+
+    end
+  end
+end

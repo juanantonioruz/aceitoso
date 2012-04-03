@@ -1,0 +1,6 @@
+<%=form_for @label do |f|%>
+    <%=f.label :nombre,:class=>'label'%>
+    <%=f.text_field :nombre%>
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',labels_path%>
+<%end%>
