@@ -10,7 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402162757) do
+ActiveRecord::Schema.define(:version => 20120402220102) do
+
+  create_table "etiquetas", :force => true do |t|
+    t.string  "nombre"
+    t.integer "etiqueta_id"
+  end
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"
@@ -19,5 +24,12 @@ ActiveRecord::Schema.define(:version => 20120402162757) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "labels", :force => true do |t|
+    t.string  "nombre"
+    t.integer "label_id"
+  end
+
+  add_index "labels", ["label_id"], :name => "index_labels_on_label_id"
 
 end

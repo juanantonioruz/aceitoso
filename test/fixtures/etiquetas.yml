@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  etiqueta_id: 1
+
+two:
+  nombre: MyString
+  etiqueta_id: 1

@@ -1,0 +1,72 @@
+class EtiquetasController < ApplicationController
+  # GET /etiqueta
+  # GET /etiqueta.json
+  def index
+    @etiquetas = Etiqueta.all
+
+    
+  end
+
+  # GET /etiqueta/1
+  # GET /etiqueta/1.json
+  def show
+    @etiqueta = Etiqueta.find(params[:id])
+
+  end
+
+  # GET /etiqueta/new
+  # GET /etiqueta/new.json
+  def new
+    @etiqueta = Etiqueta.new
+
+  end
+
+  # GET /etiqueta/1/edit
+  def edit
+    @etiqueta = etiqueta.find(params[:id])
+  end
+
+  # POST /etiqueta
+  # POST /etiqueta.json
+  def create
+    @etiqueta = etiqueta.new(params[:etiqueta])
+
+    respond_to do |format|
+      if @etiqueta.save
+        format.html { redirect_to @etiqueta, :notice => 'etiqueta was successfully created.' }
+        format.json { render :json => @etiqueta, :status => :created, :location => @etiqueta }
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @etiqueta.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /etiqueta/1
+  # PUT /etiqueta/1.json
+  def update
+    @etiqueta = etiqueta.find(params[:id])
+
+    respond_to do |format|
+      if @etiqueta.update_attributes(params[:etiqueta])
+        format.html { redirect_to @etiqueta, :notice => 'etiqueta was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => "edit" }
+        format.json { render :json => @etiqueta.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /etiqueta/1
+  # DELETE /etiqueta/1.json
+  def destroy
+    @etiqueta = etiqueta.find(params[:id])
+    @etiqueta.destroy
+
+    respond_to do |format|
+      format.html { redirect_to etiqueta_url }
+      format.json { head :no_content }
+    end
+  end
+end
