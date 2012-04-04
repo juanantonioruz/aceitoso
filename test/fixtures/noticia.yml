@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  url: MyString
+  descripcion: MyText
+  museo: 
+
+two:
+  nombre: MyString
+  url: MyString
+  descripcion: MyText
+  museo: 

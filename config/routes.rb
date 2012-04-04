@@ -6,6 +6,7 @@ Olearum::Application.routes.draw do
     resources :piezas
     resources :eventos
     resources :premios
+    resources :publicacions
   end
   
   resources :labels do
