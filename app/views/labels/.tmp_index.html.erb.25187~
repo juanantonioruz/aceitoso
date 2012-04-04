@@ -19,15 +19,14 @@
     <%= link_to 'Ver',label,:class=>'btn btn-success'%>
     <%= link_to 'Editar',edit_label_path(label),:class=>'btn btn-warning'%>
     <%= link_to 'Borrar',label_path(label,:index=>'true'),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion? Las etiquetas hijas se eliminaran',:class=>'btn btn-danger'%>
+
     </td>
     </tr>
 <%end%>
 </tbody>
 </table>
-<%= link_to 'Añadir etiqueta principal',new_label_path,:class=>'btn'%>
-<hr>
-<i> * Para añadir una etiqueta a una existente haga click en "ver" la etiqueta existente</i>
-<hr>
+<%= link_to 'Añadir etiqueta',new_label_path,:class=>'btn'%>
+
 
 <script >
   $(function() {
