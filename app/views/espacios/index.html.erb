@@ -1,0 +1,29 @@
+<h1> Espacios: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Titulo</th>
+<th>Id en el plano</th>
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@espacios.each do |espacio|%>
+<tr>
+<td><%=espacio.nombre%></td>
+<td><%=espacio.idplano%></td>
+<td><%=espacio.descripcion%></td>
+<td><%=imagentam(espacio,'64x64')%></td>
+
+
+<td>
+<%= link_to 'Ver',museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:method=>:delete,:confirm=>'¿Seguro que desea borrar este espacio?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir espacio',new_museo_espacio_path(@museo),:class=>'btn'%>
+
+

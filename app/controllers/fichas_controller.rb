@@ -14,10 +14,7 @@ class FichasController < ApplicationController
 
             if @ficha.update_attributes(params[:ficha])
                   redirect_to museo_ficha_path(@museo), :notice => 'Informacion actualizada'
-            
-           
             end
-        
     end
 
 end

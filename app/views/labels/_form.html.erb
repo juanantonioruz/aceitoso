@@ -1,4 +1,4 @@
-<%=form_for ([@ficha, @museo.labels.update]) do |f|%>
+<%=form_for @label do |f|%>
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>
     <br/>
