@@ -1,4 +1,4 @@
-<h1> Catálogo de piezas: <%=@museo.nombre%></h1>
+<h1> Catálogo de premios: <%=@museo.nombre%></h1>
 <table class='table zebra-striped'>
 <tr>
 <th>Nombre</th>
@@ -7,22 +7,22 @@
 
 
 </tr>
-<%@piezas.each do |pieza|%>
+<%@premios.each do |premio|%>
 <tr>
-<td><%=pieza.nombre%></td>
-<td><%=pieza.url%></td>
-<td><%=pieza.descripcion%></td>
+<td><%=premio.nombre%></td>
+<td><%=premio.url%></td>
+<td><%=premio.descripcion%></td>
 
 
 
 <td>
-<%= link_to 'Ver',museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:class=>'btn btn-success'%>
-<%= link_to 'Editar',edit_museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:class=>'btn btn-warning'%>
-<%= link_to 'Borrar',museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta pieza?',:class=>'btn btn-danger'%>
+<%= link_to 'Ver',museo_premio_path(:museo_id=>premio.museo,:id=>premio),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_premio_path(:museo_id=>premio.museo,:id=>premio),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_premio_path(:museo_id=>premio.museo,:id=>premio),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta premio?',:class=>'btn btn-danger'%>
 
 </td>
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir pieza',new_museo_pieza_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+<%= link_to 'Añadir premio',new_museo_premio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
 

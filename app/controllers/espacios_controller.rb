@@ -11,7 +11,7 @@ class EspaciosController < ApplicationController
         @museo=Museo.find(params[:museo_id])
         @espacio=@museo.espacios.create(params[:espacio])
         @espacio.save
-        redirect_to museo_espacios_path(:museo_id=>@museo,:id=>@espacio))
+        redirect_to museo_espacios_path(:museo_id=>@museo,:id=>@espacio)
     end
     def show
         @espacio=Espacio.find(params[:id])
