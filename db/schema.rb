@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404161855) do
+ActiveRecord::Schema.define(:version => 20120404180829) do
 
   create_table "espacios", :force => true do |t|
     t.string  "nombre"
@@ -59,5 +59,15 @@ ActiveRecord::Schema.define(:version => 20120404161855) do
   create_table "museos", :force => true do |t|
     t.string "nombre"
   end
+
+  create_table "piezas", :force => true do |t|
+    t.string  "nombre"
+    t.text    "descripcion"
+    t.string  "imagen"
+    t.boolean "coleccion",   :default => false
+    t.integer "museo_id"
+  end
+
+  add_index "piezas", ["museo_id"], :name => "index_piezas_on_museo_id"
 
 end

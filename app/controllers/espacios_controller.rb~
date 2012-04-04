@@ -22,7 +22,7 @@ class EspaciosController < ApplicationController
     end
     def destroy
         @espacio = Espacio.find(params[:id])
-        @museo=espacio.museo    
+        @museo=@espacio.museo
         @espacio.destroy
 
         respond_to do |format|
