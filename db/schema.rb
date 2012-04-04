@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403191641) do
+ActiveRecord::Schema.define(:version => 20120403215226) do
+
+  create_table "fichas", :force => true do |t|
+    t.string  "imagen"
+    t.text    "descripcion"
+    t.text    "contacto"
+    t.text    "llegar"
+    t.text    "horario"
+    t.string  "x"
+    t.string  "y"
+    t.integer "museo_id"
+  end
+
+  add_index "fichas", ["museo_id"], :name => "index_fichas_on_museo_id"
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"

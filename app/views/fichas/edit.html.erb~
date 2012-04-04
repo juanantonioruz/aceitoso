@@ -1,0 +1,1 @@
+<h1>Edición ficha técnica: <%=@museo.nombre%></h1>

@@ -1,6 +1,8 @@
 Olearum::Application.routes.draw do
   
-  resources :museos
+  resources :museos do
+    resource :ficha
+  end
   
   resources :labels do
     resources :labels

@@ -1,0 +1,28 @@
+<%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
+    <%=f.label :imagen,:class=>'label'%>
+    <%if @ficha.imagen_url.to_s!='' %>
+        <%=imagentam(@ficha,'64x64')%>
+        <%= f.check_box :remove_imagen %>
+        Borrar imagen
+    <%end%>
+    <br/>
+    <%= f.file_field :imagen %> 
+
+    <%=f.label :descripcion,:class=>'label'%>
+    <%=f.text_area :descripcion,:size=>'30x5'%>
+
+    <label class='label'>Contacto</label>
+    <%=f.text_area :contacto,:size=>'30x5'%>
+
+    <label class='label'>Como llegar</label>
+     <%=f.text_area :llegar,:size=>'30x5'%>
+
+    <label class='label'>Horarios</label>
+     <%=f.text_area :horario,:size=>'30x5'%>
+
+    <label class='label'>Coordenadas: Latitud / Longitud</label>
+    <p>Latitud:&nbsp <%=f.text_field :x%>&nbsp;Longitud:  <%=f.text_field  :y%></p>
+
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
+<%end%>

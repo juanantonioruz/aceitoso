@@ -1,0 +1,3 @@
+class Museo < ActiveRecord::Base
+    has_one :ficha
+end

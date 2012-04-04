@@ -7,7 +7,9 @@ class MuseosController < ApplicationController
     end
     def create
         @museo=Museo.create(params[:museo])
+        @museo.ficha=Ficha.create  ####Ojo al 1-1 asi es muy limpio
         @museo.save
+        
         redirect_to @museo
     end
     def show

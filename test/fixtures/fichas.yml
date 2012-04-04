@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  imagen: MyString
+  descripcion: MyText
+  contacto: MyText
+  llegar: MyText
+  horario: MyText
+  x: MyString
+  y: MyString
+  museo: 
+
+two:
+  imagen: MyString
+  descripcion: MyText
+  contacto: MyText
+  llegar: MyText
+  horario: MyText
+  x: MyString
+  y: MyString
+  museo: 
