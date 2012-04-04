@@ -1,0 +1,18 @@
+<h1>Premio del museo <%=@premio.museo.nombre%></h1>
+
+
+<label class='label'>Nombre</label>
+<p><%=@premio.nombre%>&nbsp;</p>
+
+<label class='label'>Sitio web del premio</label>
+<p><%=@premio.url%>&nbsp;</p>
+
+<label class='label'>Descripción de la premio</label>
+<p><%=@premio.descripcion%>&nbsp;</p>
+
+<label class='label'>Es parte de la colección del museo</label>
+<p><%=@premio.escoleccion%>&nbsp;</p>
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_premio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a premios',museo_premios_path(@museo)%>

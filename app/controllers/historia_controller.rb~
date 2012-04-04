@@ -1,0 +1,40 @@
+class HistoriaController < ApplicationController
+    def index
+        @museo=Museo.find(params[:museo_id])
+        @historias=@museo.historia
+    end
+    def new
+        @museo=Museo.find(params[:museo_id])
+        @historia=@museo.historia.new
+    end
+    def create
+        @museo=Museo.find(params[:museo_id])
+        @historia=@museo.historia.create(params[:historia])
+        @historia.save
+        redirect_to museo_historia_path(@museo)
+    end
+    def show
+        @historia=historia.find(params[:id])
+    end
+    def edit
+         @historia=historia.find(params[:id])
+         @museo=@historia.museo
+    end
+    def destroy
+        @historia = historia.find(params[:id])
+        @museo=@historia.museo
+        @historia.destroy
+
+        respond_to do |format|
+            format.html { redirect_to museo_historia_path(@museo) }
+        end
+    end
+    def update
+        @historia = historia.find(params[:id])
+        @museo=@historia.museo
+
+            if @historia.update_attributes(params[:historia])
+                  redirect_to museo_historia_path(:museo_id=>@museo,:id=>@historia), :notice => 'historia actualizada'
+            end
+    end
+end

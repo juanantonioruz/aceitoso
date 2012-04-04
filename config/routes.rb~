@@ -3,11 +3,15 @@ Olearum::Application.routes.draw do
   resources :museos do
     resource :ficha
     resources :espacios
+    resources :piezas
+    resources :eventos
+    resources :premios
   end
   
   resources :labels do
     resources :labels
   end
+
   resources :genericas
   
   #resources :informations

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404180829) do
+ActiveRecord::Schema.define(:version => 20120404221308) do
 
   create_table "espacios", :force => true do |t|
     t.string  "nombre"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20120404180829) do
     t.string  "imagen"
     t.integer "museo_id"
   end
+
+  create_table "eventos", :force => true do |t|
+    t.string  "titulo"
+    t.string  "imagen"
+    t.text    "descripcion"
+    t.integer "museo_id"
+  end
+
+  add_index "eventos", ["museo_id"], :name => "index_eventos_on_museo_id"
 
   create_table "fichas", :force => true do |t|
     t.string  "imagen"
@@ -69,5 +78,14 @@ ActiveRecord::Schema.define(:version => 20120404180829) do
   end
 
   add_index "piezas", ["museo_id"], :name => "index_piezas_on_museo_id"
+
+  create_table "premios", :force => true do |t|
+    t.string  "nombre"
+    t.string  "url"
+    t.text    "descripcion"
+    t.integer "museo_id"
+  end
+
+  add_index "premios", ["museo_id"], :name => "index_premios_on_museo_id"
 
 end

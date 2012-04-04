@@ -11,7 +11,7 @@ class PiezasController < ApplicationController
         @museo=Museo.find(params[:museo_id])
         @pieza=@museo.piezas.create(params[:pieza])
         @pieza.save
-        redirect_to museo_piezas_path(@museo)
+        redirect_to museo_pieza_path(:museo_id=>@museo,:id=>@pieza)
     end
     def show
         @pieza=Pieza.find(params[:id])

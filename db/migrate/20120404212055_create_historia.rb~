@@ -1,0 +1,12 @@
+class CreateHistoria < ActiveRecord::Migration
+  def change
+    create_table :historia do |t|
+      t.string :titulo
+      t.string :imagen
+      t.text :descripcion
+      t.references :museo
+
+    end
+    add_index :historia, :museo_id
+  end
+end
