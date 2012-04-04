@@ -18,12 +18,12 @@
 <td>
 <%= link_to 'Ver',museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:class=>'btn btn-warning'%>
-<%= link_to 'Borrar',museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion?',:class=>'btn btn-danger'%>
+<%= link_to 'Borrar',museo_espacio_path(:museo_id=>espacio.museo,:id=>espacio),:method=>:delete,:confirm=>'¿Seguro que desea borrar este espacio?',:class=>'btn btn-danger'%>
 
 </td>
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir espacio',new_museo_espacio_path(@museo),:class=>'btn'%>
+<%= link_to 'Añadir espacio',new_museo_espacio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
 
 

@@ -11,7 +11,7 @@
 <tr>
 <td><%=pieza.nombre%></td>
 <td><%=pieza.descripcion%></td>
-<td><%=pieza.coleccion%></td>
+<td><%=pieza.escoleccion%></td>
 <td><%=imagentam(pieza,'64x64')%></td>
 
 
@@ -24,6 +24,6 @@
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir pieza',new_museo_pieza_path(@museo),:class=>'btn'%>
+<%= link_to 'Añadir pieza',new_museo_pieza_path(@museo),:class=>'btn'%> o <%=link_to 'volver al museo,',museo_path(@museo)%>
 
-
+volver al
