@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404231107) do
+ActiveRecord::Schema.define(:version => 20120405130302) do
 
   create_table "espacios", :force => true do |t|
     t.string  "nombre"
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(:version => 20120404231107) do
 
   add_index "genericas_labels", ["generica_id", "label_id"], :name => "index_genericas_labels_on_generica_id_and_label_id"
   add_index "genericas_labels", ["label_id", "generica_id"], :name => "index_genericas_labels_on_label_id_and_generica_id"
+
+  create_table "infos", :force => true do |t|
+    t.string  "url"
+    t.integer "museo_id"
+  end
+
+  add_index "infos", ["museo_id"], :name => "index_infos_on_museo_id"
 
   create_table "labels", :force => true do |t|
     t.string  "nombre"

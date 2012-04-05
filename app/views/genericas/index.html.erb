@@ -1,27 +1,24 @@
-<h1>Listado de informaciones genéricas</h1>
+<h1>Contenido museístico</h1>
 <table class='table zebra-striped'>
 <tr>
-<th>Titulo</th>
-<th>Descripcion</th>
-<th>Etiquetas</th>
-<th>Imagen</th>
+<th>Título</th>
+<th>Enlace</th>
 <th>Acciones</th>
 </tr>
-<%@genericas.each do |generica|%>
+<%@infos.each do |info|%>
 <tr>
-<td><%=generica.titulo%></td>
-<td><%=generica.descripcion%></td>
-<td><%=generica.etiquetas%></td>
-<td><%=imagentam(generica,'64x64')%></td>
+<td><%=titulo(info)%></td>
+<td><%=url(info)%></td>
+<td><%=imagentam(info,'64x64')%></td>
 <td>
-<%= link_to 'Ver',generica,:class=>'btn btn-success'%>
-<%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>
-<%= link_to 'Borrar',generica_path(generica),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion?',:class=>'btn btn-danger'%>
+<%= link_to 'Ver',info,:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_info_path(info),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',info_path(info),:method=>:delete,:confirm=>'¿Seguro que desea borrar la informacion?',:class=>'btn btn-danger'%>
 
 </td>
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir información',new_generica_path,:class=>'btn'%>
+<%= link_to 'Añadir información',new_info_path,:class=>'btn'%>
 
 

@@ -5,7 +5,7 @@
  
 <tr><th>Espacios</th><td>Espacios del museo: nombre, imagen, descripción,...</td><td><%=link_to 'Ver',museo_espacios_path(museo),:class=>'btn '%></td></tr>
 
-<tr><th>Contenido museístico</th><td>Aka @infosgenericas</td><td><%=link_to 'Ver',museo,:class=>'btn btn-warning '%></td></tr>
+<tr><th>Contenido museístico</th><td>Noticias asociadas al museo</td><td><%=link_to 'Ver',museo_infos_path(museo),:class=>'btn'%></td></tr>
 
 <tr><th>Piezas museísticas</th><td>Listado de piezas del museo</td><td><%=link_to 'Ver',museo_piezas_path(museo),:class=>'btn '%></td></tr>
 
@@ -13,7 +13,7 @@
 
 <tr><th>Premios/Reconocimientos</th><td>Premios recibidos por el museo</td><td><%=link_to 'Ver',museo_premios_path(museo),:class=>'btn '%></td></tr>
 
-<tr><th>Publicaciones</th><td>Aka @publicaciones</td><td><%=link_to 'Ver',museo_publicacions_path(museo),:class=>'btn '%></td></tr>
+<tr><th>Publicaciones</th><td>Noticias de prensa, comunicados,...</td><td><%=link_to 'Ver',museo_publicacions_path(museo),:class=>'btn '%></td></tr>
 
 <tr><th>Servicios</th><td>Aka @Servicios ---> ?? Los saca de sitio como las etiquetas?? checkbox???</td><td><%=link_to 'Ver',museo,:class=>'btn btn-danger'%></td></tr>
 

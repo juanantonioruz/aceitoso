@@ -1,0 +1,4 @@
+class Publicacion < Premio
+#<ActiveRecord::Base
+  belongs_to :museo
+end
