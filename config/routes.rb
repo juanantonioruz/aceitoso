@@ -1,5 +1,7 @@
 Olearum::Application.routes.draw do
   
+  mount Ckeditor::Engine => '/ckeditor'
+
   resources :museos do
     resource :ficha
     resources :espacios

@@ -1,4 +1,4 @@
-class FichasController < ApplicationController
+ class FichasController < ApplicationController
     def show
         @museo=Museo.find(params[:museo_id])
         @ficha=@museo.ficha

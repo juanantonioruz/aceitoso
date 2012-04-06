@@ -17,7 +17,7 @@
       }
     </style>
     <%= stylesheet_link_tag "application", :media => "all" %>
-
+    <%= javascript_include_tag "ckeditor/init" %>
     <%= javascript_include_tag "application" %>
   </head>
   <body>
@@ -52,8 +52,7 @@
               <li class="nav-header">Opciones</li>
                 <li><%= link_to "Etiquetas",labels_path  %></li>
                 <li><%=link_to 'Informaciones genéricas',genericas_path%></li>
-                
-                <li><%= link_to "Museos", "/path3"  %></li>
+                <li><%= link_to "Museos",museos_path  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
