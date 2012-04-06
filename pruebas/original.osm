@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-6200' visible='true' lat='37.09275092881853' lon='-5.4593833963591365' />
+  <node id='-6198' visible='true' lat='37.09256627852796' lon='-5.459448502814642' />
+  <node id='-6196' visible='true' lat='37.0923672019294' lon='-5.459177225916705' />
+  <node id='-6194' visible='true' lat='37.092615326305285' lon='-5.459007225727332' />
+  <node id='-6193' visible='true' lat='37.09284036864128' lon='-5.459448502814642' />
+  <way id='-6195' action='modify' visible='true'>
+    <nd ref='-6193' />
+    <nd ref='-6194' />
+    <nd ref='-6196' />
+    <nd ref='-6198' />
+    <nd ref='-6200' />
+    <nd ref='-6193' />
+    <tag k='toilets' v='yes' />
+  </way>
+</osm>
