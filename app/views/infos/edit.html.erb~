@@ -1,2 +1,0 @@
-<h1>Edición de contenido museístico <%=@info.nombre%></h1>
-<%=render 'form'%>

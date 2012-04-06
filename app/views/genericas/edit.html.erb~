@@ -1,2 +1,0 @@
-<h1>Editar información</h1>
-<%=render 'form'%>
