@@ -17,13 +17,14 @@
      <%=f.label :contacto,:class=>'label'%>
     <%= f.text_area :contacto,  :class => "tinymce" ,:rows=>5,:cols=>100%>
 
-     <%=f.label :llegar,:class=>'label'%>
+    <label class='label'>Como llegar</label>
     <%= f.text_area :llegar,  :class => "tinymce" ,:rows=>5,:cols=>100%>
 
      <%=f.label :horario,:class=>'label'%>
     <%= f.text_area :horario,:class => "tinymce" ,:rows=>5,:cols=>100%>
      
-    
+    <label class='label'>Coordenadas: Latitud / Longitud</label>
+    <p>Latitud:&nbsp <%=f.text_field :x%>&nbsp;Longitud:  <%=f.text_field  :y%></p>
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
 <%end%>
