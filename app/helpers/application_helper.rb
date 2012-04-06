@@ -14,5 +14,7 @@ module ApplicationHelper
             return ''
         end
     end
-    
+    def formatea(texto)
+        return raw(RedCloth.new(texto).to_html)
+    end
 end
