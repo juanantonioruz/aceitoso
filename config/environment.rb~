@@ -1,6 +1,0 @@
-# Load the rails application
-require File.expand_path('../application', __FILE__)
-config.gem "RedCloth", :lib => 'redcloth'
-# Initialize the rails application
-#Encoding.default_external = "UTF-8"
-Olearum::Application.initialize!

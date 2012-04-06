@@ -1,3 +1,0 @@
-<h1>Crear museo</h1>
-<%=render 'form'%>
-
