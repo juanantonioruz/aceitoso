@@ -12,7 +12,6 @@ gem 'json'
 gem 'execjs'
 gem 'therubyracer'
 gem 'tinymce-rails'
-gem 'tinymce-rails-langs'
 
 
 #gem "redcarpet"
