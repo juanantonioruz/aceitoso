@@ -18,7 +18,8 @@
   <li><a href="#contacto"  data-toggle="tab">Contacto</a></li>
   <li><a href="#llegar"  data-toggle="tab">Como llegar</a></li>
   <li><a href="#horario"  data-toggle="tab">Horario</a></li>
- <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
+  <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
+  <li><a href="#tags"  data-toggle="tab">Etiquetas</a></li>
 </ul>
 
 <%= tinymce %>
@@ -57,8 +58,10 @@
         <b>Longitud:</b>  <%=f.text_field  :y%></p>
         <br/>
     </div>
+    <div class="tab-pane" id="tags">
+    </div>
 </div> 
-     <%=etiquetar @ficha%>
+    
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
 <%end%>
