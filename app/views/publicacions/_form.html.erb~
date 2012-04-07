@@ -3,7 +3,7 @@
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>  
 
-    <label class='label'>Enlace a la publicación</label>
+    <label class='label'>Sitio web del premio</label>
     <%=f.text_field :url%>  
 
     <%=f.label :descripcion,:class=>'label'%>

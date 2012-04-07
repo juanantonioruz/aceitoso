@@ -7,5 +7,6 @@ class Label < ActiveRecord::Base
   has_and_belongs_to_many :espacios
   has_and_belongs_to_many :eventos
   has_and_belongs_to_many :premios
+  has_and_belongs_to_many :publicacions
  
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407214842) do
+ActiveRecord::Schema.define(:version => 20120407220229) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -157,5 +157,13 @@ ActiveRecord::Schema.define(:version => 20120407214842) do
   end
 
   add_index "publicacions", ["museo_id"], :name => "index_publicacions_on_museo_id"
+
+  create_table "publicacions_labels", :id => false, :force => true do |t|
+    t.integer "publicacion_id"
+    t.integer "label_id"
+  end
+
+  add_index "publicacions_labels", ["label_id", "publicacion_id"], :name => "index_publicacions_labels_on_label_id_and_publicacion_id"
+  add_index "publicacions_labels", ["publicacion_id", "label_id"], :name => "index_publicacions_labels_on_publicacion_id_and_label_id"
 
 end
