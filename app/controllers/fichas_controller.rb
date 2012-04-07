@@ -2,9 +2,8 @@
     def show
         @museo=Museo.find(params[:museo_id])
         if @museo.ficha.nil?
-            @ficha=@museo.ficha.new
-            
-            @ficha.save
+             @museo.ficha=Ficha.create  ####Ojo al 1-1 asi es muy limpio
+             @museo.save
         end
         @ficha=@museo.ficha
             

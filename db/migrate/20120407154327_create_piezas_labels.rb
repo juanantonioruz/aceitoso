@@ -9,6 +9,6 @@ class CreatePiezasLabels < ActiveRecord::Migration
   end
 
   def down
-      drop_table piezas_labels
+      drop_table :piezas_labels
   end
 end

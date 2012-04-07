@@ -11,6 +11,6 @@ class CreateGenericasLabelsTable < ActiveRecord::Migration
   end
 
   def down
-    drop_table :genericas_labels
+    drop_table genericas_labels
   end
 end

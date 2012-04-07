@@ -9,6 +9,6 @@ class CreateEspaciosLabels < ActiveRecord::Migration
   end
 
   def down
-      drop_table espacios_labels
+      drop_table :espacios_labels
   end
 end
