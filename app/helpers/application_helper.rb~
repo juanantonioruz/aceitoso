@@ -17,7 +17,5 @@ module ApplicationHelper
     end
     def alerta(tipo,aviso)
         render :partial=>'shared/alerta',:locals=>{:tipo=>tipo,:aviso=>aviso}
-        #Tres tipos disponibles: info warning error
-
     end
 end
