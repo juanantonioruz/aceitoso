@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407143631) do
+ActiveRecord::Schema.define(:version => 20120407154327) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20120407143631) do
     t.string  "imagen"
     t.integer "museo_id"
   end
+
+  create_table "espacios_labels", :id => false, :force => true do |t|
+    t.integer "espacio_id"
+    t.integer "label_id"
+  end
+
+  add_index "espacios_labels", ["espacio_id", "label_id"], :name => "index_espacios_labels_on_espacio_id_and_label_id"
+  add_index "espacios_labels", ["label_id", "espacio_id"], :name => "index_espacios_labels_on_label_id_and_espacio_id"
 
   create_table "eventos", :force => true do |t|
     t.string  "titulo"
@@ -107,6 +115,14 @@ ActiveRecord::Schema.define(:version => 20120407143631) do
   end
 
   add_index "piezas", ["museo_id"], :name => "index_piezas_on_museo_id"
+
+  create_table "piezas_labels", :id => false, :force => true do |t|
+    t.integer "pieza_id"
+    t.integer "label_id"
+  end
+
+  add_index "piezas_labels", ["label_id", "pieza_id"], :name => "index_piezas_labels_on_label_id_and_pieza_id"
+  add_index "piezas_labels", ["pieza_id", "label_id"], :name => "index_piezas_labels_on_pieza_id_and_label_id"
 
   create_table "premios", :force => true do |t|
     t.string  "nombre"

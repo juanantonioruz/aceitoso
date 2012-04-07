@@ -3,7 +3,7 @@
         @museo=Museo.find(params[:museo_id])
         if @museo.ficha.nil?
             @ficha=@museo.ficha.new
-            
+            @ficha.museo=@museo
             @ficha.save
         end
         @ficha=@museo.ficha
