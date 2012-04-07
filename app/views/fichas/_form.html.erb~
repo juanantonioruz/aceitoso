@@ -1,5 +1,13 @@
 <%= tinymce_assets %>
-<%= tinymce :theme => "simple",:theme_toolbar_location=>'top', :language => "es", :plugins => ["inlinepopups", "paste"] %>
+<style>
+.mceEditor td.mceIframeContainer iframe {
+    width: 400px !important;
+}
+.mceEditor table {
+    width: 400px !important;
+}
+</style>
+<%= tinymce :theme => "simple",:language => "es", :width=>200,:plugins => ["inlinepopups", "paste"] %>
 
 <%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
     <%=f.label :imagen,:class=>'label'%>
@@ -12,8 +20,7 @@
     <%= f.file_field :imagen %> 
 
     <%=f.label :descripcion,:class=>'label'%>
-    <%= f.text_area :descripcion,  :class => "tinymce" ,:rows=>5,:cols=>100%>
-
+    <%= f.text_area :descripcion,  :class => "tinymce textarea", :rows => 5, :cols => 120 %>
      <%=f.label :contacto,:class=>'label'%>
     <%= f.text_area :contacto,  :class => "tinymce" ,:rows=>5,:cols=>100%>
 
@@ -24,7 +31,8 @@
     <%= f.text_area :horario,:class => "tinymce" ,:rows=>5,:cols=>100%>
      
     <label class='label'>Coordenadas: Latitud / Longitud</label>
-    <p>Latitud:&nbsp <%=f.text_field :x%>&nbsp;Longitud:  <%=f.text_field  :y%></p>
+    <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;
+    <p><b>Longitud:</b>  <%=f.text_field  :y%></p>
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
 <%end%>

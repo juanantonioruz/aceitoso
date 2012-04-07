@@ -8,8 +8,8 @@
 </tr>
 <%@genericas.each do |generica|%>
 <tr>
-<td><%=generica.titulo%></td>
-<td><%=generica.descripcion%></td>
+<td><%=@generica.titulo%></td>
+<td><%=@generica.descripcion%></td>
 <td><%=imagentam(generica,'64x64')%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
