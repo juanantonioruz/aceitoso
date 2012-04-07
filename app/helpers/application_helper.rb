@@ -20,4 +20,8 @@ module ApplicationHelper
         #Tres tipos disponibles: info warning error
 
     end
+    def etiquetar(modelo)
+          render :partial=>'shared/tags',:locals=>{:modelo=>modelo}
+          ## Permite incluir el campo de formulario para cualquier modelo que tenga la relacion hbtm
+    end
 end
