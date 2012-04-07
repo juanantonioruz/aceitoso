@@ -7,7 +7,7 @@
     width: 400px !important;
 }
 </style>
-<%= tinymce :theme => "simple",:language => "es", :width=>200,:plugins => ["inlinepopups", "paste"] %>
+<%= tinymce :theme => "advanced",:language => "es",:plugins => ["inlinepopups", "paste"] %>
 
 <%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
     <%=f.label :imagen,:class=>'label'%>
