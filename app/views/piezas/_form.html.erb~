@@ -14,14 +14,12 @@
     <%= f.file_field :imagen %> 
 
     <!------------------->
-
-
-
+    <%=etiquetar @pieza%>
     <!--------------------->
    
 
     <%=f.label :coleccion,:class=>'label'%>
-    <%=f.check_box :coleccion%>
+    <%=f.check_box :coleccion%><i>* Marque esta casilla para indicar que pertenece al fondo original</i>
 
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
