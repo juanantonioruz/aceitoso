@@ -8,8 +8,7 @@
 
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
-    
-    <%=etiquetar @premio%>
+
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_premios_path(@museo)%>
 <%end%>

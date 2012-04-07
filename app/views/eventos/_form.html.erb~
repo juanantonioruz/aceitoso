@@ -14,7 +14,7 @@
     <br/>
     <%= f.file_field :imagen %> 
 
-    <%=etiquetar @evento%>
+
 
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
