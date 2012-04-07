@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406151346) do
+ActiveRecord::Schema.define(:version => 20120407143631) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -56,6 +55,14 @@ ActiveRecord::Schema.define(:version => 20120406151346) do
   end
 
   add_index "fichas", ["museo_id"], :name => "index_fichas_on_museo_id"
+
+  create_table "fichas_labels", :id => false, :force => true do |t|
+    t.integer "ficha_id"
+    t.integer "label_id"
+  end
+
+  add_index "fichas_labels", ["ficha_id", "label_id"], :name => "index_fichas_labels_on_ficha_id_and_label_id"
+  add_index "fichas_labels", ["label_id", "ficha_id"], :name => "index_fichas_labels_on_label_id_and_ficha_id"
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"

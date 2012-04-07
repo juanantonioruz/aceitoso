@@ -1,5 +1,4 @@
 <h1>Ficha técnica: <%=@ficha.museo.nombre%></h1>
-<%=etiquetas @ficha%>
 <label class='label'>Imagen</label>
 <p><%=imagentam(@ficha,'64x64')%>&nbsp;</p>
 
@@ -17,7 +16,7 @@
 <label class='label'>Coordenadas: Latitud / Longitud</label>
 <p><b>Latitud:</b> <%=@ficha.x%></p><p><b>Longitud:</b> <%=@ficha.y%></p>
 
-
+<%=etiquetas @ficha%>
 
 <br/>
 <%=link_to 'Editar',edit_museo_ficha_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo',@museo%>

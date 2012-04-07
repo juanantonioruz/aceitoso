@@ -1,6 +1,5 @@
 <h1>Mostrando: <%=@generica.titulo%></h1>
 <label class='label'>Descripción</label>
-<%=@generica.descripcion%>
 <!--Aqui las etiquetas-->
 <%= etiquetas @generica%>
 <label class='label'>Imagen</label>

@@ -24,4 +24,7 @@ module ApplicationHelper
           render :partial=>'shared/tags',:locals=>{:modelo=>modelo}
           ## Permite incluir el campo de formulario para cualquier modelo que tenga la relacion hbtm
     end
+    def etiquetas(modelo)
+         render :partial=>'shared/etiquetas',:locals=>{:modelo=>modelo}
+    end
 end

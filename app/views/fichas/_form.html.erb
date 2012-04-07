@@ -1,6 +1,3 @@
-
-
-
 <%= tinymce_assets %>
 <style>
 .mceEditor td.mceIframeContainer iframe {
@@ -61,6 +58,7 @@
         <br/>
     </div>
 </div> 
+     <%=etiquetar @ficha%>
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
 <%end%>
