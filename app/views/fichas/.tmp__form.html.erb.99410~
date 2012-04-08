@@ -1,0 +1,71 @@
+<%= tinymce_assets %>
+<style>
+.mceEditor td.mceIframeContainer iframe {
+    width: 400px !important;
+    height: 200px !important;
+}
+.mceEditor table {
+    width: 400px !important;
+}
+</style>
+<br/>
+
+<%=alerta 'info','Utilice las pestañas para editar la información asociada'%>
+
+<ul class="nav nav-tabs"  data-tabs="tabs">
+  <li class="active" ><a href="#imagen" data-toggle="tab">Imagen</a></li>
+  <li><a href="#descripcion"  data-toggle="tab">Descripción</a></li>
+  <li><a href="#contacto"  data-toggle="tab">Contacto</a></li>
+  <li><a href="#llegar"  data-toggle="tab">Como llegar</a></li>
+  <li><a href="#horario"  data-toggle="tab">Horario</a></li>
+  <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
+  <li><a href="#tags"  data-toggle="tab">Etiquetas</a></li>
+</ul>
+
+<%= tinymce %>
+
+<%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
+    <div  id="tabs" class="tab-content" >
+        <div class="tab-pane active" id="imagen">
+        <%=f.label :imagen,:class=>'label'%>
+        <%if @ficha.imagen_url.to_s!='' %>
+            <%=imagentam(@ficha,'64x64')%>
+            <%= f.check_box :remove_imagen %>
+            Borrar imagen
+        <%end%>
+        <br/>
+        <%= f.file_field :imagen %>
+    </div>
+    <div class="tab-pane" id="descripcion">
+        <%=f.label :descripcion,:class=>'label'%>
+        <%= f.text_area :descripcion,  :class => "tinymce", :rows => 10, :cols => 120 %>
+    </div>
+    <div class="tab-pane" id="contacto">
+        <%=f.label :contacto,:class=>'label'%>
+        <%= f.text_area :contacto,  :class => "tinymce" ,:rows=>5,:cols=>100%>    
+    </div>
+    <div class="tab-pane" id="llegar">
+        <label class='label'>Como llegar</label>
+        <%= f.text_area :llegar,  :class => "tinymce" ,:rows=>5,:cols=>100%>
+    </div>
+    <div class="tab-pane" id="horario">
+        <%=f.label :horario,:class=>'label'%>
+        <%= f.text_area :horario,:class => "tinymce" ,:rows=>5,:cols=>100%>
+    </div>
+    <div class="tab-pane" id="coordenadas">
+        <label class='label'>Coordenadas: Latitud / Longitud</label>
+        <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;
+        <b>Longitud:</b>  <%=f.text_field  :y%></p>
+        <br/>
+    </div>
+    <div class="tab-pane" id="tags">
+     <%=etiquetar @ficha%>
+    </div>
+</div> 
+    
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
+<%end%>
+<script>
+ $("#tabs").tabs();
+</script>

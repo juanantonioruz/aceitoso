@@ -1,3 +1,52 @@
+<%
+@onload="init('ficha');"
+%>
+<%content_for :cabeza do %>
+        <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
+        
+        <script src="/pruebas/lib/Firebug/firebug.js"></script>
+        <script src="/pruebas/OpenLayers.js"></script>
+        <script type="text/javascript">
+			var n_input;
+            OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+                defaultHandlerOptions: {
+                    'single': true,
+                    'double': false,
+                    'pixelTolerance': 0,
+                    'stopSingle': false,
+                    'stopDouble': false
+                },
+
+                
+            });
+
+            var map, controls; 
+			
+            function init(nombre_input){
+				$.n_input=nombre_input;
+        		this.n_input=nombre_input;
+                map = new OpenLayers.Map('map');
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+                map.addLayers([layer]);
+                  map.setCenter(
+    new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>), <%=if(!@ficha.x.blank? ) then 18 else 4 end %>
+);
+               
+
+
+
+  
+              
+
+            }
+            
+          
+        </script>
+
+<%end%>
+
 <h1>Ficha técnica: <%=@ficha.museo.nombre%></h1>
 <%=etiquetas @ficha%>
 <label class='label'>Imagen</label>
@@ -15,7 +64,10 @@
 <label class='label'>Horarios</label>
 <%= raw  @ficha.horario%>
 <label class='label'>Coordenadas: Latitud / Longitud</label>
-<p><b>Latitud:</b> <%=@ficha.x%></p><p><b>Longitud:</b> <%=@ficha.y%></p>
+<!-- p><b>Latitud:</b> <%=@ficha.x%></p><p><b>Longitud:</b> <%=@ficha.y%></p -->
+<p><hr></p>
+		 <div id="map" class="smallmap" style="width: 300px; 
+                height: 300px; border: 1px solid gray;margin-right:100px;"></div>
 
 
 
