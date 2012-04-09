@@ -14,15 +14,17 @@
     <%= f.file_field :imagen %>  
     <br/>
 
-    <!-----------      Como hago yo reutilizble esto sin jaleo                     ---------->
-    <label class='label'>Etiquetas</label>
-    <% for label in Label.find(:all) %>  
-    <span>  
-      <%= check_box_tag "generica[label_ids][]", label.id, @generica.labels.include?(label) %>  
-      <%= label.nombre %>  
-    </span>
-    <!---------------------------------------------------------------------------------->
-    <% end %>  <br/>  
+    <!-----------      Como hago yo reutilizble esto sin jaleo                     -------->
+
+   
+       
+    <!-----El helper renderiza la vista , -------->
+    <%=etiquetar @generica%>
+
+
+    <!------------------------>
+
+   
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',genericas_path%>
 <%end%>
 

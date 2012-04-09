@@ -1,7 +1,12 @@
-class FichasController < ApplicationController
+ class FichasController < ApplicationController
     def show
         @museo=Museo.find(params[:museo_id])
+        if @museo.ficha.nil?
+             @museo.ficha=Ficha.create  ####Ojo al 1-1 asi es muy limpio
+             @museo.save
+        end
         @ficha=@museo.ficha
+            
     end 
     def edit
         @museo=Museo.find(params[:museo_id])

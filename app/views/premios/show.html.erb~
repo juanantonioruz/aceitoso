@@ -10,9 +10,7 @@
 <label class='label'>Descripción de la premio</label>
 <p><%=@premio.descripcion%>&nbsp;</p>
 
-<label class='label'>Es parte de la colección del museo</label>
-<p><%=@premio.escoleccion%>&nbsp;</p>
-
+<%=etiquetas @premio%>
 
 <br/>
 <%=link_to 'Editar',edit_museo_premio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a premios',museo_premios_path(@museo)%>

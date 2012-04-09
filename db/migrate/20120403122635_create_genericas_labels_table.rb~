@@ -5,7 +5,7 @@ class CreateGenericasLabelsTable < ActiveRecord::Migration
     t.references :label
     end
     add_index :genericas_labels, [:generica_id, :label_id]
-    add_index :genericas_laels, [:label_id, :generica_id]
+    add_index :genericas_labels, [:label_id, :generica_id]
 
 
   end

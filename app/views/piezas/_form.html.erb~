@@ -5,22 +5,25 @@
 
 
     <%=f.label :imagen,:class=>'label'%>
-    <%if @espacio.imagen_url.to_s!='' %>
-        <%=imagentam(@espacio,'64x64')%>
+    <%if @pieza.imagen_url.to_s!='' %>
+        <%=imagentam(@pieza,'64x64')%>
         <%= f.check_box :remove_imagen %>
         Borrar imagen
     <%end%>
-
     <br/>
     <%= f.file_field :imagen %> 
 
+    <!------------------->
+    <%=etiquetar @pieza%>
+    <!--------------------->
+   
 
     <%=f.label :coleccion,:class=>'label'%>
-    <%=f.check_box :coleccion%>
+    <%=f.check_box :coleccion%><i>  * Marque esta casilla para indicar que pertenece al fondo original</i>
 
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
 
     <br/>
-    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_espacios_path(@museo)%>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_piezas_path(@museo)%>
 <%end%>

@@ -1,0 +1,161 @@
+<%content_for :cabeza do %>
+        <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
+        
+        <script src="/pruebas/lib/Firebug/firebug.js"></script>
+        <script src="/pruebas/OpenLayers.js"></script>
+        <script type="text/javascript">
+
+            OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+                defaultHandlerOptions: {
+                    'single': true,
+                    'double': false,
+                    'pixelTolerance': 0,
+                    'stopSingle': false,
+                    'stopDouble': false
+                },
+
+                initialize: function(options) {
+                    this.handlerOptions = OpenLayers.Util.extend(
+                        {}, this.defaultHandlerOptions
+                    );
+                    OpenLayers.Control.prototype.initialize.apply(
+                        this, arguments
+                    ); 
+                    this.handler = new OpenLayers.Handler.Click(
+                        this, {
+                            'click': this.onClick,
+                            'dblclick': this.onDblclick 
+                        }, this.handlerOptions
+                    );
+                }, 
+
+                onClick: function(evt) {
+                    var output = document.getElementById(this.key + "Output");
+                    var msg = "click " + evt.xy;
+                    output.value = output.value + msg + "\r\n";
+                    var lonlat = map.getLonLatFromViewPortPx(evt.xy);
+                    output.value = output.value+"You clicked near " + lonlat.lat + " N, " +
+                                              + lonlat.lon + " E";
+                }
+
+            });
+
+            var map, controls; 
+
+            function init(){
+        
+                map = new OpenLayers.Map('map');
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+                map.addLayers([layer]);
+                  map.setCenter(
+    new OpenLayers.LonLat(-5.98689436912537, 37.3927590250969).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ), 18
+);
+                controls = {
+                    "single": new OpenLayers.Control.Click({
+                        handlerOptions: {
+                            "single": true
+                        }
+                    })
+                };
+
+
+                var control;
+                for(var key in controls) {
+                    control = controls[key];
+                    // only to route output here
+                    control.key = key;
+                    map.addControl(control);
+                }
+                
+
+                var control=controls['single']
+              //  map.addControl(control);
+                control.activate();
+
+  
+              
+
+            }
+            
+          
+        </script>
+
+<%end%>
+
+
+<%= tinymce_assets %>
+<style>
+.mceEditor td.mceIframeContainer iframe {
+    width: 400px !important;
+    height: 200px !important;
+}
+.mceEditor table {
+    width: 400px !important;
+}
+</style>
+<br/>
+
+<%=alerta 'info','Utilice las pestañas para editar la información asociada'%>
+
+<ul class="nav nav-tabs"  data-tabs="tabs">
+  <li class="active" ><a href="#imagen" data-toggle="tab">Imagen</a></li>
+  <li><a href="#descripcion"  data-toggle="tab">Descripción</a></li>
+  <li><a href="#contacto"  data-toggle="tab">Contacto</a></li>
+  <li><a href="#llegar"  data-toggle="tab">Como llegar</a></li>
+  <li><a href="#horario"  data-toggle="tab">Horario</a></li>
+  <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
+  <li><a href="#tags"  data-toggle="tab">Etiquetas</a></li>
+</ul>
+
+<%= tinymce %>
+
+<%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
+    <div  id="tabs" class="tab-content" >
+        <div class="tab-pane active" id="imagen">
+        <%=f.label :imagen,:class=>'label'%>
+        <%if @ficha.imagen_url.to_s!='' %>
+            <%=imagentam(@ficha,'64x64')%>
+            <%= f.check_box :remove_imagen %>
+            Borrar imagen
+        <%end%>
+        <br/>
+        <%= f.file_field :imagen %>
+    </div>
+    <div class="tab-pane" id="descripcion">
+        <%=f.label :descripcion,:class=>'label'%>
+        <%= f.text_area :descripcion,  :class => "tinymce", :rows => 10, :cols => 120 %>
+    </div>
+    <div class="tab-pane" id="contacto">
+        <%=f.label :contacto,:class=>'label'%>
+        <%= f.text_area :contacto,  :class => "tinymce" ,:rows=>5,:cols=>100%>    
+    </div>
+    <div class="tab-pane" id="llegar">
+        <label class='label'>Como llegar</label>
+        <%= f.text_area :llegar,  :class => "tinymce" ,:rows=>5,:cols=>100%>
+    </div>
+    <div class="tab-pane" id="horario">
+        <%=f.label :horario,:class=>'label'%>
+        <%= f.text_area :horario,:class => "tinymce" ,:rows=>5,:cols=>100%>
+    </div>
+    <div class="tab-pane" id="coordenadas">
+        <label class='label'>Coordenadas: Latitud / Longitud</label>
+        <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;
+        <b>Longitud:</b>  <%=f.text_field  :y%></p>
+        <br/>
+    </div>
+    <div class="tab-pane" id="tags">
+     <%=etiquetar @ficha%>
+    </div>
+</div> 
+    
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_ficha_path(@museo)%>
+<%end%>
+<script>
+ $("#tabs").tabs();
+</script>

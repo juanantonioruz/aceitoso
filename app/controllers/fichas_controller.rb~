@@ -1,7 +1,14 @@
-class FichasController < ApplicationController
+ class FichasController < ApplicationController
     def show
         @museo=Museo.find(params[:museo_id])
+        if @museo.ficha.nil?
+            @ficha=Ficha.new  
+            @ficha.save
+            @ficha.museo=@museo 
+            @ficha.save 
+        end
         @ficha=@museo.ficha
+            
     end 
     def edit
         @museo=Museo.find(params[:museo_id])
@@ -15,7 +22,6 @@ class FichasController < ApplicationController
             if @ficha.update_attributes(params[:ficha])
                   redirect_to museo_ficha_path(@museo), :notice => 'Informacion actualizada'
             end
-        
     end
 
 end

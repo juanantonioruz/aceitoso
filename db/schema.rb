@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405130302) do
+ActiveRecord::Schema.define(:version => 20120407220229) do
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "espacios", :force => true do |t|
     t.string  "nombre"
@@ -20,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
     t.integer "museo_id"
   end
 
+  create_table "espacios_labels", :id => false, :force => true do |t|
+    t.integer "espacio_id"
+    t.integer "label_id"
+  end
+
+  add_index "espacios_labels", ["espacio_id", "label_id"], :name => "index_espacios_labels_on_espacio_id_and_label_id"
+  add_index "espacios_labels", ["label_id", "espacio_id"], :name => "index_espacios_labels_on_label_id_and_espacio_id"
+
   create_table "eventos", :force => true do |t|
     t.string  "titulo"
     t.string  "imagen"
@@ -28,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
   end
 
   add_index "eventos", ["museo_id"], :name => "index_eventos_on_museo_id"
+
+  create_table "eventos_labels", :id => false, :force => true do |t|
+    t.integer "evento_id"
+    t.integer "label_id"
+  end
+
+  add_index "eventos_labels", ["evento_id", "label_id"], :name => "index_eventos_labels_on_evento_id_and_label_id"
+  add_index "eventos_labels", ["label_id", "evento_id"], :name => "index_eventos_labels_on_label_id_and_evento_id"
 
   create_table "fichas", :force => true do |t|
     t.string  "imagen"
@@ -41,6 +72,14 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
   end
 
   add_index "fichas", ["museo_id"], :name => "index_fichas_on_museo_id"
+
+  create_table "fichas_labels", :id => false, :force => true do |t|
+    t.integer "ficha_id"
+    t.integer "label_id"
+  end
+
+  add_index "fichas_labels", ["ficha_id", "label_id"], :name => "index_fichas_labels_on_ficha_id_and_label_id"
+  add_index "fichas_labels", ["label_id", "ficha_id"], :name => "index_fichas_labels_on_label_id_and_ficha_id"
 
   create_table "genericas", :force => true do |t|
     t.string   "titulo"
@@ -86,6 +125,14 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
 
   add_index "piezas", ["museo_id"], :name => "index_piezas_on_museo_id"
 
+  create_table "piezas_labels", :id => false, :force => true do |t|
+    t.integer "pieza_id"
+    t.integer "label_id"
+  end
+
+  add_index "piezas_labels", ["label_id", "pieza_id"], :name => "index_piezas_labels_on_label_id_and_pieza_id"
+  add_index "piezas_labels", ["pieza_id", "label_id"], :name => "index_piezas_labels_on_pieza_id_and_label_id"
+
   create_table "premios", :force => true do |t|
     t.string  "nombre"
     t.string  "url"
@@ -95,6 +142,14 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
 
   add_index "premios", ["museo_id"], :name => "index_premios_on_museo_id"
 
+  create_table "premios_labels", :id => false, :force => true do |t|
+    t.integer "premio_id"
+    t.integer "label_id"
+  end
+
+  add_index "premios_labels", ["label_id", "premio_id"], :name => "index_premios_labels_on_label_id_and_premio_id"
+  add_index "premios_labels", ["premio_id", "label_id"], :name => "index_premios_labels_on_premio_id_and_label_id"
+
   create_table "publicacions", :force => true do |t|
     t.string  "nombre"
     t.string  "url"
@@ -103,5 +158,13 @@ ActiveRecord::Schema.define(:version => 20120405130302) do
   end
 
   add_index "publicacions", ["museo_id"], :name => "index_publicacions_on_museo_id"
+
+  create_table "publicacions_labels", :id => false, :force => true do |t|
+    t.integer "publicacion_id"
+    t.integer "label_id"
+  end
+
+  add_index "publicacions_labels", ["label_id", "publicacion_id"], :name => "index_publicacions_labels_on_label_id_and_publicacion_id"
+  add_index "publicacions_labels", ["publicacion_id", "label_id"], :name => "index_publicacions_labels_on_publicacion_id_and_label_id"
 
 end

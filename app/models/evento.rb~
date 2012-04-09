@@ -1,3 +1,5 @@
 class Evento < ActiveRecord::Base
-  belongs_to :museo
+     mount_uploader :imagen,ImagenUploader
+     belongs_to :museo
+     has_and_belongs_to_many :labels,:join_table=>'eventos_labels'
 end

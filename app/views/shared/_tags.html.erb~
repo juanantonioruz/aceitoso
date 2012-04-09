@@ -1,0 +1,9 @@
+<label class='label'>Etiquetas</label>
+<%=modelo.class.name.downcase%>
+    <% for label in Label.find(:all) %>  
+    <span>  
+      <%= check_box_tag modelo.class.name.downcase+"[label_ids][]", label.id, modelo.labels.include?(label) %>  
+      <%= label.nombre %>  
+    </span>
+    <%end%>
+<br/>

@@ -11,7 +11,11 @@ gem 'carrierwave'
 gem 'json'
 gem 'execjs'
 gem 'therubyracer'
-gem 'RedCloth'
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
+
+
+#gem "redcarpet"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -1,2 +1,0 @@
-<h1>Edición de pieza <%=@pieza.nombre%></h1>
-<%=render 'form'%>

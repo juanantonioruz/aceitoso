@@ -1,0 +1,8 @@
+<div class="alert alert-info">
+    <a class="close" href="#" data-dismiss="<%=alerta%>">&times;</a>
+    <p><strong>*</strong> <%=aviso%></p>
+</div>
+<script>
+ $("#tabs").tabs();
+$(".alert").alert();
+</script>

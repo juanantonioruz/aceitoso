@@ -1,2 +1,0 @@
-class Genericalabel < ActiveRecord::Base
-end

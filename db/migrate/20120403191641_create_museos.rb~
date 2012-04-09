@@ -1,9 +1,0 @@
-class CreateMuseos < ActiveRecord::Migration
-  def change
-    create_table :museos do |t|
-      t.string :nombre
-
-      t.timestamps
-    end
-  end
-end

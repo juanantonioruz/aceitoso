@@ -1,20 +1,22 @@
 <h1>Ficha técnica: <%=@ficha.museo.nombre%></h1>
+<%=etiquetas @ficha%>
 <label class='label'>Imagen</label>
 <p><%=imagentam(@ficha,'64x64')%>&nbsp;</p>
 
 <label class='label'>Descripcion</label>
-<p><%=formatea(@ficha.descripcion)%>&nbsp;</p>
+<p><%=raw  @ficha.descripcion%></p>
 
 <label class='label'>Contacto</label>
-<p><%=formatea(@ficha.contacto)%>&nbsp;</p>
+<p><%= @ficha.contacto.html_safe%>&nbsp;</p>
 
 <label class='label'>Como llegar</label>
-<p><%=formatea(@ficha.llegar)%>&nbsp;</p>
+<p><%= @ficha.llegar.html_safe%>&nbsp;</p>
 
 <label class='label'>Horarios</label>
-<%= formatea(@ficha.horario)%>
+<%=   @ficha.horario.html_safe%>
 <label class='label'>Coordenadas: Latitud / Longitud</label>
-<p>Latitud: <%=@ficha.x%></p><p>Longitud: <%=@ficha.y%></p>
+<p><b>Latitud:</b> <%=@ficha.x%></p><p><b>Longitud:</b> <%=@ficha.y%></p>
+
 
 
 <br/>

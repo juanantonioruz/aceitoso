@@ -13,4 +13,4 @@
 
 
 <br/>
-<%=link_to 'Editar',edit_museo_espacio_path(@espacio),:class=>'btn'%> o <%=link_to 'Volver a espacios',museo_espacios_path(@museo)%>
+<%=link_to 'Editar',edit_museo_espacio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a espacios',museo_espacios_path(@museo)%>

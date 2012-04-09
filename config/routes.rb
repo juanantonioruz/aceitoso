@@ -1,5 +1,6 @@
 Olearum::Application.routes.draw do
   
+
   resources :museos do
     resource :ficha
     resources :espacios

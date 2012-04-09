@@ -1,4 +1,5 @@
 <h1>pieza: <%=@pieza.museo.nombre%></h1>
+<%=etiquetas @pieza%>
 <label class='label'>Imagen</label>
 <p><%=imagentam(@pieza,'64x64')%>&nbsp;</p>
 
@@ -9,7 +10,7 @@
 <p><%=@pieza.descripcion%>&nbsp;</p>
 
 <label class='label'>Es parte de la colección del museo</label>
-<p><%=@pieza.coleccion%>&nbsp;</p>
+<p><%=@pieza.escoleccion%>&nbsp;</p>
 
 
 <br/>

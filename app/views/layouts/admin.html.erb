@@ -17,10 +17,10 @@
       }
     </style>
     <%= stylesheet_link_tag "application", :media => "all" %>
-
     <%= javascript_include_tag "application" %>
+<%=yield :cabeza%>
   </head>
-  <body>
+  <body onload="<%=if(defined? @onload) then @onload end%>">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gpx version="1.1" creator="JOSM GPX export" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <desc>descripcion de juan</desc>
+    <bounds minlat="37.0923672" minlon="-5.4594485" maxlat="37.0928404" maxlon="-5.459007199999999" />
+  </metadata>
+  <trk>    <trkseg>
+      <trkpt lat="37.09284036864128" lon="-5.459448502814642">
+      </trkpt>
+      <trkpt lat="37.092615326305285" lon="-5.459007225727332">
+      </trkpt>
+      <trkpt lat="37.0923672019294" lon="-5.459177225916705">
+      </trkpt>
+      <trkpt lat="37.09256627852796" lon="-5.459448502814642">
+      </trkpt>
+      <trkpt lat="37.09275092881853" lon="-5.4593833963591365">
+      </trkpt>
+      <trkpt lat="37.09284036864128" lon="-5.459448502814642">
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

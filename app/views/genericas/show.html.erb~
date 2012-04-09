@@ -1,12 +1,9 @@
 <h1>Mostrando: <%=@generica.titulo%></h1>
 <label class='label'>Descripción</label>
-<p><%=@generica.descripcion%></p>
-<label class='label'>Etiquetas</label>
-<%@generica.labels.each do |label|%>
-    <span><%=label.nombre%></span>
-<%end%>
+<!--Aqui las etiquetas-->
+<%= etiquetas @generica%>
 <label class='label'>Imagen</label>
-<%=imagentam(generica,'128x128')%><br/>
+<%=imagentam(@generica,'128x128')%><br/>
 
 <br/>
 <%=link_to 'Editar',edit_generica_path(@generica),:class=>'btn'%> o <%=link_to 'Ir al listado',genericas_path%>

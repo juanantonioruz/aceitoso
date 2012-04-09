@@ -1,4 +1,4 @@
-<%=form_for [@museo,@museo.espacios.build],:html=>{:multipart=>true} do |f|%>
+<%=form_for [@museo,@espacio],:html=>{:multipart=>true} do |f|%>
 
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>    
