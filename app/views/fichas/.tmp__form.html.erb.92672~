@@ -1,6 +1,3 @@
-<%
-@onload="init('ficha');"
-%>
 <%content_for :cabeza do %>
         <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
@@ -8,7 +5,7 @@
         <script src="/pruebas/lib/Firebug/firebug.js"></script>
         <script src="/pruebas/OpenLayers.js"></script>
         <script type="text/javascript">
-			var n_input;
+
             OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
                 defaultHandlerOptions: {
                     'single': true,
@@ -34,30 +31,29 @@
                 }, 
 
                 onClick: function(evt) {
-                    var output_x = document.getElementById($.n_input+"_x" );
-                    var output_y = document.getElementById($.n_input+"_y" );
-                   // var msg = "click " + evt.xy;
-                    //output.value = output.value + msg + "\r\n";
+                    var output = document.getElementById(this.key + "Output");
+                    var msg = "click " + evt.xy;
+                    output.value = output.value + msg + "\r\n";
                     var lonlat = map.getLonLatFromViewPortPx(evt.xy);
-					lonlat.transform( map.projection,map.displayProjection);
-
-                    output_x.value =lonlat.lat;
-                    output_y.value =lonlat.lon;
+                    output.value = output.value+"You clicked near " + lonlat.lat + " N, " +
+                                              + lonlat.lon + " E";
                 }
 
             });
 
             var map, controls; 
-			
-            function init(nombre_input){
-				$.n_input=nombre_input;
-        		this.n_input=nombre_input;
+
+            function init(){
+        
                 map = new OpenLayers.Map('map');
 				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
 
                 map.addLayers([layer]);
                   map.setCenter(
-    new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>), <%=if(!@ficha.x.blank? ) then 18 else 7 end %>
+    new OpenLayers.LonLat(-5.98689436912537, 37.3927590250969).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ), 18
 );
                 controls = {
                     "single": new OpenLayers.Control.Click({
@@ -151,8 +147,6 @@
         <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;
         <b>Longitud:</b>  <%=f.text_field  :y%></p>
         <br/>
-		 <div id="map" class="smallmap" style="width: 540px;
-                height: 370px; border: 1px solid gray;float:left;margin-right:100px;"></div>
     </div>
     <div class="tab-pane" id="tags">
      <%=etiquetar @ficha%>

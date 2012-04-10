@@ -20,7 +20,7 @@
     <%= javascript_include_tag "application" %>
 <%=yield :cabeza%>
   </head>
-  <body onload="<%=if(defined? @onload) then @onload end%>">
+  <body>
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
