@@ -36,7 +36,7 @@ class LabelsController < ApplicationController
 
         respond_to do |format|
             if @label.update_attributes(params[:label])
-                 format.html { redirect_to @label, :notice => 'Informacion actualizada'}
+                 format.html { redirect_to @label, :notice => 'Informacion actualizada'  }         
             else
                 format.html { render :action => "edit"}
             end

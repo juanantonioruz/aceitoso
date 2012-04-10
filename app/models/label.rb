@@ -1,12 +1,12 @@
 class Label < ActiveRecord::Base
   belongs_to :label
   has_many :labels,:dependent=>:destroy
-  has_and_belongs_to_many :genericas
-  has_and_belongs_to_many :fichas
-  has_and_belongs_to_many :piezas
-  has_and_belongs_to_many :espacios
-  has_and_belongs_to_many :eventos
-  has_and_belongs_to_many :premios
-  has_and_belongs_to_many :publicacions
+  has_and_belongs_to_many :genericas,:join_table=>'genericas_labels'
+  has_and_belongs_to_many :fichas,:join_table=>'fichas_labels'
+  has_and_belongs_to_many :piezas,:join_table=>'piezas_labels'
+  has_and_belongs_to_many :espacios,:join_table=>'espacios_labels'
+  has_and_belongs_to_many :eventos,:join_table=>'eventos_labels'
+  has_and_belongs_to_many :premios,:join_table=>'premios_labels'
+  has_and_belongs_to_many :publicacions,:join_table=>'publicacions_labels'
  
 end
