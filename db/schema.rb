@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411161701) do
+ActiveRecord::Schema.define(:version => 20120411165437) do
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -217,6 +217,14 @@ ActiveRecord::Schema.define(:version => 20120411161701) do
   create_table "services", :force => true do |t|
     t.string "imagen"
   end
+
+  create_table "servicios", :force => true do |t|
+    t.string  "imagen"
+    t.text    "descripcion"
+    t.integer "museo_id"
+  end
+
+  add_index "servicios", ["museo_id"], :name => "index_servicios_on_museo_id"
 
   create_table "urbanos", :force => true do |t|
     t.string  "imagen"

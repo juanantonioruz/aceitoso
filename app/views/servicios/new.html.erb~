@@ -1,0 +1,1 @@
+<h1>Nuevo servicio para <%=@museo.nombre%></h1>

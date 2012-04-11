@@ -6,6 +6,7 @@ class Museo < ActiveRecord::Base
     has_many :premios,:dependent=>:destroy
     has_many :publicacions,:dependent=>:destroy
     has_many :infos,:dependent=>:destroy
+    has_many :servicios,:dependent=>:destroy
     has_one :entorno,:dependent=>:destroy
 
     ###Habilitar las consultas @museo.hitos, @museo.caminos

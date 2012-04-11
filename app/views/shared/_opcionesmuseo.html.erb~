@@ -15,7 +15,7 @@
 
 <tr><th>Publicaciones</th><td>Noticias de prensa, comunicados,...</td><td><%=link_to 'Ver',museo_publicacions_path(museo),:class=>'btn '%></td></tr>
 
-<tr><th>Servicios</th><td>Aka @Servicios ---> ?? Los saca de sitio como las etiquetas?? checkbox???</td><td><%=link_to 'Ver',museo,:class=>'btn btn-danger'%></td></tr>
+<tr><th>Servicios</th><td>Listado de servicios que ofrece el museo</td><td><%=link_to 'Ver',museo_servicios_path(museo),:class=>'btn btn-danger'%></td></tr>
 
 <tr><th>Entorno</th><td>Información sobre el entorno del museo: rutas, hitos, ciudades</td><td><%=link_to 'Ver',museo_entorno_path(museo),:class=>'btn '%></td></tr>
 

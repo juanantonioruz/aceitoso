@@ -1,0 +1,27 @@
+<h1>Servicios ofrecido por <%=@museo.nombre%></h1>
+
+<table class='table zebra-striped' id='ordenar'>
+<thead>
+<th>Imagen</th>
+<th>Descripción</th>
+<th>Acciones</th>
+</thead>
+<tbody>
+<%@servicios.each do |servicio|%>
+    <tr>
+    <td><%=image_tag(servicio.imagen,:size=>'64x64')%></td>
+    <td><%=servicio.descripcion%></td>
+    <td>
+    <%= link_to 'Ver',museo_servicio_path(servicio),:class=>'btn btn-success'%>
+    <%= link_to 'Editar',edit_museo_servicio_path(servicio),:class=>'btn btn-warning'%>
+    <%= link_to 'Borrar',museo_servicio_path(servicio),:method=>:delete,:confirm=>'¿Seguro que desea borrar el servicio?',:class=>'btn btn-danger'%>
+    </td>
+    </tr>
+<%end%>
+</tbody>
+</table>
+<%= link_to 'Añadir un servicio',new_museo_servicio_path(:museo_id=>@museo),:class=>'btn'%>
+<hr>
+<i> * Desde aquí se indican los servicios que ofrece el museo, con una descripción opcional</i>
+<hr>
+

@@ -1,0 +1,23 @@
+<%=form_for [@museo,@servicio],:html=>{:multipart=>true} do |f|%>
+
+    <!-- imagenes de los servicios disponibles con radiobuttons-->
+    <%=f.label :imagen,:class=>'label'%>
+    <% Service.all.each do |ser| %>
+       <%= image_tag(ser.imagen,:size=>'32x32') %>       
+       <%= f.radio_button :imagen, ser.imagen %>
+        </span>
+    <% end %>
+
+
+    <!---->
+
+    <%=f.label :descripcion,:class=>'label'%>
+    <%=f.text_area :descripcion,:size=>'30x5'%>
+    
+
+     
+    
+
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_servicios_path(@museo)%>
+<%end%>

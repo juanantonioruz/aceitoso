@@ -1,6 +1,7 @@
 Olearum::Application.routes.draw do
   
   resources :services
+
   resources :museos do
     resource :ficha
     resource :entorno do
@@ -16,6 +17,7 @@ Olearum::Application.routes.draw do
     resources :premios
     resources :publicacions
     resources :infos
+    resources :servicios
   end
   
   resources :labels do
