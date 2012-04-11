@@ -13,7 +13,7 @@
 
 <!-- Aqui render las coordenadas y opcion de añadir como con las etiquetas-->
 <label class='label'>Coordenadas de la ruta</label>
-<%=render :partial=>'coordenadas/coordenada', :collection=>@camino.coordenadas%>
+<%= render :partial=>'coordenadas/coordenada', :collection=>@camino.coordenadas%>
 <%=render :partial =>'coordenadas/form'%>
 
 <!----->

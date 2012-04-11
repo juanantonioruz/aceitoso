@@ -20,5 +20,5 @@
     <br/>
 
     <br/>
-    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_premios_path(@museo)%>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_hitos_path(@museo)%>
 <%end%>

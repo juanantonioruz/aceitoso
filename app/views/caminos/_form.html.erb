@@ -15,6 +15,8 @@
     <br/>
     <%= f.file_field :imagen %> 
 
+<%=etiquetar @camino%>
+
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_caminos_path(@museo)%>
 <%end%>

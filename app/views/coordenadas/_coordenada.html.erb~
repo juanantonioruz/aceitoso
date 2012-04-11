@@ -1,6 +1,6 @@
 <p>
-  <b>Latitud</b><%=coordenada.x%>  <b>Latitud</b><%=coordenada.y%>
-   <%= link_to 'Borrar',museo_entorno_camino_coordenada_path(:museo_id=>coordenada.camino.entorno.museo,:camino_id=>coordenada.camino,:id=>coordenada), :confirm => 'Seguro, la coordenada no figurará en la ruta?',    :method => :delete,:class=>'btn btn-mini btn-danger' %></p>
+  <b>Latitud </b><%=coordenada.x%> &nbsp; <b>Longitud </b><%=coordenada.y%>&nbsp;
+   <%= link_to 'Borrar',museo_entorno_camino_coordenada_path(:museo_id=>coordenada.camino.entorno.museo,:camino_id=>coordenada.camino,:id=>coordenada), :confirm => '¿Seguro? la coordenada no figurará en la ruta',    :method => :delete,:class=>'btn btn-mini btn-danger' %></p>
  
 </p>
 

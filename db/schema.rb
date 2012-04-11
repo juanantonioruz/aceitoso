@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411142215) do
+ActiveRecord::Schema.define(:version => 20120411161224) do
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(:version => 20120411142215) do
     t.string  "nombre"
     t.integer "entorno_id"
   end
+
+  create_table "caminos_labels", :id => false, :force => true do |t|
+    t.integer "camino_id"
+    t.integer "label_id"
+  end
+
+  add_index "caminos_labels", ["camino_id", "label_id"], :name => "index_caminos_labels_on_camino_id_and_label_id"
+  add_index "caminos_labels", ["label_id", "camino_id"], :name => "index_caminos_labels_on_label_id_and_camino_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -128,6 +136,14 @@ ActiveRecord::Schema.define(:version => 20120411142215) do
 
   add_index "hitos", ["entorno_id"], :name => "index_hitos_on_entorno_id"
 
+  create_table "hitos_labels", :id => false, :force => true do |t|
+    t.integer "hito_id"
+    t.integer "label_id"
+  end
+
+  add_index "hitos_labels", ["hito_id", "label_id"], :name => "index_hitos_labels_on_hito_id_and_label_id"
+  add_index "hitos_labels", ["label_id", "hito_id"], :name => "index_hitos_labels_on_label_id_and_hito_id"
+
   create_table "infos", :force => true do |t|
     t.string  "url"
     t.integer "museo_id"
@@ -208,5 +224,13 @@ ActiveRecord::Schema.define(:version => 20120411142215) do
   end
 
   add_index "urbanos", ["entorno_id"], :name => "index_urbanos_on_entorno_id"
+
+  create_table "urbanos_labels", :id => false, :force => true do |t|
+    t.integer "urbano_id"
+    t.integer "label_id"
+  end
+
+  add_index "urbanos_labels", ["label_id", "urbano_id"], :name => "index_urbanos_labels_on_label_id_and_urbano_id"
+  add_index "urbanos_labels", ["urbano_id", "label_id"], :name => "index_urbanos_labels_on_urbano_id_and_label_id"
 
 end
