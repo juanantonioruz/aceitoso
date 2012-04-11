@@ -1,0 +1,1 @@
+<h1>Edición de la ruta: <%=@camino.nombre%></h1>

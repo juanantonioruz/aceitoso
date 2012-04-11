@@ -1,0 +1,15 @@
+<%= form_for([@camino, @camino.coordenada.build]) do |h| %>
+
+    <%= h.hidden_field :camino_id,:value=>@camino.id %>
+    <%= h.label :latitud %>
+    <%= h.text_field :latitud %>
+
+    <%= h.label :longitud %>
+    <%= h.text_field :longitud %>
+  
+  
+  <div class="actions">
+    <%= h.submit 'Guardar coordenada',:class=>'btn' %>
+  </div>
+
+  <%end%>

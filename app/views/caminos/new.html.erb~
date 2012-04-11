@@ -1,0 +1,2 @@
+<h1>Nueva ruta para <%=@museo.nombre%>
+<%=render 'form'%>

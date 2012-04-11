@@ -5,7 +5,9 @@ Olearum::Application.routes.draw do
     resource :ficha
     resource :entorno do
         resources :hitos
-        resources :caminos
+        resources :caminos do
+            resources :coordenadas
+            end
         resources :urbanos
     end
     resources :espacios 

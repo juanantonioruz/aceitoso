@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411120830) do
+ActiveRecord::Schema.define(:version => 20120411142215) do
+
+  create_table "caminos", :force => true do |t|
+    t.string  "imagen"
+    t.text    "descripcion"
+    t.string  "nombre"
+    t.integer "entorno_id"
+  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -25,6 +32,14 @@ ActiveRecord::Schema.define(:version => 20120411120830) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "coordenadas", :force => true do |t|
+    t.string  "x"
+    t.string  "y"
+    t.integer "camino_id"
+  end
+
+  add_index "coordenadas", ["camino_id"], :name => "index_coordenadas_on_camino_id"
 
   create_table "entornos", :force => true do |t|
     t.integer "museo_id"
