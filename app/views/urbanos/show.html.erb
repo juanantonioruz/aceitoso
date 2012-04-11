@@ -1,0 +1,17 @@
+<h1>Centro urbano: <%=@urbano.nombre%></h1>
+<br/>
+
+<label class='label'>Imagen</label>
+<p><%=imagentam(@urbano,'64x64')%>&nbsp;</p>
+
+<label class='label'>Nombre</label>
+<p><%=@urbano.nombre%>&nbsp;</p>
+
+<label class='label'>Descripción del centro urbano</label>
+<p><%=@urbano.descripcion%>&nbsp;</p>
+
+<label class='label'>Coordenadas: Latitud / Longitud</label>
+<p>Latitud: <%=@urbano.x%> Longitud <%=@urbano.y%></p>
+
+<br/>
+<%= link_to 'Editar',edit_museo_entorno_urbano_path(:museo_id=>@museo,:id=>@urbano),:class=>'btn'%> o <%=link_to 'Volver a centros urbanos',museo_entorno_urbanos_path(@museo)%>

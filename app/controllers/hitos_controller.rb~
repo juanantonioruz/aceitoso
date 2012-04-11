@@ -36,7 +36,8 @@ class HitosController < ApplicationController
     end
     def update
         @hito = Hito.find(params[:id])
-        @museo=@hito.museo
+        @entorno=@hito.entorno
+        @museo=@entorno.museo
 
             if @hito.update_attributes(params[:hito])
                   redirect_to museo_entorno_hito_path(:museo_id=>@museo,:id=>@hito), :notice => 'Informacion actualizada'

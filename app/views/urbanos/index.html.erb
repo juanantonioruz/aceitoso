@@ -1,0 +1,25 @@
+<h1>Centros urbanos para el museo: <%=@museo.nombre%></h1>
+<br/>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@urbanos.each do |urbano|%>
+<tr>
+<td><%=urbano.nombre%></td>
+<td><%=urbano.descripcion%></td>
+<td><%=imagentam(urbano,'64x64')%></td>
+<td>
+<%= link_to 'Ver',museo_entorno_urbano_path(:museo_id=>@museo,:id=>urbano),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_entorno_urbano_path(:museo_id=>@museo,:id=>urbano),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_entorno_urbano_path(:museo_id=>@museo,:id=>urbano),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir centro urbano',new_museo_entorno_urbano_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al entorno',museo_entorno_path(@museo)%>
+

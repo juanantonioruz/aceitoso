@@ -1,0 +1,3 @@
+class Urbano < ActiveRecord::Base
+  belongs_to :entorno
+end
