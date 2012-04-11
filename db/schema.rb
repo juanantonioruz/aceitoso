@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120407220229) do
+ActiveRecord::Schema.define(:version => 20120411111847) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20120407220229) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "entornos", :force => true do |t|
+    t.integer "museo_id"
+  end
+
+  add_index "entornos", ["museo_id"], :name => "index_entornos_on_museo_id"
 
   create_table "espacios", :force => true do |t|
     t.string  "nombre"
@@ -95,6 +101,17 @@ ActiveRecord::Schema.define(:version => 20120407220229) do
 
   add_index "genericas_labels", ["generica_id", "label_id"], :name => "index_genericas_labels_on_generica_id_and_label_id"
   add_index "genericas_labels", ["label_id", "generica_id"], :name => "index_genericas_labels_on_label_id_and_generica_id"
+
+  create_table "hitos", :force => true do |t|
+    t.string  "imagen"
+    t.string  "nombre"
+    t.text    "descripcion"
+    t.string  "x"
+    t.string  "y"
+    t.integer "entorno_id"
+  end
+
+  add_index "hitos", ["entorno_id"], :name => "index_hitos_on_entorno_id"
 
   create_table "infos", :force => true do |t|
     t.string  "url"

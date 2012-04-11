@@ -1,0 +1,10 @@
+class CreateEntornos < ActiveRecord::Migration
+  def change
+    create_table :entornos do |t|
+      t.references :museo
+
+      t.timestamps
+    end
+    add_index :entornos, :museo_id
+  end
+end

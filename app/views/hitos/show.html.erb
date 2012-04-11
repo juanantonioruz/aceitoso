@@ -1,0 +1,17 @@
+<h1>Hito: <%=@hito.entorno.museo.nombre%></h1>
+<br/>
+
+<label class='label'>Imagen</label>
+<p><%=imagentam(@hito,'64x64')%>&nbsp;</p>
+
+<label class='label'>Nombre</label>
+<p><%=@hito.nombre%>&nbsp;</p>
+
+<label class='label'>Descripción de la hito</label>
+<p><%=@hito.descripcion%>&nbsp;</p>
+
+<label class='label'>Coordenadas: Latitud / Longitud</label>
+<p>Latitud: <%=@hito.x%> Longitud <%=@hito.y%></p>
+
+<br/>
+<%=link_to 'Editar',edit_museo_entorno_hito_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a hitos',museo_entorno_hitos_path(@museo)%>

@@ -1,0 +1,1 @@
+<h1>Edición del hito: <%=@hito.nombre%></h1>
