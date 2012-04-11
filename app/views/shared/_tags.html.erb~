@@ -1,4 +1,7 @@
-<label class='label'>Etiquetas</label>
+Accion <%=controller.action_name%>
+<% if controller.action_name !='index'%>
+
+<%end%>
 <%modelo.class.name.downcase%>
     <% for label in Label.find(:all) %>  
     <span>  

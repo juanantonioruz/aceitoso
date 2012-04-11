@@ -1,4 +1,9 @@
+
+<% if controller.action_name !='index'%>
 <label class='label'>Etiquetas</label>
-<%modelo.labels.each do |label|%>
+<%end%>
+
+<p><%modelo.labels.each do |label|%>
     <span><%=label.nombre%></span>
 <%end%>
+</p>
