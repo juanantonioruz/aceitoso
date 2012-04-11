@@ -25,7 +25,7 @@
 <hr>
 <i> * Para añadir puntos a una ruta existente haga click en "ver" en dicha ruta</i>
 <hr>
-<%='coordenada'.pluralize%>
+
 
 <%= link_to 'Añadir camino',new_museo_entorno_camino_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al entorno',museo_entorno_path(@museo)%>
 
