@@ -1,4 +1,4 @@
-<h1>Hitos para el museo: <%=@museo.nombre%></h1>
+<h1>Centros urbanos para el museo: <%=@museo.nombre%></h1>
 <br/>
 <table class='table zebra-striped'>
 <tr>

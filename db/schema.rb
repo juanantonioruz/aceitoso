@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411161224) do
+ActiveRecord::Schema.define(:version => 20120411161701) do
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -213,6 +213,10 @@ ActiveRecord::Schema.define(:version => 20120411161224) do
 
   add_index "publicacions_labels", ["label_id", "publicacion_id"], :name => "index_publicacions_labels_on_label_id_and_publicacion_id"
   add_index "publicacions_labels", ["publicacion_id", "label_id"], :name => "index_publicacions_labels_on_publicacion_id_and_label_id"
+
+  create_table "services", :force => true do |t|
+    t.string "imagen"
+  end
 
   create_table "urbanos", :force => true do |t|
     t.string  "imagen"
