@@ -16,4 +16,4 @@ OpenLayers_Book_Sourcecode/*
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/public/uploads
+#/public/uploads
