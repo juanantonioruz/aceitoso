@@ -1,0 +1,15 @@
+<%=form_for [@museo,@publicacion],:html=>{:multipart=>true} do |f|%>
+
+    <%=f.label :nombre,:class=>'label'%>
+    <%=f.text_field :nombre%>  
+
+    <label class='label'>Enlace a la publicación</label>
+    <%=f.text_field :url%> 
+
+    <%=f.label :descripcion,:class=>'label'%>
+    <%=f.text_area :descripcion,:size=>'30x5'%>
+
+    <%=etiquetar @publicacion%>
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_publicacions_path(@museo)%>
+<%end%>

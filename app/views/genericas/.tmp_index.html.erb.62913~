@@ -1,4 +1,4 @@
-<h1>Recursos interpretativos</h1>
+<h1>Contenido museístico</h1>
 <table class='table zebra-striped'>
 <tr>
 <th>Título</th>
@@ -20,6 +20,6 @@
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir recurso interpretativo',new_generica_path,:class=>'btn'%>
+<%= link_to 'Añadir información',new_generica_path,:class=>'btn'%>
 
 

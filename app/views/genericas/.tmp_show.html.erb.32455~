@@ -1,4 +1,4 @@
-<h1>Mostrando recurso interpretativo: <%=@generica.titulo%></h1>
+<h1>Mostrando: <%=@generica.titulo%></h1>
 <label class='label'>Descripción</label>
 <%=@generica.descripcion%>
 <!--Aqui las etiquetas-->

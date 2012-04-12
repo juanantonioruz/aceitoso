@@ -1,0 +1,2 @@
+<h1>Nuevo contenido: <%=@museo.nombre%></h1>
+<%=render 'form'%>

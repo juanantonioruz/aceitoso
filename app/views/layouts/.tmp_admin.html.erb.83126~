@@ -52,7 +52,7 @@
               <li class="nav-header">Opciones</li>
                 <li><%= link_to "Etiquetas",labels_path  %></li>
                  <li><%= link_to "Servicios disponibles",services_path  %></li>
-                <li><%=link_to 'Recursos Interpretativos',genericas_path%></li>
+                <li><%=link_to 'Informaciones genéricas',genericas_path%></li>
                 <li><%= link_to "Museos",museos_path  %></li>
             </ul>
           </div><!--/.well -->

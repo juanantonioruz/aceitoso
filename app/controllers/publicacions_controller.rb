@@ -20,7 +20,7 @@ class PublicacionsController < ApplicationController
          @publicacion=Publicacion.find(params[:id])
          @museo=@publicacion.museo
     end
-    def destroy
+    def destroya
         @publicacion = Publicacion.find(params[:id])
         @museo=@publicacion.museo
         @publicacion.destroy
@@ -34,7 +34,7 @@ class PublicacionsController < ApplicationController
         @museo=@publicacion.museo
 
             if @publicacion.update_attributes(params[:publicacion])
-                  redirect_to museo_publicacion_path(:museo_id=>@museo,:id=>@publicacion), :notice => 'Publicación actualizada'
+                  redirect_to museo_publicacion_path(:museo_id=>@museo,:id=>@publicacion), :notice => 'Publicacion actualizada'
             end
     end
 end

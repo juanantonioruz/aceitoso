@@ -1,4 +1,4 @@
-<h1> Recursos interpretativos enlazados a: <%=@museo.nombre%></h1>
+<h1> Contenido museístico: <%=@museo.nombre%></h1>
 <table class='table zebra-striped'>
 <tr>
 <th>Título</th>
@@ -19,5 +19,5 @@
 </tr>
 <%end%>
 </table>
-<%= link_to 'Enlazar resurso interpretativo',new_museo_info_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+<%= link_to 'Añadir contenido',new_museo_info_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
 
