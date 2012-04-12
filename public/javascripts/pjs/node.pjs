@@ -1,0 +1,81 @@
+class Node {
+  Graph g;
+	boolean visited = false;
+	boolean hovering = false;
+	boolean dragging = false;
+	
+  Particle particula;
+  ParticleSystem ps;
+  Object subject;
+  public Node(Object s) {
+		this.subject = s;
+  }
+  
+  public void setGraph(Graph g) {
+    this.g = g;
+		this.ps = g.ps;
+		this.particula = ps.makeParticle(1.0,300,200,0);
+  }
+	
+	public Object getSubject() {
+		return this.subject;
+	}
+	
+  public String getId() {
+    return subject.getId;
+  }
+
+  public String getName() {
+    return subject.getName();
+  }
+
+	public void  setVisited(boolean visited) {
+		this.visited = visited;
+	}
+	
+	public boolean isVisited() {
+		return this.visited;
+	}
+	
+	public void setDragging(boolean dragging) {
+		this.dragging = dragging;
+	}
+	
+	public boolean isDragging() {
+		return dragging;
+	}
+
+	public Graph getGraph() {
+		return g;
+	}
+  
+  public ArrayList getOutgoingEdges() {
+    return g.getOutgoingEdges(this); 
+  }
+
+  public ArrayList getIncomingEdges() {
+    return g.getIncomingEdges(this);
+  }
+
+  public Particle getParticle() {
+    return particula;
+  }
+
+	public void setPos(float x, float y) {
+		this.particula.position().set(x, y, 0);
+	}
+
+  public void draw() {
+		// draw subject:Resource
+				//console.dir(subject);
+		subject.setPos(this.particula.position().x, this.particula.position().y);
+		subject.update();
+		
+		subject.draw();
+  }
+
+	public boolean mouseOver() {
+		return subject.mouseOver();
+	}
+
+}

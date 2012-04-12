@@ -1,0 +1,11 @@
+url > http://dev.freebase.com/flyout?id=/m/077qn&callback=jsonp1333451026339
+
+respuesta
+/** this is jsonp **/ jsonp1333451026339({"id":"/m/077qn","html":"\n  <div class=\"fbs-flyout-content\">\n      <img class=\"fbs-flyout-image-true\" id=\"fbs-topic-image\" src=\"https://www.googleapis.com/freebase/v1/image/m/077qn?key=AIzaSyCQVC9yA72POMg2VjiQhSJQQP1nf3ToZTs&amp;maxwidth=75&amp;mode=fit&amp;errorid=%2Ffreebase%2Fno_image_png\">\n    <h1 class=\"fbs-flyout-image-true\" id=\"fbs-flyout-title\">\n      Serbia\n    </h1>\n        <h3 class=\"fbs-topic-properties fbs-flyout-image-true\">\n          <strong>Area:</strong> 88361.0\n        </h3>\n        <h3 class=\"fbs-topic-properties fbs-flyout-image-true\">\n          <strong>Time zone(s):</strong> Central European Time\n        </h3>\n        <h3 class=\"fbs-topic-properties fbs-flyout-image-true\">\n          <strong>Population:</strong> 7120666 - 2011\n        </h3>\n      <p class=\"fbs-topic-article fbs-flyout-image-true\">\n        Serbia /ˈsɜrbiə/, officially the Republic of Serbia (Serbian: Република Србија / Republika Srbija, pronounced [rɛpǔblika sř̩bija]), is a landlocked country located at the crossroads of Central and Southeast Europe, covering the southern part of the…\n      </p>\n      \n  </div>\n\n  <div class=\"fbs-attribution\">\n      <span class=\"fbs-flyout-types\">\n        Country, Country, Government\n      </span>\n  </div>"});
+
+
+url imagen > https://www.googleapis.com/freebase/v1/image/m/077qn?key=AIzaSyCQVC9yA72POMg2VjiQhSJQQP1nf3ToZTs&maxwidth=75&mode=fit&errorid=%2Ffreebase%2Fno_image_png
+
+respuesta 
+Content-Type	image/png
+... la imagen

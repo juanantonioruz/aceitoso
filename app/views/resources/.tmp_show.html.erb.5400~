@@ -1,0 +1,10 @@
+<%content_for :extra do %>
+<ul>
+	
+<% @resource.each do |marron| %>
+<li><%=marron.titulo%></li>
+
+
+<% end %>
+</ul>
+<% end %>

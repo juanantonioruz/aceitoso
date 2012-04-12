@@ -32,7 +32,8 @@ Olearum::Application.routes.draw do
 
   get "olearum/index"
 
-  
+  get "resources/show"
+
 
 
 

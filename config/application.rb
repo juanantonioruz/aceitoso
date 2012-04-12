@@ -51,6 +51,7 @@ module Olearum
 
     # Enable the asset pipeline
     config.assets.enabled = true
+   # config.action_view.javascript_expansions[:pro] = %w(jquery-1.7.2.js processing-1.3.6.js   suggest.js)
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

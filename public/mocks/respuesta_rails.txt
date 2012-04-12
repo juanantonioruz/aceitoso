@@ -1,0 +1,40 @@
+url: http://askken.heroku.com/resources/show?id=%2Fen%2Fporsche
+
+respuesta json
+Content-Type	application/json; charset=utf-8
+{
+"data":
+	{
+	"attributes":[
+			{"values":[{
+					"name":"Ferdinand Porsche",
+					"id":"/en/ferdinand_porsche"
+					}],
+				"name":"Founders",
+				"id":"/organization/organization/founders"},
+			{"values":[],
+				"name":"Headquarters",
+				"id":"/organization/organization/headquarters"},
+			{"values":[{"name":"Automobile","id":"/en/automobile"}],
+				"name":"Industry",
+				"id":"/business/business_operation/industry"},
+			{"values":[],
+				"name":"Equivalent Instances",
+				"id":"/base/ontologies/ontology_instance/equivalent_instances"},
+			{"values":[],
+				"name":"Employees and other personnel",
+				"id":"/business/employer/employees"},
+			{"values":[{"name":"Porsche 911","id":"/en/porsche_911"},{"name":"Porsche","id":"/m/0h5wrrb"}],
+				"name":"Make(s)",
+				"id":"/automotive/company/make_s"}
+			],
+	"name":"Porsche",
+	"id":"/en/porsche"
+	},
+"details_html":"<h2>Porsche</h2>\n<p class='summary'>\n<img class='summary-img' src='http://img.freebase.com/api/trans/image_thumb//m/029j0m8?mode=fit&amp;maxwidth=150'>\nPorsche Automobil Holding SE, usually shortened to Porsche SE (German pronunciation: [\u02c8p\u0254\u0281\u0283\u0259]) a Societas Europaea or European Public Company, is a German holding company with investments in the automotive industry.\nPorsche SE is headquartered in Zuffenhausen, a city district of Stuttgart, Baden-W\u00fcrttemberg and is owned by the Pi\u00ebch and Porsche families, and Qatar Holdings, through the Qatar Investment Authority (10%). It owns 50.7% of Volkswagen AG and 50.1% of Porsche Zwischenholding GmbH,...\n[\n<a href='http://freebase.com/view/en/porsche' target='_new'>Freebase Topic</a>\n|\n&nbsp;\n<a href='http://en.wikipedia.org/w/index.php?curid=24365' target='_new'>Wikipedia Article</a>\n]\n<h3>Links</h3>\n<ul class='links'>\n<li>\n<a href='http://www.porsche.com/' target='_new'></a>\n</li>\n<li>\n<a href='http://topics.nytimes.com/top/news/business/companies/porsche_ag/index.html' target='_new'></a>\n</li>\n<li>\n<a href='http://www.porsche-se.com/pho/en/' target='_new'></a>\n</li>\n<li>\n<a href='http://www.honk.com/porsche' target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a href='http://www.porsche.com' target='_new'></a>\n</li>\n</ul>\n</p>\n"}
+
+
+{"data":
+{"name":"jn",
+"attributes":[{"name":"ey","id":"1","values":[]},{"name":"ey2","id":"2","values":[]}],
+"id":"que bueno"},"details_html":"los detalles html"}
