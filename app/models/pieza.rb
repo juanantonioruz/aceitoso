@@ -7,7 +7,7 @@ class Pieza < ActiveRecord::Base
 
   def escoleccion
     if self.coleccion
-        'Sí'
+        'Si'
     else
         'No'
     end

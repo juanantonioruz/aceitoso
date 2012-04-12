@@ -16,13 +16,13 @@
     <!------------------->
     <%=etiquetar @pieza%>
     <!--------------------->
-    <label class='label'>Es pieza original?</label>
-  <%= f.radio_button :coleccion,  !@pieza.coleccion %> SI
-  <%= f.radio_button :coleccion,  @pieza.coleccion %> NO
+   
+    <label class='label'>Pieza original</label
+    <%=f.check_box :coleccion%><i>  * Marque esta casilla para indicar que pertenece al fondo original</i>
 
 
     <%=f.label :descripcion,:class=>'label'%>
-    <%=f.text_area :descripcion,:size=>'500x15', :style=>'width: 510px;'%>
+    <%=f.text_area :descripcion,:size=>'30x5'%>
 
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_piezas_path(@museo)%>

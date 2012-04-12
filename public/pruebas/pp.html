@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Bounds Example</title>
+    <script src="OpenLayers.js"></script>
+    <script src="proj4js/lib/proj4js.js"></script>
+    <script type="text/javascript">
+        function init(){
+        var map = new OpenLayers.Map('map');
+var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+map.addLayers([layer]);
+            Proj4js.defs["EPSG:26915"] = "+proj=utm +zone=15 +ellps=GRS80 +datum=NAD83 +units=m +no_defs";
+            var fromProjection = new OpenLayers.Projection("EPSG:26915");
+            var toProjection = new OpenLayers.Projection("EPSG:4326");
+            var extent = new OpenLayers.Bounds(189775.379950,4816289.746171,761662.354535,5472414.143295);
+            console.log(extent);
+            console.log(extent.transform(fromProjection,toProjection));
+            map.setCenter(
+   extent.transform(fromProjection,toProjection), 8
+);
+        }
+    </script>
+
+  </head>
+
+  <body onload="init()">
+          <div id="map" class="smallmap"></div>
+  </body>
+
+</html>
+
