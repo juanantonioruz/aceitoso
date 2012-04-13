@@ -161,21 +161,34 @@ void mouseMoved() {
 String lineCap;
 void mousePressed() {
 	if (!resourceId) return;
-	$("#mapa").animate({
-    width: "70%",
-  }, 1500 );
+	
+  
   if (mouseButton == LEFT) {
 		Node selectedNode = g.getSelectedNode();
 		Resource r = selectedNode.getSubject();
 		if (selectedValueIndex != null) {
 			// Close current resource
 			r.setClosed();
-			console.log(selectedValueIndex);
-			console.dir(r.getValues().size());
-			console.dir(r.getValues().get(selectedValueIndex));
+			//console.log(selectedValueIndex);
+			//console.dir(r.getValues().size());
+			//console.dir(r.getValues().get(selectedValueIndex));
+			//println("x="+r.getX());
+			//println("y="+r.getY());
 			r2 = fetchResource(r.getValues().get(selectedValueIndex).getId());
 			//r2 = fetchResource(selectedValueIndex);
-			console.dir(r2);
+			//console.dir(r2);
+			if(r.getX()!=null){
+			//println("center new"+r.getX());
+			                  $.mapita.setCenter(
+    new OpenLayers.LonLat('"+r.getX()+"', '"+r.getY()+"'), 12);
+			
+			$("#container_mapa").animate({
+   width: "50%",
+  }, 1500 );
+	$("#mapa_div").animate({
+   width: "100%",
+  }, 1500 );
+  }
 			// Check if resource already exists
 	    int i = 0;
 	    Node n = null;

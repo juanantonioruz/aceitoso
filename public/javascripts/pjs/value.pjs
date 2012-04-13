@@ -7,6 +7,7 @@ public class Value {
 	
   String id = "";
   String name = "";
+  String coords = "";
   
   int idx = 0;
 	
@@ -20,7 +21,7 @@ public class Value {
 	color hoverCol;
 	Attribute attr;
 
-	public Value(String id, String name, Attribute attr) {
+	public Value(String id, String name,   Attribute attr) {
 		this.id = id;
 		this.name = name;
 		this.attr = attr;
@@ -30,6 +31,7 @@ public class Value {
 	public Attribute getAttribute() {
 		return attr;
 	}
+	
 	
 	public void setPos(float x, float y) {
 		this.x = x;

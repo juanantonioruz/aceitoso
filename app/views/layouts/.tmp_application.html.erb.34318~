@@ -13,16 +13,30 @@
         
         <script src="/pruebas/lib/Firebug/firebug.js"></script>
         <script src="/pruebas/OpenLayers.js"></script>
+        <script type="text/javascript">
+		
+            var map, controls; 
+			
+            function init(){
+                map = new OpenLayers.Map('mapa');
+				console.dir(map);
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+                map.addLayers([layer]);
+                  map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
+            }
+            
+          
+        </script>
 
 
   <%= csrf_meta_tags %>
   <script type="text/javascript">
-  	 var controls; 
-
   	var tId,pjs,cnt=0;
 
  $(document).ready(
  function() {
+ 	init("mapa_div");
   pjs = Processing.getInstanceById("kenviz");
   console.log(cnt+':'+pjs);
   if (!pjs) tId=setInterval(function() {
@@ -33,20 +47,8 @@
 	inicia(pjs);		
 	} 
   },500);
-  if(!$.mapita)
-	$.mapita=init_mapa();
-
 });
- function init_mapa(){
-         		var map;
-		        map = new OpenLayers.Map('mapa_div');
-				//console.dir(map);
-				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
 
-                map.addLayers([layer]);
-                  map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
-				 return map;
-            }
   function inicia() {
     p = Processing.getInstanceById("kenviz");
 
@@ -124,15 +126,21 @@
 /javascripts/pjs/node.pjs 
 /javascripts/pjs/graph.pjs"></canvas>  
 <header >
-<section id="title" >
+<section id="title">
+	<%=yield :extra%>
 </section>
 <section id="search">
-<input autocomplete="off" default="Search  interconnected topics ..." id="fb-suggest" name="fb-suggest" type="text" class="">
+<input autocomplete="off" default="Search 8 million interconnected topics ..." id="fb-suggest" name="fb-suggest" type="text" class="">
 </section>
 <br style="clear: both;">
 </header>
 <section id="content" style="position:relative;">
 <%= yield %>
+</section>
+<section id="mapa" style="z-index: 15; top: 10px; left: 10px; height:100px; width:100px;position: absolute;">
+<div id="mapa_div">
+	otra
+</div>
 </section>
 <aside>
 <div id="explanation">
@@ -173,10 +181,19 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 <a href="http://www.google.com/chrome/">Chrome</a><br>
 </div>
 </aside>
-<footer style="">
-	<div id="container_mapa" style="top:-20px;width:200px; height:180px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" style="width:200px; height:180px;">
-		</div>
+<footer>
+<div class="left">
+Created by
+<a href="http://twitter.com/_mql">Michael Aufreiter</a>
+at
+<a href="http://quasipartikel.at">Quasipartikel</a>
+Labs
+</div>
+<div class="right">
+feeded by
+<a href="http://freebase.com" target="_blank">Freebase</a>
+| Code available at
+<a href="http://github.com/michael/askken" target="_blank">Github</a>
 </div>
 </footer>
 </body>
