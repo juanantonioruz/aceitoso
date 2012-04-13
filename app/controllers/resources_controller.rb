@@ -3,56 +3,83 @@ class ResourcesController < ApplicationController
 
   def search
         logger.info "search::: > buscando .... "+params[:query].to_s
+#    logger.info @resource
+   query = params[:query].split.map {|term| "%#{term}%" }
+   sql = "nombre LIKE ?" 
 
-      respuesta='/* this is javascript */ '+params[:callback].to_s+'({"status":"200 OK",
+     @resource=Museo.where([sql, "%"+params[:query]+"%"])
+
+#    logger.info @resource.children
+    data=DatosSearch.new
+#    data.resultado_html="202"
+     data.data=@resource
+
+      respuesta='/* this is javascript */ '+params[:callback].to_s+'({
       "result":[
       {"mid":"1",
       "name":"Serbia",
-      "notable":{"name":"Country","id":"/location/country"}
+      "notable":{"name":"Country"}
       },
       {"mid":"2","name":"Seattle","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":71.649063},
       {"mid":"3","name":"Sex","notable":{"name":"Route of infection transmission","id":"/medicine/transmission_route"},"lang":"en","score":64.541069},
       {"mid":"4","name":"Seoul","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":63.484711},
       {"mid":"5","name":"Senegal","notable":{"name":"Country","id":"/location/country"},"lang":"en","score":62.349876}
-      ]});'
+      ]
+      });'
+         # logger.info respuesta
+            respuesta='/* this is javascript */ '+params[:callback].to_s+'('+data.to_json().to_s+');'
+          #logger.info respuesta
             render :text => respuesta
   end
   
   def fly
+
         logger.info "consulta suggest por mid > id .... "+params[:id].to_s
-      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+params[:id].to_s+'","html":"id: '+params[:id].to_s+' callback:'+params[:callback].to_s+'"});'
+        museo=Museo.find_by_id(params[:id])
+        logger.info museo.ficha.descripcion
+      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+params[:id].to_s+'","html":\''+museo.ficha.descripcion+'\'});'
                 render :text => respuesta
   end
 
   def show
     logger.info "es menor que 500 .... "+params[:id].to_s
-#    if(!params[:id].nil? ) then  
-#    @resource=Marron.find_by_id(params[:id])
-#    logger.info @resource
+    if(!params[:id].nil? ) then  
+    @resource=Museo.find_by_id(params[:id])
+    logger.info @resource
 #    logger.info @resource.children
-#    data=Datos.new
-#    data.resultado="202"
-#    data.data=@resource
+    data=Datos.new
+    data.data=@resource
     
-  #  data.resultado_html="<h2>Porsche</h2>\n<p class='summary'>\n<img class='summary-img' src='http://img.freebase.com/api/trans/image_thumb//m/029j0m8?mode=fit&amp;maxwidth=150'>\nPorsche Automobil Holding SE, usually shortened to Porsche SE (German pronunciation: [\u02c8p\u0254\u0281\u0283\u0259]) a Societas Europaea or European Public Company, is a German holding company with investments in the automotive industry.\nPorsche SE is headquartered in Zuffenhausen, a city district of Stuttgart, Baden-W\u00fcrttemberg and is owned by the Pi\u00ebch and Porsche families, and Qatar Holdings, through the Qatar Investment Authority (10%). It owns 50.7% of Volkswagen AG and 50.1% of Porsche Zwischenholding GmbH,...\n[\n<a href='http://freebase.com/view/en/porsche' target='_new'>Freebase Topic</a>\n|\n&nbsp;\n<a href='http://en.wikipedia.org/w/index.php?curid=24365' target='_new'>Wikipedia Article</a>\n]\n<h3>Links</h3>\n<ul class='links'>\n<li>\n<a href='http://www.porsche.com/' target='_new'></a>\n</li>\n<li>\n<a href='http://topics.nytimes.com/top/news/business/companies/porsche_ag/index.html' target='_new'></a>\n</li>\n<li>\n<a href='http://www.porsche-se.com/pho/en/' target='_new'></a>\n</li>\n<li>\n<a href='http://www.honk.com/porsche' target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a target='_new'></a>\n</li>\n<li>\n<a href='http://www.porsche.com' target='_new'></a>\n</li>\n</ul>\n</p>\n"
-   # data.resultado_html="los detalles html"
+    data.resultado_html=@resource.ficha.descripcion
      respond_to do |format|
  format.html # show.html.erb
- format.json {render :text => '{"data":{"attributes":[{"values":[{"name":"Ferdinand Porsche","id":"/en/ferdinand_porsche"}],"name":"Founders","id":"/organization/organization/founders"},{"values":[],"name":"Headquarters","id":"/organization/organization/headquarters"},{"values":[{"name":"Automobile","id":"/en/automobile"}],"name":"Industry","id":"/business/business_operation/industry"},{"values":[],"name":"Equivalent Instances","id":"/base/ontologies/ontology_instance/equivalent_instances"},{"values":[],"name":"Employees and other personnel","id":"/business/employer/employees"},{"values":[{"name":"Porsche 911","id":"/en/porsche_911"},{"name":"Porsche","id":"/m/0h5wrrb"}],"name":"Make(s)","id":"/automotive/company/make_s"}],"name":"Porsche","id":"/en/porsche"},"details_html":"details"}'}
- #format.json {render :json =>data.to_json( ) }
+ #format.json {render :text => '{"data":{"attributes":[{"values":[{"name":"Ferdinand Porsche","id":"/en/ferdinand_porsche"}],"name":"Founders","id":"/organization/organization/founders"},{"values":[],"name":"Headquarters","id":"/organization/organization/headquarters"},{"values":[{"name":"Automobile","id":"/en/automobile"}],"name":"Industry","id":"/business/business_operation/industry"},{"values":[],"name":"Equivalent Instances","id":"/base/ontologies/ontology_instance/equivalent_instances"},{"values":[],"name":"Employees and other personnel","id":"/business/employer/employees"},{"values":[{"name":"Porsche 911","id":"/en/porsche_911"},{"name":"Porsche","id":"/m/0h5wrrb"}],"name":"Make(s)","id":"/automotive/company/make_s"}],"name":"Porsche","id":"/en/porsche"},"details_html":"details"}'}
+ format.json {render :json =>data.to_json( ) }
 #end
 end
 end
+end
+class DatosSearch
+  attr_accessor  :data, :resultado_html
+    def as_json(options = {})
+    {
+    :result=>self.data.map {|mar| {"mid" => mar.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
+    
+
+    }
+  end
+
+end
 class Datos
-  attr_accessor :resultado, :data, :resultado_html
+  attr_accessor   :data, :resultado_html
     def as_json(options = {})
     {
     :data=>{
-    :attributes=>  self.data.children.map { |mar| {:id => mar.id.to_s, :name => mar.titulo, :values=>mar.children.map { |child| {:name=>child.titulo,:id=>child.id.to_s}}} },
-    :name=>self.data.titulo,
+    :attributes=>  self.data.ficha.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>mar.fichas.map { |child| {:name=>child.museo.nombre,:id=>child.museo.id.to_s}}} },
+    :name=>self.data.nombre,
     :id=>self.data.id.to_s
     },
-    :details_html=>self.data.descripcion
+    :details_html=>self.data.ficha.descripcion
 
 
     }

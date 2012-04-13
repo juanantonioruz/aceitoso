@@ -112,7 +112,7 @@ public class Value {
          rotate(PI);
        }
        
-       text(this.getName(), 20, 20);
+       text(this.getName(), 2, 2);
        
        popMatrix();
        

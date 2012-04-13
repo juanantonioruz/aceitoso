@@ -4,7 +4,6 @@
 <tr>
 <th>Nombre</th>
 <th>Acciones</th>
-<th>Eliminar museo</th>
 </tr>
 </thead>
 <tbody>
@@ -14,9 +13,7 @@
 <td>
 <%= link_to 'Ver',museo,:class=>'btn btn-success'%>&nbsp;
 <%= link_to 'Editar',edit_museo_path(museo),:class=>'btn btn-warning'%>
-</td>
-<td>
-<i>* ¡Cuidado!Se borrará cualquier información asociada al museo</i>&nbsp;<%= link_to 'Borrar',museo_path(museo),:method=>:delete,:confirm=>'¿Seguro que desea borrar el museo? Toda la información asociada se borrará',:class=>'btn btn-danger'%>
+<%= link_to 'Borrar',museo_path(museo),:method=>:delete,:confirm=>'¿Seguro que desea borrar el museo? Toda la información asociada se borrará',:class=>'btn btn-danger'%>
 </td>
 </tr>
 <%end%>
