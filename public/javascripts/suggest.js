@@ -858,6 +858,8 @@
     },
 
     use_jsonp: function(service_url) {
+		//cambiado
+		return true;
       /*
        * if we're on the same host,
        * then we don't need to use jsonp.
@@ -1124,7 +1126,7 @@
 		  //console.error(o);
 		  //console.error(filter);
 		  // cambiado
-      //if ($.type(filter) === "string") {
+     // if ($.type(filter) === "string") {
           // the original filter may be a single filter param (string)
           //filter = [filter];
      //}
@@ -1599,7 +1601,7 @@
 
       // default is service_url if NULL
       flyout_service_url: "http://dev.freebase.com",
-      flyout_service_url: "http://olearum.enjava.com",
+      flyout_service_url: "",
 
       // flyout_service_url + flyout_service_path =
       // url to flyout service

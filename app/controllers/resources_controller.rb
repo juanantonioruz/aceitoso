@@ -6,22 +6,22 @@ class ResourcesController < ApplicationController
 
       respuesta='/* this is javascript */ '+params[:callback].to_s+'({"status":"200 OK",
       "result":[
-      {"mid":"/m/077qn",
+      {"mid":"1",
       "name":"Serbia",
-      "notable":{"name":"Country","id":"/location/country"},
-      "lang":"en",
-      "score":71.716133
-      },{"mid":"/m/0d9jr","name":"Seattle","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":71.649063},{"mid":"/m/06ng1","name":"Sex","notable":{"name":"Route of infection transmission","id":"/medicine/transmission_route"},"lang":"en","score":64.541069},{"mid":"/m/0hsqf","name":"Seoul","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":63.484711},{"mid":"/m/06srk","name":"Senegal","notable":{"name":"Country","id":"/location/country"},"lang":"en","score":62.349876},{"mid":"/m/070xg","name":"Seattle Seahawks","notable":{"name":"American football team","id":"/american_football/football_team"},"lang":"en","score":60.330681},{"mid":"/m/09f3c","name":"Seville","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":59.434868},{"mid":"/m/04jpl","name":"London","notable":{"name":"Railway terminus","id":"/rail/railway_terminus"},"lang":"en","score":58.766258},{"mid":"/m/06p8m","name":"Sega","notable":{"name":"Organization","id":"/organization/organization"},"lang":"en","score":57.999702},{"mid":"/m/025sf8g","name":"Selenium","notable":{"name":"Chemical Element","id":"/chemistry/chemical_element"},"lang":"en","score":57.965519},{"mid":"/m/06sw9","name":"Seychelles","notable":{"name":"Country","id":"/location/country"},"lang":"en","score":57.842812},{"mid":"/m/021mp2","name":"Sedan","notable":{"name":"Body Style","id":"/automotive/body_style"},"lang":"en","score":56.666691},{"mid":"/m/06nwz","name":"Seafood","notable":{"name":"Cuisine","id":"/food/cuisine"},"lang":"en","score":56.549774},{"mid":"/m/0f3vz","name":"Seine","notable":{"name":"Body Of Water","id":"/geography/body_of_water"},"lang":"en","score":55.925282},{"mid":"/m/06nxt","name":"Second","notable":{"name":"Unit Of Time","id":"/measurement_unit/time_unit"},"lang":"en","score":55.326965},{"mid":"/m/072kp","name":"Seinfeld","notable":{"name":"TV Program","id":"/tv/tv_program"},"lang":"en","score":54.893318},{"mid":"/m/01vsykc","name":"Seal","notable":{"name":"Musician","id":"/m/09jwl"},"lang":"en","score":54.657032},{"mid":"/m/073z8","name":"Serotonin","notable":{"name":"Chemical Compound","id":"/chemistry/chemical_compound"},"lang":"en","score":54.299114},{"mid":"/m/09dh0","name":"Seed","notable":{"name":"Industry","id":"/business/industry"},"lang":"en","score":53.546150},{"mid":"/m/06_4g","name":"Sejm","notable":{"name":"Governmental Body","id":"/government/governmental_body"},"lang":"en","score":53.515915}],"cursor":20,"cost":27,"hits":56662});'
+      "notable":{"name":"Country","id":"/location/country"}
+      },
+      {"mid":"2","name":"Seattle","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":71.649063},
+      {"mid":"3","name":"Sex","notable":{"name":"Route of infection transmission","id":"/medicine/transmission_route"},"lang":"en","score":64.541069},
+      {"mid":"4","name":"Seoul","notable":{"name":"City/Town/Village","id":"/location/citytown"},"lang":"en","score":63.484711},
+      {"mid":"5","name":"Senegal","notable":{"name":"Country","id":"/location/country"},"lang":"en","score":62.349876}
+      ]});'
             render :text => respuesta
   end
   
   def fly
         logger.info "consulta suggest por mid > id .... "+params[:id].to_s
-      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"/m/077qn",\
-      "html":"aqui esta la respuesta html"
-      });'
+      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+params[:id].to_s+'","html":"id: '+params[:id].to_s+' callback:'+params[:callback].to_s+'"});'
                 render :text => respuesta
-
   end
 
   def show
