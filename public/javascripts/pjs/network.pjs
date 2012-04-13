@@ -167,7 +167,6 @@ void mousePressed() {
   if (mouseButton == LEFT) {
 		Node selectedNode = g.getSelectedNode();
 		Resource r = selectedNode.getSubject();
-		
 		if (selectedValueIndex != null) {
 			// Close current resource
 			r.setClosed();
