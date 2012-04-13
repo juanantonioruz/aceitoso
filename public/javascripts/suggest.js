@@ -1044,7 +1044,6 @@
 
       this.jsonp = true;
       this.jsonp_flyout = $.suggest.use_jsonp(o.flyout_service_url);
-
       if (!$.suggest.cache) {
         $.suggest.cache = {};
       }
@@ -1433,7 +1432,7 @@
       if (o.ac_param.lang) {
           ajax_options.data.lang = o.ac_param.lang;
       }
-
+		
       //var self = this;
       clearTimeout(this.flyout_request.timeout);
       this.flyout_request.timeout =
@@ -1585,9 +1584,11 @@
 
       // base url for autocomplete service
       service_url: "https://www.googleapis.com",
+      service_url: "",
 
       // service_url + service_path = url to autocomplete service
       service_path: "/freebase/v1/search",
+      service_path: "/resources/search",
 
       // 'left', 'right' or null
       // where list will be aligned left or right with the input
@@ -1598,10 +1599,11 @@
 
       // default is service_url if NULL
       flyout_service_url: "http://dev.freebase.com",
+      flyout_service_url: "http://olearum.enjava.com",
 
       // flyout_service_url + flyout_service_path =
       // url to flyout service
-      flyout_service_path: "/flyout?id=${id}",
+      flyout_service_path: "/resources/fly?id=${id}",
 
       // jQuery selector to specify where the flyout
       // will be appended to (defaults to document.body).
