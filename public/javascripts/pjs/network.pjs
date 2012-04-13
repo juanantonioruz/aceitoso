@@ -29,7 +29,7 @@ int nodeCount = 0;
 
 Resource fetchResource(String resourceId) {
   // init dummy resource
-  console.log("fecthing resource::: "+resourceId);
+  println("fecthing resource::: "+resourceId);
   Resource resource = new Resource(resourceId, "", "");
 	resource.idx = nodeCount;
   nodeCount++;
