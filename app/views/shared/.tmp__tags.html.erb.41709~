@@ -1,4 +1,5 @@
 <label class='label'>Etiquetas</label>
+eyy
 <%modelo.class.name.downcase%>
     <% for label in Label.find(:all) %>
     <span>  
