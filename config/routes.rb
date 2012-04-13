@@ -33,6 +33,7 @@ Olearum::Application.routes.draw do
   get "olearum/index"
 
   get "resources/show"
+  get "resources/detalla"
   match 'mapa' => 'resources#show'
 
   get "resources/search"

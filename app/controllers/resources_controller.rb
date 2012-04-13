@@ -54,10 +54,13 @@ class ResourcesController < ApplicationController
       respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+resultado.id.to_s+'","html":\''+html+'\'});'
                 render :text => respuesta
   end
-
   def show
+         respond_to do |format|
+ format.html # show.html.erb
+end
+  end
+  def detalla
     logger.info "es menor que 500 .... "+params[:id].to_s
-    if(!params[:id].nil? ) then  
       resultado, html=busca(params[:id])      
 
     @resource=resultado
@@ -66,13 +69,13 @@ class ResourcesController < ApplicationController
     data.resultado_html=html
     
      
-     respond_to do |format|
- format.html # show.html.erb
+    # respond_to do |format|
+ #format.html # show.html.erb
  #format.json {render :text => '{"data":{"attributes":[{"values":[{"name":"Ferdinand Porsche","id":"/en/ferdinand_porsche"}],"name":"Founders","id":"/organization/organization/founders"},{"values":[],"name":"Headquarters","id":"/organization/organization/headquarters"},{"values":[{"name":"Automobile","id":"/en/automobile"}],"name":"Industry","id":"/business/business_operation/industry"},{"values":[],"name":"Equivalent Instances","id":"/base/ontologies/ontology_instance/equivalent_instances"},{"values":[],"name":"Employees and other personnel","id":"/business/employer/employees"},{"values":[{"name":"Porsche 911","id":"/en/porsche_911"},{"name":"Porsche","id":"/m/0h5wrrb"}],"name":"Make(s)","id":"/automotive/company/make_s"}],"name":"Porsche","id":"/en/porsche"},"details_html":"details"}'}
- format.json {render :json =>data.to_json( ) }
+# format.json {render :json =>data.to_json( ) }
+  render :text =>data.to_json( ) 
 #end
-end
-end
+#end
 end
 class DatosSearch
   attr_accessor  :data_museos,:data_genericas, :resultado_html
@@ -96,7 +99,7 @@ class DatosSearch
 
 end
 class Datos
-  attr_accessor   :data, :resultado_html
+  attr_accessor   :data, :resultado_html, :coordenadas
     def as_json(options = {})
     {
     :data=>{
@@ -104,7 +107,8 @@ class Datos
     :name=>(self.data.class==Museo)? self.data.nombre : self.data.titulo ,
     :id=>self.data.id.to_s
     },
-    :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion 
+    :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
+    :coords=>(self.data.class==Museo)? self.data.ficha.x+"x"+self.data.ficha.y : ""
 
 
     }

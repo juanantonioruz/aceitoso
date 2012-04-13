@@ -57,6 +57,7 @@ public class Resource {
   String id = "";
   String name = "";
   String html = "";
+  String coords = "";
 
   public Resource(String id, String name, String html) {
 		this.attributes = new ArrayList();
@@ -64,7 +65,20 @@ public class Resource {
     this.name = name;
     this.html = html;
   }
-  
+  public String getX() {
+		if(coords.indexOf("x")!=-1){
+			return coords.split("x")[0];
+		}else{
+			return null;
+		}
+	}
+	public String getY() {
+		if(coords.indexOf("x")!=-1){
+			return coords.split("x")[1];
+		}else{
+			return null;
+		}
+	}
   public void fetchData() {
    
     if(depurando){
@@ -82,7 +96,7 @@ public class Resource {
   	$.ajax({
   		async: true,
       type: "GET",
-      url: "/resources/show",
+      url: "/resources/detalla",
   		data: {id: that.id},
       dataType: 'json',
       success: function(response) {
@@ -90,16 +104,16 @@ public class Resource {
         that.id = response.data.id;
         that.name = response.data.name;
         that.html = response.details_html;
-        
+        that.coords = response.coords;
         int numValues = 0;
         for (int i = 0 ; i < response.data.attributes.length(); i++) {
          Attribute attr = new Attribute(response.data.attributes[i].name, that);
-	        console.dir(attr);
+	       // console.dir(attr);
          
          for (int j = 0; j < response.data.attributes[i].values.length(); j++) {
-	        console.dir(response.data.attributes[i].values);
+	        //console.dir(response.data.attributes[i].values);
          	Value val=new Value(response.data.attributes[i].values[j].id, response.data.attributes[i].values[j].name, attr);
-	        console.dir(val);
+	        //console.dir(val);
            attr.addValue(val);
            numValues++;
          }
