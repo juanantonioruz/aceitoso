@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  museo_origen_id: 1
+  museo_fin_id: 1
+  generica_origen_id: 1
+  generica_fin_id: 1
+
+two:
+  museo_origen_id: 1
+  museo_fin_id: 1
+  generica_origen_id: 1
+  generica_fin_id: 1
