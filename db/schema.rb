@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415005352) do
+ActiveRecord::Schema.define(:version => 20120415233530) do
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -163,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20120415005352) do
     t.string "nombre"
   end
 
+  create_table "nombre_relacions", :force => true do |t|
+    t.string   "nombre1"
+    t.string   "nombre2"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "piezas", :force => true do |t|
     t.string  "nombre"
     t.text    "descripcion"
@@ -220,10 +227,18 @@ ActiveRecord::Schema.define(:version => 20120415005352) do
     t.integer  "museo_fin_id"
     t.integer  "generica_origen_id"
     t.integer  "generica_fin_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "mensaje_origen"
     t.string   "mensaje_fin"
+    t.integer  "sentido_relacion_id"
+  end
+
+  create_table "sentido_relacions", :force => true do |t|
+    t.string   "creciente"
+    t.integer  "nombre_relacion_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "services", :force => true do |t|
