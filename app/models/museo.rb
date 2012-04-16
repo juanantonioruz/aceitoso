@@ -1,6 +1,10 @@
 class Museo < ActiveRecord::Base
     has_one :ficha,:dependent=>:destroy
     has_many :espacios,:dependent=>:destroy
+    
+     has_many :relaciones_origen,:dependent=>:destroy,:class_name => "Relacion", :foreign_key=>"museo_origen_id"
+     has_many :relaciones_fin,:dependent=>:destroy, :class_name => "Relacion", :foreign_key=>"museo_fin_id"
+    
     has_many :piezas,:dependent=>:destroy
     has_many :eventos,:dependent=>:destroy
     has_many :premios,:dependent=>:destroy
@@ -13,4 +17,6 @@ class Museo < ActiveRecord::Base
     has_many :hitos,:through=>:entorno
     has_many :urbanos,:through=>:entorno
     has_many :caminos,:through=>:entorno
+
+
 end

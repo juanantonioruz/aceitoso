@@ -44,10 +44,6 @@
       <div class="row-fluid">
 
         <div class="span9">
-        	    <% if flash[:notice] %>
-      <p class="error" style="background-color:red;"><%= flash[:notice] %></p>
-    <% end %>
-
           <%= yield %>
         </div>
          <div class="span3">

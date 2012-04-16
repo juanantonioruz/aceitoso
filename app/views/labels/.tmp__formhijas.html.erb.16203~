@@ -1,0 +1,12 @@
+<%= form_for([@label, @label.labels.build]) do |h| %>
+
+    <%= h.hidden_field :label_id,:value=>@label.id %>
+    <%= h.label :nombre %>
+    <%= h.text_field :nombre %>
+  
+  
+  <div class="actions">
+    <%= h.submit 'Guardar etiqueta hija',:class=>'btn' %>
+  </div>
+
+  <%end%>

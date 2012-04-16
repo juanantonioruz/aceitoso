@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411165437) do
+ActiveRecord::Schema.define(:version => 20120415233530) do
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -162,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20120411165437) do
     t.string "nombre"
   end
 
+  create_table "nombre_relacions", :force => true do |t|
+    t.string   "nombre1"
+    t.string   "nombre2"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "piezas", :force => true do |t|
     t.string  "nombre"
     t.text    "descripcion"
@@ -213,6 +221,25 @@ ActiveRecord::Schema.define(:version => 20120411165437) do
 
   add_index "publicacions_labels", ["label_id", "publicacion_id"], :name => "index_publicacions_labels_on_label_id_and_publicacion_id"
   add_index "publicacions_labels", ["publicacion_id", "label_id"], :name => "index_publicacions_labels_on_publicacion_id_and_label_id"
+
+  create_table "relacions", :force => true do |t|
+    t.integer  "museo_origen_id"
+    t.integer  "museo_fin_id"
+    t.integer  "generica_origen_id"
+    t.integer  "generica_fin_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "mensaje_origen"
+    t.string   "mensaje_fin"
+    t.integer  "sentido_relacion_id"
+  end
+
+  create_table "sentido_relacions", :force => true do |t|
+    t.string   "creciente"
+    t.integer  "nombre_relacion_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "services", :force => true do |t|
     t.string "imagen"

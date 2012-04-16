@@ -1,0 +1,2 @@
+<h1>Edición del servicio</h1>
+<%= render 'form'%>
