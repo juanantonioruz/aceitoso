@@ -1,3 +1,4 @@
+<%=cargaeditor%>
 <%=form_for [@museo,@evento],:html=>{:multipart=>true} do |f|%>
 
     <%=f.label :titulo,:class=>'label'%>
@@ -17,7 +18,7 @@
     <%=etiquetar @evento%>
 
     <%=f.label :descripcion,:class=>'label'%>
-    <%=f.text_area :descripcion,:size=>'30x5'%>
+    <%=f.text_area :descripcion,:class=>'tinymce'%>
 
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_eventos_path(@museo)%>

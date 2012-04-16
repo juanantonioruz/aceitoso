@@ -1,8 +1,8 @@
 <%= tinymce_assets %>
 <style>
 .mceEditor td.mceIframeContainer iframe {
-    width: 400px !important;
-    height: 200px !important;
+    width: 100% !important;
+
 }
 .mceEditor table {
     width: 100% !important;

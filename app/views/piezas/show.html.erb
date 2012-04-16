@@ -7,7 +7,7 @@
 <p><%=@pieza.nombre%>&nbsp;</p>
 
 <label class='label'>Descripción de la pieza</label>
-<p><%=@pieza.descripcion%>&nbsp;</p>
+<p><%=raw @pieza.descripcion%>&nbsp;</p>
 
 <label class='label'>Es pieza original?</label>
 <p><%=@pieza.escoleccion%>&nbsp;</p>

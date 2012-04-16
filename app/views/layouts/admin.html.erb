@@ -47,8 +47,9 @@
 
         <div class="span9">
         	    <% if flash[:notice] %>
-      <p class="error" style="background-color:red;"><%= flash[:notice] %></p>
-    <% end %>
+                 <!--<p class="error" style="background-color:red;"><%= flash[:notice] %></p>-->
+                <%=alerta('info',flash[:notice])%>
+            <% end %>
 
           <%= yield %>
         </div>

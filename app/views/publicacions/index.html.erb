@@ -4,7 +4,6 @@
 <th>Nombre / enlace</th>
 <!--<th>Enlace a la publicación</th>-->
 <th>Etiquetas</th>
-<th>Descripción</th>
 <th>Acciones</th>
 </tr>
 <%@publicacions.each do |publicacion|%>
@@ -13,7 +12,6 @@
 <td><%=link_to_unless publicacion.url=='', publicacion.nombre,publicacion.url%></td>
 <!--<td><%=publicacion.url%></td>-->
 <td><%=etiquetas publicacion%></td>
-<td><%=publicacion.descripcion%></td>
 
 
 

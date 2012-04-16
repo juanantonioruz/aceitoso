@@ -9,7 +9,7 @@
 <label class='label'>Descripción de la pieza</label>
 <p><%=@pieza.descripcion%>&nbsp;</p>
 
-<label class='label'>Es parte de la colección del museo</label>
+<label class='label'>Es pieza original?</label>
 <p><%=@pieza.escoleccion%>&nbsp;</p>
 
 

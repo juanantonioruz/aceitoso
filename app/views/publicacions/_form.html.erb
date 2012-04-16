@@ -1,3 +1,4 @@
+<%=cargaeditor%>
 <%=form_for [@museo,@publicacion],:html=>{:multipart=>true} do |f|%>
 
     <%=f.label :nombre,:class=>'label'%>
@@ -7,7 +8,7 @@
     <%=f.text_field :url%> 
 
     <%=f.label :descripcion,:class=>'label'%>
-    <%=f.text_area :descripcion,:size=>'30x5'%>
+    <%=f.text_area :descripcion,:class=>'tinymce'%>
 
     <%=etiquetar @publicacion%>
     <br/>

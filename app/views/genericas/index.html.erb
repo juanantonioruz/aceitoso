@@ -7,6 +7,7 @@
 <%@genericas.each do |generica|%>
 <tr>
 <td><%=generica.titulo%></td>
+
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>

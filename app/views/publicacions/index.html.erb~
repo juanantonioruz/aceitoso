@@ -10,7 +10,7 @@
 <%@publicacions.each do |publicacion|%>
 <tr>
 
-<td><%=link_to publicacion.nombre,publicacion.url%></td>
+<td><%=link_to_unless publicacion.url=='', publicacion.nombre,publicacion.url%></td>
 <!--<td><%=publicacion.url%></td>-->
 <td><%=etiquetas publicacion%></td>
 <td><%=publicacion.descripcion%></td>

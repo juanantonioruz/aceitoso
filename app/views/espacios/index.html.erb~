@@ -3,6 +3,7 @@
 <tr>
 <th>Titulo</th>
 <th>Id en el plano</th>
+<th>Descripcion</th>
 <th>Imagen</th>
 <th>Acciones</th>
 </tr>
@@ -10,6 +11,7 @@
 <tr>
 <td><%=espacio.nombre%></td>
 <td><%=espacio.idplano%></td>
+<td><%=espacio.descripcion%></td>
 <td><%=imagentam(espacio,'64x64')%></td>
 
 

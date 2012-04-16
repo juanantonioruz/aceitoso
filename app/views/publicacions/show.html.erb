@@ -8,7 +8,7 @@
 <p><%=link_to @publicacion.enlace%></p>
 
 <label class='label'>Descripción de la publicacion</label>
-<p><%=@publicacion.descripcion%>&nbsp;</p>
+<p><%=raw @publicacion.descripcion%>&nbsp;</p>
 
 
 <%=etiquetas @publicacion%>

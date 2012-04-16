@@ -1,16 +1,14 @@
-<h1>Contenido museístico</h1>
+<h1>Articulos</h1>
 <table class='table zebra-striped'>
 <tr>
 <th>Título</th>
-<th>Descripcion</th>
-<th>Imagen</th>
+<th>Texto</th>
 <th>Acciones</th>
 </tr>
 <%@genericas.each do |generica|%>
 <tr>
-<td><%=@generica.titulo%></td>
-<td><%=@generica.descripcion%></td>
-<td><%=imagentam(generica,'64x64')%></td>
+<td><%=generica.titulo%></td>
+<td><%=truncate(raw(generica.descripcion),:lenght=>'20')%></td>
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>
@@ -20,6 +18,6 @@
 </tr>
 <%end%>
 </table>
-<%= link_to 'Añadir información',new_generica_path,:class=>'btn'%>
+<%= link_to 'Añadir articulo',new_generica_path,:class=>'btn'%>
 
 
