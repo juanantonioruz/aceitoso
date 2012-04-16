@@ -5,10 +5,8 @@
 
       <%=h.label :nueva_relacion,:class=>'label'%>
      <%=@generica.titulo%> <%=h.collection_select(:sentido_relacion_id, SentidoRelacion.all, :id,:titulo,:prompt => 'Elija tipo y sentido de relacion')%>
-     <%=h.collection_select(:generica_fin_id, Generica.all, :id,:titulo,:prompt => 'Elija articulo')%>
-
+     <%=h.collection_select(:generica_fin_id, Generica.all(:conditions => ["id != ?", @generica.id]), :id,:titulo,:prompt => 'Elija articulo')%>
       <!--%=h.label :relacion,:class=>'label'%-->
-
   
   <div class="actions">
     <%= h.submit 'Guardar relacion',:class=>'btn' %>
