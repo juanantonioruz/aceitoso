@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415233530) do
+ActiveRecord::Schema.define(:version => 20120416181920) do
+
+  create_table "books", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "caminos", :force => true do |t|
     t.string  "imagen"
@@ -203,6 +208,12 @@ ActiveRecord::Schema.define(:version => 20120415233530) do
 
   add_index "premios_labels", ["label_id", "premio_id"], :name => "index_premios_labels_on_label_id_and_premio_id"
   add_index "premios_labels", ["premio_id", "label_id"], :name => "index_premios_labels_on_premio_id_and_label_id"
+
+  create_table "products", :force => true do |t|
+    t.integer "heir_id"
+    t.string  "heir_type"
+    t.string  "title"
+  end
 
   create_table "publicacions", :force => true do |t|
     t.string  "nombre"
