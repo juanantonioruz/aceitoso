@@ -1,0 +1,23 @@
+<table class='table'>
+ <tbody>
+
+ <tr><th>Ficha técnica</th> <td>Imagen del museo, descripción, como llegar,...</td><td><%=link_to 'Ver',museo_ficha_path(museo),:class=>'btn '%></td></tr>
+ 
+<tr><th>Espacios</th><td>Espacios del museo: nombre, imagen, descripción,...</td><td><%=link_to 'Ver',museo_espacios_path(museo),:class=>'btn '%></td></tr>
+
+<tr><th>Recursos interpretativos</th><td>paneles, videos...sobre contenido general teórico, histórico</td><td><%=link_to 'Ver',museo_infos_path(museo),:class=>'btn'%></td></tr>
+
+<tr><th>Piezas museísticas</th><td>Listado de piezas del museo</td><td><%=link_to 'Ver',museo_piezas_path(museo),:class=>'btn '%></td></tr>
+
+<tr><th>Historia</th><td>Eventos históricos asociados al museo</td><td><%=link_to 'Ver',museo_eventos_path(museo),:class=>'btn '%></td></tr>
+
+<tr><th>Premios/Reconocimientos</th><td>Premios recibidos por el museo</td><td><%=link_to 'Ver',museo_premios_path(museo),:class=>'btn '%></td></tr>
+
+<tr><th>Publicaciones</th><td>Noticias de prensa, comunicados,...</td><td><%=link_to 'Ver',museo_publicacions_path(museo),:class=>'btn '%></td></tr>
+
+<tr><th>Servicios</th><td>Listado de servicios que ofrece el museo</td><td><%=link_to 'Ver',museo_servicios_path(museo),:class=>'btn'%></td></tr>
+
+<tr><th>Entorno</th><td>Información sobre el entorno del museo: rutas, hitos, ciudades</td><td><%=link_to 'Ver',museo_entorno_path(museo),:class=>'btn '%></td></tr>
+
+</tbody>
+</table>

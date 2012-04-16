@@ -41,7 +41,7 @@
 <%end%>
 
 <h1>Ficha técnica: <%=@ficha.museo.nombre%></h1>
-<!-- %=etiquetas @ficha% -->
+<%=etiquetas @ficha%>
 <label class='label'>Imagen</label>
 <p><%=imagentam(@ficha,'64x64')%>&nbsp;</p>
 
