@@ -92,16 +92,7 @@
 <%end%>
 
 
-<%= tinymce_assets %>
-<style>
-.mceEditor td.mceIframeContainer iframe {
-    width: 400px !important;
-    height: 200px !important;
-}
-.mceEditor table {
-    width: 400px !important;
-}
-</style>
+
 <br/>
 
 <%=alerta 'info','Utilice las pestañas para editar la información asociada'%>
@@ -115,8 +106,7 @@
   <!-- li><a href="#etiquetas"  data-toggle="tab">Etiquetas</a></li -->
   <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
 </ul>
-
-<%= tinymce %>
+<%= cargaeditor%> <!--  Application helper a las text areas :class => "tinymce" -->
 
 <%=form_for [@museo, @museo.ficha],:html=>{:multipart=>true} do |f|%>
     <div  id="tabs" class="tab-content" >

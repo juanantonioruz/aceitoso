@@ -27,4 +27,9 @@ module ApplicationHelper
     def etiquetas(modelo)
          render :partial=>'shared/etiquetas',:locals=>{:modelo=>modelo}
     end
+    def cargaeditor
+        render 'shared/editor'
+
+        ## LLamar al metodo, luego a las textarea :class => "tinymce"
+    end
 end

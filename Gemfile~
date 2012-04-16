@@ -5,6 +5,7 @@ gem 'rails', '3.2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+
 gem 'mysql2'
 gem "twitter-bootstrap-rails"
 gem 'carrierwave'
@@ -12,7 +13,9 @@ gem 'json'
 gem 'execjs'
 gem 'therubyracer'
 gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
 
+gem 'locomotive-aloha-rails'
 
 #gem "redcarpet"
 # Gems used only for assets and not required

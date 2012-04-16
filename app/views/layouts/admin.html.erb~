@@ -5,6 +5,17 @@
     <title>Olearum</title>
     <%= csrf_meta_tags %>
 
+    <!------------ Aloha -->
+
+ 
+   
+             
+ 
+              <!-- make all elements with class="editable" editable with Aloha Editor -->
+             
+
+    <%= stylesheet_link_tag 'aloha.css'%>
+
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
@@ -19,6 +30,7 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
 <%=yield :cabeza%>
+
   </head>
   <body onload="<%=if(defined? @onload) then @onload end%>">
 
@@ -40,19 +52,25 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-top:50px;">
       <div class="row-fluid">
 
         <div class="span9">
+        	    <% if flash[:notice] %>
+      <p class="error" style="background-color:red;"><%= flash[:notice] %></p>
+    <% end %>
+
           <%= yield %>
         </div>
          <div class="span3">
           <div class=" sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Opciones</li>
-                <li><%= link_to "Etiquetas",labels_path  %></li>
-                <li><%=link_to 'Informaciones genéricas',genericas_path%></li>
+                <!--li><%= link_to "Etiquetas",labels_path  %></li-->
+                 <li><%= link_to "Servicios disponibles",services_path  %></li>
+                <li><%=link_to 'Articulos',genericas_path%></li>
                 <li><%= link_to "Museos",museos_path  %></li>
+                 <li><%= link_to "Tipos de Relaciones",nombre_relacions_path  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
