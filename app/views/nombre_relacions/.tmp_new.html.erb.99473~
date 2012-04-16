@@ -1,2 +1,0 @@
-<h1>Creación de servicio disponible</h1>
-<%=render 'form'%>
