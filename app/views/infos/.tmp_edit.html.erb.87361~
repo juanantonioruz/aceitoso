@@ -1,2 +1,0 @@
-<h1>Edición de recurso interpretativo </h1>
-<%=render 'form'%>

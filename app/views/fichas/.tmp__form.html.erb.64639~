@@ -112,7 +112,7 @@
   <li><a href="#contacto"  data-toggle="tab">Contacto</a></li>
   <li><a href="#llegar"  data-toggle="tab">Como llegar</a></li>
   <li><a href="#horario"  data-toggle="tab">Horario</a></li>
-  <li><a href="#etiquetas"  data-toggle="tab">Etiquetas</a></li>
+  <!-- li><a href="#etiquetas"  data-toggle="tab">Etiquetas</a></li -->
   <li><a href="#coordenadas"  data-toggle="tab">Coordenadas</a></li>
 </ul>
 
@@ -146,9 +146,9 @@
         <%=f.label :horario,:class=>'label'%>
         <%= f.text_area :horario,:class => "tinymce" ,:rows=>5,:cols=>100%>
     </div>
-     <div class="tab-pane" id="etiquetas">
+     <!--div class="tab-pane" id="etiquetas">
      <%=etiquetar @ficha%>
-    </div>
+    </div-->
     <div class="tab-pane" id="coordenadas">
         <label class='label'>Coordenadas: Latitud / Longitud</label>
         <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;
