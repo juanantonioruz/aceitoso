@@ -33,7 +33,7 @@ class EspaciosController < ApplicationController
         @espacio = Espacio.find(params[:id])
         @museo=@espacio.museo
 
-            if @espacio.update_attributes(params[:evento])
+            if @espacio.update_attributes(params[:espacio])
                   redirect_to museo_espacio_path(:museo_id=>@museo,:id=>@espacio), :notice => 'Espacio actualizado'
             end
     end
