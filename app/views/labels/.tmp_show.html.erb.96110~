@@ -3,8 +3,8 @@
 <p><%=@label.nombre%></p>
 
 <label class='label'>Etiquetas hijas</label>
-<%@label.labels.each do |lab|%>
-   <p><b><%=lab.nombre%></b> <%= link_to 'Borrar', [lab.label, lab], :confirm => 'Seguro?',    :method => :delete,:class=>'btn btn-mini btn-danger' %></p>
+<%@label.labels.each do |label|%>
+   <p><b><%=label.nombre%></b> <%= link_to 'Borrar', [label.label, label], :confirm => 'Seguro?',    :method => :delete,:class=>'btn btn-mini btn-danger' %></p>
 <%end%>
 
 <%=render 'formhijas'%>

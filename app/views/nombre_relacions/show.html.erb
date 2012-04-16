@@ -1,0 +1,9 @@
+<h1>Detalle del Tipo de Relacion</h1>
+   <br/>
+   Nombre1:
+    <%=@nombre_relacion.nombre1%>
+   <br/>
+   Nombre2:
+    <%=@nombre_relacion.nombre2%>
+    <br/><br/>
+    <%=link_to 'Editar el tipo de relacion',edit_nombre_relacion_path(@nombre_relacion),:class=>'btn btn-success'%> o <%=link_to 'cancelar',nombre_relacions_path%>

@@ -44,10 +44,6 @@
       <div class="row-fluid">
 
         <div class="span9">
-        	    <% if flash[:notice] %>
-      <p class="error" style="background-color:red;"><%= flash[:notice] %></p>
-    <% end %>
-
           <%= yield %>
         </div>
          <div class="span3">
@@ -56,8 +52,7 @@
               <li class="nav-header">Opciones</li>
                 <li><%= link_to "Etiquetas",labels_path  %></li>
                  <li><%= link_to "Servicios disponibles",services_path  %></li>
-                 <li><%= link_to "Relaciones disponibles",nombre_relacions_path  %></li>
-                <li><%=link_to 'Articulos',genericas_path%></li>
+                <li><%=link_to 'Recursos Interpretativos',genericas_path%></li>
                 <li><%= link_to "Museos",museos_path  %></li>
             </ul>
           </div><!--/.well -->

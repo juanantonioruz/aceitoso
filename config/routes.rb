@@ -1,6 +1,10 @@
 Olearum::Application.routes.draw do
   
   resources :services
+  resources :relaciones
+  resources :relacions
+  resources :nombre_relacions
+  resources :generica_relacions
 
   resources :museos do
     resource :ficha

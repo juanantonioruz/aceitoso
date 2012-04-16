@@ -17,4 +17,6 @@ class Museo < ActiveRecord::Base
     has_many :hitos,:through=>:entorno
     has_many :urbanos,:through=>:entorno
     has_many :caminos,:through=>:entorno
+
+
 end
