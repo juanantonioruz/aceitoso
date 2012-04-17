@@ -118,8 +118,9 @@ class Datos
 #    else
 #      value=self.data
 #    end
-#    tanto museo como generica son relacionables ... 
-    self.data
+#    tanto museo como generica son relacionables ...
+    atributos={} 
+    self.data.relaciones_origen.each{|r| puts r.sentido_relacion.nombre_relacion.nombre1 if r.sentido_relacion.creciente}
     
     value.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
     
