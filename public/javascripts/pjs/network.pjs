@@ -177,19 +177,8 @@ void mousePressed() {
 			r2 = fetchResource(r.getValues().get(selectedValueIndex).getId());
 			//r2 = fetchResource(selectedValueIndex);
 			//console.dir(r2);
-			println("selectedNode"+selectedNode.getSubject().getX());
-			if(selectedNode.getSubject().getX()!=null){
-			//println("center new"+r.getX());
-			                  $.mapita.setCenter(
-	    new OpenLayers.LonLat('"+selectedNode.getSubject().getX()+"', '"+rselectedNode.getSubject().getY()+"'), (int)random(5,10));
+			//println("selectedNode"+selectedNode.getSubject().getX());
 			
-			$("#container_mapa").animate({
-   width: "50%",
-  }, 1500 );
-	$("#mapa_div").animate({
-   width: "100%",
-  }, 1500 );
-  }
 			// Check if resource already exists
 	    int i = 0;
 	    Node n = null;

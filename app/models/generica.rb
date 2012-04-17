@@ -12,5 +12,8 @@ class Generica < ActiveRecord::Base
    def nombre_select
     "Articulo: #{titulo}"    
   end
+  def nombre_relacionable
+    titulo
+  end
 
 end

@@ -112,6 +112,10 @@ class Datos
 
     }
   end
+  def llena mapa
+        self.data.relaciones_origen.each{|rel| nombre=dameNombreRelacion(rel) and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+
+  end
   def dameAtributos
 #    if self.data.class==Museo
 #      value=self.data.ficha
@@ -119,12 +123,38 @@ class Datos
 #      value=self.data
 #    end
 #    tanto museo como generica son relacionables ...
-    atributos={} 
-    self.data.relaciones_origen.each{|r| puts r.sentido_relacion.nombre_relacion.nombre1 if r.sentido_relacion.creciente}
+    mapa=Hash.new
+    llena mapa
     
-    value.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
+     mapa.map{|k,v|  {:id => k, :name => k, :values=>dameValuesRelacionables(v) }}
+     
+    #mapa.each { |atr|  {:id => atr.to_s, :name => atr, :values=>dameValuesRelacionables(mapa[atr]) } }
+    # por cada atributo obtener los relacionables
+    # el atributo es el nombre1 o nombre2 de la relacion.sentido_relacion.nombre_relacion segun su valor creciente del sentido
+    
+    
+    #  atributos.each{|atri| }
+    #value.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
     
   end
+  
+   def dameValuesRelacionables lista
+    lista.map { |relacionable| {:name=>relacionable.heir.nombre_relacionable,:id=>relacionable.id}}
+  end
+  
+  def dameNombreRelacion rel
+    if rel.sentido_relacion.creciente
+      rel.sentido_relacion.nombre_relacion.nombre1 
+    else
+    rel.sentido_relacion.nombre_relacion.nombre2 
+    end
+    
+  end
+  
+  def coincide nombre_atributo, relacion, relaciones
+      relaciones.each{|rel| dameNombreRelacion rel unless relacion==rel}
+  end
+  
   def dameValuesMuseos mar
     mar.fichas.map { |child| {:name=>child.museo.nombre,:id=>child.museo.id.to_s+"-M"}}
   end

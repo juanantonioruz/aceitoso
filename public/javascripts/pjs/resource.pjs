@@ -105,7 +105,7 @@ public class Resource {
         that.name = response.data.name;
         that.html = response.details_html;
         that.coords = response.coords;
-        println(that.coords);
+        //println(that.coords);
         int numValues = 0;
         for (int i = 0 ; i < response.data.attributes.length(); i++) {
          Attribute attr = new Attribute(response.data.attributes[i].name, that);
