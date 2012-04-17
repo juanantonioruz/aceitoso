@@ -18,6 +18,9 @@ class MuseosController < ApplicationController
     def edit
         @museo=Museo.find(params[:id])
     end
+    def relacion
+        @museo=Museo.find(params[:id])
+    end
 
     def update
         @museo = Museo.find(params[:id])

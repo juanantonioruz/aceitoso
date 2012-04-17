@@ -5,8 +5,10 @@ Olearum::Application.routes.draw do
   resources :relacions
   resources :nombre_relacions
   resources :generica_relacions
+  resources :museo_relacions
 
   resources :museos do
+     get :relacion, :on => :member
     resource :ficha
     resource :entorno do
         resources :hitos
@@ -29,6 +31,8 @@ Olearum::Application.routes.draw do
   end
 
   resources :genericas
+
+  
   
   #resources :informations
   

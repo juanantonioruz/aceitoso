@@ -7,20 +7,7 @@
 <%=imagentam(@generica,'128x128')%><br/>
 
 
-<label class='label'>Relaciones Como Origen</label>
-<%@generica.predecessor.relaciones_origen.each do |rel|%>
-   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
-   <%= link_to 'Borrar',  generica_relacion_path(rel), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' %>
-   </p>
-<%end%>
-<label class='label'>Relaciones Como Destino</label>
-<%@generica.predecessor.relaciones_fin.each do |rel|%>
-   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
-   <%= link_to 'Borrar',  generica_relacion_path(rel), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' %>
-   </p>
-<%end%>
-<%=render 'formhijas'%>
-
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"generica", :relacionable=>@generica} )  %>
 <!-- %=render 'formmuseos'% --> 
 <br/>
 
