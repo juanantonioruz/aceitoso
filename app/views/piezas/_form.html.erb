@@ -18,8 +18,8 @@
     <%=etiquetar @pieza%>
     <!--------------------->
     <label class='label'>Es pieza original?</label>
-  <%= f.radio_button :coleccion,  !@pieza.coleccion %> SI
-  <%= f.radio_button :coleccion,  @pieza.coleccion %> NO
+  <%= f.radio_button :coleccion,  false %> NO
+  <%= f.radio_button :coleccion,  true %> SI
 
 
     <%=f.label :descripcion,:class=>'label'%>

@@ -9,6 +9,7 @@ gem 'heritage'
 gem 'mysql2'
 gem "twitter-bootstrap-rails"
 gem 'carrierwave'
+gem 'rmagick' 
 gem 'json'
 gem 'execjs'
 gem 'therubyracer'

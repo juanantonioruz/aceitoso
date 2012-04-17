@@ -34,14 +34,13 @@ class ResourcesController < ApplicationController
   end
   def busca(id_param)
             parametros=id_param.split('-')
-        if parametros[1]=='I' then
-        resultado=Generica.find_by_id(parametros[0])
+        resultado=Relacionable.find_by_id(id_param).heir
+        
+        if resultado.class == Generica
           html=resultado.descripcion
-          else
-        resultado=Museo.find_by_id(parametros[0])
-      html=resultado.ficha.descripcion
-      end
-
+        elsif
+          html=resultado.ficha.descripcion
+        end
     return resultado, html
   end
 
@@ -87,12 +86,12 @@ class DatosSearch
     }
   end
   def dameMuseos
-    resp=self.data_museos.map {|mar| {"mid" => mar.id.to_s+"-"+(mar.class==Museo ? "M" :"I"), "name" => mar.nombre, "notable"=>'aa'} }
+    resp=self.data_museos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
     print resp.class
     resp
   end
   def dameGenericas
-    resp=self.data_genericas.map {|mar| {"mid" => mar.id.to_s+"-"+(mar.class==Museo ? "M" :"I"), "name" => mar.titulo, "notable"=>'aa'} }
+    resp=self.data_genericas.map {|mar| {"mid" => mar.predecessor.id.to_s+"-"+(mar.class==Museo ? "M" :"I"), "name" => mar.titulo, "notable"=>'aa'} }
     print resp.class
     resp
   end
@@ -114,12 +113,15 @@ class Datos
     }
   end
   def dameAtributos
-    if self.data.class==Museo
-      value=self.data.ficha
-    else
-      value=self.data
-    end
-    value.labels.map { |mar| {:id => mar.id.to_s+"-"+(data.class==Museo ? "M" :"I"), :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
+#    if self.data.class==Museo
+#      value=self.data.ficha
+#    else
+#      value=self.data
+#    end
+#    tanto museo como generica son relacionables ... 
+    self.data
+    
+    value.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
     
   end
   def dameValuesMuseos mar
