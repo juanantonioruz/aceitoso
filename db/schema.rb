@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417005636) do
+ActiveRecord::Schema.define(:version => 20120417100907) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -53,13 +52,6 @@ ActiveRecord::Schema.define(:version => 20120417005636) do
   end
 
   add_index "coordenadas", ["camino_id"], :name => "index_coordenadas_on_camino_id"
-
-  create_table "elemento_relacionables", :force => true do |t|
-    t.integer  "heir_id"
-    t.string   "heir_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "entornos", :force => true do |t|
     t.integer "museo_id"
@@ -171,7 +163,8 @@ ActiveRecord::Schema.define(:version => 20120417005636) do
   add_index "labels", ["label_id"], :name => "index_labels_on_label_id"
 
   create_table "museos", :force => true do |t|
-    t.string "nombre"
+    t.string   "nombre"
+    t.datetime "created_at"
   end
 
   create_table "nombre_relacions", :force => true do |t|
