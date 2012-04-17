@@ -1,7 +1,7 @@
 <%= form_for([@generica, @generica.predecessor.relaciones_origen.build]) do |h| %>
 
     <%= h.hidden_field :origen_id,:value=>@generica.predecessor.id %>
-    <%=hidden_field_tag 'generica', true%>
+    <%=hidden_field_tag 'generica_id', @generica.id%>
 
       <%=h.label :nueva_relacion,:class=>'label'%>
      <%=@generica.titulo%> <%=h.collection_select(:sentido_relacion_id, SentidoRelacion.all, :id,:titulo,:prompt => 'Elija tipo y sentido de relacion')%>
