@@ -1,0 +1,18 @@
+<%= form_for([@generica, @generica.relaciones_origen.build]) do |h| %>
+
+    <%= h.hidden_field :generica_origen_id,:value=>@generica.id %>
+    <%=hidden_field_tag 'museo', true%>
+
+
+      <%=h.label :nueva_relacion,:class=>'label'%>
+     <%=@generica.titulo%> <%=h.collection_select(:sentido_relacion_id, SentidoRelacion.all, :id,:titulo,:prompt => 'Elija tipo y sentido de relacion')%>
+     <%=h.collection_select(:museo_fin_id, Museo.all, :id,:nombre,:prompt => 'Elija museo')%>
+
+      <!--%=h.label :relacion,:class=>'label'%-->
+
+  
+  <div class="actions">
+    <%= h.submit 'Guardar relacion',:class=>'btn' %>
+  </div>
+
+  <%end%>

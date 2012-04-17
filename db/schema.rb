@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417000415) do
+ActiveRecord::Schema.define(:version => 20120417005636) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -247,14 +247,8 @@ ActiveRecord::Schema.define(:version => 20120417000415) do
   end
 
   create_table "relacions", :force => true do |t|
-    t.integer  "museo_origen_id"
-    t.integer  "museo_fin_id"
-    t.integer  "generica_origen_id"
-    t.integer  "generica_fin_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.string   "mensaje_origen"
-    t.string   "mensaje_fin"
     t.integer  "sentido_relacion_id"
     t.integer  "origen_id"
     t.integer  "fin_id"

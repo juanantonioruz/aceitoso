@@ -21,4 +21,9 @@ class Museo < ActiveRecord::Base
 
    acts_as_heir_of :relacionable
 
+  def nombre_select
+    "#{self.class}: #{nombre}"    
+  end
+
+
 end
