@@ -2,9 +2,9 @@ module InfosHelper
     def titulo(info)
      if !info.url==''
        generica=Generica.find(info.url)    
-        return generica.titulo
+     return generica.titulo
         else
-           'Sin noticia'
+    
       end
     end
     def url(info)
