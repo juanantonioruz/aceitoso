@@ -14,10 +14,10 @@
     <br/>
     <%= f.file_field :imagen %> 
 
-    <!------------------->
+    <!-------------------
     <%=etiquetar @pieza%>
-    <!--------------------->
-    <label class='label'>Es pieza original?</label>
+    -->
+    <%=f.label 'es pieza original?',:class=>'label'%>
   <%= f.radio_button :coleccion,  false %> NO
   <%= f.radio_button :coleccion,  true %> SI
 
