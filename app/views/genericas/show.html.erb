@@ -6,6 +6,7 @@
 <label class='label'>Imagen</label>
 <%=imagentam(@generica,'128x128')%><br/>
 
+
 <label class='label'>Relaciones Como Origen</label>
 <%@generica.predecessor.relaciones_origen.each do |rel|%>
    <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
