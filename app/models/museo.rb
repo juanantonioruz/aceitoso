@@ -25,5 +25,8 @@ class Museo < ActiveRecord::Base
     "#{self.class}: #{nombre}"    
   end
 
+  def nombre_relacionable
+    nombre
+  end
 
 end
