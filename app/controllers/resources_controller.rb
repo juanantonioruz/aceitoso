@@ -113,11 +113,14 @@ class Datos
     }
   end
   def dameAtributos
-    if self.data.class==Museo
-      value=self.data.ficha
-    else
-      value=self.data
-    end
+#    if self.data.class==Museo
+#      value=self.data.ficha
+#    else
+#      value=self.data
+#    end
+#    tanto museo como generica son relacionables ... 
+    self.data
+    
     value.labels.map { |mar| {:id => mar.id.to_s, :name => mar.nombre, :values=>dameValuesMuseos(mar)+dameValuesGenericas(mar)} }
     
   end
