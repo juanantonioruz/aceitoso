@@ -5,7 +5,8 @@ class Generica < ActiveRecord::Base
        has_many :relaciones_origen,:dependent=>:destroy,:class_name => "Relacion", :foreign_key=>"generica_origen_id"
        has_many :relaciones_fin,:dependent=>:destroy, :class_name => "Relacion", :foreign_key=>"generica_fin_id"
 
- 
+    acts_as_heir_of :relacionable
+
     def etiquetas
        self.labels.collect { |l| l.nombre+' ' } 
     end

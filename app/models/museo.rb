@@ -1,4 +1,5 @@
 class Museo < ActiveRecord::Base
+
     has_one :ficha,:dependent=>:destroy
     has_many :espacios,:dependent=>:destroy
     
@@ -18,5 +19,6 @@ class Museo < ActiveRecord::Base
     has_many :urbanos,:through=>:entorno
     has_many :caminos,:through=>:entorno
 
+   acts_as_heir_of :relacionable
 
 end

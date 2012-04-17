@@ -6,15 +6,17 @@
 <label class='label'>Imagen</label>
 <%=imagentam(@generica,'128x128')%><br/>
 
+<!--
 <label class='label'>Relaciones</label>
 <%@generica.relaciones_origen.each do |rel|%>
    <p><%=@generica.titulo%> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.nombre_extremo_fin%></b>
    <%= link_to 'Borrar',  generica_relacion_path(rel), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' %>
    </p>
 <%end%>
+-->
+<!-- %=render 'formhijas'% -->
 
-<%=render 'formhijas'%>
-<%=render 'formmuseos'%>
+<!-- %=render 'formmuseos'% --> 
 <br/>
 
 <br/>

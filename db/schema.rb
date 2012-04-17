@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416181920) do
+ActiveRecord::Schema.define(:version => 20120417000415) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20120416181920) do
   end
 
   add_index "coordenadas", ["camino_id"], :name => "index_coordenadas_on_camino_id"
+
+  create_table "elemento_relacionables", :force => true do |t|
+    t.integer  "heir_id"
+    t.string   "heir_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "entornos", :force => true do |t|
     t.integer "museo_id"
@@ -232,6 +239,13 @@ ActiveRecord::Schema.define(:version => 20120416181920) do
   add_index "publicacions_labels", ["label_id", "publicacion_id"], :name => "index_publicacions_labels_on_label_id_and_publicacion_id"
   add_index "publicacions_labels", ["publicacion_id", "label_id"], :name => "index_publicacions_labels_on_publicacion_id_and_label_id"
 
+  create_table "relacionables", :force => true do |t|
+    t.integer  "heir_id"
+    t.string   "heir_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "relacions", :force => true do |t|
     t.integer  "museo_origen_id"
     t.integer  "museo_fin_id"
@@ -242,6 +256,8 @@ ActiveRecord::Schema.define(:version => 20120416181920) do
     t.string   "mensaje_origen"
     t.string   "mensaje_fin"
     t.integer  "sentido_relacion_id"
+    t.integer  "origen_id"
+    t.integer  "fin_id"
   end
 
   create_table "sentido_relacions", :force => true do |t|
