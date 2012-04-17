@@ -1,0 +1,5 @@
+<h1>Museo <%=@museo.nombre%></h1>
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"museo", :relacionable=>@museo} )  %>
+
+
+ <%=link_to 'Ir a lista de museos',museos_path, :class=>'btn btn-success'%>
