@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417100907) do
+ActiveRecord::Schema.define(:version => 20120418001411) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -52,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20120417100907) do
   end
 
   add_index "coordenadas", ["camino_id"], :name => "index_coordenadas_on_camino_id"
+
+  create_table "elemento_relacionables", :force => true do |t|
+    t.integer  "heir_id"
+    t.string   "heir_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "entornos", :force => true do |t|
     t.integer "museo_id"
@@ -165,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20120417100907) do
   create_table "museos", :force => true do |t|
     t.string   "nombre"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "nombre_relacions", :force => true do |t|
@@ -175,11 +184,13 @@ ActiveRecord::Schema.define(:version => 20120417100907) do
   end
 
   create_table "piezas", :force => true do |t|
-    t.string  "nombre"
-    t.text    "descripcion"
-    t.string  "imagen"
-    t.boolean "coleccion",   :default => false
-    t.integer "museo_id"
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.string   "imagen"
+    t.boolean  "coleccion",   :default => false
+    t.integer  "museo_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "piezas", ["museo_id"], :name => "index_piezas_on_museo_id"
