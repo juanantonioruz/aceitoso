@@ -24,29 +24,14 @@
             var map, controls; 
 			
             function init(nombre_input){
-	    	var mercator = new OpenLayers.Projection("EPSG:900913");
-		    var geographic = new OpenLayers.Projection("EPSG:4326");
-
 				$.n_input=nombre_input;
         		this.n_input=nombre_input;
-				var options = { projection: mercator}
-
-                map = new OpenLayers.Map('map', options);
+                map = new OpenLayers.Map('map');
 				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
 
                 map.addLayers([layer]);
-				
-				var markers = new OpenLayers.Layer.Markers( "Markers" );
-map.addLayer(markers);
-var size = new OpenLayers.Size(21,25);
-var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-
-var center= new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>).transform(geographic, mercator);
-markers.addMarker(new OpenLayers.Marker(center,icon)); 
-				
                   map.setCenter(
-   center, <%=if(!@ficha.x.blank? ) then 6 else 4 end %>
+    new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>), <%=if(!@ficha.x.blank? ) then 18 else 4 end %>
 );
             }
             
@@ -74,8 +59,8 @@ markers.addMarker(new OpenLayers.Marker(center,icon));
 <label class='label'>Coordenadas: Latitud / Longitud</label>
 <!-- p><b>Latitud:</b> <%=@ficha.x%></p><p><b>Longitud:</b> <%=@ficha.y%></p -->
 <p><hr></p>
-		 <div id="map" class="smallmap" style="width: 400px; 
-                height: 400px; border: 1px solid gray;margin-right:100px;"></div>
+		 <div id="map" class="smallmap" style="width: 300px; 
+                height: 300px; border: 1px solid gray;margin-right:100px;"></div>
 
 
 
