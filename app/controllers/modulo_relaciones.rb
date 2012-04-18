@@ -4,7 +4,10 @@ module ModuloRelaciones
   def destruye pathito
             @relacion=Relacion.find(params[:id])
         @relacion.destroy
-          redirect_to send(pathito+"_path",@relacion.origen.heir)
+            lista=Hash[:id=>@relacion.origen.heir]
+          if defined? params[:museo_id] then lista[:museo_id]=params[:museo_id] end 
+          redirect_to send("#{pathito}_path", lista)
+
 
   end
   def crea pathito
@@ -22,7 +25,9 @@ module ModuloRelaciones
         else
           @relacion=Relacion.create(params[:relacion])
           @relacion.save
-          redirect_to send(pathito+"_path",@relacion.origen.heir)
+          lista=Hash[:id=>@relacion.origen.heir]
+          if defined? params[:museo_id] then lista[:museo_id]=params[:museo_id] end 
+          redirect_to send("#{pathito}_path", lista)
         end
   end
 end

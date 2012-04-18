@@ -20,6 +20,10 @@ class PiezasController < ApplicationController
          @pieza=Pieza.find(params[:id])
          @museo=@pieza.museo
     end
+    def relacion
+         @pieza=Pieza.find(params[:id])
+         @museo=@pieza.museo
+    end
     def destroy
         @pieza = Pieza.find(params[:id])
         @museo=@pieza.museo
