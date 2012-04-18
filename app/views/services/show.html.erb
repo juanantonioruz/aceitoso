@@ -1,5 +1,7 @@
 <h1>Detalle del servicio</h1>
    <br/>
     <%=imagentam(@service,'124x124')%>
-    <br/><br/>
+    <br/>
+    <p><b>Descripción:</b> <%=@service.descripcion%></p>
+<br/>
     <%=link_to 'Editar la imagen',edit_service_path(@service),:class=>'btn btn-success'%> o <%=link_to 'cancelar',services_path%>
