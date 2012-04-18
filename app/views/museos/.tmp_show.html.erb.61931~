@@ -1,4 +1,4 @@
-<h1><%=@museo.nombre%></h1>
+<h1>Museo <%=@museo.nombre%></h1>
 <br>
 <p><i>* Puede ver y modificar la información asociada al museo pulsando ver en cada una de las opciones</i></p>
 
