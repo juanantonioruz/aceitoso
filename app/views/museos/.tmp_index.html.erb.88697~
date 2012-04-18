@@ -1,0 +1,25 @@
+<h1>Listado de Museos</h1>
+<table class='table zebra-striped'>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+<%@museos.each do |museo|%>
+<tr>
+<td><%=museo.nombre%></td>
+<td>
+<%= link_to 'Ver',museo,:class=>'btn btn-success'%>&nbsp;
+<%= link_to 'Relaciones',relacion_museo_path(museo),:class=>'btn btn-success'%>&nbsp;
+<%= link_to 'Editar',edit_museo_path(museo),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_path(museo),:method=>:delete,:confirm=>'¿Seguro que desea borrar el museo? Toda la información asociada se borrará',:class=>'btn btn-danger'%>
+</td>
+</tr>
+<%end%>
+</tbody>
+</table>
+<%= link_to 'Añadir museo',new_museo_path,:class=>'btn'%>
+
+
