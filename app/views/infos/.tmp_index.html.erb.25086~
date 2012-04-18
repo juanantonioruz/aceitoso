@@ -2,14 +2,12 @@
 <table class='table zebra-striped'>
 <tr>
 <th>Título</th>
-<th>Tipo</th>
 <th>Enlace</th>
 <th>Acciones</th>
 </tr>
 <%@infos.each do |info|%>
 <tr>
 <td><%=titulo(info)%></td>
-<td><%=info.tipo_ri%></td>
 <td><%=url(info)%></td>
 
 <td>

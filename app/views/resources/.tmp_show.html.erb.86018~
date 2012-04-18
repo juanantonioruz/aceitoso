@@ -1,0 +1,11 @@
+<%content_for :extra do %>
+<ul>
+	
+<% if !@resource.nil? then @resource.each do |marron| %>
+<li><%=marron.titulo%></li>
+
+
+<% end %>
+</ul>
+<% end %>
+<% end %>
