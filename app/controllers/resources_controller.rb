@@ -7,12 +7,14 @@ class ResourcesController < ApplicationController
    query = params[:query].split.map {|term| "%#{term}%" }
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+params[:query]+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+params[:query]+"%"])
+     @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+params[:query]+"%"])
     
 #    logger.info @resource.children
     data=DatosSearch.new
 #    data.resultado_html="202"
      data.data_museos=@resource_museos
      data.data_genericas=@resource_genericas
+     data.data_piezas=@resource_piezas
     # @resource.each{|el| logger.info (el.class==Museo)}
 
       respuesta='/* this is javascript */ '+params[:callback].to_s+'({
@@ -36,7 +38,7 @@ class ResourcesController < ApplicationController
             parametros=id_param.split('-')
         resultado=Relacionable.find_by_id(id_param).heir
         
-        if resultado.class == Generica
+        if [Generica, Pieza].include?resultado.class
           html=resultado.descripcion
         elsif
           html=resultado.ficha.descripcion
@@ -77,16 +79,21 @@ end
 #end
 end
 class DatosSearch
-  attr_accessor  :data_museos,:data_genericas, :resultado_html
+  attr_accessor  :data_museos,:data_genericas,:data_piezas, :resultado_html
     def as_json(options = {})
     {
-    :result=>dameMuseos+dameGenericas
+    :result=>dameMuseos+dameGenericas+damePiezas
     
 
     }
   end
   def dameMuseos
     resp=self.data_museos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
+    print resp.class
+    resp
+  end
+  def damePiezas
+    resp=self.data_piezas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
     print resp.class
     resp
   end
@@ -103,7 +110,7 @@ class Datos
     {
     :data=>{
     :attributes=>  dameAtributos,
-    :name=>(self.data.class==Museo)? self.data.nombre : self.data.titulo ,
+    :name=>([Museo, Pieza].include? self.data.class)? self.data.nombre : self.data.titulo ,
     :id=>self.data.id.to_s
     },
     :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
