@@ -1,0 +1,17 @@
+<h1>pieza: <%=@pieza.museo.nombre%></h1>
+<%=etiquetas @pieza%>
+<label class='label'>Imagen</label>
+<p><%=imagentam(@pieza,'64x64')%>&nbsp;</p>
+
+<label class='label'>Nombre</label>
+<p><%=@pieza.nombre%>&nbsp;</p>
+
+<label class='label'>Descripción de la pieza</label>
+<p><%=raw @pieza.descripcion%>&nbsp;</p>
+
+<label class='label'>Es pieza original?</label>
+<p><%=@pieza.escoleccion%>&nbsp;</p>
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_pieza_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a piezas',museo_piezas_path(@museo)%>

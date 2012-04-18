@@ -1,0 +1,27 @@
+<h1>Servicios ofrecidos por los museos</h1>
+
+<table class='table zebra-striped' id='ordenar'>
+<thead>
+<th>Imagen</th>
+<th>Descripción</th>
+<th>Acciones</th>
+</thead>
+<tbody>
+<%@services.each do |s|%>
+    <tr>
+    <td><%=imagentam(s,'64x64')%></td>
+    <td><%=s.descripcion%></td>
+    <td>
+    <%= link_to 'Ver',s,:class=>'btn btn-success'%>
+    <%= link_to 'Editar',edit_service_path(s),:class=>'btn btn-warning'%>
+    <%= link_to 'Borrar',service_path(s,:index=>'true'),:method=>:delete,:confirm=>'¿Seguro que desea borrar el servicio?',:class=>'btn btn-danger'%>
+    </td>
+    </tr>
+<%end%>
+</tbody>
+</table>
+<%= link_to 'Añadir un servicio',new_service_path,:class=>'btn'%>
+<hr>
+<i> * Desde aquí se habilitan las imagenes de los servicios que se podrán seleccionar para cada museo</i>
+<hr>
+
