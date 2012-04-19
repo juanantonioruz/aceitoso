@@ -11,17 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419004706) do
+ActiveRecord::Schema.define(:version => 20120419015102) do
 
   create_table "books", :force => true do |t|
     t.string "name"
   end
 
+  create_table "camino_genericas", :force => true do |t|
+    t.integer  "camino_id"
+    t.integer  "generica_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "caminos", :force => true do |t|
-    t.string  "imagen"
-    t.text    "descripcion"
-    t.string  "nombre"
-    t.integer "entorno_id"
+    t.string   "imagen"
+    t.text     "descripcion"
+    t.string   "nombre"
+    t.integer  "entorno_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "caminos_labels", :id => false, :force => true do |t|
@@ -137,13 +146,22 @@ ActiveRecord::Schema.define(:version => 20120419004706) do
   add_index "genericas_labels", ["generica_id", "label_id"], :name => "index_genericas_labels_on_generica_id_and_label_id"
   add_index "genericas_labels", ["label_id", "generica_id"], :name => "index_genericas_labels_on_label_id_and_generica_id"
 
+  create_table "hito_genericas", :force => true do |t|
+    t.integer  "hito_id"
+    t.integer  "generica_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "hitos", :force => true do |t|
-    t.string  "imagen"
-    t.string  "nombre"
-    t.text    "descripcion"
-    t.string  "x"
-    t.string  "y"
-    t.integer "entorno_id"
+    t.string   "imagen"
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.string   "x"
+    t.string   "y"
+    t.integer  "entorno_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "hitos", ["entorno_id"], :name => "index_hitos_on_entorno_id"

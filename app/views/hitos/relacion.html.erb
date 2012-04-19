@@ -1,0 +1,6 @@
+<h1>Hito: <%=@hito.nombre%></h1>
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"hito", :relacionable=>@hito} )  %>
+<br/>
+<%=link_to 'Volver a lista de hitos',museo_entorno_hitos_path(@museo)%>
+
+

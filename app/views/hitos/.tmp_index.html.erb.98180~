@@ -15,8 +15,6 @@
 <td>
 <%= link_to 'Ver',museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-warning'%>
-<%= link_to 'Relaciones',relacion_museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-success'%>&nbsp;
-
 <%= link_to 'Borrar',museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
 
 </td>

@@ -5,6 +5,10 @@ class Generica < ActiveRecord::Base
 
   has_many :pieza_genericas
   has_many :piezas, :through => :pieza_genericas
+  has_many :camino_genericas
+  has_many :caminos, :through => :camino_genericas
+  has_many :hito_genericas
+  has_many :hitos, :through => :hito_genericas
 
 
     acts_as_heir_of :relacionable

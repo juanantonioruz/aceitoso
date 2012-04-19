@@ -25,6 +25,11 @@ class HitosController < ApplicationController
         @entorno=@hito.entorno
         @museo=@entorno.museo
     end
+    def relacion
+        @hito=Hito.find(params[:id])
+        @entorno=@hito.entorno
+        @museo=@entorno.museo
+    end
     def destroy
         @hito = Hito.find(params[:id])
         @museo=@hito.museo
