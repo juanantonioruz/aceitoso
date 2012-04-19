@@ -9,6 +9,10 @@
 <br>
 		<%=f.label "Piezas relacionadas",:class=>'label'%>
 		<%= f.select :pieza_ids, Pieza.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
+		<%=f.label "Hitos relacionados",:class=>'label'%>
+		<%= f.select :hito_ids, Hito.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
+		<%=f.label "Rutas relacionados",:class=>'label'%>
+		<%= f.select :camino_ids, Camino.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
 
     <%=f.label :imagen,:class=>'label'%>
     <%if @generica.imagen_url.to_s!='' %>

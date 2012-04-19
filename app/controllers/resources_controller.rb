@@ -39,6 +39,8 @@ class ResourcesController < ApplicationController
         
         if [Generica, Pieza].include?resultado.class
           html=resultado.descripcion
+        elsif resultado.class==Camino
+          html=resultado.descripcion
         else
           html=resultado.ficha.descripcion
         end
@@ -105,11 +107,20 @@ class DatosSearch
 end
 class Datos
   attr_accessor   :data, :resultado_html, :coordenadas
+  def dameNombre
+    if [Museo, Pieza].include? self.data.class then
+      self.data.nombre
+    elsif self.data.class==Camino
+      self.data.descripcion
+    else
+      self.data.titulo
+    end
+  end
     def as_json(options = {})
     {
     :data=>{
     :attributes=>  dameAtributos,
-    :name=>([Museo, Pieza].include? self.data.class)? self.data.nombre : self.data.titulo ,
+    :name=>dameNombre ,
     :id=>self.data.id.to_s
     },
     :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
@@ -120,6 +131,22 @@ class Datos
   end
   def llena mapa
         self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+
+  end
+  def llenaMuseo mapa
+        self.data.piezas.each{|pieza| nombre="ContienePiezasxxx77" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+
+  end
+  def llenaPieza mapa
+         nombre="ContieneMuseoxxx77"
+         mapa[nombre] = [self.data.museo.predecessor] 
+        self.data.genericas.each{|generica| nombre="Articulosxxx88" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+
+  end
+  def llenaGenerica mapa
+        self.data.piezas.each{|pieza| nombre="Piezasxxx88" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.caminos.each{|camino| nombre="Caminosxxx99" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.hitos.each{|hito| nombre="Hitosxxx100" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llena_destinos mapa
@@ -136,6 +163,9 @@ class Datos
     mapa=Hash.new
     llena mapa
     llena_destinos mapa
+    if self.data.class==Museo then llenaMuseo mapa end
+    if self.data.class==Pieza then llenaPieza mapa end
+    if self.data.class==Generica then llenaGenerica mapa end
     
      mapa.map{|k,v|  {:id => k.split("xxx")[1], :name => k.split("xxx")[0], :values=>dameValuesRelacionables(v) }}
      
