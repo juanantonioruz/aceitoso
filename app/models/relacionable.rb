@@ -5,7 +5,7 @@ class Relacionable < ActiveRecord::Base
        has_many :relaciones_fin,:dependent=>:destroy, :class_name => "Relacion", :foreign_key=>"fin_id"
 
   def nombre_select
-    " #{heir.nombre_select}"
+    heir.nil?? "#{id} - #{heir_type} nulo" : "#{id} - #{heir.nombre_select}"
   end
 
 

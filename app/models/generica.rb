@@ -3,6 +3,10 @@ class Generica < ActiveRecord::Base
     mount_uploader :imagen,ImagenUploader
     has_and_belongs_to_many :labels,:join_table=>'genericas_labels'
 
+  has_many :pieza_genericas
+  has_many :piezas, :through => :pieza_genericas
+
+
     acts_as_heir_of :relacionable
 
     def etiquetas

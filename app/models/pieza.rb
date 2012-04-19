@@ -4,6 +4,11 @@ class Pieza < ActiveRecord::Base
   mount_uploader :imagen,ImagenUploader
   belongs_to :museo
   has_and_belongs_to_many :labels,:join_table=>'piezas_labels'
+
+  has_many :pieza_genericas
+  has_many :genericas, :through => :pieza_genericas
+
+
   acts_as_heir_of :relacionable
 
   def escoleccion
@@ -16,11 +21,11 @@ class Pieza < ActiveRecord::Base
   
 
   def nombre_select
-    "#{self.class}: #{nombre}"    
+    "#{self.class}: #{nombre} de #{museo.nombre}"    
   end
 
   def nombre_relacionable
-    nombre
+    "#{nombre} de #{museo.nombre}"
   end
 
 end
