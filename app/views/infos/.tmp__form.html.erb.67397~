@@ -1,7 +1,5 @@
 <%=form_for [@museo,@info] do |f|%>
 
-    <%=f.label :tipo,:class=>'label'%>
-    <%= f.select(:tipo_ri, dameTiposRI()) %>
 
     <%=f.label :url,:class=>'label'%>
     <%=f.collection_select(:url, Generica.all, :id,:titulo,:prompt => 'Elija la información')%>

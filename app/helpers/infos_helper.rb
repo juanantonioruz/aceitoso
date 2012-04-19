@@ -1,4 +1,9 @@
 module InfosHelper
+  
+  def dameTiposRI
+    %w{panel video interactivo maqueta}
+  end
+  
     def titulo(info)
      if !info.url==''
        generica=Generica.find(info.url)    

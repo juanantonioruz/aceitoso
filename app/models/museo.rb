@@ -1,4 +1,5 @@
 class Museo < ActiveRecord::Base
+  mount_uploader :imagen_ri,ImagenUploader
 
     has_one :ficha,:dependent=>:destroy
     has_many :espacios,:dependent=>:destroy
