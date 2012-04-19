@@ -132,27 +132,27 @@ class Datos
     }
   end
   def llena mapa
-        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.sentido_relacion.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.fin.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
 
   end
   def llenaMuseo mapa
-        self.data.piezas.each{|pieza| nombre="ContienePiezasxxx77" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.piezas.each{|pieza| nombre="#{pieza.predecessor.id}xxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
 
   end
   def llenaPieza mapa
          nombre="ContieneMuseoxxx77"
          mapa[nombre] = [self.data.museo.predecessor] 
-        self.data.genericas.each{|generica| nombre="Articulosxxx88" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+        self.data.genericas.each{|generica| nombre="#{generica.predecessor.id}xxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaGenerica mapa
-        self.data.piezas.each{|pieza| nombre="Piezasxxx88" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.caminos.each{|camino| nombre="Caminosxxx99" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.hitos.each{|hito| nombre="Hitosxxx100" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.piezas.each{|pieza| nombre="#{pieza.predecessor.id}xxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.caminos.each{|camino| nombre="#{camino.predecessor.id}xxx#{camino.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.hitos.each{|hito| nombre="#{hito.predecessor.id}xxx#{hito.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llena_destinos mapa
-        self.data.relaciones_fin.each{|rel| nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.origen] else mapa[nombre] << rel.origen end }
+        self.data.relaciones_fin.each{|rel| nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.fin.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.origen] else mapa[nombre] << rel.origen end }
 
   end
   def dameAtributos
@@ -182,7 +182,7 @@ class Datos
   end
   
    def dameValuesRelacionables lista
-    lista.map { |relacionable| {:name=>relacionable.heir.nombre_relacionable,:id=>relacionable.id}}
+    lista.map { |relacionable| {:name=>relacionable.heir.nombre_ask,:id=>relacionable.id}}
   end
   
   def dameNombreRelacion rel
@@ -194,11 +194,7 @@ class Datos
     
   end
   def dameNombreRelacionDestino rel
-    if rel.sentido_relacion.creciente
-      rel.sentido_relacion.nombre_relacion.nombre2 
-    else
-    rel.sentido_relacion.nombre_relacion.nombre1 
-    end
+    rel.sentido_relacion.titulo_destino_desde_destino
     
   end
   

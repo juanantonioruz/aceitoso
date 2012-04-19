@@ -27,5 +27,8 @@ class Pieza < ActiveRecord::Base
   def nombre_relacionable
     "#{nombre} de #{museo.nombre}"
   end
+  def nombre_ask
+    "#{nombre}"    
+  end
 
 end

@@ -25,6 +25,9 @@ class Museo < ActiveRecord::Base
   def nombre_select
     "#{self.class}: #{nombre}"    
   end
+  def nombre_ask
+    "#{nombre}"    
+  end
 
   def nombre_relacionable
     nombre

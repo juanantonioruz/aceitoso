@@ -17,6 +17,9 @@ end
 def nombre_relacionable
 nombre
 end
+  def nombre_ask
+    "#{nombre}"    
+  end
 
 
 end

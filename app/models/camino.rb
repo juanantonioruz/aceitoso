@@ -20,4 +20,9 @@ def nombre_relacionable
 " #{descripcion[0,15]}"
 end
 
+  def nombre_ask
+    "#{descripcion[0,15]}"    
+  end
+
+
 end
