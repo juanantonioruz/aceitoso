@@ -1,5 +1,5 @@
 <label class='label'>Relaciones Como Origen</label>
-<%relacionable.predecessor.relaciones_origen.sort{|a,b| b.fin.nombre_select <=> a.fin.nombre_select}.each do |rel|%>
+<%relacionable.predecessor.relaciones_origen.each do |rel|%>
    <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
 <%
 lista=Hash[:id=>rel]
@@ -9,8 +9,8 @@ if defined? params[:museo_id]  and relacionable.class!=Museo then lista[:museo_i
    </p>
 <%end%>
 <label class='label'>Relaciones Como Destino</label>
-<%relacionable.predecessor.relaciones_fin.sort{|a,b| b.origen.nombre_select <=> a.origen.nombre_select}.each do |rel|%>
-   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo_destino%></b>  <b><%=rel.fin.nombre_select%></b>
+<%relacionable.predecessor.relaciones_fin.each do |rel|%>
+   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
    <%
 lista=Hash[:id=>rel]
 if defined? params[:museo_id]   and relacionable.class!=Museo then lista[:museo_id]=params[:museo_id] end 

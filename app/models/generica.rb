@@ -23,5 +23,8 @@ class Generica < ActiveRecord::Base
   def nombre_relacionable
     titulo
   end
+  def nombre_ask
+    "#{titulo}"    
+  end
 
 end

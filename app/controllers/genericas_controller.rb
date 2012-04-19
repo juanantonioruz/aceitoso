@@ -1,7 +1,7 @@
 class GenericasController < ApplicationController
 
     def index
-        @genericas=Generica.all
+        @genericas=Generica.all(:order=>:titulo)
     end
 
     def new
