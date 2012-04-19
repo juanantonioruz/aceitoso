@@ -5,11 +5,10 @@ module InfosHelper
   end
   
     def titulo(info)
-     if !info.url==''
-       generica=Generica.find(info.url)    
-        return generica.titulo
+     if info.url.to_i!=0
+          "#{Generica.find_by_id(info.url.to_i).titulo}"
         else
-           'Sin noticia'
+           return "Sin articulo asociado. Id: #{info.id}"
       end
     end
     def url(info)

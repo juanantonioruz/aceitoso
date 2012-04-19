@@ -3,7 +3,7 @@
 
 
 <label class='label'>Título</label>
-<p><%=titulo(@info)%> &nbsp;</p>
+<p><%=titulo(@info)%>&nbsp;</p>
 <label class='label'>Tipo</label>
 <p><%=@info.tipo_ri%>&nbsp;</p>
 

@@ -20,6 +20,10 @@ class InfosController < ApplicationController
          @info=Info.find(params[:id])
          @museo=@info.museo
     end
+    def relacion
+         @info=Info.find(params[:id])
+         @museo=@info.museo
+    end
     def destroy
         @info = Info.find(params[:id])
         @museo=@info.museo

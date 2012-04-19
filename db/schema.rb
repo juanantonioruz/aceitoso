@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418230928) do
+ActiveRecord::Schema.define(:version => 20120418232407) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -157,9 +157,11 @@ ActiveRecord::Schema.define(:version => 20120418230928) do
   add_index "hitos_labels", ["label_id", "hito_id"], :name => "index_hitos_labels_on_label_id_and_hito_id"
 
   create_table "infos", :force => true do |t|
-    t.string  "url"
-    t.integer "museo_id"
-    t.string  "tipo_ri"
+    t.string   "url"
+    t.integer  "museo_id"
+    t.string   "tipo_ri"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "infos", ["museo_id"], :name => "index_infos_on_museo_id"
