@@ -10,8 +10,6 @@
 <%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"generica", :relacionable=>@generica} )  %>
 <!-- %=render 'formmuseos'% --> 
 <br/>
-<label class='label'>Piezas Relacionados</label>
-<p><%=@generica.piezas.map {|x| x.nombre}%>&nbsp;</p>
 
 <br/>
 <%=link_to 'Editar',edit_generica_path(@generica),:class=>'btn'%> o <%=link_to 'Ir al listado',genericas_path%>

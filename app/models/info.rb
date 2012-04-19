@@ -1,7 +1,8 @@
 class Info < ActiveRecord::Base
 
   belongs_to :museo
-    acts_as_heir_of :relacionable
+
+    
   def nombre_select
     "#{self.class}: #{titular(self)}"    
   end
@@ -12,8 +13,7 @@ class Info < ActiveRecord::Base
   
    def titular(info)
      if !info.url.blank?
-       generica=Generica.find(info.url)    
-        return generica.titulo
+       "ee"
         else
            return "Sin articulo asociado. Id: #{info.id}"
       end

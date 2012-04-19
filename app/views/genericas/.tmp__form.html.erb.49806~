@@ -5,12 +5,9 @@
     <%=f.text_field :titulo%>
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:class=>'tinymce'%>
-<br>
-<br>
-		<%=f.label "Piezas relacionadas",:class=>'label'%>
-		<%= f.select :pieza_ids, Pieza.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
-
     <%=f.label :imagen,:class=>'label'%>
+   
+    
     <%if @generica.imagen_url.to_s!='' %>
         <%=imagentam(@generica,'64x64')%>
         <%= f.check_box :remove_imagen %>

@@ -1,0 +1,38 @@
+<label class='label'>Relaciones Como Origen</label>
+<%relacionable.predecessor.relaciones_origen.each do |rel|%>
+   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
+<%
+lista=Hash[:id=>rel]
+if defined? params[:museo_id]  and relacionable.class!=Museo then lista[:museo_id]=params[:museo_id] end 
+%>
+   <%= link_to 'Borrar',  send("#{pathito}_relacion_path", lista), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' %>
+   </p>
+<%end%>
+<label class='label'>Relaciones Como Destino</label>
+<%relacionable.predecessor.relaciones_fin.each do |rel|%>
+   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
+   <%
+lista=Hash[:id=>rel]
+if defined? params[:museo_id]   and relacionable.class!=Museo then lista[:museo_id]=params[:museo_id] end 
+%>
+
+   <%= link_to 'Borrar',  send("#{pathito}_relacion_path", lista), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' %>
+   </p>
+<%end%>
+<%= form_for([relacionable,relacionable.predecessor.relaciones_origen.build]) do |h| %>
+    <%= h.hidden_field :origen_id,:value=>relacionable.predecessor.id %>
+    <%=hidden_field_tag '#{pathito}_id', relacionable.id%>
+<%	if defined? params[:museo_id] and !params[:museo_id].blank? then %>
+    <%=hidden_field_tag :museo_id, params[:museo_id]%>
+<%end%> 
+
+      <%=h.label :nueva_relacion,:class=>'label'%>
+     <%=relacionable.nombre_relacionable%> <%=h.collection_select(:sentido_relacion_id, SentidoRelacion.all, :id,:titulo,:prompt => 'Elija tipo y sentido de relacion')%>
+     <%=h.collection_select(:fin_id, Relacionable.all(:conditions => ["id != ?", relacionable.predecessor.id]), :id,:nombre_select,:prompt => 'Elija relacionable')%>
+      <!--%=h.label :relacion,:class=>'label'%-->
+  
+  <div class="actions">
+    <%= h.submit 'Guardar relacion',:class=>'btn' %>
+  </div>
+
+  <%end%>

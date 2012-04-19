@@ -1,10 +1,6 @@
 <%=cargaeditor%>
 <%=form_for [@museo,@pieza],:html=>{:multipart=>true} do |f|%>
 
-<%=f.label "Articulos relacionadas",:class=>'label'%>
-<%= f.select :generica_ids, Generica.all.collect {|x| [x.titulo, x.id]}, {}, :multiple => true, :empty=>true %>
-
-
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>    
 
