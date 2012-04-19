@@ -43,7 +43,7 @@ class ResourcesController < ApplicationController
           html=resultado.descripcion
         elsif resultado.class==Camino
           html=resultado.descripcion
-        else
+        elsif resultado.class==Museo
           html=resultado.ficha.descripcion
         end
     return resultado, html
@@ -136,19 +136,19 @@ class Datos
 
   end
   def llenaMuseo mapa
-        self.data.piezas.each{|pieza| nombre="#{pieza.predecessor.id}xxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
 
   end
   def llenaPieza mapa
-         nombre="ContieneMuseoxxx77"
+         nombre="Se expone enxxx#{self.data.museo.predecessor.id}"
          mapa[nombre] = [self.data.museo.predecessor] 
-        self.data.genericas.each{|generica| nombre="#{generica.predecessor.id}xxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaGenerica mapa
-        self.data.piezas.each{|pieza| nombre="#{pieza.predecessor.id}xxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.caminos.each{|camino| nombre="#{camino.predecessor.id}xxx#{camino.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.hitos.each{|hito| nombre="#{hito.predecessor.id}xxx#{hito.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{camino.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{hito.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llena_destinos mapa

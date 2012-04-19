@@ -2,7 +2,7 @@
 <%=form_for [@museo,@pieza],:html=>{:multipart=>true} do |f|%>
 
 <%=f.label "Articulos relacionados",:class=>'label'%>
-<%= f.select :generica_ids, Generica.all.sort{|a,b| b.titulo <=> a.titulo}.collect {|x| [x.titulo, x.id]}, {}, :multiple => true, :empty=>true %>
+<%= f.select :generica_ids, Generica.all.collect {|x| [x.titulo, x.id]}, {}, :multiple => true, :empty=>true %>
 
 
     <%=f.label :nombre,:class=>'label'%>
