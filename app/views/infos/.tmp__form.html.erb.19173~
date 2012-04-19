@@ -1,0 +1,10 @@
+<%=form_for [@museo,@info] do |f|%>
+
+    <%=f.label :tipo,:class=>'label'%>
+    <%= f.select(:tipo_ri, dameTiposRI()) %>
+
+    <%=f.label :url,:class=>'label'%>
+    <%=f.collection_select(:url, Generica.all, :id,:titulo,:prompt => 'Elija la información')%>
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_infos_path(@museo)%>
+<%end%>

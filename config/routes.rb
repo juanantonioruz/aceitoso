@@ -8,6 +8,8 @@ Olearum::Application.routes.draw do
   resources :museo_relacions
   resources :pieza_relacions
   resources :museo_pieza_relacions
+  resources :info_relacions
+  resources :museo_info_relacions
 
   resources :museos do
      get :relacion, :on => :member
@@ -26,7 +28,9 @@ Olearum::Application.routes.draw do
     resources :eventos
     resources :premios
     resources :publicacions
-    resources :infos
+    resources :infos do
+      get :relacion, :on => :member
+    end
     resources :servicios
   end
   
