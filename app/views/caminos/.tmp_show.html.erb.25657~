@@ -10,15 +10,12 @@
 <label class='label'>Descripción de la ruta</label>
 <p><%=@camino.descripcion%>&nbsp;</p>
 
-<!-- %=etiquetas @camino% -->
+<%=etiquetas @camino%>
 
 <!-- Aqui render las coordenadas y opcion de añadir como con las etiquetas-->
 <label class='label'>Coordenadas de la ruta</label>
 <%= render :partial=>'coordenadas/coordenada', :collection=>@camino.coordenadas%>
 <%=render :partial =>'coordenadas/form'%>
-
-<label class='label'>Articulos Relacionados</label>
-<p><%=@camino.genericas.map {|x| x.titulo}%>&nbsp;</p>
 
 <!----->
 

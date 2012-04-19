@@ -1,11 +1,11 @@
 class GenericaRelacionsController < ApplicationController
   include ModuloRelaciones
    def create
-     crea "generica"
+     crea "relacion_generica"
     end
     
      def destroy
-       destruye "generica"
+       destruye "relacion_generica"
      end
 
 end

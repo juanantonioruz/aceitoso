@@ -10,14 +10,10 @@
 <label class='label'>Descripción de la hito</label>
 <p><%=@hito.descripcion%>&nbsp;</p>
 
+<%=etiquetas @hito%>
 
 <label class='label'>Coordenadas: Latitud / Longitud</label>
 <p>Latitud: <%=@hito.x%> Longitud <%=@hito.y%></p>
-
-
-<label class='label'>Articulos Relacionados</label>
-<p><%=@hito.genericas.map {|x| x.titulo}%>&nbsp;</p>
-
 
 <br/>
 <%=link_to 'Editar',edit_museo_entorno_hito_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a hitos',museo_entorno_hitos_path(@museo)%>

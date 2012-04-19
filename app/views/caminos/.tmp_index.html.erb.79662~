@@ -15,7 +15,7 @@
 <td>
 <%= link_to 'Ver',museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>
 <%= link_to 'Editar',edit_museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-warning'%>
-<%= link_to 'Relaciones',relacion_museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>&nbsp;
+<%= link_to 'Relaciones',relacion_museo_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>&nbsp;
 
 <%= link_to 'Borrar',museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
 

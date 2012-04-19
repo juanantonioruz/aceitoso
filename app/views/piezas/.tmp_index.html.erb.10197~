@@ -1,0 +1,27 @@
+<h1> Catálogo de piezas: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Pieza original</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@piezas.each do |pieza|%>
+<tr>
+<td><%=pieza.nombre%></td>
+<td><%=pieza.escoleccion%></td>
+<td><%=imagentam(pieza,'64x64')%></td>
+
+
+<td>
+<%= link_to 'Ver',museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:class=>'btn btn-warning'%>
+<%= link_to 'Relaciones',relacion_museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:class=>'btn btn-success'%>&nbsp;
+<%= link_to 'Borrar',museo_pieza_path(:museo_id=>pieza.museo,:id=>pieza),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta pieza?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir pieza',new_museo_pieza_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

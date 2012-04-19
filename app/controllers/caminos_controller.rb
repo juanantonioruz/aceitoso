@@ -27,6 +27,11 @@ class CaminosController < ApplicationController
         @entorno=@camino.entorno
         @museo=@entorno.museo
     end
+    def relacion
+        @camino=Camino.find(params[:id])
+        @entorno=@camino.entorno
+        @museo=@entorno.museo
+    end
     def destroy
         @camino = Camino.find(params[:id])
         @museo=@camino.museo

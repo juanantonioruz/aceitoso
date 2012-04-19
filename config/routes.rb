@@ -10,14 +10,21 @@ Olearum::Application.routes.draw do
   resources :museo_pieza_relacions
   resources :info_relacions
   resources :museo_info_relacions
+  resources :hito_relacions
+  resources :museo_hito_relacions
+  resources :camino_relacions
+  resources :museo_camino_relacions
 
   resources :museos do
      get :relacion, :on => :member
     resource :ficha
     resource :entorno do
-        resources :hitos
+        resources :hitos do
+      get :relacion, :on => :member
+    end
         resources :caminos do
-            resources :coordenadas
+           get :relacion, :on => :member
+           resources :coordenadas
             end
         resources :urbanos
     end
@@ -38,7 +45,10 @@ Olearum::Application.routes.draw do
     resources :labels
   end
 
-  resources :genericas
+  resources :genericas do
+         get :relacion, :on => :member
+
+  end
 
   
   
