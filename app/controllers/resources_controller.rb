@@ -35,12 +35,11 @@ class ResourcesController < ApplicationController
             render :text => respuesta
   end
   def busca(id_param)
-            parametros=id_param.split('-')
         resultado=Relacionable.find_by_id(id_param).heir
         
         if [Generica, Pieza].include?resultado.class
           html=resultado.descripcion
-        elsif
+        else
           html=resultado.ficha.descripcion
         end
     return resultado, html
@@ -82,7 +81,7 @@ class DatosSearch
   attr_accessor  :data_museos,:data_genericas,:data_piezas, :resultado_html
     def as_json(options = {})
     {
-    :result=>dameMuseos+dameGenericas+damePiezas
+    :result=>dameMuseos+dameGenericas
     
 
     }
@@ -114,13 +113,17 @@ class Datos
     :id=>self.data.id.to_s
     },
     :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
-    :coords=>(self.data.class==Museo)? self.data.ficha.x+"x"+self.data.ficha.y : ""
+    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
 
 
     }
   end
   def llena mapa
-        self.data.relaciones_origen.each{|rel| nombre=dameNombreRelacion(rel) and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+
+  end
+  def llena_destinos mapa
+        self.data.relaciones_fin.each{|rel| nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.origen] else mapa[nombre] << rel.origen end }
 
   end
   def dameAtributos
@@ -132,8 +135,9 @@ class Datos
 #    tanto museo como generica son relacionables ...
     mapa=Hash.new
     llena mapa
+    llena_destinos mapa
     
-     mapa.map{|k,v|  {:id => k, :name => k, :values=>dameValuesRelacionables(v) }}
+     mapa.map{|k,v|  {:id => k.split("xxx")[1], :name => k.split("xxx")[0], :values=>dameValuesRelacionables(v) }}
      
     #mapa.each { |atr|  {:id => atr.to_s, :name => atr, :values=>dameValuesRelacionables(mapa[atr]) } }
     # por cada atributo obtener los relacionables
@@ -154,6 +158,14 @@ class Datos
       rel.sentido_relacion.nombre_relacion.nombre1 
     else
     rel.sentido_relacion.nombre_relacion.nombre2 
+    end
+    
+  end
+  def dameNombreRelacionDestino rel
+    if rel.sentido_relacion.creciente
+      rel.sentido_relacion.nombre_relacion.nombre2 
+    else
+    rel.sentido_relacion.nombre_relacion.nombre1 
     end
     
   end
