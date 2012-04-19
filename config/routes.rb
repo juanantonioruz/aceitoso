@@ -38,7 +38,10 @@ Olearum::Application.routes.draw do
     resources :labels
   end
 
-  resources :genericas
+  resources :genericas do
+         get :relacion, :on => :member
+
+  end
 
   
   

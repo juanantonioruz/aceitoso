@@ -7,6 +7,7 @@
 <%=imagentam(@generica,'128x128')%><br/>
 
 
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"generica", :relacionable=>@generica} )  %>
 <!-- %=render 'formmuseos'% --> 
 <br/>
 <label class='label'>Piezas Relacionados</label>

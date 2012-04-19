@@ -18,6 +18,9 @@ class GenericasController < ApplicationController
     def edit
         @generica=Generica.find(params[:id])
     end
+    def relacion
+        @generica=Generica.find(params[:id])
+    end
 
     def update
         @generica = Generica.find(params[:id])
