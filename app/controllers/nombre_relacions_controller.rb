@@ -1,7 +1,7 @@
 class NombreRelacionsController < ApplicationController
     
     def index
-        @relaciones=NombreRelacion.all
+        @relaciones=NombreRelacion.all(:order=>:nombre1)
     end
     def new
         @nombre_relacion=NombreRelacion.new

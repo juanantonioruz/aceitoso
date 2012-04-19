@@ -5,9 +5,11 @@ class ResourcesController < ApplicationController
         logger.info "search::: > buscando .... "+params[:query].to_s
 #    logger.info @resource
    query = params[:query].split.map {|term| "%#{term}%" }
-     @resource_museos=  Museo.where(["nombre LIKE ?", "%"+params[:query]+"%"])
-     @resource_genericas= Generica.where(["titulo LIKE ?", "%"+params[:query]+"%"])
-     @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+params[:query]+"%"])
+   query=params[:query].sub("Articulo: ", "")
+   query=query.sub("Museo: ", "")
+     @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
+     @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
+     @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
     
 #    logger.info @resource.children
     data=DatosSearch.new
@@ -89,17 +91,17 @@ class DatosSearch
     }
   end
   def dameMuseos
-    resp=self.data_museos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
+    resp=self.data_museos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
     print resp.class
     resp
   end
   def damePiezas
-    resp=self.data_piezas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre, "notable"=>'aa'} }
+    resp=self.data_piezas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
     print resp.class
     resp
   end
   def dameGenericas
-    resp=self.data_genericas.map {|mar| {"mid" => mar.predecessor.id.to_s+"-"+(mar.class==Museo ? "M" :"I"), "name" => mar.titulo, "notable"=>'aa'} }
+    resp=self.data_genericas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
     print resp.class
     resp
   end
@@ -130,7 +132,7 @@ class Datos
     }
   end
   def llena mapa
-        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.sentido_relacion.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
 
   end
   def llenaMuseo mapa

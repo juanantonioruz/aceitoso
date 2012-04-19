@@ -22,7 +22,7 @@ public class Resource {
 	float targetWeight = 1.0;
 	float highlightedWeight = 4.0;
 	
-	float diameter = 10;
+	float diameter = 15;
 
 	Attribute selectedAttribute = null;
 	Attribute previousSelectedAttribute = null;
@@ -328,7 +328,7 @@ public class Resource {
 			strokeWeight(20);
 			lineCap = "butt"; // processing.js patch!
       
-			arc(this.x, this.y, radiusClosed*2+20, radiusClosed*2+20, 0, TWO_PI);
+			arc(this.x, this.y, radiusClosed*2, radiusClosed*2, 0, TWO_PI);
 
       float angle = 0;
       angle += theta;

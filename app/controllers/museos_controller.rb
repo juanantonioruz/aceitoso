@@ -1,6 +1,6 @@
 class MuseosController < ApplicationController
     def index
-        @museos=Museo.all
+        @museos=Museo.all(:order=>:nombre)
     end
     def new
         @museo=Museo.new

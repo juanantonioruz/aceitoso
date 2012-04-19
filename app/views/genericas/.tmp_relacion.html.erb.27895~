@@ -1,0 +1,5 @@
+<h1>Articulo <%=@generica.titulo%></h1>
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"generica", :relacionable=>@generica} )  %>
+
+
+ <%=link_to 'Ir a lista de articulos',genericas_path, :class=>'btn btn-success'%>
