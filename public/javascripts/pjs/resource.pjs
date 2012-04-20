@@ -191,7 +191,9 @@ public class Resource {
   public void setClosed() {
     this.state = "closed";
   }
-  
+  public boolean isClosed(){
+   return this.state=="closed";
+  }
   public void setOpen() {
     if (this.state != "open") {
       this.state = "open";

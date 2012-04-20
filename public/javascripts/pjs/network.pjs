@@ -159,15 +159,17 @@ void mouseMoved() {
 	}
 }
 String lineCap;
+boolean debug=false;
 void mousePressed() {
-	if (!resourceId) return;
+	//if (!resourceId) return;
 	
   
   if (mouseButton == LEFT) {
 		Node selectedNode = g.getSelectedNode();
 		Resource r = selectedNode.getSubject();
 		if (selectedValueIndex != null) {
-			// Close current resource
+			// Close current resource... ya hay un circulo anterior
+			if(debug)println("// Close current resource selectedValueIndex != null");		
 			r.setClosed();
 			//console.log(selectedValueIndex);
 			//console.dir(r.getValues().size());
@@ -182,7 +184,6 @@ void mousePressed() {
 			// Check if resource already exists
 	    int i = 0;
 	    Node n = null;
-	    				console.log("before");
 	    
 	    while (i < g.nodes.size() && !n) {
 				if (g.nodes.get(i).getSubject().getId()==r2.getId())
@@ -194,25 +195,27 @@ void mousePressed() {
 				g.addNode(newNode = new Node(r2));
 				g.addEdge(new Edge(selectedNode, newNode));
 				g.setSelectedNode(newNode);
-				
 			} else {
 				g.addEdge(new Edge(selectedNode, n));
-				g.setSelectedNode(g.nodes.get(0));
-			}
+				g.setSelectedNode(n);
+				if(debug)println("node n!=null"); n.getSubject().setOpen();				
+		}
 			
 		} else if (selectedNodeIndex != null) {
 			// TODO: Zoom to node
+			if(debug)println("// selectedNodeIndex != null");			
+			
 			selectedNode = g.nodes.get(selectedNodeIndex);
 			g.setDragNode(selectedNode);
 			if (g.getSelectedNode()!=selectedNode) {
   			r.setClosed();
-
-  			
   			selectedNode.getSubject().setOpen();
-
   			$('aside').html(selectedNode.getSubject().html);
   			g.setSelectedNode(selectedNode);
 			}
+		}else{
+					if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		
+		
 		}
 				
   } else { // Right click
