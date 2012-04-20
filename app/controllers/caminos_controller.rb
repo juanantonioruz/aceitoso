@@ -42,7 +42,7 @@ class CaminosController < ApplicationController
         end
     end
     def update
-        @camino = Camino.find(params[:id])
+        @camino = Camino.find(params[:camino][:id])
         @entorno=@camino.entorno
         @museo=@entorno.museo
 

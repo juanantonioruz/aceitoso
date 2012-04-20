@@ -1,5 +1,4 @@
 <%=form_for [@museo,@entorno,@camino],:html=>{:multipart=>true} do |f|%>
-    <%=f.hidden_field :id%>  
 
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>  
@@ -19,6 +18,7 @@
     <br/>
     <%= f.file_field :imagen %> 
 
+<%=etiquetar @camino%>
 
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_caminos_path(@museo)%>
