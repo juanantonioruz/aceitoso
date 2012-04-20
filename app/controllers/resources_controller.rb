@@ -68,7 +68,6 @@ class ResourcesController < ApplicationController
 end
   end
   def detalla
-    logger.info "es menor que 500 .... "+params[:id].to_s
       resultado, html=busca(params[:id])      
 
     @resource=resultado
@@ -137,12 +136,35 @@ class Datos
     :name=>dameNombre ,
     :id=>self.data.predecessor.id.to_s
     },
-    :details_html=>(self.data.class==Museo)? '<h1>'+self.data.nombre_relacionable+'</h1>'+self.data.ficha.descripcion : '<h1>'+self.data.nombre_relacionable+'</h1>'+self.data.descripcion, 
+    :details_html=>dameDetails, 
     :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
 
 
     }
   end
+  
+  def dameDetails
+    titulo="<h1>#{self.data.nombre_relacionable}</h1>"
+    respuesta_det=titulo
+    respuesta_det<<"<p class='summary'>"
+    if (self.data.class==Museo) then
+        respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
+          respuesta_det<<self.data.ficha.descripcion 
+
+else
+   if ([Pieza, Generica, Hito, Camino].include?self.data.class)
+        respuesta_det<<imagen_details(self.data.imagen) unless self.data.imagen.blank?
+        end
+          respuesta_det<<self.data.descripcion 
+  end
+      respuesta_det<<"</p>"
+    respuesta_det
+   end
+  
+  def imagen_details url
+   "<img class='summary-img' width='150' src='#{url}'>"   
+  end
+  
   def llena mapa
         self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.origen.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
 
