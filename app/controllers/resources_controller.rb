@@ -7,9 +7,13 @@ class ResourcesController < ApplicationController
    query = params[:query].split.map {|term| "%#{term}%" }
    query=params[:query].sub("Articulo: ", "")
    query=query.sub("Museo: ", "")
+   query=query.sub("Camino: ", "")
+   query=query.sub("Hito: ", "")
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
      @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
+     @resource_caminos= Camino.where(["nombre LIKE ?", "%"+query+"%"])
+     @resource_hitos= Hito.where(["nombre LIKE ?", "%"+query+"%"])
     
 #    logger.info @resource.children
     data=DatosSearch.new
@@ -17,6 +21,8 @@ class ResourcesController < ApplicationController
      data.data_museos=@resource_museos
      data.data_genericas=@resource_genericas
      data.data_piezas=@resource_piezas
+     data.data_caminos=@resource_caminos
+     data.data_hitos=@resource_hitos
     # @resource.each{|el| logger.info (el.class==Museo)}
 
       respuesta='/* this is javascript */ '+params[:callback].to_s+'({
@@ -80,12 +86,10 @@ end
 #end
 end
 class DatosSearch
-  attr_accessor  :data_museos,:data_genericas,:data_piezas, :resultado_html
+  attr_accessor  :data_museos,:data_genericas,:data_piezas,:data_hitos,:data_caminos, :resultado_html
     def as_json(options = {})
     {
-    :result=>dameMuseos+dameGenericas
-    
-
+    :result=>dameMuseos+dameGenericas+dameHitos+dameCaminos
     }
   end
   def dameMuseos
@@ -95,6 +99,16 @@ class DatosSearch
   end
   def damePiezas
     resp=self.data_piezas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
+    print resp.class
+    resp
+  end
+  def dameHitos
+    resp=self.data_hitos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
+    print resp.class
+    resp
+  end
+  def dameCaminos
+    resp=self.data_caminos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
     print resp.class
     resp
   end
@@ -133,6 +147,8 @@ class Datos
   end
   def llenaMuseo mapa
         self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{pieza.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{camino.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{hito.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llenaPieza mapa
@@ -142,10 +158,24 @@ class Datos
         self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
+  def llenaCamino mapa
+         nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
+         Rails.logger.warn nombre+" camino"
+         mapa[nombre] = [self.data.entorno.museo.predecessor] 
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+
+  end
+  def llenaHito mapa
+         nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
+         Rails.logger.warn nombre+" hito"
+         mapa[nombre] = [self.data.entorno.museo.predecessor] 
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+
+  end
   def llenaGenerica mapa
         self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{camino.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{hito.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{camino.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{hito.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llena_destinos mapa
@@ -164,6 +194,8 @@ class Datos
     llena_destinos mapa
     if self.data.class==Museo then llenaMuseo mapa end
     if self.data.class==Pieza then llenaPieza mapa end
+    if self.data.class==Camino then llenaCamino mapa end
+    if self.data.class==Hito then llenaHito mapa end
     if self.data.class==Generica then llenaGenerica mapa end
     
      mapa.map{|k,v|  {:id => k.split("xxx")[1], :name => k.split("xxx")[0], :values=>dameValuesRelacionables(v) }}
