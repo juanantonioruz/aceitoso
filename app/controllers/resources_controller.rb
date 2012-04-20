@@ -123,7 +123,7 @@ class Datos
     :data=>{
     :attributes=>  dameAtributos,
     :name=>dameNombre ,
-    :id=>self.data.id.to_s
+    :id=>self.data.predecessor.id.to_s
     },
     :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
     :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
@@ -136,11 +136,12 @@ class Datos
 
   end
   def llenaMuseo mapa
-        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{pieza.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
 
   end
   def llenaPieza mapa
          nombre="Se expone enxxx#{self.data.museo.predecessor.id}"
+         Rails.logger.warn nombre+" llllllllllll"
          mapa[nombre] = [self.data.museo.predecessor] 
         self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 

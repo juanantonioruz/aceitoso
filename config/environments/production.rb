@@ -31,7 +31,7 @@ Olearum::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-   config.log_level = :debug
+   config.log_level = :warn
 
    config.consider_all_requests_local = true 
 
