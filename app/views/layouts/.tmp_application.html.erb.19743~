@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Olearum: Red de museos del aceite de oliva</title>
+  <title>Askjuan</title>
   <%= stylesheet_link_tag    "global", :media => "all" %>
 
         <script src="/javascripts/jquery-1.7.2.js"></script>
@@ -137,22 +137,33 @@
 <aside>
 <div id="explanation">
 <!-- askken introduction -->
-<h1>Olearum: Red de museos del aceite de oliva </h1>
-<p>Navegador de información relacionada con el aceite de oliva</p>
+<span>ASK JUAN </span>
+<p>Visual Knowledge Browser based en ASK KEN™</p>
 
-<h2>¿cómo se usa?</h2>
+<h2>About</h2>
 <p>
-instrucciones</p>
-<h3>Comenzar</h3>
-<p>
-...
+ASK KEN™ is sort of a Node-Link diagram that allows to visually navigate through
+interconnected topics provided by the
+<a href="http://freebase.com">Freebase</a>
+Service.
+It takes advantage of the latest HTML5 features
+by using the canvas element for drawing.
 </p>
-<h3>Claves de uso</h3>
+<h3>Get started</h3>
 <p>
-...</p>
-<h3>Creditos</h3>
+Start using the browser by just typing in the name of a topic, as you would do in Wikipedia.
+</p>
+<h3>Quirks</h3>
 <p>
-...
+Although it’s basically working, the project has rough edges and is far from being complete. There may be some
+unexpected behavior here and there. Also, as the number of nodes increases,
+the performance may drop significantly. So please be aware of that.
+</p>
+<h3>Credits</h3>
+<p>
+Thanks to
+<a href="http://froodee.at/" target="_blank">Samo Korosec</a>
+for helping with color and layout.
 </p>
 </div>
 <div id="browser_not_supported">

@@ -21,14 +21,14 @@ class Pieza < ActiveRecord::Base
   
 
   def nombre_select
-    "#{self.class}: #{nombre} de #{museo.nombre}"    
+    "#{self.class}: #{nombre}"    
   end
 
   def nombre_relacionable
     "#{nombre} de #{museo.nombre}"
   end
   def nombre_ask
-    "#{nombre} de #{museo.nombre}"
+    "#{nombre}"
   end
 
 end
