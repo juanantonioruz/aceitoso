@@ -28,7 +28,7 @@ class Pieza < ActiveRecord::Base
     "#{nombre} de #{museo.nombre}"
   end
   def nombre_ask
-    "#{nombre}"    
+    "#{nombre} de #{museo.nombre}"
   end
 
 end

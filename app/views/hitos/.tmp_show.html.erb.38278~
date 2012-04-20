@@ -1,4 +1,4 @@
-<h1>Hito: <%=@hito.nombre%> de <%=@hito.entorno.museo.nombre%></h1>
+<h1>Hito: <%=@hito.entorno.museo.nombre%></h1>
 <br/>
 
 <label class='label'>Imagen</label>
