@@ -1,9 +1,12 @@
 <h1>Articulos</h1>
 <table class='table zebra-striped'>
+<thead>
 <tr>
 <th>Título</th>
 <th>Acciones</th>
+</thead>
 </tr>
+<tbody>
 <%@genericas.each do |generica|%>
 <tr>
 <td><%=generica.titulo%></td>
@@ -18,6 +21,7 @@
 </td>
 </tr>
 <%end%>
+</tbody>
 </table>
 <%= link_to 'Añadir articulo',new_generica_path,:class=>'btn'%>
 
