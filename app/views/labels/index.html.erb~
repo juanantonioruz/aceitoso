@@ -29,4 +29,8 @@
 <i> * Para añadir una etiqueta a una existente haga click en "ver" la etiqueta existente</i>
 <hr>
 
-
+<script >
+  $(function() {
+    $(".table").tablesorter({ sortList: [[1,0]] });
+  });
+</script>
