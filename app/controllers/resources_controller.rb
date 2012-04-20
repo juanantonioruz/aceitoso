@@ -7,9 +7,13 @@ class ResourcesController < ApplicationController
    query = params[:query].split.map {|term| "%#{term}%" }
    query=params[:query].sub("Articulo: ", "")
    query=query.sub("Museo: ", "")
+   query=query.sub("Camino: ", "")
+   query=query.sub("Hito: ", "")
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
      @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
+     @resource_caminos= Camino.where(["nombre LIKE ?", "%"+query+"%"])
+     @resource_hitos= Hito.where(["nombre LIKE ?", "%"+query+"%"])
     
 #    logger.info @resource.children
     data=DatosSearch.new
@@ -17,6 +21,8 @@ class ResourcesController < ApplicationController
      data.data_museos=@resource_museos
      data.data_genericas=@resource_genericas
      data.data_piezas=@resource_piezas
+     data.data_caminos=@resource_caminos
+     data.data_hitos=@resource_hitos
     # @resource.each{|el| logger.info (el.class==Museo)}
 
       respuesta='/* this is javascript */ '+params[:callback].to_s+'({
@@ -80,12 +86,10 @@ end
 #end
 end
 class DatosSearch
-  attr_accessor  :data_museos,:data_genericas,:data_piezas, :resultado_html
+  attr_accessor  :data_museos,:data_genericas,:data_piezas,:data_hitos,:data_caminos, :resultado_html
     def as_json(options = {})
     {
-    :result=>dameMuseos+dameGenericas
-    
-
+    :result=>dameMuseos+dameGenericas+dameHitos+dameCaminos
     }
   end
   def dameMuseos
@@ -95,6 +99,16 @@ class DatosSearch
   end
   def damePiezas
     resp=self.data_piezas.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
+    print resp.class
+    resp
+  end
+  def dameHitos
+    resp=self.data_hitos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
+    print resp.class
+    resp
+  end
+  def dameCaminos
+    resp=self.data_caminos.map {|mar| {"mid" => mar.predecessor.id.to_s, "name" => mar.nombre_select, "notable"=>'aa'} }
     print resp.class
     resp
   end
