@@ -12,7 +12,7 @@ class Camino < ActiveRecord::Base
 
 
 def nombre_select
-"#{self.class}: #{nombre}"
+"Ruta: #{nombre}"
 
 end
 

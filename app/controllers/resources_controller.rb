@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
    query = params[:query].split.map {|term| "%#{term}%" }
    query=params[:query].sub("Articulo: ", "")
    query=query.sub("Museo: ", "")
-   query=query.sub("Camino: ", "")
+   query=query.sub("Ruta: ", "")
    query=query.sub("Hito: ", "")
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
