@@ -148,36 +148,36 @@ class Datos
 
   end
   def llenaMuseo mapa
-        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{pieza.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{camino.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{hito.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llenaPieza mapa
          nombre="Se expone enxxx#{self.data.museo.predecessor.id}"
          Rails.logger.warn nombre+" llllllllllll"
          mapa[nombre] = [self.data.museo.predecessor] 
-        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaCamino mapa
          nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
          Rails.logger.warn nombre+" camino"
          mapa[nombre] = [self.data.entorno.museo.predecessor] 
-        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaHito mapa
          nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
          Rails.logger.warn nombre+" hito"
          mapa[nombre] = [self.data.entorno.museo.predecessor] 
-        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{generica.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+        self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaGenerica mapa
-        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxx#{pieza.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{camino.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{hito.entorno.museo.predecessor.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
+        self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
+        self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
 
   end
   def llena_destinos mapa
