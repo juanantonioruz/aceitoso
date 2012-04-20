@@ -40,7 +40,7 @@ class HitosController < ApplicationController
         end
     end
     def update
-        @hito = Hito.find(params[:id])
+        @hito = Hito.find(params[:hito][:id])
         @entorno=@hito.entorno
         @museo=@entorno.museo
 

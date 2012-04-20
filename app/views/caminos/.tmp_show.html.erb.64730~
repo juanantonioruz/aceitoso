@@ -1,4 +1,4 @@
-<h1>Ruta:  <%=@camino.nombre%> de <%=@camino.entorno.museo.nombre%></h1>
+<h1>Ruta: <%=@camino.entorno.museo.nombre%></h1>
 <br/>
 
 <label class='label'>Imagen</label>
@@ -23,4 +23,4 @@
 <!----->
 
 <br/>
-<%=link_to 'Editar',edit_museo_entorno_camino_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a rutas',museo_entorno_caminos_path(@museo)%>
+<%=link_to 'Editar',edit_museo_entorno_camino_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a caminos',museo_entorno_caminos_path(@museo)%>
