@@ -1,4 +1,7 @@
 /* @pjs font="/fonts/GraublauWeb.otf, /fonts/GraublauWebBold.otf"; */
+/* @pjs preload="javascripts/pjs/images/LOGO_OLEARUM.jpg"; */
+/* @pjs preload="javascripts/pjs/images/EducacionCulturaYDeporte.jpg"; */
+
 String mensaje="hola";
 boolean depurando=true;
 
@@ -55,7 +58,15 @@ void resize() {
 void setR(String v){
 resourceId=v;
 }
+    PImage olearumImage;
+    PImage ministerioImage;
+
+
+
+
 void setup() {	
+    olearumImage = loadImage("javascripts/pjs/images/LOGO_OLEARUM.jpg");
+    ministerioImage = loadImage("javascripts/pjs/images/EducacionCulturaYDeporte.jpg");
 	console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -79,10 +90,11 @@ void setup() {
 
 void printMensaje(boolean fondo){
 if(depurando){
-if(fondo)
-    background(234,239,224);
-	textFont(defaultFont, 103);
-	text(mensaje, 100,100);
+if(fondo){
+// background(234,239,224);
+}
+//textFont(defaultFont, 103);
+//text(mensaje, 100,100);
 }
 }
 
@@ -91,12 +103,16 @@ strokeCap(SQUARE);
   if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
+        image(olearumImage, width-125-50-50, height-38,40,38);
+        image(ministerioImage, width-125-50, height-38, 125, 38);
+    
     g.draw();
 			//console.log("***!.............");
     
   //  printMensaje();
   }else{
-    printMensaje(true);
+        image(olearumImage, 0, 0);
+        image(ministerioImage, 40, 200);
 	}
 }
 

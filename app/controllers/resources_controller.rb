@@ -122,10 +122,12 @@ end
 class Datos
   attr_accessor   :data, :resultado_html, :coordenadas
   def dameNombre
-    if [Museo, Pieza, Hito, Camino].include? self.data.class then
-      self.data.nombre
+    if [Museo].include? self.data.class then
+      self.data.nombre_select
+    elsif [Pieza, Hito, Camino].include? self.data.class then
+      self.data.nombre_select
     else
-      self.data.titulo
+      self.data.nombre_select
     end
   end
     def as_json(options = {})
@@ -135,7 +137,7 @@ class Datos
     :name=>dameNombre ,
     :id=>self.data.predecessor.id.to_s
     },
-    :details_html=>(self.data.class==Museo)? self.data.ficha.descripcion : self.data.descripcion, 
+    :details_html=>(self.data.class==Museo)? '<h1>'+self.data.nombre_relacionable+'</h1>'+self.data.ficha.descripcion : '<h1>'+self.data.nombre_relacionable+'</h1>'+self.data.descripcion, 
     :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
 
 
