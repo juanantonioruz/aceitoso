@@ -39,9 +39,7 @@ class ResourcesController < ApplicationController
   def busca(id_param)
         resultado=Relacionable.find_by_id(id_param).heir
         
-        if [Generica, Pieza].include?resultado.class
-          html=resultado.descripcion
-        elsif resultado.class==Camino
+        if [Generica, Pieza, Hito, Camino].include?resultado.class
           html=resultado.descripcion
         elsif resultado.class==Museo
           html=resultado.ficha.descripcion
@@ -110,10 +108,8 @@ end
 class Datos
   attr_accessor   :data, :resultado_html, :coordenadas
   def dameNombre
-    if [Museo, Pieza].include? self.data.class then
+    if [Museo, Pieza, Hito, Camino].include? self.data.class then
       self.data.nombre
-    elsif self.data.class==Camino
-      self.data.descripcion
     else
       self.data.titulo
     end

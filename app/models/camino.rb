@@ -12,16 +12,16 @@ class Camino < ActiveRecord::Base
 
 
 def nombre_select
-"#{self.class}: #{descripcion[0,15]}"
+"#{self.class}: #{nombre}"
 
 end
 
 def nombre_relacionable
-" #{descripcion[0,15]}"
+" #{nombre}"
 end
 
   def nombre_ask
-    "#{descripcion[0,15]}"    
+    "#{nombre}"    
   end
 
 
