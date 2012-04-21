@@ -2,9 +2,9 @@
 
 <table class='table zebra-striped' id='ordenar'>
 <thead>
-<th class='header hea'>Desde</th>
+<th class='header'>Desde</th>
 <th class='header'>Hasta</th>
-<th class='header'>Acciones</th>
+<th>Acciones</th>
 </thead>
 <tbody>
 <%@relaciones.each do |s|%>
