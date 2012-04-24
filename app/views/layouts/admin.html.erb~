@@ -78,12 +78,10 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-          <script >
-  $(function() {
-    $("#ordenar").tablesorter({ sortList: [[1,0]] });
-  });
-</script>
-    
+<<<<<<< HEAD
+=======
+      
+>>>>>>> fb9601d161dc48ba72a4249f25a226fae4d96cd3
 
   </body>
 </html>
