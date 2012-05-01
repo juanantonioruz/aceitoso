@@ -67,6 +67,12 @@ class ResourcesController < ApplicationController
  format.html # show.html.erb
 end
   end
+  def relacionables
+         respond_to do |format|
+            format.xml {render :xml => Relacionable.find(:all).to_xml(:only => [:id,:heir_type], :include=>{:heir=>{:except=>[:descripcion, :created_at,:updated_at]}})}
+end
+#@equipos.sort_by( &:id).to_xml(:only => [:id, :nombre,:x,:y])}
+  end
   def detalla
       resultado, html=busca(params[:id])      
 
