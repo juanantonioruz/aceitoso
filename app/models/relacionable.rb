@@ -1,4 +1,5 @@
 class Relacionable < ActiveRecord::Base
+  attr_accessor :nombre
           acts_as_predecessor :exposes=>:nombre_select, :exposes=>:nombre_ask
 
        has_many :relaciones_origen,:dependent=>:destroy,:class_name => "Relacion", :foreign_key=>"origen_id"

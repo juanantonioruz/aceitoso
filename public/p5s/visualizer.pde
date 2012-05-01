@@ -22,21 +22,49 @@ void setup() {
     physics = new VerletPhysics2D();
   physics.setDrag(0.05);
   physics.setWorldBounds(new Rect(10,10,width-20,height-20));
-    newGraph();
   
+  loadXML();
+    newGraph();
 }
+int contador=0;
+ArrayList relacionables=new ArrayList();
+void loadXML(){
+	String xmlFile="resources/relacionables.xml";
+		ArrayList equipos=new ArrayList();
+		XMLElement xmlO = new XMLElement(this, xmlFile);
+		int numSites = xmlO.getChildCount();
+		XMLElement[] kids = xmlO.getChildren();
+		console.log("numero de elementos en " + kids.length);
+			for (XMLElement el : kids) {
+		//console.log(el);
+			if(el.getChild("heir")!=null){
+			var titulo_xml=el.getChild("heir").getChild("titulo");
+			if(titulo_xml != null){
+			contador++;
+				String nombre = titulo_xml.getContent();
+				int id = int(el.getChild("id").getContent());		
+		console.log("eee"+nombre);
+		relacionables.add(el);
+		}
+		}
+			}
+		console.log("relacionables con nombre::: "+contador);
+
+}
+
  ArrayList clusters;
 // Spawn a new random graph
 void newGraph() {
 
   // Clear physics
   physics.clear();
+ physics.addBehavior(new toxi.physics2d.GravityBehavior(new toxi.Vec2D(0.5, 0.5)));
 
   // Create new ArrayList (clears old one)
   clusters = new ArrayList();
 
   // Create 8 random clusters
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 1; i++) {
     toxi.Vec2D center = new toxi.Vec2D(width/2,height/2);
     clusters.add(new Cluster((int) random(3,8),random(20,100),center));
   }
@@ -66,7 +94,7 @@ void draw() {
       c.display();
     }
   }
-   if (showPhysics) {
+   if (showPhysics && false) {
     for (int i = 0; i < clusters.size(); i++) {
       // Cluster internal connections
       Cluster ci = (Cluster) clusters.get(i);
