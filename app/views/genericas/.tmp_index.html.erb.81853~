@@ -1,5 +1,4 @@
 <h1>Articulos</h1>
-<%= will_paginate @genericas %>
 <table class='table zebra-striped'>
 <thead>
 <tr>
@@ -24,7 +23,6 @@
 <%end%>
 </tbody>
 </table>
-
 <%= link_to 'Añadir articulo',new_generica_path,:class=>'btn'%>
 
 

@@ -18,6 +18,9 @@
       }
     </style>
     <%= stylesheet_link_tag "application", :media => "all" %>
+	<%=javascript_include_tag "autocomplete-rails.js"%>
+
+    <%= stylesheet_link_tag "pagination", :media => "all" %>
     <%= javascript_include_tag "application" %>
 <%=yield :cabeza%>
 

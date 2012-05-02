@@ -66,7 +66,7 @@ Olearum::Application.routes.draw do
 
   get "resources/search"
   get "resources/fly"
-  get "resources/relacionables"
+  #get "resources/relacionables"
 
 
 
