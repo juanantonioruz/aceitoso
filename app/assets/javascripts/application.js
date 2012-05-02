@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui-1.8.20.custom.min
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .

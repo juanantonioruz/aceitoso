@@ -1,0 +1,3 @@
+miDiv=$('#rails_yield');
+miDiv.css("background-color", "#abacab");
+miDiv.html("jolinnnn");
