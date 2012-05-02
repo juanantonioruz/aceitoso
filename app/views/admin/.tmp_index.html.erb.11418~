@@ -1,0 +1,7 @@
+<h1>Admin#index</h1>
+<p>Find me in app/views/admin/index.html.erb</p>
+<p><%= 'info'.pluralize%></p>
+<p><%= 'entorno'.pluralize%></p>
+<p><%= 'hito'.pluralize%></p>
+<p><%= 'camino'.pluralize%>*** ruta: Ojo con el modelo este nombre no es valido plural=singular para rails</p>
+<p><%= 'urbano'.pluralize%></p>

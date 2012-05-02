@@ -58,7 +58,6 @@ void newGraph() {
 
   // Clear physics
   physics.clear();
- physics.addBehavior(new toxi.physics2d.GravityBehavior(new toxi.Vec2D(0.5, 0.5)));
 
   // Create new ArrayList (clears old one)
   clusters = new ArrayList();
@@ -77,6 +76,7 @@ void newGraph() {
     //  ci.connect(cj);
     }
   }
+ physics.addBehavior(new toxi.physics2d.GravityBehavior(new toxi.Vec2D(0, 10)));
 }
  
  
