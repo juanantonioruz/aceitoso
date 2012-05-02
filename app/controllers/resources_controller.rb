@@ -63,6 +63,7 @@ class ResourcesController < ApplicationController
                 render :text => respuesta
   end
   def show
+    @museos=Museo.find(:all)
          respond_to do |format|
  format.html # show.html.erb
 end

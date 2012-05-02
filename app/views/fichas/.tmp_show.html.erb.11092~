@@ -37,14 +37,13 @@
                 map.addLayers([layer]);
 				
 				var markers = new OpenLayers.Layer.Markers( "Markers" );
-				map.addLayer(markers);
+map.addLayer(markers);
+var size = new OpenLayers.Size(21,25);
+var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 
-				var size = new OpenLayers.Size(21,25);
-				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-
-			var center= new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>).transform(geographic, mercator);
-			markers.addMarker(new OpenLayers.Marker(center,icon)); 
+var center= new OpenLayers.LonLat(<%=if(!@ficha.y.blank? ) then @ficha.y else '-666497.4453543' end %>, <%=if(!@ficha.x.blank? ) then @ficha.x else '4493995.6445449' end %>).transform(geographic, mercator);
+markers.addMarker(new OpenLayers.Marker(center,icon)); 
 				
                   map.setCenter(
    center, <%=if(!@ficha.x.blank? ) then 6 else 4 end %>
