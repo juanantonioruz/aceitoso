@@ -1,0 +1,3 @@
+miDiv=$('#resultados');
+miDiv.css("background-color", "pink");
+miDiv.html("<%=(render :file=>'/genericas/_tabla_genericas.html.erb', :locals=>{:resultados=>@res}).gsub('"', "'").gsub(/\n/, "").html_safe%>");

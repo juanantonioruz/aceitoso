@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   def index
   end
   def seleccionar
-    gen=Generica.find(params[:search])
+    gen=params[:search_class].constantize.find(params[:search])
         @res=[]
         @res<<gen
     logger.error "ayyy#{@res}"

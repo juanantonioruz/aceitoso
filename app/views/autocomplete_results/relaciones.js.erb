@@ -1,0 +1,3 @@
+miDiv=$('#resultados');
+miDiv.css("background-color", "pink");
+miDiv.html("<%=render(:file => "/shared/detallar_relaciones.html.erb",:locals => {:no_admin=>true, :pathito=>"generica", :relacionable=>@res[0]} ).gsub('"', "'").gsub(/\n/, "").html_safe  %>");

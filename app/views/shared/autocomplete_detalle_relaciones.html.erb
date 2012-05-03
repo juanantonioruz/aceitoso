@@ -1,7 +1,7 @@
 <p>
 <%=if defined? mensaje then mensaje else "Cuadro de busqueda " end%>	
 <%= text_field_tag :biz %>
-<%= link_to 'mostrar todos los registros',url_for(:only_path=>true),:class=>'btn btn-warning', :id=>"view_all_results"%>
+<a href='#' class='btn btn-warning' id="view_all_results" onclick='ea();return false;'>Reset Detalle de relaciones extra</a>
 
 </p>
 <script>
@@ -10,6 +10,14 @@
 });
 $("#biz").autocomplete( {minLength:0, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda) %>'}
 );
+function ea(){
+	$("#resultados" ).html("");
+		$("#biz" ).val("");
+	valor_seleccionado=0;
+	checkBoton();
+	return false;
+	}
+
 function checkBoton(){
 	if ($("#biz" ).val().length>0 && valor_seleccionado>0){
 	$("#view_all_results" ).show();
@@ -22,8 +30,7 @@ function checkBoton(){
 $("#biz").autocomplete({
    search: function(event, ui) {
    	if (!checkBoton() && valor_seleccionado!=0) {
-		$("#main_container").hide();
-		window.location.reload();
+		$("#resultados").hide();
 		return false;
 	}
 }
