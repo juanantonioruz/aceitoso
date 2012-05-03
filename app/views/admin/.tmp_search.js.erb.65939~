@@ -1,7 +1,0 @@
-<%
-res=""
-for rel in @relacionables
-res << "{\"paciente\":\"#{rel.nombre_select}\", \"value\":\"#{rel.id}\", \"label\":\"#{rel.nombre_select}\"},"
-end
-%>
-[<%=raw(res[0,res.length-1])%>]
