@@ -8,10 +8,28 @@
 <%end%> 
 
       <%=h.label :nueva_relacion,:class=>'label'%>
-     <%=relacionable.nombre_relacionable%> <%=h.collection_select(:sentido_relacion_id, SentidoRelacion.all, :id,:titulo,:prompt => 'Elija tipo y sentido de relacion')%>
-     <%=h.collection_select(:fin_id, Relacionable.all(:conditions => ["id != ?", relacionable.predecessor.id]), :id,:nombre_select,:prompt => 'Elija relacionable')%>
-      <!--%=h.label :relacion,:class=>'label'%-->
-  
+    <table border="1">
+    	<tr>
+    		
+    	<th>Origen</th>
+    	<th>... se relaciona como...</th>
+    	<th>Destino</th>
+    	</tr>
+		<tr>
+			<td>
+	 <%=relacionable.nombre_relacionable%> 
+			</td>
+			<td>
+  <%=render(:file => "/shared/autocomplete_sentido_relacion.html.erb", :locals => {:mensaje=>"detallar relacionable",:modelos_de_busqueda=>"SentidoRelacion", :template=>"relaciones"} )  %>
+			</td>
+			<td>
+  <%=render(:file => "/shared/autocomplete_destino_relaciones.html.erb", :locals => {:mensaje=>"detallar relacionable",:modelos_de_busqueda=>"Generica-Pieza-Museo-Hito-Camino", :template=>"relaciones"} )  %>
+			</td>
+		</tr>
+	 
+    
+    </table>
+
   <div class="actions">
     <%= h.submit 'Guardar relacion',:class=>'btn' %>
   </div>

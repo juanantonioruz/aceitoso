@@ -1,0 +1,7 @@
+<%
+res=""
+for rel in @relacionables
+res << "{\"id_autocomplete\":\"#{rel.id}\",\"class_autocomplete\":\"#{rel.class}\", \"value\":\"#{rel.nombre_select}\", \"label\":\"#{rel.nombre_select}\"},"
+end
+%>
+[<%=raw(res[0,res.length-1])%>]

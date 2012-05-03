@@ -1,0 +1,12 @@
+<%= text_field_tag :bizo %>
+<%= hidden_field :relacion_fin_id, "", :id=>:relacion_fin_id, :name=>"relacion[fin_id]" %>
+<script>
+	jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+$("#bizo").autocomplete( {minLength:2, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda, :template=>:search_relacion_destino) %>'}
+);
+$("#bizo" ).bind( "autocompleteselect", function(event, ui) {
+	$("#relacion_fin_id" ).val(ui.item.id_autocomplete);
+});
+</script>
