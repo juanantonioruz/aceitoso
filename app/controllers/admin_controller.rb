@@ -26,14 +26,14 @@ class AdminController < ApplicationController
       end
   end
   def dameCondition v, t
-    if v=="Museo" || v=="Pieza"
+    if v=="Museo" || v=="Pieza" || v=="Hito" || v=="Camino"
      ['nombre LIKE ?', "%#{t}%"]
     elsif v=="Generica"
      ['titulo LIKE ?', "%#{t}%"]
      end
   end
   def dameOrder v
-    if v=="Museo" || v=="Pieza"
+    if v=="Museo" || v=="Pieza" || v=="Hito" || v=="Camino"
       'nombre asc'
     elsif v=="Generica"
       'titulo asc'
