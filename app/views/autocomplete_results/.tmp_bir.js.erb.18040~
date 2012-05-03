@@ -1,0 +1,3 @@
+miDiv=$('#resultados');
+miDiv.css("background-color", "red");
+miDiv.html("<%=params[:search]%>");

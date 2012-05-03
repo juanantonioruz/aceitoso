@@ -1,0 +1,49 @@
+<h1>Admin#index</h1>
+<p>Find me in app/views/admin/index.html.erb</p>
+<p><%= 'info'.pluralize%></p>
+<p><%= 'entorno'.pluralize%></p>
+<p><%= 'hito'.pluralize%></p>
+<p><%= 'camino'.pluralize%>*** ruta: Ojo con el modelo este nombre no es valido plural=singular para rails</p>
+<p><%= 'urbano'.pluralize%></p>
+<div id="resultados"></div>
+<p>
+ ajax 	
+	
+<%= text_field_tag :search %>
+</p>
+<p>
+autocomplete con ajax al seleccionar	
+<%= text_field_tag :biz %>
+</p>
+<script>
+	
+	$("#search").live("keyup", function(){
+  $.ajax({
+    complete:function(request){},
+    data:'search='+ $(this).val(),
+    dataType:'script',
+    type:'get',
+    url: '/admin/search'
+  })
+});
+
+
+jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+$("#biz").autocomplete( {source: '<%= admin_biz_path(:js) %>'}
+);
+$("#biz" ).bind( "autocompleteselect", function(event, ui) {
+ console.dir(ui.item.paciente);
+  $.ajax({
+    complete:function(request){},
+    data:'search='+ ui.item.paciente,
+    dataType:'script',
+    type:'get',
+    url: '/admin/search'
+  })
+});
+
+
+</script>
+

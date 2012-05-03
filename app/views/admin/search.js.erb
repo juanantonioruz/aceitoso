@@ -1,3 +1,7 @@
-miDiv=$('#resultados');
-miDiv.css("background-color", "#abacab");
-miDiv.html("<%=params[:search]%>");
+<%
+res=""
+for rel in @relacionables
+res << "{\"id_autocomplete\":\"#{rel.id}\", \"value\":\"#{rel.nombre_select}\", \"label\":\"#{rel.nombre_select}\"},"
+end
+%>
+[<%=raw(res[0,res.length-1])%>]

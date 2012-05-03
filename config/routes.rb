@@ -56,7 +56,7 @@ Olearum::Application.routes.draw do
   
   get "admin/index"
   get "admin/search"
-  get "admin/biz"
+  get "admin/seleccionar"
 
   get "olearum/index"
 

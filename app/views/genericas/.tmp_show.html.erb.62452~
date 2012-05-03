@@ -1,0 +1,24 @@
+<h1>Mostrando articulo: <%=@generica.titulo%></h1>
+<label class='label'>Descripción</label>
+<p><%=raw @generica.descripcion%></p>
+<!--Aqui las etiquetas-->
+<!--%= etiquetas @generica% -->
+<label class='label'>Imagen</label>
+<%=imagentam(@generica,'128x128')%><br/>
+
+
+<!-- %=render 'formmuseos'% --> 
+<br/>
+<label class='label'>Piezas Relacionadas</label>
+<p><%=@generica.piezas.map {|x| x.nombre}%>&nbsp;</p>
+
+<br/>
+<label class='label'>Hitos Relacionados</label>
+<p><%=@generica.hitos.map {|x| x.nombre}%>&nbsp;</p>
+
+<br/>
+<label class='label'>Rutas Relacionadas</label>
+<p><%=@generica.caminos.map {|x| x.descripcion}%>&nbsp;</p>
+
+<br/>
+<%=link_to 'Editar',edit_generica_path(@generica),:class=>'btn'%> o <%=link_to 'Ir al listado',genericas_path%>

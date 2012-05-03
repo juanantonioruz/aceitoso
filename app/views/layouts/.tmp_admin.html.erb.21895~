@@ -18,13 +18,14 @@
       }
     </style>
     <%= stylesheet_link_tag "application", :media => "all" %>
+	<%=javascript_include_tag "autocomplete-rails.js"%>
 
     <%= stylesheet_link_tag "pagination", :media => "all" %>
     <%= javascript_include_tag "application" %>
 <%=yield :cabeza%>
 
   </head>
-  <body onload="<%=if(defined? @onload) then @onload end%>" >
+  <body onload="<%=if(defined? @onload) then @onload end%>">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -44,7 +45,7 @@
       </div>
     </div>
 
-    <div class="container" style="margin-top:50px;" id="main_container">
+    <div class="container" style="margin-top:50px;">
       <div class="row-fluid">
 
         <div class="span9">

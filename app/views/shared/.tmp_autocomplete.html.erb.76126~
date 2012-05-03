@@ -1,0 +1,23 @@
+<div id="resultados"></div>
+<p>
+autocomplete con ajax al seleccionar	
+<%= text_field_tag :biz %>
+</p>
+<script>
+	jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+$("#biz").autocomplete( {source: '<%= admin_biz_path(:js) %>'}
+);
+$("#biz" ).bind( "autocompleteselect", function(event, ui) {
+ console.dir(ui.item.paciente);
+  $.ajax({
+    complete:function(request){},
+    data:'search='+ ui.item.paciente,
+    dataType:'script',
+    type:'get',
+    url: '/admin/search'
+  })
+});
+
+</script>
