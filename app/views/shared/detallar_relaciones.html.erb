@@ -1,6 +1,8 @@
 <%
 editor=!(defined? no_admin).nil?
 %>
+<label class='label'>Relaciones</label>
+
 <%relacionable.predecessor.relaciones_origen.sort{|a,b| b.fin.nombre_select <=> a.fin.nombre_select}.each do |rel|%>
    <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
 <%if rel.fin.heir.class==Pieza and false%>   

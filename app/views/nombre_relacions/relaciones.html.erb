@@ -1,0 +1,14 @@
+<h1>Relaciones del Tipo de Relacion </h1>
+<h3><%=@nombre_relacion.nombre1%> //  <%=@nombre_relacion.nombre2%></h3>
+<hr>
+<!-- h1><%=@relaciones_crecientes.length%></h1 -->
+<% @relaciones_crecientes.sort{|a,b| a.origen.nombre_select <=> b.origen.nombre_select}.each do |rel|  %>
+<%=rel.origen.nombre_select%>  >> <b><%=@nombre_relacion.nombre1%> </b> >> <%=rel.fin.nombre_select%><br>
+<%end%>
+<!-- h1><%=@relaciones_decrecientes.length%></h1 -->
+<hr>
+<% @relaciones_decrecientes.sort{|a,b| a.origen.nombre_select <=> b.origen.nombre_select}.each do |rel|  %>
+<%=rel.origen.nombre_select%>  >> <b><%=@nombre_relacion.nombre2%> </b> >> <%=rel.fin.nombre_select%><br>
+<%end%>
+<br/><br/>
+<%=link_to 'volver',nombre_relacions_path ,:class=>'btn btn-success'%>

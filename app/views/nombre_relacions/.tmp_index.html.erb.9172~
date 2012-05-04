@@ -13,7 +13,6 @@
     <td><%=s.nombre2%></td>
     <td>
     <%= link_to 'Ver', nombre_relacion_path(s),:class=>'btn btn-success'%>
-    <%= link_to 'Relaciones', relaciones_nombre_relacion_path(s),:class=>'btn btn-success'%>
     <%= link_to 'Editar',edit_nombre_relacion_path(s),:class=>'btn btn-warning'%>
     <%= link_to 'Borrar',nombre_relacion_path(s,:index=>'true'),:method=>:delete,:confirm=>'¿Seguro que desea borrar la relacion?',:class=>'btn btn-danger'%>
     </td>

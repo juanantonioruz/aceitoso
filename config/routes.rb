@@ -3,7 +3,10 @@ Olearum::Application.routes.draw do
   resources :services
   resources :relaciones
   resources :relacions
-  resources :nombre_relacions
+  resources :nombre_relacions do
+         get :relaciones, :on => :member
+
+  end
   resources :generica_relacions
   resources :museo_relacions
   resources :pieza_relacions
