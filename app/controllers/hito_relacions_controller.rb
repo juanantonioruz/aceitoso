@@ -1,7 +1,7 @@
 class HitoRelacionsController < ApplicationController
   include ModuloRelaciones
    def create
-     crea "relacion_museo_entorno_hito"
+     crea "relacion_museo_entorno_hito", "hito"
     end
     
      def destroy

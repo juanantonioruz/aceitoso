@@ -2,7 +2,7 @@
 
 <%= form_for([relacionable,relacionable.predecessor.relaciones_origen.build]) do |h| %>
     <%= h.hidden_field :origen_id,:value=>relacionable.predecessor.id %>
-    <%=hidden_field_tag '#{pathito}_id', relacionable.id%>
+    <%=hidden_field_tag "#{pathito}_id", relacionable.id %>
 <%	if defined? params[:museo_id] and !params[:museo_id].blank? then %>
     <%=hidden_field_tag :museo_id, params[:museo_id]%>
 <%end%> 
