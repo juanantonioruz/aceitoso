@@ -1,0 +1,49 @@
+<p>
+<%=if defined? mensaje then mensaje else "Cuadro de busqueda " end%>	
+<%= text_field_tag :biz %>
+<%= link_to 'mostrar todos los registros',url_for(:only_path=>true),:class=>'btn btn-warning', :id=>"view_all_results"%>
+
+</p>
+<script>
+	jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+$("#biz").autocomplete( {minLength:0, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda) %>'}
+);
+function checkBoton(){
+	if ($("#biz" ).val().length>0 && valor_seleccionado>0){
+	$("#view_all_results" ).show();
+	return true;
+	}else{
+	$("#view_all_results" ).hide();
+		return false;
+	} 
+}
+$("#biz").autocomplete({
+   search: function(event, ui) {
+   	if (!checkBoton() && valor_seleccionado!=0) {
+		$("#main_container").hide();
+		window.location.reload();
+		return false;
+	}
+}
+});
+var valor_seleccionado=0;
+$("#biz" ).bind( "autocompleteselect", function(event, ui) {
+	
+	valor_seleccionado= ui.item.id_autocomplete;
+  $.ajax({
+    complete:function(request){},
+    data:'search='+ ui.item.id_autocomplete+'&search_class='+ui.item.class_autocomplete+'&template=<%=template%>',
+    dataType:'script',
+    type:'get',
+    url: '/admin/seleccionar'
+  })
+  checkBoton();
+});
+//if (!($("#resultados").length>0)) {
+//alert("webmaster olvidaste incluir el div de resultados");
+//$("#biz").hide();
+//}
+checkBoton();
+</script>

@@ -17,7 +17,11 @@
     <%end%>
     <br/>
     <%= f.file_field :imagen %> 
-	<%=render(:file => "/shared/coordenadas_edit",:locals => {:input_form=>"hito", :modelo=>@hito, :formulario=>f} )  %>
+    
+
+    <label class='label'>Coordenadas: Latitud / Longitud</label>
+     <p><b>Latitud:</b>&nbsp<%=f.text_field :x%>&nbsp;<b>Longitud:</b>  <%=f.text_field  :y%></p>
+    <br/>
 
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_hitos_path(@museo)%>

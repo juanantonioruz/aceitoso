@@ -11,7 +11,8 @@
 <p><%=@hito.descripcion%>&nbsp;</p>
 
 
-	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@hito} )  %>
+<label class='label'>Coordenadas: Latitud / Longitud</label>
+<p>Latitud: <%=@hito.x%> Longitud <%=@hito.y%></p>
 
 
 <label class='label'>Articulos Relacionados</label>

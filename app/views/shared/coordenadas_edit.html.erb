@@ -1,0 +1,112 @@
+<%
+@onload="init('#{input_form}');"
+%>
+<%content_for :cabeza do %>
+        <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
+        
+        <script src="/pruebas/lib/Firebug/firebug.js"></script>
+        <script src="/pruebas/OpenLayers.js"></script>
+        <script type="text/javascript">
+			var n_input;
+			var mercator = new OpenLayers.Projection("EPSG:900913");
+		    var geographic = new OpenLayers.Projection("EPSG:4326");
+			var size = new OpenLayers.Size(21,25);
+			var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+			var icon = new OpenLayers.Icon('/images/marker.png',size,offset);
+            OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+                defaultHandlerOptions: {
+                    'single': true,
+                    'double': false,
+                    'pixelTolerance': 0,
+                    'stopSingle': false,
+                    'stopDouble': false
+                },
+
+                initialize: function(options) {
+                    this.handlerOptions = OpenLayers.Util.extend(
+                        {}, this.defaultHandlerOptions
+                    );
+                    OpenLayers.Control.prototype.initialize.apply(
+                        this, arguments
+                    ); 
+                    this.handler = new OpenLayers.Handler.Click(
+                        this, {
+                            'click': this.onClick,
+                            'dblclick': this.onDblclick 
+                        }, this.handlerOptions
+                    );
+                }, 
+
+                onClick: function(evt) {
+                    var output_x = document.getElementById($.n_input+"_x" );
+                    var output_y = document.getElementById($.n_input+"_y" );
+                   // var msg = "click " + evt.xy;
+                    //output.value = output.value + msg + "\r\n";
+                    var lonlat = map.getLonLatFromViewPortPx(evt.xy).transform(mercator,geographic);
+                    output_x.value =lonlat.lat;
+                    output_y.value =lonlat.lon;
+					var markers=map.getLayersByName("Markers")[0];
+					//alert(markers);
+					markers.clearMarkers();
+					var center= new OpenLayers.LonLat(lonlat.lon, lonlat.lat).transform(geographic,mercator);
+			
+				markers.addMarker(new OpenLayers.Marker(center,icon)); 
+
+                }
+
+            });
+
+            var map, controls; 
+			
+            function init(nombre_input){
+
+				$.n_input=nombre_input;
+        		this.n_input=nombre_input;
+				var options = { projection: mercator}
+
+                map = new OpenLayers.Map('map', options);
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+                map.addLayers([layer]);
+				var markers = new OpenLayers.Layer.Markers( "Markers" );
+				map.addLayer(markers);
+				var center= new OpenLayers.LonLat(<%=if(!modelo.y.blank? ) then modelo.y else '-666497.4453543' end %>, <%=if(!modelo.x.blank? ) then modelo.x else '4493995.6445449' end %>).transform(geographic, mercator);
+				markers.addMarker(new OpenLayers.Marker(center,icon)); 
+				map.setCenter(center, <%=if(!modelo.x.blank? ) then 10 else 7 end %>);
+                controls = {
+                    "single": new OpenLayers.Control.Click({
+                        handlerOptions: {
+                            "single": true
+                        }
+                    })
+                };
+
+                var control;
+                for(var key in controls) {
+                    control = controls[key];
+                    // only to route output here
+                    control.key = key;
+                    map.addControl(control);
+                }
+                
+
+                var control=controls['single']
+              //  map.addControl(control);
+                control.activate();
+
+            }
+            
+          
+        </script>
+
+<%end%>
+        <label class='label'>Coordenadas: Latitud / Longitud</label>
+        <p><b>Latitud:</b>&nbsp<%=formulario.text_field :x%>&nbsp;
+        <b>Longitud:</b>  <%=formulario.text_field  :y%></p>
+        <br/>
+		 <div id="map" class="smallmap" style="width: 540px;
+                height: 370px; border: 1px solid gray;float:left;margin-right:100px;"></div>
+
+				    <div style="clear:both;">
+	</div>
