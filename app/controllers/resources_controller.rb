@@ -6,12 +6,6 @@ def genera
   museos=Museo.find(:all)
   CSV.generate({:col_sep => "\t"}) do |csv| 
     csv << %w{point title description icon}
-   for museo in museos do 
-        ficha=museo.ficha
-        if(!ficha.y.nil?)
-        csv <<  "#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion}".split("|")
-        end
-    end
   end
   
 end
