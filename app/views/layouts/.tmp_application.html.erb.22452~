@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
         
+        <script src="/pruebas/lib/Firebug/firebug.js"></script>
         <script src="/pruebas/OpenLayers.js"></script>
 
 
@@ -36,31 +37,22 @@
 	$.mapita=init_mapa();
 
 });
-         		var map;
  function init_mapa(){
  		    	var mercator = new OpenLayers.Projection("EPSG:900913");
 		    var geographic = new OpenLayers.Projection("EPSG:4326");
 
-				var options = { projection: mercator}
+         		var map;
+								var options = { projection: mercator}
 
                 map = new OpenLayers.Map('mapa_div', options);
 
 				//console.dir(map);
-				var layer_new = new OpenLayers.Layer.Vector("POIs", {
-					projection: geographic,
-
-                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
-                    protocol: new OpenLayers.Protocol.HTTP({
-                        url: "/resources/textfile",
-                        format: new OpenLayers.Format.Text()
-                    })
-                });
 				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
 
-                map.addLayers([layer, layer_new]);
-				var markers = new OpenLayers.Layer.Markers( "Markers" );
-			//	map.addLayer(markers);
-				var center;
+                map.addLayers([layer]);
+					var markers = new OpenLayers.Layer.Markers( "Markers" );
+				map.addLayer(markers);
+								var center;
 				<% for museo in @museos do 
 				ficha=museo.ficha
 				%>
@@ -70,48 +62,8 @@
 				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
 				markers.addMarker(new OpenLayers.Marker(center,icon)); 
 				<%end %>
-				   // Interaction; not needed for initial display.
-                selectControl = new OpenLayers.Control.SelectFeature(layer_new);
-                map.addControl(selectControl);
-                selectControl.activate();
-                layer_new.events.on({
-                    'featureselected': onFeatureSelect,
-                    'featureunselected': onFeatureUnselect
-                });
                   map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
 				 return map;
-            }
-			  // Needed only for interaction, not for the display.
-            function onPopupClose(evt) {
-                // 'this' is the popup.
-                var feature = this.feature;
-                if (feature.layer_new) { // The feature is not destroyed
-                    selectControl.unselect(feature);
-                } else { // After "moveend" or "refresh" events on POIs layer all 
-                         //     features have been destroyed by the Strategy.BBOX
-                    this.destroy();
-                }
-            }
-            function onFeatureSelect(evt) {
-                feature = evt.feature;
-                popup = new OpenLayers.Popup.FramedCloud("featurePopup",
-                                         feature.geometry.getBounds().getCenterLonLat(),
-                                         new OpenLayers.Size(100,100),
-                                         "<h2>"+feature.attributes.title + "</h2>" +
-                                         feature.attributes.description,
-                                         null, true, onPopupClose);
-                feature.popup = popup;
-                popup.feature = feature;
-                map.addPopup(popup, true);
-            }
-            function onFeatureUnselect(evt) {
-                feature = evt.feature;
-                if (feature.popup) {
-                    popup.feature = null;
-                    map.removePopup(feature.popup);
-                    feature.popup.destroy();
-                    feature.popup = null;
-                }
             }
   function inicia() {
     p = Processing.getInstanceById("kenviz");

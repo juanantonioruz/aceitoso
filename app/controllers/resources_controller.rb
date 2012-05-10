@@ -1,5 +1,38 @@
 class ResourcesController < ApplicationController
   layout 'application'
+   require 'csv'
+
+def genera
+  museos=Museo.find(:all)
+  CSV.generate({:col_sep => "\t"}) do |csv| 
+    csv << %w{point title description icon}
+   for museo in museos do 
+        ficha=museo.ficha
+        if(!ficha.y.nil?)
+        csv <<  "#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion}".split("|")
+        end
+    end
+  end
+  
+end
+
+  def textfile
+     render :text => genera 
+  end
+  def text_cvs vv
+    vv.split().each do |csv|
+
+
+
+   if csv =~ /\A".*"\z/m then csv.gsub!(/\A"(.*)"\z/m, '\1') end  # remove double-quotes at string beginning & end
+
+
+  end
+
+  vv
+
+  end
+
 
   def search
         logger.info "search::: > buscando .... "+params[:query].to_s

@@ -17,9 +17,7 @@
     <%end%>
     <br/>
     <%= f.file_field :imagen %> 
-    
-	<%=render(:file => "/shared/coordenadas_edit.html.erb",:locals => {:input_form=>"hito", :modelo=>@hito, :formulario=>f} )  %>
-
+	<%=render(:file => "/shared/coordenadas_edit",:locals => {:input_form=>"hito", :modelo=>@hito, :formulario=>f} )  %>
 
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_hitos_path(@museo)%>

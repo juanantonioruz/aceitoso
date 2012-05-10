@@ -107,3 +107,6 @@
         <br/>
 		 <div id="map" class="smallmap" style="width: 540px;
                 height: 370px; border: 1px solid gray;float:left;margin-right:100px;"></div>
+
+				    <div style="clear:both;">
+	</div>
