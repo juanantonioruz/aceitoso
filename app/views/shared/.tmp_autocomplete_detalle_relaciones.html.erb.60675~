@@ -9,7 +9,7 @@
 	jQuery.ajaxSetup({
 'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
-$("#biz").autocomplete( {minLength:2, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda) %>'}
+$("#biz").autocomplete( {minLength:0, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda) %>'}
 );
 function ea(){
 	$("#resultados" ).html("");

@@ -1,0 +1,12 @@
+<%= text_field_tag :bizote %>
+<%= hidden_field :relacion_sentido_relacion_id, "", :id=>:relacion_sentido_relacion_id, :name=>"relacion[sentido_relacion_id]" %>
+<script>
+	jQuery.ajaxSetup({
+'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+$("#bizote").autocomplete( {minLength:2, source: '<%= admin_search_path(:modelos_de_busqueda=>modelos_de_busqueda, :template=>:search_sentidos_relacion) %>'}
+);
+$("#bizote" ).bind( "autocompleteselect", function(event, ui) {
+	$("#relacion_sentido_relacion_id" ).val(ui.item.id_autocomplete);
+});
+</script>

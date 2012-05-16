@@ -21,10 +21,14 @@ class AdminController < ApplicationController
     logger.error "jolin...#{modelos}"
     @relacionables=[]
     modelos.each do |v|
+      condicion=dameCondition(v,params[:term])
       if(v=="SentidoRelacion")
-      @relacionables+=v.constantize.joins(:nombre_relacion).find(:all,:conditions =>dameCondition(v,params[:term]), :order=>dameOrder(v))
+      if params[:term].strip.empty?
+        condicion=nil
+        end
+      @relacionables+=v.constantize.joins(:nombre_relacion).find(:all,:conditions =>condicion, :order=>dameOrder(v))
       else
-      @relacionables+=v.constantize.find(:all,:conditions =>dameCondition(v,params[:term]), :order=>dameOrder(v))
+      @relacionables+=v.constantize.find(:all,:conditions =>condicion, :order=>dameOrder(v))
       end
     end
         respond_to do |format|  

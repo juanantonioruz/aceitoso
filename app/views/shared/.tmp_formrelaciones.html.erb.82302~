@@ -1,0 +1,37 @@
+<%=render(:file => "/shared/detallar_relaciones.html.erb" , :locals => {:relacionable=>relacionable, :pathito=>pathito} )  %>
+
+<%= form_for([relacionable,relacionable.predecessor.relaciones_origen.build]) do |h| %>
+    <%= h.hidden_field :origen_id,:value=>relacionable.predecessor.id %>
+    <%=hidden_field_tag "#{pathito}_id", relacionable.id %>
+<%	if defined? params[:museo_id] and !params[:museo_id].blank? then %>
+    <%=hidden_field_tag :museo_id, params[:museo_id]%>
+<%end%> 
+
+      <%=h.label :nueva_relacion,:class=>'label'%>
+    <table border="1">
+    	<tr>
+    		
+    	<th>Origen</th>
+    	<th>... se relaciona como...</th>
+    	<th>Destino</th>
+    	</tr>
+		<tr>
+			<td>
+	 <%=relacionable.nombre_relacionable%> 
+			</td>
+			<td>
+  <%=render(:file => "/shared/autocomplete_sentido_relacion.html.erb", :locals => {:mensaje=>"detallar relacionable",:modelos_de_busqueda=>"SentidoRelacion", :template=>"relaciones"} )  %>
+			</td>
+			<td>
+  <%=render(:file => "/shared/autocomplete_destino_relaciones.html.erb", :locals => {:mensaje=>"detallar relacionable",:modelos_de_busqueda=>"Generica-Pieza-Museo-Hito-Camino", :template=>"relaciones"} )  %>
+			</td>
+		</tr>
+	 
+    
+    </table>
+
+  <div class="actions">
+    <%= h.submit 'Guardar relacion',:class=>'btn' %>
+  </div>
+
+  <%end%>
