@@ -53,6 +53,7 @@ else
         self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
         self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
         self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        #self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio] else mapa[nombre] << espacio end }
 
   end
   def llenaPieza mapa
@@ -115,7 +116,8 @@ else
   end
   
    def dameValuesRelacionables lista
-    lista.map { |relacionable| {:name=>relacionable.heir.nombre_ask,:id=>relacionable.id}}
+     ## esto es una chapuza llamar relacionable al espacio que por ahora no lo es.. .
+    lista.map { |relacionable| {:name=>if  relacionable.class==Espacio then relacionable.nombre_ask else relacionable.heir.nombre_ask end ,:id=>relacionable.id}}
   end
   
   def dameNombreRelacion rel
