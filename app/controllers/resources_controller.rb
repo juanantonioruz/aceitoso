@@ -22,9 +22,19 @@ end
    for museo in museos do 
         ficha=museo.ficha
 
-    v+="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion}".split("|").join("\t")+"\n"
+    v+="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion}|#{dameIco}".split("|").join("\t")+"\n"
     end
      render :text => v.html_safe 
+  end
+  def dameIco
+  @contador=Random.rand(2)
+    if ((@contador.divmod(2)[1])==0)
+      return "http://openlayers.org/dev/examples/img/check-round-green.png"
+    else
+      return "http://openlayers.org/dev/examples/img/mobile-layers.png"
+      
+    end
+    @contador=@contador+1
   end
   def text_cvs vv
     vv.split().each do |csv|
