@@ -54,6 +54,7 @@ else
         self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
         self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
         self.data.espacios.each{|espacio| nombre="Espacios Visitablesxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio.predecessor] else mapa[nombre] << espacio.predecessor end }
+        self.data.eventos.each{|evento| nombre="Historiaxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[evento.predecessor] else mapa[nombre] << evento.predecessor end }
         self.data.infos.each{|ri| nombre="Recursos Interpretativosxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[ri.generica.predecessor] else mapa[nombre] << ri.generica.predecessor end }
         #self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio] else mapa[nombre] << espacio end }
 
@@ -82,6 +83,12 @@ else
   def llenaEspacio mapa
          nombre="En museoxxx#{self.data.museo.predecessor.id}"
          Rails.logger.warn nombre+" espacio"
+         mapa[nombre] = [self.data.museo.predecessor] 
+
+  end
+  def llenaEvento mapa
+         nombre="En museoxxx#{self.data.museo.predecessor.id}"
+         Rails.logger.warn nombre+" evento"
          mapa[nombre] = [self.data.museo.predecessor] 
 
   end
@@ -117,6 +124,7 @@ else
     if self.data.class==Camino then llenaCamino mapa end
     if self.data.class==Hito then llenaHito mapa end
     if self.data.class==Espacio then llenaEspacio mapa end
+    if self.data.class==Evento then llenaEvento mapa end
     if self.data.class==Info then llenaInfo mapa end
     if self.data.class==Generica then llenaGenerica mapa end
     

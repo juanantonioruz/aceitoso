@@ -5,6 +5,7 @@
 <label class='label'>Imagen</label>
 <p><%=imagentam(@evento,'64x64')%>&nbsp;</p>
 
+<%=etiquetas @evento%>
 
 <label class='label'>Descripción del evento</label>
 <p><%=raw @evento.descripcion%>&nbsp;</p>

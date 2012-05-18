@@ -1,0 +1,25 @@
+<h1> Eventos históricos: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Titulo</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@eventos.each do |evento|%>
+<tr>
+<td><%=evento.titulo%></td>
+
+<td><%=imagentam(evento,'64x64')%></td>
+
+
+<td>
+<%= link_to 'Ver',museo_evento_path(:museo_id=>evento.museo,:id=>evento),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_evento_path(:museo_id=>evento.museo,:id=>evento),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_evento_path(:museo_id=>evento.museo,:id=>evento),:method=>:delete,:confirm=>'¿Seguro que desea borrar este evento?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir evento',new_museo_evento_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+
