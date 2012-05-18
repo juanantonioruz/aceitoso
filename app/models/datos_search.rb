@@ -1,5 +1,5 @@
 class DatosSearch
-  attr_accessor  :data_museos,:data_genericas,:data_piezas,:data_hitos,:data_caminos, :resultado_html
+  attr_accessor  :data_museos,:data_genericas,:data_hitos,:data_caminos, :resultado_html
     def as_json(options = {})
     {
     :result=>dameMuseos+dameGenericas+dameHitos+dameCaminos
@@ -11,9 +11,7 @@ class DatosSearch
   def dameMuseos
     generaArrayInterpretable data_museos
   end
-  def damePiezas
-    generaArrayInterpretable data_piezas
-  end
+ 
   def dameHitos
     generaArrayInterpretable data_hitos
   end

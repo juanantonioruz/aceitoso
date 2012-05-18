@@ -50,7 +50,7 @@ end
 
   end
 
-
+  #este metodo es invocado por el suggest del interactivo
   def search
         logger.info "search::: > buscando .... "+params[:query].to_s
 #    logger.info @resource
@@ -61,7 +61,7 @@ end
    query=query.sub("Hito: ", "")
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
-     @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
+    # @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_caminos= Camino.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_hitos= Hito.where(["nombre LIKE ?", "%"+query+"%"])
     
@@ -70,7 +70,7 @@ end
 #    data.resultado_html="202"
      data.data_museos=@resource_museos
      data.data_genericas=@resource_genericas
-     data.data_piezas=@resource_piezas
+#     data.data_piezas=@resource_piezas
      data.data_caminos=@resource_caminos
      data.data_hitos=@resource_hitos
     # @resource.each{|el| logger.info (el.class==Museo)}
@@ -103,13 +103,16 @@ end
     return resultado, html
   end
 
+  #este metodo es invocado por el suggest para detallar info en mouse-over ... ahora no anda...
+
   def fly
 
         logger.info "consulta suggest por mid > id .... "+params[:id].to_s
+      
       resultado, html=busca(params[:id])      
-
+      if html.nil? then html="sin info" end
      #   logger.info museo.ficha.descripcion
-      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+resultado.id.to_s+'","html":\''+html+'\'});'
+      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+resultado.id.to_s+'","html":"'+html.gsub(/\t/,'').gsub(/\n/,'').gsub(/\"/,'\'')+'"});'
                 render :text => respuesta
   end
   def show
