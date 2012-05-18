@@ -1,6 +1,9 @@
 class Info < ActiveRecord::Base
 
   belongs_to :museo
+  belongs_to :generica
+
+  acts_as_heir_of :relacionable
 
     
   def nombre_select
@@ -11,9 +14,20 @@ class Info < ActiveRecord::Base
     titular(self)    
   end
   
+  def descripcion
+    if !generica.blank?
+          "#{generica.descripcion}"
+        else
+           return "Sin articulo asociado. Id: #{id}"
+      end
+    end
+  
+     def nombre_ask
+        "#{titular(self)}"
+    end
    def titular(info)
-     if !info.url.blank?
-       "ee"
+     if !info.generica.blank?
+          "#{info.generica.titulo}"
         else
            return "Sin articulo asociado. Id: #{info.id}"
       end
