@@ -53,6 +53,7 @@ else
         self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
         self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
         self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio.predecessor] else mapa[nombre] << espacio.predecessor end }
         #self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio] else mapa[nombre] << espacio end }
 
   end
@@ -75,6 +76,12 @@ else
          Rails.logger.warn nombre+" hito"
          mapa[nombre] = [self.data.entorno.museo.predecessor] 
         self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
+
+  end
+  def llenaEspacio mapa
+         nombre="En museoxxx#{self.data.museo.predecessor.id}"
+         Rails.logger.warn nombre+" espacio"
+         mapa[nombre] = [self.data.museo.predecessor] 
 
   end
   def llenaGenerica mapa
@@ -101,6 +108,7 @@ else
     if self.data.class==Pieza then llenaPieza mapa end
     if self.data.class==Camino then llenaCamino mapa end
     if self.data.class==Hito then llenaHito mapa end
+    if self.data.class==Espacio then llenaEspacio mapa end
     if self.data.class==Generica then llenaGenerica mapa end
     
      mapa.map{|k,v|  {:id => k.split("xxx")[1], :name => k.split("xxx")[0], :values=>dameValuesRelacionables(v) }}

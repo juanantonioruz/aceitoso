@@ -4,6 +4,7 @@
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>    
 
+    <%=etiquetar @espacio%>
 
     <%=f.label :idplano,:class=>'label'%>
     <%=f.text_field :idplano%> 

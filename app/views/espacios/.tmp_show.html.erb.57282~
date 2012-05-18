@@ -5,6 +5,7 @@
 <label class='label'>Nombre</label>
 <p><%=@espacio.nombre%>&nbsp;</p>
 
+<%=etiquetas @espacio%>
 
 <label class='label'>Identificador en el plano</label>
 <p><%=@espacio.idplano%>&nbsp;</p>

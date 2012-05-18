@@ -112,7 +112,7 @@ end
       resultado, html=busca(params[:id])      
       if html.nil? then html="sin info" end
      #   logger.info museo.ficha.descripcion
-      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+resultado.id.to_s+'","html":"'+html.gsub(/\t/,'').gsub(/\n/,'').gsub(/\"/,'\'')+'"});'
+      respuesta ='/** this is jsonp **/ '+params[:callback].to_s+'({"id":"'+resultado.id.to_s+'","html":"<div class=\"fbs-flyout-content\">'+html.gsub(/\"/,'\'')+'</div>"});'
                 render :text => respuesta
   end
   def show
