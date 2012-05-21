@@ -23,7 +23,7 @@ end
       museos=Museo.find(:all)
    for museo in museos do 
         ficha=museo.ficha
-    ne="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{CGI.unescapeHTML(strip_tags(ficha.descripcion))}|#{dameIco}".split("|").join("\t")+"\n"
+    ne="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIco}".split("|").join("\t")+"\n"
     logger.info "#{museo.nombre}|#{dameIco}|#{ficha.x},#{ficha.y}|#{CGI.unescapeHTML(ficha.descripcion)}"
     v+=ne
     
