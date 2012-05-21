@@ -105,6 +105,8 @@ public class Resource {
         that.name = response.data.name;
         that.html = response.details_html;
         that.coords = response.coords;
+        that.clasi=response.clasi;
+      
         var lon_lat=that.coords.split("x");
         if(that.coords!=null) coloca(lon_lat[1], lon_lat[0]);
         //println(that.coords);
@@ -131,6 +133,11 @@ public class Resource {
         that.frameCount = 0;
         
         $('aside').html(g.getSelectedNode().getSubject().html);
+         if(that.clasi=="Museo"){
+         //  println(that.clasi);
+       
+        loadMarcas("hitostextfile", true);
+         }
       },
       error: function() {
       

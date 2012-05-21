@@ -62,10 +62,11 @@ Olearum::Application.routes.draw do
   get "admin/seleccionar"
 
   get "olearum/index"
-
+  get "olearum/admin" => "admin#index"
   get "resources/show"
   get "resources/detalla"
-  get "resources/textfile"
+  get "resources/museostextfile"
+  get "resources/hitostextfile"
   match 'mapa' => 'resources#show'
 
   get "resources/search"

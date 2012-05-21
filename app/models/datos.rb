@@ -1,5 +1,5 @@
 class Datos
-  attr_accessor   :data, :resultado_html, :coordenadas
+  attr_accessor   :data, :resultado_html, :coordenadas, :clase
   def dameNombre
     if [Museo].include? self.data.class then
       self.data.nombre_select
@@ -17,7 +17,8 @@ class Datos
     :id=>self.data.predecessor.id.to_s
     },
     :details_html=>dameDetails, 
-    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
+    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : "",
+    :clasi=>self.clase
 
 
     }
