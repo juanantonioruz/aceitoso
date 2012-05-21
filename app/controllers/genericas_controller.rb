@@ -20,6 +20,10 @@ class GenericasController < ApplicationController
     end
     def relacion
         @generica=Generica.find(params[:id])
+            respond_to do |format|
+      format.html 
+    end
+
     end
 
     def update

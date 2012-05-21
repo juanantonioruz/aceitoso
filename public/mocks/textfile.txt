@@ -1,0 +1,4 @@
+point	title	description	icon
+10,20	my violera title	my orange description	http://www.openlayers.org/api/img/zoom-world-mini.png
+-666497.4453543,4493995.6445449	andere	my purple description<br/>is great.	
+42,-71	my violera title	my purple description<br/>is great.	http://www.openlayers.org/api/img/zoom-world-mini.png

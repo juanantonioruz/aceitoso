@@ -3,7 +3,10 @@ Olearum::Application.routes.draw do
   resources :services
   resources :relaciones
   resources :relacions
-  resources :nombre_relacions
+  resources :nombre_relacions do
+         get :relaciones, :on => :member
+
+  end
   resources :generica_relacions
   resources :museo_relacions
   resources :pieza_relacions
@@ -56,12 +59,13 @@ Olearum::Application.routes.draw do
   
   get "admin/index"
   get "admin/search"
-  get "admin/biz"
+  get "admin/seleccionar"
 
   get "olearum/index"
 
   get "resources/show"
   get "resources/detalla"
+  get "resources/textfile"
   match 'mapa' => 'resources#show'
 
   get "resources/search"
@@ -120,7 +124,7 @@ Olearum::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'admin#index'
+   root :to => 'resources#show'
 
   # See how all your routes lay out with "rake routes"
 

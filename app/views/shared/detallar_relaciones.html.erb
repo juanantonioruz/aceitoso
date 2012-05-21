@@ -1,0 +1,34 @@
+<%
+editor=!(defined? no_admin).nil?
+%>
+<label class='label'>Relaciones</label>
+
+<%relacionable.predecessor.relaciones_origen.sort{|a,b| b.fin.nombre_select <=> a.fin.nombre_select}.each do |rel|%>
+   <p><b><%=rel.origen.nombre_select%></b> <b><%=rel.sentido_relacion.titulo%></b>  <b><%=rel.fin.nombre_select%></b>
+<%if rel.fin.heir.class==Pieza and false%>   
+ <%= link_to 'Editar Pieza fin',edit_museo_pieza_path(:museo_id=>rel.fin.heir.museo,:id=>rel.fin.heir),:class=>'btn btn-success'%>&nbsp;
+  <%end%>
+<%
+lista=Hash[:id=>rel]
+if defined? params[:museo_id]  and relacionable.class!=Museo then lista[:museo_id]=params[:museo_id] end 
+%>
+   <%=  link_to 'Borrar',  send("#{pathito}_relacion_path", lista), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' unless editor%>
+   </p>
+<%end%>
+<!-- label class='label'>Relaciones Como Destino</label -->
+<%relacionable.predecessor.relaciones_fin.sort{|a,b| b.origen.nombre_select <=> a.origen.nombre_select}.each do |rel|%>
+   <p>
+<b><!-- desde destino --><%=rel.fin.nombre_select%></b> <b><%=rel.sentido_relacion.titulo_destino%></b>  <b><%=rel.origen.nombre_select%></b>
+
+   <%if rel.origen.heir.class==Pieza and false%>   
+ <%= link_to 'Editar Pieza fin',edit_museo_pieza_path(:museo_id=>rel.origen.heir.museo,:id=>rel.origen.heir),:class=>'btn btn-success'%>&nbsp;
+  <%end%>
+
+   <%
+lista=Hash[:id=>rel]
+if defined? params[:museo_id]   and relacionable.class!=Museo then lista[:museo_id]=params[:museo_id] end 
+%>
+
+   <%= link_to 'Borrar',  send("#{pathito}_relacion_path", lista), :confirm => 'Seguro?',  :method => :delete,:class=>'btn btn-mini btn-danger' unless editor%>
+   </p>
+<%end%>

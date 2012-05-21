@@ -32,7 +32,7 @@ int nodeCount = 0;
 
 Resource fetchResource(String resourceId) {
   // init dummy resource
-//  println("fecthing resource::: "+resourceId);
+ // println("fecthing resource::: "+resourceId);
   Resource resource = new Resource(resourceId, "", "");
 	resource.idx = nodeCount;
   nodeCount++;
@@ -182,6 +182,7 @@ void mousePressed() {
   
   if (mouseButton == LEFT) {
 		Node selectedNode = g.getSelectedNode();
+		if(selectedNode==null) return;
 		Resource r = selectedNode.getSubject();
 		if (selectedValueIndex != null) {
 			// Close current resource... ya hay un circulo anterior

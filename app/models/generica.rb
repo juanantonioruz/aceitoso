@@ -10,6 +10,7 @@ class Generica < ActiveRecord::Base
   has_many :hito_genericas
   has_many :hitos, :through => :hito_genericas
 
+    has_many :infos
 
     acts_as_heir_of :relacionable
 

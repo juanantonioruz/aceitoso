@@ -34,7 +34,7 @@ class EventosController < ApplicationController
         @museo=@evento.museo
 
             if @evento.update_attributes(params[:evento])
-                  redirect_to museo_evento_path(:museo_id=>@museo,:id=>@evento), :notice => 'Evento histórico actualizada'
+                  redirect_to museo_evento_path(:museo_id=>@museo,:id=>@evento), :notice => 'Evento historico actualizada'
             end
     end
 end
