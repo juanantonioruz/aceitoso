@@ -1,6 +1,8 @@
+  include ActionView::Helpers::SanitizeHelper
 class ResourcesController < ApplicationController
   layout 'application'
    require 'csv'
+   require 'cgi'
 
 def genera
   museos=Museo.find(:all)
@@ -21,12 +23,20 @@ end
       museos=Museo.find(:all)
    for museo in museos do 
         ficha=museo.ficha
-
-    v+="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion}|#{dameIco}".split("|").join("\t")+"\n"
+    ne="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{CGI.unescapeHTML(strip_tags(ficha.descripcion))}|#{dameIco}".split("|").join("\t")+"\n"
+    logger.info "#{museo.nombre}|#{dameIco}|#{ficha.x},#{ficha.y}|#{CGI.unescapeHTML(ficha.descripcion)}"
+    v+=ne
+    
     end
      render :text => v.html_safe 
   end
+  
   def dameIco
+          return "/uploads/service/imagen/11/wifi.png"
+
+  end
+  
+  def dameIcoBis
   @contador=Random.rand(2)
     if ((@contador.divmod(2)[1])==0)
       return "http://openlayers.org/dev/examples/img/check-round-green.png"

@@ -36,10 +36,10 @@
 	$.mapita=init_mapa();
 
 });
-         		var map, mercator, geographic;
+         		var map;
  function init_mapa(){
- 		    	 mercator = new OpenLayers.Projection("EPSG:900913");
-		    geographic = new OpenLayers.Projection("EPSG:4326");
+ 		    	var mercator = new OpenLayers.Projection("EPSG:900913");
+		    var geographic = new OpenLayers.Projection("EPSG:4326");
 
 				var options = { projection: mercator}
 
@@ -109,14 +109,10 @@
                 if (feature.popup) {
                     popup.feature = null;
                     map.removePopup(feature.popup);
-                   // esto lo he comentado yo, revisar a ver si va a dar fallos feature.popup.destroy();
+                    feature.popup.destroy();
                     feature.popup = null;
                 }
             }
-			function coloca(lon, lat) {
-				var lonlat = new OpenLayers.LonLat(lon, lat).transform(geographic, mercator);
-				map.setCenter(lonlat,8);
-			}
   function inicia() {
     p = Processing.getInstanceById("kenviz");
 
