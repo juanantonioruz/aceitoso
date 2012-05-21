@@ -36,7 +36,7 @@
 	$.mapita=init_mapa();
 
 });
-         		var map, mercator, geographic;
+         		var map, mercator, geographic,p;
  function init_mapa(){
  		    	 mercator = new OpenLayers.Projection("EPSG:900913");
 		    geographic = new OpenLayers.Projection("EPSG:4326");
@@ -103,6 +103,9 @@
                 feature.popup = popup;
                 popup.feature = feature;
                 map.addPopup(popup, true);
+				p.setR(feature.attributes.id);
+		 //alert("val:"+p.resourceId);
+           p.setup();
             }
             function onFeatureUnselect(evt) {
                 feature = evt.feature;
@@ -238,5 +241,6 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 		</div>
 </div>
 </footer>
+
 </body>
 </html>

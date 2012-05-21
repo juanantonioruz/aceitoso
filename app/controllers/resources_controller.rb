@@ -19,12 +19,11 @@ def genera
 end
 
   def textfile
-    v="point|title|description|icon".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon".split("|").join("\t")+"\n"
       museos=Museo.find(:all)
    for museo in museos do 
         ficha=museo.ficha
-    ne="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIco}".split("|").join("\t")+"\n"
-    logger.info "#{museo.nombre}|#{dameIco}|#{ficha.x},#{ficha.y}|#{CGI.unescapeHTML(ficha.descripcion)}"
+    ne="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIco}".split("|").join("\t")+"\n"
     v+=ne
     
     end
