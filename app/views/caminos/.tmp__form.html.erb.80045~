@@ -10,14 +10,19 @@
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
     
-	<%=f.label "KML",:class=>'label'%>
-	 <%= f.file_field :archivo %>
+	
+	 <div class="field">
+        <label><%=t('eligeDoc')+' '+t('es')%></label>
+        <%= f.file_field :archivo %>
+  </div>
   <%if @camino.archivo_url.to_s!=''%>
- <br> <b> Archivo KML ya adjuntado</b><br>
-   <%= link_to @camino.archivo, @camino.archivo_url.to_s %>
-   <br>
+   <%= link_to t('documento'), @camino.archivo_url.to_s %>
+   <div class="field">
+        <label>
           <%= f.check_box :remove_archivo %>
           <%= t('destroy')%>
+        </label>
+    </div>
   <%end%>
 	
      <%=f.label :imagen,:class=>'label'%>
