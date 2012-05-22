@@ -55,7 +55,7 @@ var ghyb = new OpenLayers.Layer.Google(
     // used to be {type: G_HYBRID_MAP, numZoomLevels: 20}
 );            map.addLayer(layer);
 				
-			 sundials = new OpenLayers.Layer.Vector("KML", {
+			 sundials = new OpenLayers.Layer.Vector("RUTA", {
                 projection: geographic,
                 strategies: [new OpenLayers.Strategy.Fixed()],
                 protocol: new OpenLayers.Protocol.HTTP({
@@ -118,6 +118,7 @@ var ghyb = new OpenLayers.Layer.Google(
 				if (content.search("<script") != -1) {
 					content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
 				}
+				$("#explanation").append(content);
 			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun);
 			feature.popup = popup;
 			map.addPopup(popup);
@@ -139,7 +140,7 @@ var ghyb = new OpenLayers.Layer.Google(
 					
 					
 				} 
-				 layer_new = new OpenLayers.Layer.Vector("POIs", {
+				 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
 					projection: geographic,
 
                     strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
