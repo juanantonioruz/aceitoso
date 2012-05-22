@@ -14,7 +14,7 @@ class Datos
     :data=>{
     :attributes=>  dameAtributos,
     :name=>dameNombre ,
-    :id=>self.data.predecessor.id.to_s
+    :id=>self.data.id.to_s
     },
     :details_html=>dameDetails, 
     :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : "",

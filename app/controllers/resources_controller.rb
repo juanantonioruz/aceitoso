@@ -30,8 +30,8 @@ end
      render :text => v.html_safe 
   end
   def hitostextfile
+    museo=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon".split("|").join("\t")+"\n"
-      museo=Museo.find(1)
   
 
         ficha=museo.ficha

@@ -136,7 +136,7 @@ public class Resource {
          if(that.clasi=="Museo"){
          //  println(that.clasi);
        
-        loadMarcas("hitostextfile", true);
+        loadMarcas("hitostextfile/"+that.id, true);
          }
       },
       error: function() {

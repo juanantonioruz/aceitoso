@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+peta n<!DOCTYPE html>
 <html>
 <head>
   <title>Olearum: Red de museos del aceite de oliva</title>
@@ -36,51 +36,70 @@
 	$.mapita=init_mapa();
 
 });
-         		var map;
+         		var map, layer_new, mercator, geographic,p,selectControl;
  function init_mapa(){
- 		    	var mercator = new OpenLayers.Projection("EPSG:900913");
-		    var geographic = new OpenLayers.Projection("EPSG:4326");
+ 		    	 mercator = new OpenLayers.Projection("EPSG:900913");
+		    geographic = new OpenLayers.Projection("EPSG:4326");
 
 				var options = { projection: mercator}
 
                 map = new OpenLayers.Map('mapa_div', options);
 
 				//console.dir(map);
-				var layer_new = new OpenLayers.Layer.Vector("POIs", {
+				
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+				loadMarcas("museostextfile", false);
+				 map.addLayer(layer_new);
+				 layer_new.events.on({
+                    'featureselected': onFeatureSelect,
+                    'featureunselected': onFeatureUnselect
+                });
+                map.addLayer(layer);
+				var center;
+			
+
+				   // Interaction; not needed for initial display.
+              
+                  selectControl = new OpenLayers.Control.SelectFeature(layer_new);
+                map.addControl(selectControl);
+                selectControl.activate();
+                  map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
+				 return map;
+            }
+			
+			function loadMarcas(peticion, eliminar){
+				if(eliminar){
+					layer_new.removeAllFeatures(true);
+					layer_new.removeMap(map);
+					map.removeLayer(layer_new);
+					  map.removeControl(selectControl);
+					
+					
+				} 
+				 layer_new = new OpenLayers.Layer.Vector("POIs", {
 					projection: geographic,
 
                     strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
                     protocol: new OpenLayers.Protocol.HTTP({
-                        url: "/resources/textfile",
+                        url: "/resources/"+peticion,
                         format: new OpenLayers.Format.Text()
                     })
                 });
-				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
-
-                map.addLayers([layer, layer_new]);
-				var markers = new OpenLayers.Layer.Markers( "Markers" );
-			//	map.addLayer(markers);
-				var center;
-				<% for museo in @museos do 
-				ficha=museo.ficha
-				%>
-				 center= new OpenLayers.LonLat(<%=if(!ficha.y.blank? ) then ficha.y else '-666497.4453543' end %>, <%=if(!ficha.x.blank? ) then ficha.x else '4493995.6445449' end %>).transform(geographic, mercator);
-				var size = new OpenLayers.Size(21,25);
-				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-				markers.addMarker(new OpenLayers.Marker(center,icon)); 
-				<%end %>
-				   // Interaction; not needed for initial display.
-                selectControl = new OpenLayers.Control.SelectFeature(layer_new);
-                map.addControl(selectControl);
-                selectControl.activate();
-                layer_new.events.on({
+				if(eliminar){
+					
+				 map.addLayer(layer_new);
+				  layer_new.events.on({
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
-                  map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
-				 return map;
-            }
+				                 selectControl = new OpenLayers.Control.SelectFeature(layer_new);
+                map.addControl(selectControl);
+                selectControl.activate();
+
+				}
+				
+			}
+			
 			  // Needed only for interaction, not for the display.
             function onPopupClose(evt) {
                 // 'this' is the popup.
@@ -97,22 +116,32 @@
                 popup = new OpenLayers.Popup.FramedCloud("featurePopup",
                                          feature.geometry.getBounds().getCenterLonLat(),
                                          new OpenLayers.Size(100,100),
-                                         "<h2>"+feature.attributes.title + "</h2>" +
+                                         "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>[search]</a>"+feature.attributes.title + "</h2>" +
                                          feature.attributes.description,
                                          null, true, onPopupClose);
                 feature.popup = popup;
                 popup.feature = feature;
                 map.addPopup(popup, true);
             }
+			function circles(id){
+				 p.setR(id);
+	         p.setup();
+
+			}
             function onFeatureUnselect(evt) {
                 feature = evt.feature;
                 if (feature.popup) {
                     popup.feature = null;
                     map.removePopup(feature.popup);
-                    feature.popup.destroy();
+                   // esto lo he comentado yo, revisar a ver si va a dar fallos feature.popup.destroy();
                     feature.popup = null;
                 }
             }
+			function coloca(lon, lat) {
+				var lonlat = new OpenLayers.LonLat(lon, lat).transform(geographic, mercator);
+				//map.panTo(lonlat);
+				map.setCenter(lonlat,8);
+			}
   function inicia() {
     p = Processing.getInstanceById("kenviz");
 
@@ -234,5 +263,6 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 		</div>
 </div>
 </footer>
+
 </body>
 </html>
