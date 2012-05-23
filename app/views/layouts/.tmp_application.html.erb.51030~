@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
   <title>Olearum: Red de museos del aceite de oliva</title>
   <%= stylesheet_link_tag    "global", :media => "all" %>
 
         <script src="/javascripts/jquery-1.7.2.js"></script>
         <script src="/javascripts/processing-1.3.6.js"></script>
         <script src="/javascripts/suggest.js"></script>
+        <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 
         <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
@@ -36,37 +39,98 @@
 	$.mapita=init_mapa();
 
 });
-         		var map, layer_new, mercator, geographic,p,selectControl;
+var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl;
  function init_mapa(){
- 		    	 mercator = new OpenLayers.Projection("EPSG:900913");
+ 		    mercator = new OpenLayers.Projection("EPSG:900913");
 		    geographic = new OpenLayers.Projection("EPSG:4326");
 
-				var options = { projection: mercator}
+			var options = { projection: mercator}
 
-                map = new OpenLayers.Map('mapa_div', options);
-
-				//console.dir(map);
+            map = new OpenLayers.Map('mapa_div', options);
 				
-				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+			var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+var ghyb = new OpenLayers.Layer.Google(
+    "Google Hybrid",
+    {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+    // used to be {type: G_HYBRID_MAP, numZoomLevels: 20}
+);            map.addLayer(layer);
+				
+			 sundials = new OpenLayers.Layer.Vector("RUTA", {
+                projection: geographic,
+                strategies: [new OpenLayers.Strategy.Fixed()],
+                protocol: new OpenLayers.Protocol.HTTP({
+                    url: "/uploads/camino/archivo/1/Robledillo_-_rutas.kml",
+                    format: new OpenLayers.Format.KML({
+                        extractStyles: true,
+                        extractAttributes: true
+                    })
+                })
+            });
+			
+			selectSun = new OpenLayers.Control.SelectFeature(sundials);
+            
+            sundials.events.on({
+                "featureselected": onFeatureSelectSun,
+                "featureunselected": onFeatureUnselectSun
+            });
+ 				 map.addLayer(sundials);
+
+
 				loadMarcas("museostextfile", false);
 				 map.addLayer(layer_new);
 				 layer_new.events.on({
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
-                map.addLayer(layer);
-				var center;
-			
-
-				   // Interaction; not needed for initial display.
+				
+				
+            map.addControl(selectSun);
+				
+     selectControl = new OpenLayers.Control.SelectFeature(
+                [layer_new, sundials],
+                {
+                    clickout: true, toggle: false,
+                    multiple: false, hover: false,
+                    toggleKey: "ctrlKey", // ctrl key removes from selection
+                    multipleKey: "shiftKey" // shift key adds to selection
+                }
+            );
+            
+            map.addControl(selectControl);
+            selectControl.activate();
               
                   selectControl = new OpenLayers.Control.SelectFeature(layer_new);
                 map.addControl(selectControl);
-                selectControl.activate();
+			   selectSun.activate();   
+               selectControl.activate();
+			       map.addControl(new OpenLayers.Control.LayerSwitcher());
+
                   map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
 				 return map;
             }
 			
+			
+		function onFeatureSelectSun(event) {
+			var feature = event.feature;
+			// Since KML is user-generated, do naive protection against
+			// Javascript.
+			var content = "<h2>"+feature.attributes.name + "</h2>" + feature.attributes.description;
+				if (content.search("<script") != -1) {
+					content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
+				}
+				$("#explanation").append(content);
+			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun);
+			feature.popup = popup;
+			map.addPopup(popup);
+		}
+        function onFeatureUnselectSun(event) {
+            var feature = event.feature;
+            if(feature.popup) {
+                map.removePopup(feature.popup);
+                feature.popup.destroy();
+                delete feature.popup;
+            }
+        }
 			function loadMarcas(peticion, eliminar){
 				if(eliminar){
 					layer_new.removeAllFeatures(true);
@@ -76,7 +140,7 @@
 					
 					
 				} 
-				 layer_new = new OpenLayers.Layer.Vector("POIs", {
+				 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
 					projection: geographic,
 
                     strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
@@ -85,6 +149,7 @@
                         format: new OpenLayers.Format.Text()
                     })
                 });
+
 				if(eliminar){
 					
 				 map.addLayer(layer_new);
@@ -92,7 +157,7 @@
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
-				                 selectControl = new OpenLayers.Control.SelectFeature(layer_new);
+				selectControl = new OpenLayers.Control.SelectFeature(layer_new);
                 map.addControl(selectControl);
                 selectControl.activate();
 
@@ -104,12 +169,17 @@
             function onPopupClose(evt) {
                 // 'this' is the popup.
                 var feature = this.feature;
-                if (feature.layer_new) { // The feature is not destroyed
+                if (feature!=undefined && feature.layer_new) { // The feature is not destroyed
                     selectControl.unselect(feature);
                 } else { // After "moveend" or "refresh" events on POIs layer all 
                          //     features have been destroyed by the Strategy.BBOX
+						             
                     this.destroy();
                 }
+
+            }
+            function onPopupCloseSun(evt) {
+				selectSun.unselectAll();
             }
             function onFeatureSelect(evt) {
                 feature = evt.feature;

@@ -49,11 +49,19 @@ var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl
             map = new OpenLayers.Map('mapa_div', options);
 				
 			var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
-var ghyb = new OpenLayers.Layer.Google(
-    "Google Hybrid",
-    {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
-    // used to be {type: G_HYBRID_MAP, numZoomLevels: 20}
-);            map.addLayer(layer);
+			var ghyb = new OpenLayers.Layer.Google(
+			    "Google Hybrid",
+			    {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+			    // used to be {type: G_HYBRID_MAP, numZoomLevels: 20}
+			);            
+			var gmap = new OpenLayers.Layer.Google(
+			    "Google Streets", // the default
+			    {numZoomLevels: 20}
+			    // default type, no change needed here
+			);			
+map.addLayer(layer);
+			map.addLayer(ghyb);
+			map.addLayer(gmap);
 				
 			 sundials = new OpenLayers.Layer.Vector("RUTA", {
                 projection: geographic,
@@ -85,9 +93,10 @@ var ghyb = new OpenLayers.Layer.Google(
 				
 				
             map.addControl(selectSun);
-				
-     selectControl = new OpenLayers.Control.SelectFeature(
-                [layer_new, sundials],
+		capas_sensibles=[layer_new, sundials]
+
+    	 selectControl = new OpenLayers.Control.SelectFeature(
+                capas_sensibles,
                 {
                     clickout: true, toggle: false,
                     multiple: false, hover: false,
@@ -195,8 +204,7 @@ var ghyb = new OpenLayers.Layer.Google(
             }
 			function circles(id){
 				 p.setR(id);
-	         p.setup();
-
+		         p.setup();
 			}
             function onFeatureUnselect(evt) {
                 feature = evt.feature;
@@ -212,6 +220,8 @@ var ghyb = new OpenLayers.Layer.Google(
 				//map.panTo(lonlat);
 				map.setCenter(lonlat,8);
 			}
+			
+			
   function inicia() {
     p = Processing.getInstanceById("kenviz");
 
