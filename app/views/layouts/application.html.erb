@@ -39,7 +39,7 @@
 	$.mapita=init_mapa();
 
 });
-var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl,capas_sensibles;
+var map, layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles;
 
 
 function inicia_capas_base(map){
@@ -106,10 +106,31 @@ function add_events_to_ruta(ruta){
                 })
             });
 	}
+	var actuales=[];
+	
+	//llamade desde processing resource.pjs parece que no accede a la variable map
+	function addLayerKML(nombre, url_kml){
+				 var idx = actuales.indexOf(nombre); // Find the index
+				 if(idx!=-1){
+				 	// se encuentra
+					// visibleIds.splice(idx, 1); // Remove it if really found!
+				 //	console.info("si se encuentra"+nombre);
+				 	
+				 } else{
+				 						  map.removeControl(selectControl);
+				 	//console.info("no se encuentra"+nombre);
+				 		vector=load_KML(nombre, url_kml);
+						add_capa_seleccionable(map, vector);
+						//selectControl.map.layers.push(vector);
+						actuales.push(nombre);
+						activar_selectControl();
+				 }
+		
+	}
 	
 	function add_capa_seleccionable(mapa, vector){
 		 mapa.addLayer(vector);
-		 	capas_sensibles.push(vector);
+		capas_sensibles.push(vector);
 			
 	}
 	
@@ -130,29 +151,41 @@ function add_events_to_ruta(ruta){
 				
 			inicia_capas_base(map);
 
-			aceite=load_KML("Ruta Aceite", "/uploads/camino/archivo/4/Ruta_del_Aceite.kml");
+			/*
+			 * 
+			 aceite=load_KML("Ruta Aceite", "/uploads/camino/archivo/4/Ruta_del_Aceite.kml");
+			add_events_to_ruta(aceite);
+         	add_capa_seleccionable(map, aceite);
+
 			sundials=load_KML("RUTA ROBLEDILLO", "/uploads/camino/archivo/1/Robledillo_-_rutas.kml");
 			
 
 			add_events_to_ruta(sundials);
-			add_events_to_ruta(aceite);
          	add_capa_seleccionable(map, sundials);
-         	add_capa_seleccionable(map, aceite);
- 		
+ 		*/
 
 			//selectSun = new OpenLayers.Control.SelectFeature(sundials);
             
 			loadMarcas("museostextfile", false);
 			
 			add_capa_seleccionable(map, layer_new);
+			
 			 layer_new.events.on({
                 'featureselected': onFeatureSelect,
                 'featureunselected': onFeatureUnselect
             });
 			
 		
-
-    		 selectControl = new OpenLayers.Control.SelectFeature(
+			activar_selectControl();
+    		
+              
+            map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
+			return map;
+            }
+			
+			
+			function activar_selectControl(){
+				 selectControl = new OpenLayers.Control.SelectFeature(
                 capas_sensibles,
                 {
                     clickout: true, toggle: false,
@@ -164,13 +197,7 @@ function add_events_to_ruta(ruta){
             
             map.addControl(selectControl);
             selectControl.activate();
-              
-            map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
-			return map;
-            }
-			
-			
-	
+			}
 			function loadMarcas(peticion, eliminar){
 				if(eliminar){
 					layer_new.removeAllFeatures(true);
@@ -197,9 +224,7 @@ function add_events_to_ruta(ruta){
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
-				selectControl = new OpenLayers.Control.SelectFeature(layer_new);
-                map.addControl(selectControl);
-                selectControl.activate();
+				activar_selectControl();
 
 				}
 				
@@ -367,8 +392,8 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 </div>
 </aside>
 <footer style="width:300px">
-	<div id="container_mapa" style="top:-20px;width:200px; height:185px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" style="width:200px; height:180px;">
+	<div id="container_mapa" style="top:-20px;width:200px; height:400px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
+	<div id="mapa_div" style="width:200px; height:400px;">
 		</div>
 </div>
 </footer>

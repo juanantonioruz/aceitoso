@@ -91,7 +91,7 @@ public class Resource {
     var that = this;
     
     this.loading = true;
-    
+
   	
   	$.ajax({
   		async: true,
@@ -105,10 +105,14 @@ public class Resource {
         that.name = response.data.name;
         that.html = response.details_html;
         that.coords = response.coords;
+        that.rutas = response.rutas;
         that.clasi=response.clasi;
       
         var lon_lat=that.coords.split("x");
         if(that.coords!=null) coloca(lon_lat[1], lon_lat[0]);
+        
+       
+        
         //println(that.coords);
         int numValues = 0;
         for (int i = 0 ; i < response.data.attributes.length(); i++) {
@@ -136,8 +140,17 @@ public class Resource {
          if(that.clasi=="Museo"){
          //  println(that.clasi);
        
-        loadMarcas("hitostextfile/"+that.id, true);
+        //loadMarcas("hitostextfile/"+that.id, true);
          }
+          if(that.rutas!=""){
+        	 for (int r = 0; r < that.rutas.length(); r++) {
+	        	//println(that.rutas.length());
+	        	addLayerKML(that.rutas[r].nombre, that.rutas[r].archivo);
+			//add_events_to_ruta(aceite);
+			 //map.addLayer(aceite);
+
+        	 }
+        }
       },
       error: function() {
       
