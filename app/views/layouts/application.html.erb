@@ -39,16 +39,11 @@
 	$.mapita=init_mapa();
 
 });
-var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl;
- function init_mapa(){
- 		    mercator = new OpenLayers.Projection("EPSG:900913");
-		    geographic = new OpenLayers.Projection("EPSG:4326");
+var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl,capas_sensibles;
 
-			var options = { projection: mercator}
 
-            map = new OpenLayers.Map('mapa_div', options);
-				
-			var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+function inicia_capas_base(map){
+	var layer = new OpenLayers.Layer.OSM( "Open Street Map");
 			var ghyb = new OpenLayers.Layer.Google(
 			    "Google Hybrid",
 			    {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
@@ -59,43 +54,105 @@ var map, layer_new, mercator, geographic,p,selectControl, sundials,selectControl
 			    {numZoomLevels: 20}
 			    // default type, no change needed here
 			);			
-map.addLayer(layer);
+			map.addLayer(layer);
 			map.addLayer(ghyb);
 			map.addLayer(gmap);
-				
-			 sundials = new OpenLayers.Layer.Vector("RUTA", {
+}
+
+function add_events_to_ruta(ruta){
+	  ruta.events.on({
+                "featureselected": onFeatureSelectSun,
+                "featureunselected": onFeatureUnselectSun
+            });
+}
+
+
+	function onFeatureSelectSun(event) {
+			var feature = event.feature;
+			// Since KML is user-generated, do naive protection against
+			// Javascript.
+			var content = "<h2>"+feature.attributes.name + "</h2>" + feature.attributes.description;
+				if (content.search("<script") != -1) {
+					content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
+				}
+				$("#explanation").append(content);
+			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun());
+			feature.popup = popup;
+			map.addPopup(popup);
+		}
+        function onFeatureUnselectSun(event) {
+            var feature = event.feature;
+            if(feature.popup) {
+                map.removePopup(feature.popup);
+                feature.popup.destroy();
+                delete feature.popup;
+            }
+        }
+		
+		   function onPopupCloseSun() {
+		   	// antes recibia un parametro que era   selectSun
+			//	selectorito.unselectAll();
+            }
+	function load_KML(nombre_capa, url_kml){
+		 return new OpenLayers.Layer.Vector(nombre_capa, {
                 projection: geographic,
                 strategies: [new OpenLayers.Strategy.Fixed()],
                 protocol: new OpenLayers.Protocol.HTTP({
-                    url: "/uploads/camino/archivo/1/Robledillo_-_rutas.kml",
+                    url: url_kml,
                     format: new OpenLayers.Format.KML({
                         extractStyles: true,
                         extractAttributes: true
                     })
                 })
             });
+	}
+	
+	function add_capa_seleccionable(mapa, vector){
+		 mapa.addLayer(vector);
+		 	capas_sensibles.push(vector);
 			
-			selectSun = new OpenLayers.Control.SelectFeature(sundials);
+	}
+	
+ function init_mapa(){
+ 	capas_sensibles=[];
+ 		    mercator = new OpenLayers.Projection("EPSG:900913");
+		    geographic = new OpenLayers.Projection("EPSG:4326");
+
+            map = new OpenLayers.Map('mapa_div', { 
+			projection: mercator,
+			controls: [
+                new OpenLayers.Control.Navigation(),
+                new OpenLayers.Control.PanPanel(),
+                new OpenLayers.Control.ZoomPanel(),
+				new OpenLayers.Control.LayerSwitcher()
+            ]
+			});
+				
+			inicia_capas_base(map);
+
+			aceite=load_KML("Ruta Aceite", "/uploads/camino/archivo/4/Ruta_del_Aceite.kml");
+			sundials=load_KML("RUTA ROBLEDILLO", "/uploads/camino/archivo/1/Robledillo_-_rutas.kml");
+			
+
+			add_events_to_ruta(sundials);
+			add_events_to_ruta(aceite);
+         	add_capa_seleccionable(map, sundials);
+         	add_capa_seleccionable(map, aceite);
+ 		
+
+			//selectSun = new OpenLayers.Control.SelectFeature(sundials);
             
-            sundials.events.on({
-                "featureselected": onFeatureSelectSun,
-                "featureunselected": onFeatureUnselectSun
+			loadMarcas("museostextfile", false);
+			
+			add_capa_seleccionable(map, layer_new);
+			 layer_new.events.on({
+                'featureselected': onFeatureSelect,
+                'featureunselected': onFeatureUnselect
             });
- 				 map.addLayer(sundials);
+			
+		
 
-
-				loadMarcas("museostextfile", false);
-				 map.addLayer(layer_new);
-				 layer_new.events.on({
-                    'featureselected': onFeatureSelect,
-                    'featureunselected': onFeatureUnselect
-                });
-				
-				
-            map.addControl(selectSun);
-		capas_sensibles=[layer_new, sundials]
-
-    	 selectControl = new OpenLayers.Control.SelectFeature(
+    		 selectControl = new OpenLayers.Control.SelectFeature(
                 capas_sensibles,
                 {
                     clickout: true, toggle: false,
@@ -108,38 +165,12 @@ map.addLayer(layer);
             map.addControl(selectControl);
             selectControl.activate();
               
-                  selectControl = new OpenLayers.Control.SelectFeature(layer_new);
-                map.addControl(selectControl);
-			   selectSun.activate();   
-               selectControl.activate();
-			       map.addControl(new OpenLayers.Control.LayerSwitcher());
-
-                  map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
-				 return map;
+            map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
+			return map;
             }
 			
 			
-		function onFeatureSelectSun(event) {
-			var feature = event.feature;
-			// Since KML is user-generated, do naive protection against
-			// Javascript.
-			var content = "<h2>"+feature.attributes.name + "</h2>" + feature.attributes.description;
-				if (content.search("<script") != -1) {
-					content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
-				}
-				$("#explanation").append(content);
-			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun);
-			feature.popup = popup;
-			map.addPopup(popup);
-		}
-        function onFeatureUnselectSun(event) {
-            var feature = event.feature;
-            if(feature.popup) {
-                map.removePopup(feature.popup);
-                feature.popup.destroy();
-                delete feature.popup;
-            }
-        }
+	
 			function loadMarcas(peticion, eliminar){
 				if(eliminar){
 					layer_new.removeAllFeatures(true);
@@ -187,9 +218,7 @@ map.addLayer(layer);
                 }
 
             }
-            function onPopupCloseSun(evt) {
-				selectSun.unselectAll();
-            }
+         
             function onFeatureSelect(evt) {
                 feature = evt.feature;
                 popup = new OpenLayers.Popup.FramedCloud("featurePopup",
@@ -338,7 +367,7 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 </div>
 </aside>
 <footer style="width:300px">
-	<div id="container_mapa" style="top:-20px;width:200px; height:180px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
+	<div id="container_mapa" style="top:-20px;width:200px; height:185px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
 	<div id="mapa_div" style="width:200px; height:180px;">
 		</div>
 </div>
