@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   layout 'admin'
   protect_from_forgery
-#  before_filter :basic_authenticate ,:except => [:mapa,:root,:show]
+  before_filter :basic_authenticate 
 
   private
   def basic_authenticate

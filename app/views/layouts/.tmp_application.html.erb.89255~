@@ -117,16 +117,63 @@ function add_events_to_ruta(ruta){
 				 //	console.info("si se encuentra"+nombre);
 				 	
 				 } else{
-				 						  map.removeControl(selectControl);
+				 						//  map.removeControl(selectControl);
 				 	//console.info("no se encuentra"+nombre);
 				 		vector=load_KML(nombre, url_kml);
+						add_events_to_ruta(vector);
 						add_capa_seleccionable(map, vector);
 						//selectControl.map.layers.push(vector);
 						actuales.push(nombre);
 						activar_selectControl();
+						//console.log(actuales);
 				 }
 		
 	}
+	
+		function loadMarcas(peticion, eliminar){
+				
+
+				 hitos = new OpenLayers.Layer.Vector("HITOS", {
+					projection: geographic,
+
+                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "/resources/"+peticion,
+                        format: new OpenLayers.Format.Text()
+                    })
+                });
+
+			
+
+					
+				 hitos.events.on({
+                    'featureselected': onFeatureSelect,
+                    'featureunselected': onFeatureUnselect
+                });
+				add_capa_seleccionable(map, hitos);
+				activar_selectControl();
+
+
+				
+			}
+
+	function activar_selectControl(){
+				map.removeControl(selectControl);
+				console.dir(capas_sensibles);
+				 selectControl = new OpenLayers.Control.SelectFeature(
+                capas_sensibles,
+                {
+                    clickout: true, toggle: false,
+                    multiple: false, hover: false,
+                    toggleKey: "ctrlKey", // ctrl key removes from selection
+                    multipleKey: "shiftKey" // shift key adds to selection
+                }
+            );
+            
+            map.addControl(selectControl);
+            selectControl.activate();
+			}
+		
 	
 	function add_capa_seleccionable(mapa, vector){
 		 mapa.addLayer(vector);
@@ -166,8 +213,16 @@ function add_events_to_ruta(ruta){
 
 			//selectSun = new OpenLayers.Control.SelectFeature(sundials);
             
-			loadMarcas("museostextfile", false);
-			
+			 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
+					projection: geographic,
+
+                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "/resources/museostextfile",
+                        format: new OpenLayers.Format.Text()
+                    })
+                });
+
 			add_capa_seleccionable(map, layer_new);
 			
 			 layer_new.events.on({
@@ -184,51 +239,7 @@ function add_events_to_ruta(ruta){
             }
 			
 			
-			function activar_selectControl(){
-				 selectControl = new OpenLayers.Control.SelectFeature(
-                capas_sensibles,
-                {
-                    clickout: true, toggle: false,
-                    multiple: false, hover: false,
-                    toggleKey: "ctrlKey", // ctrl key removes from selection
-                    multipleKey: "shiftKey" // shift key adds to selection
-                }
-            );
-            
-            map.addControl(selectControl);
-            selectControl.activate();
-			}
-			function loadMarcas(peticion, eliminar){
-				if(eliminar){
-					layer_new.removeAllFeatures(true);
-					layer_new.removeMap(map);
-					map.removeLayer(layer_new);
-					  map.removeControl(selectControl);
-					
-					
-				} 
-				 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
-					projection: geographic,
-
-                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
-                    protocol: new OpenLayers.Protocol.HTTP({
-                        url: "/resources/"+peticion,
-                        format: new OpenLayers.Format.Text()
-                    })
-                });
-
-				if(eliminar){
-					
-				 map.addLayer(layer_new);
-				  layer_new.events.on({
-                    'featureselected': onFeatureSelect,
-                    'featureunselected': onFeatureUnselect
-                });
-				activar_selectControl();
-
-				}
-				
-			}
+		
 			
 			  // Needed only for interaction, not for the display.
             function onPopupClose(evt) {
