@@ -18,22 +18,40 @@ def genera
   
 end
 
-  def textfile
-    v="point|title|description|icon".split("|").join("\t")+"\n"
+  def museostextfile
+    v="id|point|title|description|icon".split("|").join("\t")+"\n"
       museos=Museo.find(:all)
    for museo in museos do 
         ficha=museo.ficha
-    ne="#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIco}".split("|").join("\t")+"\n"
-    logger.info "#{museo.nombre}|#{dameIco}|#{ficha.x},#{ficha.y}|#{CGI.unescapeHTML(ficha.descripcion)}"
+    ne="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
     v+=ne
     
     end
      render :text => v.html_safe 
   end
+  def hitostextfile
+    museo=Relacionable.find(params[:id]).heir
+    v="id|point|title|description|icon".split("|").join("\t")+"\n"
   
-  def dameIco
+
+        ficha=museo.ficha
+    v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
+ #   v+=ne
+     for hito in museo.hitos do
+        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{hito.descripcion.gsub(/\n/, "")}|#{dameIcoHito}".split("|").join("\t")+"\n"
+     end
+    
+  
+     render :text => v.html_safe 
+  end
+  
+  def dameIcoMuseo
           return "/uploads/service/imagen/11/wifi.png"
 
+end
+
+  def dameIcoHito
+    return "/uploads/service/imagen/6/17_jardindevariedades.png"
   end
   
   def dameIcoBis
@@ -143,6 +161,7 @@ end
     @resource=resultado
     data=Datos.new
     data.data=@resource
+    data.clase= resultado.class.to_s
     data.resultado_html=html
     
      

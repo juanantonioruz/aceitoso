@@ -10,6 +10,16 @@
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:size=>'30x5'%>
     
+	<%=f.label "KML",:class=>'label'%>
+	 <%= f.file_field :archivo %>
+  <%if @camino.archivo_url.to_s!=''%>
+ <br> <b> Archivo KML ya adjuntado</b><br>
+   <%= link_to @camino.archivo, @camino.archivo_url.to_s %>
+   <br>
+          <%= f.check_box :remove_archivo %>
+          <%= t('destroy')%>
+  <%end%>
+	
      <%=f.label :imagen,:class=>'label'%>
     <%if @camino.imagen_url.to_s!='' %>
         <%=imagentam(@camino,'64x64')%>

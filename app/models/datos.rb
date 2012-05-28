@@ -1,5 +1,5 @@
 class Datos
-  attr_accessor   :data, :resultado_html, :coordenadas
+  attr_accessor   :data, :resultado_html, :coordenadas, :clase
   def dameNombre
     if [Museo].include? self.data.class then
       self.data.nombre_select
@@ -14,10 +14,12 @@ class Datos
     :data=>{
     :attributes=>  dameAtributos,
     :name=>dameNombre ,
-    :id=>self.data.predecessor.id.to_s
+    :id=>self.data.id.to_s
     },
     :details_html=>dameDetails, 
-    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : ""
+    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : "",
+    :clasi=>self.clase,
+    :rutas=>(self.data.class==Museo)?dameRutas(self.data) :""
 
 
     }
@@ -108,6 +110,10 @@ else
   def llena_destinos mapa
         self.data.relaciones_fin.each{|rel| nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.fin.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.origen] else mapa[nombre] << rel.origen end }
 
+  end
+  def dameRutas museo
+        
+       museo.caminos.map{|k|  {:nombre => k.nombre, :archivo => k.archivo.to_s}}
   end
   def dameAtributos
 #    if self.data.class==Museo
