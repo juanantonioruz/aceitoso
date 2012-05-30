@@ -31,9 +31,7 @@ int fontSizeCaption = 16;
 int nodeCount = 0;
 
 Resource fetchResource(String resourceId) {
-$("#mapa").animate({
-    width: "70%",
-  }, 1500 );
+
     // init dummy resource
  // println("fecthing resource::: "+resourceId);
   Resource resource = new Resource(resourceId, "", "");

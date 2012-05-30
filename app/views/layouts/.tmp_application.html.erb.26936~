@@ -18,42 +18,6 @@
 
 
   <%= csrf_meta_tags %>
-  
-<style>
-     .olControlPanel button {
-          position: relative;
-          display: block;
-          margin: 2px;
-          border: 1px solid;
-          padding: 0 5px;
-          border-radius: 4px;
-          height: 35px;
-          background-color: white;
-          float: left;
-          overflow: visible; /* needed to remove padding from buttons in IE */
-        }
-        .olControlPanel button span {
-          padding-left: 25px;
-        }
-        .olControlPanel button span:first-child {
-          padding-left: 0;
-          display: block;
-          position: absolute;
-          left: 2px;
-        }
-        .olControlPanel .ampliaItemActive span:first-child { 
-          background-image: url("/images/expand.gif");
-          height: 29px;
-          width: 29px;
-          top: 2px;
-        }
-        .olControlPanel .reduceItemInactive span:first-child { 
-          background-image: url("/images/minimize.gif");
-          height: 29px;
-          width: 29px;
-          top: 2px;
-        }
-</style>
   <script type="text/javascript">
   	 var controls; 
 
@@ -216,31 +180,6 @@ function add_events_to_ruta(ruta){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(valor){
-		$("#OpenLayers_Map_13_OpenLayers_ViewPort").animate({
-    width: valor, height:valor
-  }, 1500 );
-$("#container_mapa").animate({
-    width: valor, height:valor
-  }, 1500 );
-$("#mapa_div").animate({
-    width: valor, height:valor
-  }, 1500 );
-$("#footer").animate({
-    width: valor, height:valor
-  }, 1500 );
-
-	}
-	
-	
-	function ampliaMapa(evt){
-		cambiaDimension("400px");
-
-	}
-
-	function reduceMapa(evt){
-		cambiaDimension("200px");
-	}
 	
  function init_mapa(){
  	capas_sensibles=[];
@@ -256,40 +195,6 @@ $("#footer").animate({
 				new OpenLayers.Control.LayerSwitcher()
             ]
 			});
-			
-				    botonAmpliaMapa = new OpenLayers.Control.Button({
-						displayClass: "amplia",
-	        title: "Zoom box: zoom clicking and dragging",
-	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
-	    );
-				    botonReduceMapa = new OpenLayers.Control.Button({
-						displayClass: "reduce",
-	        title: "Zoom box: zoom clicking and dragging",
-	        text: "REDUCIR MAPA",trigger:reduceMapa}
-	    );
-
-		 var panel = new OpenLayers.Control.Panel({
-        defaultControl: botonAmpliaMapa,
-        createControlMarkup: function(control) {
-            var button = document.createElement('button'),
-                iconSpan = document.createElement('span'),
-                textSpan = document.createElement('span');
-            iconSpan.innerHTML = '&nbsp;';
-            button.appendChild(iconSpan);
-            if (control.text && false) {
-                textSpan.innerHTML = control.text;
-            }
-            button.appendChild(textSpan);
-            return button;
-        }
-    });
-	
-
-	    panel.addControls([botonAmpliaMapa,botonReduceMapa ]);
-		    map.addControl(panel);
-
-
-
 				
 			inicia_capas_base(map);
 
@@ -497,9 +402,9 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 <a href="http://www.google.com/chrome/">Chrome</a><br>
 </div>
 </aside>
-<footer style="">
-	<div id="container_mapa" style="top:-20px;width:200px; height:200px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" style="width:200px; height:200px;">
+<footer style="width:300px">
+	<div id="container_mapa" style="top:-20px;width:200px; height:400px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
+	<div id="mapa_div" style="width:200px; height:400px;">
 		</div>
 </div>
 </footer>
