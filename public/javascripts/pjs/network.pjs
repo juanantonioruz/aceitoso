@@ -31,7 +31,10 @@ int fontSizeCaption = 16;
 int nodeCount = 0;
 
 Resource fetchResource(String resourceId) {
-  // init dummy resource
+$("#mapa").animate({
+    width: "70%",
+  }, 1500 );
+    // init dummy resource
  // println("fecthing resource::: "+resourceId);
   Resource resource = new Resource(resourceId, "", "");
 	resource.idx = nodeCount;
@@ -67,7 +70,7 @@ resourceId=v;
 void setup() {	
     olearumImage = loadImage("javascripts/pjs/images/LOGO_OLEARUM.jpg");
     ministerioImage = loadImage("javascripts/pjs/images/EducacionCulturaYDeporte.jpg");
-	console.info("resourceId: "+resourceId);
+	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
 	textFont(defaultFont, fontSize);

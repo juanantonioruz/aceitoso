@@ -83,7 +83,7 @@ public class Resource {
    
     if(depurando){
     mensaje="id:"+id;
-    console.log(mensaje);
+   // console.log(mensaje);
    // return ;
     }
     

@@ -26,10 +26,10 @@
  $(document).ready(
  function() {
   pjs = Processing.getInstanceById("kenviz");
-  //console.log(cnt+':'+pjs);
+  console.log(cnt+':'+pjs);
   if (!pjs) tId=setInterval(function() {
     pjs = Processing.getInstanceById("kenviz");
-  //  console.log(cnt+':'+pjs);
+    console.log(cnt+':'+pjs);
     if (pjs){
 	clearInterval(tId);
 	inicia(pjs);		
@@ -159,7 +159,7 @@ function add_events_to_ruta(ruta){
 
 	function activar_selectControl(){
 				map.removeControl(selectControl);
-				//console.dir(capas_sensibles);
+				console.dir(capas_sensibles);
 				 selectControl = new OpenLayers.Control.SelectFeature(
                 capas_sensibles,
                 {
