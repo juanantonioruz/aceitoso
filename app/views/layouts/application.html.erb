@@ -243,10 +243,13 @@ $("#footer").animate({
 	}
 	
  function init_mapa(){
+ 	$("#mapa_div").css('width','200px');
+ 	$("#mapa_div").css('height','200px');
+
  	capas_sensibles=[];
  		    mercator = new OpenLayers.Projection("EPSG:900913");
 		    geographic = new OpenLayers.Projection("EPSG:4326");
-
+			
             map = new OpenLayers.Map('mapa_div', { 
 			projection: mercator,
 			controls: [
@@ -499,7 +502,7 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 </aside>
 <footer style="">
 	<div id="container_mapa" style="top:-20px;width:200px; height:200px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" style="width:200px; height:200px;">
+	<div id="mapa_div" >
 		</div>
 </div>
 </footer>
