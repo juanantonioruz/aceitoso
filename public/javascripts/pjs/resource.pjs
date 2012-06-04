@@ -137,10 +137,11 @@ public class Resource {
         that.frameCount = 0;
         
         $('aside').html(g.getSelectedNode().getSubject().html);
+       
          if(that.clasi=="Museo"){
          //  println(that.clasi);
        
-        loadMarcas("hitostextfile/"+that.id, true);
+        loadMarcas("hitostextfile/"+that.id);
          }
           if(that.rutas!=""){
         	 for (int r = 0; r < that.rutas.length(); r++) {
