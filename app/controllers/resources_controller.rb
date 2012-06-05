@@ -89,18 +89,27 @@ end
    query=query.sub("Hito: ", "")
      @resource_museos=  Museo.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_genericas= Generica.where(["titulo LIKE ?", "%"+query+"%"])
-    # @resource_piezas= Pieza.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_caminos= Camino.where(["nombre LIKE ?", "%"+query+"%"])
      @resource_hitos= Hito.where(["nombre LIKE ?", "%"+query+"%"])
+
+    @resource_museos_desc=  Museo.find(:all, :joins=>:ficha, :conditions=>["nombre NOT LIKE :consulta and fichas.descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
+    @resource_genericas_desc=  Generica.find(:all,  :conditions=>["titulo NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
+    @resource_caminos_desc=  Camino.find(:all,  :conditions=>["nombre NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
+    @resource_hitos_desc=  Hito.find(:all,  :conditions=>["nombre NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
+        #logger.info "search::: > buscando .... "+@resource_museos_desc.to_s+""+@resource_genericas_desc.to_s+@resource_caminos_desc.to_s+@resource_hitos_desc.to_s
+
     
-#    logger.info @resource.children
     data=DatosSearch.new
 #    data.resultado_html="202"
      data.data_museos=@resource_museos
      data.data_genericas=@resource_genericas
-#     data.data_piezas=@resource_piezas
      data.data_caminos=@resource_caminos
      data.data_hitos=@resource_hitos
+     
+     data.data_museos_desc=@resource_museos_desc
+     data.data_genericas_desc=@resource_genericas_desc
+     data.data_caminos_desc=@resource_caminos_desc
+     data.data_hitos_desc=@resource_hitos_desc
     # @resource.each{|el| logger.info (el.class==Museo)}
 
       respuesta='/* this is javascript */ '+params[:callback].to_s+'({

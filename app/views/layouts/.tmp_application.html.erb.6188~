@@ -19,6 +19,7 @@
 
   <%= csrf_meta_tags %>
   
+  
 <style>
      .olControlPanel button {
           position: relative;
@@ -75,11 +76,11 @@
 	$.mapita=init_mapa();
 
 });
-var map, layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles;
+var map, layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
 
 
 function inicia_capas_base(map){
-	var layer = new OpenLayers.Layer.OSM( "Open Street Map");
+		var layer = new OpenLayers.Layer.OSM( "Open Street Map");
 			var ghyb = new OpenLayers.Layer.Google(
 			    "Google Hybrid",
 			    {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
@@ -113,6 +114,7 @@ function add_events_to_ruta(ruta){
 				}
 				$("#explanation").append(content);
 			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun());
+			popup.maxSize=new  OpenLayers.Size(300, 300);
 			feature.popup = popup;
 			map.addPopup(popup);
 		}
@@ -143,8 +145,8 @@ function add_events_to_ruta(ruta){
             });
 	}
 	var actuales=[];
-	
 	//llamade desde processing resource.pjs parece que no accede a la variable map
+	var kmls=[];
 	function addLayerKML(nombre, url_kml){
 				 var idx = actuales.indexOf(nombre); // Find the index
 				 if(idx!=-1){
@@ -155,7 +157,9 @@ function add_events_to_ruta(ruta){
 				 } else{
 				 						//  map.removeControl(selectControl);
 				 	//console.info("no se encuentra"+nombre);
+					
 				 		vector=load_KML(nombre, url_kml);
+						kmls.push([nombre, url_kml]);
 						add_events_to_ruta(vector);
 						add_capa_seleccionable(map, vector);
 						//selectControl.map.layers.push(vector);
@@ -165,9 +169,9 @@ function add_events_to_ruta(ruta){
 				 }
 		
 	}
-	
-		function loadMarcas(peticion, eliminar){
-				
+	var hitos_peticion;
+		function loadMarcas(peticion){
+				hitos_peticion=peticion;
 
 				 hitos = new OpenLayers.Layer.Vector("HITOS", {
 					projection: geographic,
@@ -216,101 +220,62 @@ function add_events_to_ruta(ruta){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(valor){
+	function cambiaDimension(altura, anchura){
+		$("#container_mapa").empty();
+		$('#container_mapa').append('<div id="mapa_div" ></div>');
+
 		$("#OpenLayers_Map_13_OpenLayers_ViewPort").animate({
-    width: valor, height:valor
+    width: anchura, height:altura
   }, 1500 );
 $("#container_mapa").animate({
-    width: valor, height:valor
+    width: anchura, height:altura
   }, 1500 );
 $("#mapa_div").animate({
-    width: valor, height:valor
-  }, 1500 );
+    anchura: anchura, height:altura
+  }, 1500, function(){
+  	init_mapa();
+  } );
 $("#footer").animate({
-    width: valor, height:valor
+    width: anchura, height:altura
   }, 1500 );
 
 	}
 	
 	
 	function ampliaMapa(evt){
-		cambiaDimension("400px");
-
+		var altura=$(document).height()-100;
+		var anchura=$(document).width()-$('aside').width()-100;
+		cambiaDimension(altura +"px",anchura +"px");
+		es_ampliado=true;
 	}
 
 	function reduceMapa(evt){
-		cambiaDimension("200px");
+		cambiaDimension("200px","200px");
+		es_ampliado=false;
 	}
 	
  function init_mapa(){
- 	$("#mapa_div").css('width','200px');
- 	$("#mapa_div").css('height','200px');
-
+	actuales=[];
  	capas_sensibles=[];
- 		    mercator = new OpenLayers.Projection("EPSG:900913");
-		    geographic = new OpenLayers.Projection("EPSG:4326");
+	    mercator = new OpenLayers.Projection("EPSG:900913");
+	    geographic = new OpenLayers.Projection("EPSG:4326");
+        map = new OpenLayers.Map('mapa_div', { 
+		projection: mercator,
+		controls: [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanPanel(),
+            new OpenLayers.Control.ZoomPanel(),
+			new OpenLayers.Control.LayerSwitcher()
+        ]
+		});
 			
-            map = new OpenLayers.Map('mapa_div', { 
-			projection: mercator,
-			controls: [
-                new OpenLayers.Control.Navigation(),
-                new OpenLayers.Control.PanPanel(),
-                new OpenLayers.Control.ZoomPanel(),
-				new OpenLayers.Control.LayerSwitcher()
-            ]
-			});
-			
-				    botonAmpliaMapa = new OpenLayers.Control.Button({
-						displayClass: "amplia",
-	        title: "Zoom box: zoom clicking and dragging",
-	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
-	    );
-				    botonReduceMapa = new OpenLayers.Control.Button({
-						displayClass: "reduce",
-	        title: "Zoom box: zoom clicking and dragging",
-	        text: "REDUCIR MAPA",trigger:reduceMapa}
-	    );
+		
 
-		 var panel = new OpenLayers.Control.Panel({
-        defaultControl: botonAmpliaMapa,
-        createControlMarkup: function(control) {
-            var button = document.createElement('button'),
-                iconSpan = document.createElement('span'),
-                textSpan = document.createElement('span');
-            iconSpan.innerHTML = '&nbsp;';
-            button.appendChild(iconSpan);
-            if (control.text && false) {
-                textSpan.innerHTML = control.text;
-            }
-            button.appendChild(textSpan);
-            return button;
-        }
-    });
-	
-
-	    panel.addControls([botonAmpliaMapa,botonReduceMapa ]);
-		    map.addControl(panel);
-
-
-
+		panel_ampliable= creaPanelAmpliable();
+		map.addControl(panel_ampliable);
 				
 			inicia_capas_base(map);
 
-			/*
-			 * 
-			 aceite=load_KML("Ruta Aceite", "/uploads/camino/archivo/4/Ruta_del_Aceite.kml");
-			add_events_to_ruta(aceite);
-         	add_capa_seleccionable(map, aceite);
-
-			sundials=load_KML("RUTA ROBLEDILLO", "/uploads/camino/archivo/1/Robledillo_-_rutas.kml");
-			
-
-			add_events_to_ruta(sundials);
-         	add_capa_seleccionable(map, sundials);
- 		*/
-
-			//selectSun = new OpenLayers.Control.SelectFeature(sundials);
-            
 			 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
 					projection: geographic,
 
@@ -333,10 +298,49 @@ $("#footer").animate({
     		
               
             map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
+			if(hitos_peticion!=null) loadMarcas(hitos_peticion);
+			if(kmls!=null){
+				for(var i=0; i<kmls.length; i++) {
+					var value = kmls[i];
+					addLayerKML(value[0],value[1]);
+				}
+
+			}
 			return map;
             }
 			
-			
+			function creaPanelAmpliable(){
+				 botonAmpliaMapa = new OpenLayers.Control.Button({
+			displayClass: "amplia",
+	        title: "Zoom box: zoom clicking and dragging",
+	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
+	    );
+				    botonReduceMapa = new OpenLayers.Control.Button({
+						displayClass: "reduce",
+	        title: "Zoom box: zoom clicking and dragging",
+	        text: "REDUCIR MAPA",trigger:reduceMapa}
+	    );
+					 var panel = new OpenLayers.Control.Panel({
+			        defaultControl: botonAmpliaMapa,
+			        createControlMarkup: function(control) {
+		            var button = document.createElement('button'),
+		                iconSpan = document.createElement('span'),
+		                textSpan = document.createElement('span');
+		            iconSpan.innerHTML = '&nbsp;';
+		            button.appendChild(iconSpan);
+		            if (control.text && false) {
+		                textSpan.innerHTML = control.text;
+		            }
+		            button.appendChild(textSpan);
+		            return button;
+		        }
+				
+   				 });
+	
+
+	  	  panel.addControls([botonAmpliaMapa,botonReduceMapa ]);
+			return panel;
+			}
 		
 			
 			  // Needed only for interaction, not for the display.
@@ -361,6 +365,9 @@ $("#footer").animate({
                                          "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>[search]</a>"+feature.attributes.title + "</h2>" +
                                          feature.attributes.description,
                                          null, true, onPopupClose);
+//				 popup.autoSize=false;
+				 			popup.maxSize= new OpenLayers.Size(300, 300);
+
                 feature.popup = popup;
                 popup.feature = feature;
                 map.addPopup(popup, true);
@@ -414,6 +421,10 @@ $("#footer").animate({
 			p.setR(data.id);
 		 //alert("val:"+p.resourceId);
            p.setup();
+		    if(es_ampliado){
+		   reduceMapa();
+		   	
+		   } 
       })
       .focus(function(e) {
         if ($(this).val() == $(this).attr('default')) {
@@ -502,7 +513,7 @@ Your Browser is currently not supported.<br><br>Try one of these:<br>
 </aside>
 <footer style="">
 	<div id="container_mapa" style="top:-20px;width:200px; height:200px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" >
+	<div id="mapa_div" style="width:200px; height:200px;">
 		</div>
 </div>
 </footer>
