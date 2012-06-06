@@ -1,0 +1,13 @@
+<h1 >Ficha</h1>
+<h2 style="background-color:black; color:white;>Nombre: <%=@museo.nombre%></h2>
+<h2 style="background-color:black; color:white;">Imagen:</h2>
+<img class='summary-img' width='150' src='<%=@museo.ficha.imagen%>'>   
+<h2 style="background-color:black; color:white;">Descripcion:</h2>
+ <%=@museo.ficha.descripcion.html_safe%>
+<h2 style="background-color:black; color:white;">Cómo llegar:</h2>
+ <%=@museo.ficha.llegar.html_safe%>
+<h2 style="background-color:black; color:white;">Horario:</h2>
+ <%=@museo.ficha.horario.html_safe%>
+<h2 style="background-color:black; color:white;">Mapa:</h2>
+ <%=@museo.ficha.x%> -  <%=@museo.ficha.y%>
+

@@ -1,5 +1,6 @@
 Olearum::Application.routes.draw do
   
+
   resources :services
   resources :relaciones
   resources :relacions
@@ -67,6 +68,8 @@ Olearum::Application.routes.draw do
   get "resources/detalla"
   get "resources/museostextfile"
   match "resources/hitostextfile/:id" => "resources#hitostextfile"
+    match "resumen/museo/:id"=> "resumen#museo"
+
   match 'mapa' => 'resources#show'
 
   get "resources/search"
