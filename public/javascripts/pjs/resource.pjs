@@ -138,6 +138,17 @@ public class Resource {
         
         $('aside').html(g.getSelectedNode().getSubject().html);
        
+       var activa=function(){
+          $("dd").hide();
+    $("dt").click(function(event){
+             var desplegable = $(this).next();
+             $('dd').not(desplegable).slideUp('fast');
+              desplegable.slideToggle('fast');
+              event.preventDefault();
+              })
+        }
+	activa();
+       
          if(that.clasi=="Museo"){
          //  println(that.clasi);
        

@@ -96,7 +96,6 @@ end
     @resource_genericas_desc=  Generica.find(:all,  :conditions=>["titulo NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
     @resource_caminos_desc=  Camino.find(:all,  :conditions=>["nombre NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
     @resource_hitos_desc=  Hito.find(:all,  :conditions=>["nombre NOT LIKE :consulta and descripcion  LIKE :consulta",{:consulta=> "%"+query+"%"}])
-        #logger.info "search::: > buscando .... "+@resource_museos_desc.to_s+""+@resource_genericas_desc.to_s+@resource_caminos_desc.to_s+@resource_hitos_desc.to_s
 
     
     data=DatosSearch.new
@@ -141,7 +140,6 @@ end
   end
 
   #este metodo es invocado por el suggest para detallar info en mouse-over ... ahora no anda...
-
   def fly
 
         logger.info "consulta suggest por mid > id .... "+params[:id].to_s
@@ -165,12 +163,13 @@ end
 #@equipos.sort_by( &:id).to_xml(:only => [:id, :nombre,:x,:y])}
   end
   def detalla
-      resultado, html=busca(params[:id])      
+     resultado, html=busca(params[:id])      
 
     @resource=resultado
     data=Datos.new
     data.data=@resource
     data.clase= resultado.class.to_s
+    logger.info "clase:"+data.clase.to_s
     data.resultado_html=html
     
      

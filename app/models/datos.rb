@@ -1,4 +1,5 @@
 class Datos
+
   attr_accessor   :data, :resultado_html, :coordenadas, :clase
   def dameNombre
     if [Museo].include? self.data.class then
@@ -25,13 +26,51 @@ class Datos
     }
   end
   
+  def dameTabNew titulo
+     "<dt ><h2 style='background-color:#003A6B; color:white;'>#{titulo}</h2></dt><dd>"
+  end
+  
+  def finTab
+    "<br></dd>"
+  end
+  
   def dameDetails
     titulo="<h1>#{self.data.nombre_relacionable}</h1>"
     respuesta_det=titulo
     respuesta_det<<"<p class='summary'>"
     if (self.data.class==Museo) then
+          respuesta_det<<"<dl>" 
+          respuesta_det<<dameTabNew("Descripcion")
         respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
-          respuesta_det<<self.data.ficha.descripcion 
+          respuesta_det<<"#{self.data.ficha.descripcion}" 
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Contacto")
+          respuesta_det<<"#{self.data.ficha.contacto}" 
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Como llegar...")
+          respuesta_det<<"#{self.data.ficha.contacto}" 
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Horario")
+          respuesta_det<<"#{self.data.ficha.horario}" 
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Servicios")
+            self.data.servicios.each do |servicio|
+              respuesta_det<<"#{servicio.descripcion}<br>" 
+            end
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Publicaciones")
+            self.data.publicacions.each do |publicacion|
+              respuesta_det<<"<b>#{publicacion.nombre}</b><br>#{publicacion.descripcion}<br>#{(publicacion.url)}" 
+            end
+          respuesta_det<<finTab
+          respuesta_det<<dameTabNew("Premios")
+            self.data.premios.each do |premio|
+              respuesta_det<<"<b>#{premio.nombre}</b><br>#{premio.descripcion}<br>#{(premio.url)}" 
+            end
+
+          respuesta_det<<finTab
+
+          respuesta_det<<"</dl>" 
 
 else
    if ([Pieza, Generica, Hito, Camino].include?self.data.class)

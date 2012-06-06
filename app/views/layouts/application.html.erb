@@ -61,7 +61,10 @@
   	var tId,pjs,cnt=0;
 
  $(document).ready(
+ 
+ 
  function() {
+ $('footer').width($(document).width()-$('aside').width()-100);
   pjs = Processing.getInstanceById("kenviz");
   //console.log(cnt+':'+pjs);
   if (!pjs) tId=setInterval(function() {
