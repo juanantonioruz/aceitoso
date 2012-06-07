@@ -1,13 +1,52 @@
-<h1 >Ficha</h1>
-<h2 style="background-color:black; color:white;>Nombre: <%=@museo.nombre%></h2>
-<h2 style="background-color:black; color:white;">Imagen:</h2>
+<style>
+	h1.resumen_museo{
+	color:black;font-size:20px;
+	}
+	h2.resumen_museo{
+	background-color:black; color:white;
+	}
+	div.resumen_museo{
+	margin:50px; 
+	}
+</style>
+<h1 class="resumen_museo">Ficha</h1>
+<h2 class="resumen_museo" >Nombre: <%=@museo.nombre%></h2>
+<h2 class="resumen_museo">Imagen:</h2>
+<div class="resumen_museo">
 <img class='summary-img' width='150' src='<%=@museo.ficha.imagen%>'>   
-<h2 style="background-color:black; color:white;">Descripcion:</h2>
- <%=@museo.ficha.descripcion.html_safe%>
-<h2 style="background-color:black; color:white;">Cómo llegar:</h2>
+</div>
+<h2 class="resumen_museo">Descripcion:</h2>
+<div class="resumen_museo">
+ <%=@museo.ficha.descripcion.html_safe%> 
+ </div>
+<h2 class="resumen_museo">Cómo llegar:</h2>
+<div class="resumen_museo">
+
  <%=@museo.ficha.llegar.html_safe%>
-<h2 style="background-color:black; color:white;">Horario:</h2>
+ </div>
+<h2 class="resumen_museo">Horario:</h2>
+<div class="resumen_museo">
  <%=@museo.ficha.horario.html_safe%>
-<h2 style="background-color:black; color:white;">Mapa:</h2>
- <%=@museo.ficha.x%> -  <%=@museo.ficha.y%>
-	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@museo.ficha} )  %>
+ </div>
+<h2 class="resumen_museo">Madiva:</h2>
+<div class="resumen_museo">
+<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@museo.ficha} )  %>
+ </div>
+<h2 class="resumen_museo">Espacios:</h2>
+<div class="resumen_museo">
+	<%
+	@museo.espacios.each do |espacio|
+%>
+<div class="espacio_resumen_museo">
+	<% if !espacio.imagen.blank? then%>
+<img class='summary-img' width='150' src='<%=espacio.imagen%>'>   
+	<%end%>
+<b><%=espacio.nombre%></b>
+<p><%=espacio.descripcion.html_safe%></p>
+<hr>
+</div>
+
+<%
+	end
+	%>
+ </div>
