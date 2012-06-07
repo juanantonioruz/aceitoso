@@ -10,4 +10,4 @@
  <%=@museo.ficha.horario.html_safe%>
 <h2 style="background-color:black; color:white;">Mapa:</h2>
  <%=@museo.ficha.x%> -  <%=@museo.ficha.y%>
-
+	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@museo.ficha} )  %>
