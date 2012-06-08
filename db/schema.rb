@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608100819) do
+ActiveRecord::Schema.define(:version => 20120608154023) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120608100819) do
     t.integer  "entorno_id"
     t.datetime "updated_at"
     t.datetime "created_at"
+    t.integer  "service_id"
   end
 
   add_index "hitos", ["entorno_id"], :name => "index_hitos_on_entorno_id"

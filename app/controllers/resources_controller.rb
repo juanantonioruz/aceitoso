@@ -38,7 +38,7 @@ end
     v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
  #   v+=ne
      for hito in museo.hitos do
-        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{hito.descripcion.gsub(/\n/, "")}|#{dameIcoHito}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{hito.descripcion.gsub(/\n/, "")}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
      end
     
   
@@ -50,8 +50,12 @@ end
 
 end
 
-  def dameIcoHito
+  def dameIcoHito(hito)
+    if(hito.service.nil?) then
     return "/uploads/service/imagen/6/17_jardindevariedades.png"
+  else
+    return hito.imagen
+    end
   end
   
   def dameIcoBis

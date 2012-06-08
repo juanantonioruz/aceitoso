@@ -3,8 +3,6 @@
 <table class='table zebra-striped'>
 <tr>
 <th>Nombre</th>
-<th>Servicio</th>
-
 <th>Descripcion</th>
 <th>Imagen</th>
 <th>Acciones</th>
@@ -12,8 +10,6 @@
 <%@hitos.each do |hito|%>
 <tr>
 <td><%=hito.nombre%></td>
-    <td><%=image_tag(hito.imagen,:size=>'64x64')%></td>
-
 <td><%=hito.descripcion%></td>
 <td><%=imagentam(hito,'64x64')%></td>
 <td>
