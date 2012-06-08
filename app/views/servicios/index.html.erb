@@ -9,7 +9,7 @@
 <tbody>
 <%@servicios.each do |servicio|%>
     <tr>
-    <td><%=image_tag(servicio.imagen,:size=>'64x64')%></td>
+    <td><%=image_tag(servicio.service.imagen,:size=>'64x64')%></td>
     <td><%=servicio.descripcion%></td>
     <td>
     <%= link_to 'Ver',museo_servicio_path(:museo_id=>@museo,:id=>servicio),:class=>'btn btn-success'%>

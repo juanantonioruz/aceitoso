@@ -1,8 +1,8 @@
 <h1>Detalle del servicio </h1>
 <br/>
-
+<%=@servicio.service.imagen%>
 <label class='label'>Imagen</label>
-<p><%=image_tag(@servicio.imagen,:size=>'64x64')%></p>
+<p><%=image_tag(@servicio.service.imagen,:size=>'64x64')%></p>
 
 <label class='label'>Descripción</label>
 <p><%=@servicio.descripcion%>&nbsp;</p>
