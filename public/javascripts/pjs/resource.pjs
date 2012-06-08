@@ -83,7 +83,7 @@ public class Resource {
    
     if(depurando){
     mensaje="id:"+id;
-    console.log(mensaje);
+   // console.log(mensaje);
    // return ;
     }
     
@@ -137,10 +137,22 @@ public class Resource {
         that.frameCount = 0;
         
         $('aside').html(g.getSelectedNode().getSubject().html);
+       
+       var activa=function(){
+          $("dd").hide();
+    $("dt").click(function(event){
+             var desplegable = $(this).next();
+             $('dd').not(desplegable).slideUp('fast');
+              desplegable.slideToggle('fast');
+              event.preventDefault();
+              })
+        }
+	activa();
+       
          if(that.clasi=="Museo"){
          //  println(that.clasi);
        
-        loadMarcas("hitostextfile/"+that.id, true);
+        loadMarcas("hitostextfile/"+that.id);
          }
           if(that.rutas!=""){
         	 for (int r = 0; r < that.rutas.length(); r++) {

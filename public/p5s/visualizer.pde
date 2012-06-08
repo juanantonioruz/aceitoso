@@ -34,7 +34,7 @@ void loadXML(){
 		XMLElement xmlO = new XMLElement(this, xmlFile);
 		int numSites = xmlO.getChildCount();
 		XMLElement[] kids = xmlO.getChildren();
-		console.log("numero de elementos en " + kids.length);
+		//console.log("numero de elementos en " + kids.length);
 			for (XMLElement el : kids) {
 		//console.log(el);
 			if(el.getChild("heir")!=null){
@@ -43,12 +43,12 @@ void loadXML(){
 			contador++;
 				String nombre = titulo_xml.getContent();
 				int id = int(el.getChild("id").getContent());		
-		console.log("eee"+nombre);
+		//console.log("eee"+nombre);
 		relacionables.add(el);
 		}
 		}
 			}
-		console.log("relacionables con nombre::: "+contador);
+		//console.log("relacionables con nombre::: "+contador);
 
 }
 

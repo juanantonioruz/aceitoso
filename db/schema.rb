@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20120608100819) do
 
+
   create_table "books", :force => true do |t|
     t.string "name"
   end
@@ -56,11 +57,13 @@ ActiveRecord::Schema.define(:version => 20120608100819) do
   add_index "entornos", ["museo_id"], :name => "index_entornos_on_museo_id"
 
   create_table "espacios", :force => true do |t|
-    t.string  "nombre"
-    t.string  "idplano"
-    t.text    "descripcion"
-    t.string  "imagen"
-    t.integer "museo_id"
+    t.string   "nombre"
+    t.string   "idplano"
+    t.text     "descripcion"
+    t.string   "imagen"
+    t.integer  "museo_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "espacios_labels", :id => false, :force => true do |t|

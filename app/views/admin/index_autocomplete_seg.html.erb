@@ -34,7 +34,7 @@ jQuery.ajaxSetup({
 $("#biz").autocomplete( {source: '<%= admin_biz_path(:js) %>'}
 );
 $("#biz" ).bind( "autocompleteselect", function(event, ui) {
- console.dir(ui.item.paciente);
+ //console.dir(ui.item.paciente);
   $.ajax({
     complete:function(request){},
     data:'search='+ ui.item.paciente,

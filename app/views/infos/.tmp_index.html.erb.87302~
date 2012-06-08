@@ -1,0 +1,27 @@
+<h1> Recursos interpretativos enlazados a: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Título</th>
+<th>Tipo</th>
+<th>Enlace</th>
+<th>Acciones</th>
+</tr>
+<%@infos.each do |info|%>
+<tr>
+<td><%=titulo(info)%></td>
+<td><%=info.tipo_ri%></td>
+<td><%=url(info)%></td>
+
+<td>
+<%= link_to 'Ver',museo_info_path(:museo_id=>info.museo,:id=>info),:class=>'btn btn-success'%>
+<%= link_to 'Relaciones',relacion_museo_info_path(:museo_id=>info.museo,:id=>info),:class=>'btn btn-success'%>&nbsp;
+
+<%= link_to 'Editar',edit_museo_info_path(:museo_id=>info.museo,:id=>info),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_info_path(:museo_id=>info.museo,:id=>info),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta info?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Enlazar resurso interpretativo',new_museo_info_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

@@ -1,0 +1,25 @@
+
+<h1>Ficha técnica: <%=@ficha.museo.nombre%></h1>
+<!-- %=etiquetas @ficha% -->
+<label class='label'>Imagen</label>
+<p><%=imagentam(@ficha,'64x64')%>&nbsp;</p>
+
+<label class='label'>Descripcion</label>
+<p><%=raw  @ficha.descripcion%></p>
+
+<label class='label'>Contacto</label>
+<p><%= raw @ficha.contacto%>&nbsp;</p>
+
+<label class='label'>Como llegar</label>
+<p><%=raw @ficha.llegar%>&nbsp;</p>
+
+<label class='label'>Horarios</label>
+<%= raw  @ficha.horario%>
+	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@ficha} )  %>
+
+
+
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_ficha_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo',@museo%>

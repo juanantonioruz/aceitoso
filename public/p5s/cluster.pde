@@ -16,7 +16,7 @@ class Cluster {
       // We can't put them right on top of each other
       nodes.add(new Node(center.add(Vec2D.randomVector())));
     }
-	console.log(nodes.size()+"nodes size");
+	//console.log(nodes.size()+"nodes size");
    
     // Connect all the nodes with a Spring
     for (int i = 0; i < nodes.size(); i++) {
