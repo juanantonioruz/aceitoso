@@ -4,9 +4,9 @@
 <%content_for :cabeza do %>
         <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
-        
         <script src="/pruebas/lib/Firebug/firebug.js"></script>
         <script src="/pruebas/OpenLayers.js"></script>
+		
         <script type="text/javascript">
 			var n_input;
             OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
@@ -51,9 +51,9 @@
             
           
         </script>
+	
 
 <%end%>
 <label class='label'>Coordenadas: Latitud / Longitud</label>
 <p><hr></p>
-		 <div id="map" class="smallmap" style="width: 400px; 
-                height: 400px; border: 1px solid gray;margin-right:100px;"></div>
+		 <div id="map" class="smallmap" style="width: 400px; height: 400px; border: 1px solid gray;margin-right:100px;"></div>

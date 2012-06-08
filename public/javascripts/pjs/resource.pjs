@@ -146,8 +146,11 @@ public class Resource {
               desplegable.slideToggle('fast');
               event.preventDefault();
               })
-        }
+
+        
+}
 	activa();
+
        
          if(that.clasi=="Museo"){
          //  println(that.clasi);

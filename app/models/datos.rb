@@ -27,11 +27,11 @@ class Datos
   end
   
   def dameTabNew titulo
-     "<dt ><h2 style='background-color:#003A6B; color:white;'>#{titulo}</h2></dt><dd>"
+     return "<dt > #{titulo}  </dt> <dd>"
   end
   
   def finTab
-    "<br></dd>"
+    return "<br> </dd>"
   end
   
   def dameDetails
@@ -40,7 +40,7 @@ class Datos
     respuesta_det<<"<p class='summary'>"
     if (self.data.class==Museo) then
           respuesta_det<<"<dl>" 
-          respuesta_det<<dameTabNew("Descripcion")
+          respuesta_det<< dameTabNew("Descripcion")
         respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
           respuesta_det<<"#{self.data.ficha.descripcion}" 
           respuesta_det<<finTab
