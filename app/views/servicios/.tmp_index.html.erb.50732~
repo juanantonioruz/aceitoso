@@ -21,8 +21,6 @@
 </tbody>
 </table>
 <%= link_to 'Añadir un servicio',new_museo_servicio_path(:museo_id=>@museo),:class=>'btn'%>
-<%=link_to 'Volver al museo',@museo%>
-
 <hr>
 <i> * Desde aquí se indican los servicios que ofrece el museo, con una descripción opcional</i>
 <hr>

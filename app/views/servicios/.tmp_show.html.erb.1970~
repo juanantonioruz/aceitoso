@@ -1,0 +1,9 @@
+<h1>Detalle del servicio </h1>
+<br/>
+<label class='label'>Imagen</label>
+<p><%=image_tag(@servicio.imagen,:size=>'64x64')%></p>
+
+<label class='label'>Descripción</label>
+<p><%=@servicio.descripcion%>&nbsp;</p>
+<br/>
+<%= link_to 'Editar',edit_museo_servicio_path(:museo_id=>@museo,:id=>@servicio),:class=>'btn'%> o <%=link_to 'Volver servicios',museo_servicios_path(@museo)%>
