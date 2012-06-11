@@ -18,7 +18,6 @@
 <tr><th>Servicios</th><td>Listado de servicios que ofrece el museo</td><td><%=link_to 'Ver',museo_servicios_path(museo),:class=>'btn'%></td></tr>
 
 <tr><th>Entorno</th><td>Información sobre el entorno del museo: rutas, hitos, ciudades</td><td><%=link_to 'Ver',museo_entorno_path(museo),:class=>'btn '%></td></tr>
-<tr><th>Varios</th><td>... campos varios</td><td><%=link_to 'Ver',museo_varios_path(museo),:class=>'btn '%></td></tr>
 
 </tbody>
 </table>

@@ -1,6 +1,7 @@
 Olearum::Application.routes.draw do
   
 
+
   resources :services
   resources :relaciones
   resources :relacions
@@ -38,6 +39,7 @@ Olearum::Application.routes.draw do
     end
     resources :eventos
     resources :premios
+    resources :varios
     resources :publicacions
     resources :infos do
       get :relacion, :on => :member

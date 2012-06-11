@@ -1,0 +1,25 @@
+<h1>Listing varios</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Descripcion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @varios.each do |vario| %>
+  <tr>
+    <td><%= vario.nombre %></td>
+    <td><%= vario.descripcion %></td>
+    <td><%= link_to 'Show', vario %></td>
+    <td><%= link_to 'Edit', edit_vario_path(vario) %></td>
+    <td><%= link_to 'Destroy', vario, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vario', new_vario_path %>

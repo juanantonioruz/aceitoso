@@ -1,0 +1,3 @@
+<h1>Edición de premio</h1>
+<h2> <%=@premio.nombre%></h2>
+<%=render 'form'%>

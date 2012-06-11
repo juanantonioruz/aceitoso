@@ -6,7 +6,7 @@ class Label < ActiveRecord::Base
   has_and_belongs_to_many :piezas,:join_table=>'piezas_labels'
   has_and_belongs_to_many :espacios,:join_table=>'espacios_labels'
   has_and_belongs_to_many :eventos,:join_table=>'eventos_labels'
-  has_and_belongs_to_many :premios,:join_table=>'premios_labels'
+
   has_and_belongs_to_many :publicacions,:join_table=>'publicacions_labels'
 
   ##### espacios: hitos, caminos, urbanos

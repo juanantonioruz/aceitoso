@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608154023) do
+ActiveRecord::Schema.define(:version => 20120611094011) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -331,5 +331,13 @@ ActiveRecord::Schema.define(:version => 20120608154023) do
 
   add_index "urbanos_labels", ["label_id", "urbano_id"], :name => "index_urbanos_labels_on_label_id_and_urbano_id"
   add_index "urbanos_labels", ["urbano_id", "label_id"], :name => "index_urbanos_labels_on_urbano_id_and_label_id"
+
+  create_table "varios", :force => true do |t|
+    t.string  "nombre"
+    t.text    "descripcion"
+    t.integer "museo_id"
+  end
+
+  add_index "varios", ["museo_id"], :name => "index_varios_on_museo_id"
 
 end

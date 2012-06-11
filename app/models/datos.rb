@@ -70,6 +70,15 @@ class Datos
 
           respuesta_det<<finTab
 
+    
+          self.data.varios.each do |vario|
+            respuesta_det<<dameTabNew(vario.nombre)
+              respuesta_det<<"#{vario.descripcion.html_safe}" 
+            respuesta_det<<finTab
+          end
+
+      
+
           respuesta_det<<"</dl>" 
 
 else

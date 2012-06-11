@@ -1,0 +1,25 @@
+<h1> Campos varios de : <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Acciones</th>
+</tr>
+<%@varios.each do |vario|%>
+<tr>
+<td><%=vario.nombre%></td>
+<td><%=raw vario.descripcion%></td>
+
+
+
+<td>
+<%= link_to 'Ver',museo_vario_path(:museo_id=>vario.museo,:id=>vario),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_vario_path(:museo_id=>vario.museo,:id=>vario),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_vario_path(:museo_id=>vario.museo,:id=>vario),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta vario?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir vario',new_museo_vario_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

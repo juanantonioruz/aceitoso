@@ -1,0 +1,25 @@
+<h1> Catálogo de premios: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Sitio web del premio</th>
+<th>Acciones</th>
+</tr>
+<%@premios.each do |premio|%>
+<tr>
+<td><%=premio.nombre%></td>
+<td><%=premio.url%></td>
+
+
+
+<td>
+<%= link_to 'Ver',museo_premio_path(:museo_id=>premio.museo,:id=>premio),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_premio_path(:museo_id=>premio.museo,:id=>premio),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_premio_path(:museo_id=>premio.museo,:id=>premio),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta premio?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir premio',new_museo_premio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

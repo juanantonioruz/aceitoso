@@ -11,6 +11,7 @@ class Museo < ActiveRecord::Base
     has_many :piezas,:dependent=>:destroy
     has_many :eventos,:dependent=>:destroy
     has_many :premios,:dependent=>:destroy
+    has_many :varios,:dependent=>:destroy
     has_many :publicacions,:dependent=>:destroy
     has_many :infos,:dependent=>:destroy
     has_many :servicios,:dependent=>:destroy
