@@ -196,20 +196,3 @@
 	end
 	%>
  </div>
- 
- 
-    <h2 class="resumen_museo">Varios:</h2>
-<div class="resumen_museo">
-	<%
-	@museo.varios.each do |vario|
-%>
-<div class="espacio_resumen_museo">
-<b><%=vario.nombre%></b>
-<p><%=premio.descripcion.html_safe%></p>
-<hr>
-</div>
-
-<%
-	end
-	%>
- </div>

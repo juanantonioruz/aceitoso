@@ -15,7 +15,6 @@
 <%= link_to 'Relaciones',relacion_museo_path(museo),:class=>'btn btn-success'%>&nbsp;
 <%= link_to 'Editar',edit_museo_path(museo),:class=>'btn btn-warning'%>
 <%= link_to 'Borrar',museo_path(museo),:method=>:delete,:confirm=>'¿Seguro que desea borrar el museo? Toda la información asociada se borrará',:class=>'btn btn-danger'%>
-<%= link_to('Resumen Envio', :controller => "resumen", :action => "museo",:id=>museo) %>&nbsp;
 </td>
 </tr>
 <%end%>

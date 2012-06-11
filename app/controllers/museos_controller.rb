@@ -1,6 +1,5 @@
 class MuseosController < ApplicationController
 
-    caches_page :index
     def index
         @museos=Museo.all(:order=>:nombre)
     end
