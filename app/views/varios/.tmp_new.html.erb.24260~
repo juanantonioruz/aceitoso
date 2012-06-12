@@ -1,5 +1,0 @@
-<h1>New vario</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', varios_path %>

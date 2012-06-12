@@ -24,11 +24,16 @@
 
  <%=@museo.ficha.llegar.html_safe%>
  </div>
+<h2 class="resumen_museo">Contacto:</h2>
+<div class="resumen_museo">
+
+ <%=@museo.ficha.contacto.html_safe%>
+ </div>
 <h2 class="resumen_museo">Horario:</h2>
 <div class="resumen_museo">
  <%=@museo.ficha.horario.html_safe%>
  </div>
-<h2 class="resumen_museo">Madiva:</h2>
+<h2 class="resumen_museo">Mapa:</h2>
 <div class="resumen_museo">
 <%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@museo.ficha} )  %>
  </div>
@@ -205,7 +210,7 @@
 %>
 <div class="espacio_resumen_museo">
 <b><%=vario.nombre%></b>
-<p><%=premio.descripcion.html_safe%></p>
+<p><%=vario.descripcion.html_safe%></p>
 <hr>
 </div>
 

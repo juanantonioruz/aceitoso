@@ -1,6 +1,0 @@
-<h1>Editing vario</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @vario %> |
-<%= link_to 'Back', varios_path %>
