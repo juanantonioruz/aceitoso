@@ -84,8 +84,12 @@ class Datos
 else
    if ([Pieza, Generica, Hito, Camino].include?self.data.class)
         respuesta_det<<imagen_details(self.data.imagen) unless self.data.imagen.blank?
-        end
-          respuesta_det<<self.data.descripcion 
+      end
+      if(self.data.descripcion.blank?)
+          respuesta_det<<"Actualmente no hay descripcion para este tema"
+    else
+    respuesta_det<<self.data.descripcion 
+      end
   end
       respuesta_det<<"</p>"
     respuesta_det
