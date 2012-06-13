@@ -131,17 +131,8 @@
 	@museo.publicacions.each do |publicacion|
 %>
 <div class="espacio_resumen_museo">
-<b>Nombre:</b> <%=publicacion.nombre%><br>
-<%if !publicacion.descripcion.empty? then%>
-
-<b>Descripcion</b>
-<%=raw publicacion.descripcion%></p>
-<%end%>
-<%if publicacion.url!="http://" && publicacion.url!=""  then%>
-<b>URL</b>
-
-<a href='<%=publicacion.url%>'><%=publicacion.url%></a>
-<%end%>
+<b><%=publicacion.nombre%></b>
+<p><%=publicacion.descripcion.html_safe%></p>
 <hr>
 </div>
 
