@@ -140,6 +140,8 @@ public class Resource {
        
        var activa=function(){
           $("dd").hide();
+ 	$("dt").mouseover(function() {$(this).css('cursor','pointer');})
+ 	$("dt").mouseleave(function() {$(this).css('cursor','default');})
     $("dt").click(function(event){
              var desplegable = $(this).next();
              $('dd').not(desplegable).slideUp('fast');
