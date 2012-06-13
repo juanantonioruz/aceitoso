@@ -48,7 +48,7 @@ class Datos
           respuesta_det<<"#{self.data.ficha.contacto}" 
           respuesta_det<<finTab
           respuesta_det<<dameTabNew("Como llegar...")
-          respuesta_det<<"#{self.data.ficha.contacto}" 
+          respuesta_det<<"#{self.data.ficha.llegar}" 
           respuesta_det<<finTab
           respuesta_det<<dameTabNew("Horario")
           respuesta_det<<"#{self.data.ficha.horario}" 
