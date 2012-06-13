@@ -58,6 +58,15 @@ class Datos
               respuesta_det<<"#{servicio.descripcion}<br>" 
             end
           respuesta_det<<finTab
+         respuesta_det<< dameTabNew("Historia")
+                   self.data.eventos.each do |evento|
+
+        respuesta_det<<imagen_details(evento.imagen) unless evento.imagen.blank?
+          respuesta_det<<"<br><b>#{evento.titulo}</b>"
+          respuesta_det<<"#{evento.descripcion.html_safe}<br><hr>"
+          end
+          respuesta_det<<finTab
+
           respuesta_det<<dameTabNew("Publicaciones")
             self.data.publicacions.each do |publicacion|
               respuesta_det<<"<b>#{publicacion.nombre}</b><br>#{publicacion.descripcion}<br>#{(publicacion.url)}" 
