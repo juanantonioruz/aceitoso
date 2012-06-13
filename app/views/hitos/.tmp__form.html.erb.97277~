@@ -1,4 +1,3 @@
-<%= cargaeditor%>
 <%=form_for( [@museo,@entorno, @hito]) do |f|%>
     <%=f.hidden_field :id%>  
 
@@ -18,7 +17,7 @@
 
 
     <%=f.label :descripcion,:class=>'label'%>
-        <%= f.text_area :descripcion,  :class => "tinymce", :rows => 10, :cols => 120 %>
+    <%=f.text_area :descripcion,:size=>'30x5'%>
     
      <%=f.label :imagen,:class=>'label'%>
     <%if @hito.imagen_url.to_s!='' %>

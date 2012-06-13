@@ -14,7 +14,7 @@
 <td><%=hito.nombre%></td>
     <td><%=image_tag(hito.imagen,:size=>'64x64')%></td>
 
-<td><%=raw hito.descripcion%></td>
+<td><%=hito.descripcion%></td>
 <td><%=imagentam(hito,'64x64')%></td>
 <td>
 <%= link_to 'Ver',museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-success'%>

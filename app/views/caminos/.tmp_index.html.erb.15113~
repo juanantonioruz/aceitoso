@@ -10,7 +10,7 @@
 <%@caminos.each do |camino|%>
 <tr>
 <td><%=camino.nombre%></td>
-<td><%=raw camino.descripcion%></td>
+<td><%=camino.descripcion%></td>
 <td><%=imagentam(camino,'64x64')%></td>
 <td>
 <%= link_to 'Ver',museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>
