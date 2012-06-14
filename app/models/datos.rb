@@ -62,6 +62,15 @@ class Datos
             end
           respuesta_det<<finTab
         end
+          if(!self.data.espacios.empty?)
+          respuesta_det<<dameTabNew("Espacios")
+            self.data.espacios.each do |espacio|
+        respuesta_det<<imagen_details(espacio.imagen) unless espacio.imagen.blank?
+
+              respuesta_det<<"<br><b>#{espacio.nombre}</b><br>#{espacio.descripcion.html_safe}<br><hr>" 
+            end
+          respuesta_det<<finTab
+        end
           if(!self.data.eventos.empty?)
          respuesta_det<< dameTabNew("Historia")
          self.data.eventos.each do |evento|
