@@ -27,8 +27,10 @@ class AdminController < ApplicationController
         condicion=nil
         end
       @relacionables+=v.constantize.joins(:nombre_relacion).find(:all,:conditions =>condicion, :order=>dameOrder(v))
-      else
-      @relacionables+=v.constantize.find(:all,:conditions =>condicion, :order=>dameOrder(v))
+    else
+      nueva=v.constantize.find(:all,:conditions =>condicion, :order=>dameOrder(v))
+      @relacionables+=nueva
+     # puts v.constantize.to_s+"----------"+condicion.to_s+"......"+nueva.count.to_s
       end
     end
         respond_to do |format|  
@@ -37,11 +39,11 @@ class AdminController < ApplicationController
   end
   def dameCondition v, t
     if v=="Museo" || v=="Pieza" || v=="Hito" || v=="Camino"
-     ['nombre LIKE ?', "%#{t}%"]
+     ["nombre LIKE ?", "%#{t}%"]
     elsif v=="Generica" 
-     ['titulo LIKE ?', "%#{t}%"]
+     ['titulo LIKE ?', "%"+t+"%"]
     elsif v=="SentidoRelacion" 
-     ['nombre1 LIKE ? or nombre2 LIKE ?', "%#{t}%","%#{t}%"]
+     ['nombre1 LIKE ? or nombre2 LIKE ?', "%"+t+"%","%"+t+"%"]
      end
   end
   def dameOrder v
