@@ -1,0 +1,7 @@
+<h1>Articulo <%=@generica.titulo%></h1>
+<%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"generica", :relacionable=>@generica} )  %>
+<%=render(:file => "/shared/autocomplete_detalle_relaciones.html.erb", :locals => {:mensaje=>"detallar relacionable",:modelos_de_busqueda=>"Generica-Pieza-Museo-Hito-Camino", :template=>"relaciones"} )  %>
+<div id="resultados">
+</div>
+
+ <%=link_to 'Ir a lista de articulos',genericas_path, :class=>'btn btn-success'%>

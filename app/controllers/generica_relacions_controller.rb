@@ -5,7 +5,7 @@ class GenericaRelacionsController < ApplicationController
     end
     
      def destroy
-       destruye "relacion_generica", "generica"
+       destruye "relacion_generica"
      end
 
 end

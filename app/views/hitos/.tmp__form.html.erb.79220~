@@ -12,7 +12,6 @@
      <%=f.label :imagen,:class=>'label'%>
       <% Service.all.each do |ser| %>
         <%= image_tag(ser.imagen,:size=>'32x32') %>       
-        <b><%=ser.descripcion %></b>       
         <%= f.radio_button :service_id, ser.id %>
        </span>
      <% end %>
