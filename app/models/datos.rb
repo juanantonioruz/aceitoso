@@ -1,3 +1,5 @@
+include ActionView::Helpers::AssetTagHelper
+
 class Datos
 
   attr_accessor   :data, :resultado_html, :coordenadas, :clase
@@ -55,7 +57,7 @@ class Datos
           respuesta_det<<finTab
           respuesta_det<<dameTabNew("Servicios")
             self.data.servicios.each do |servicio|
-              respuesta_det<<"#{servicio.descripcion}<br>" 
+              respuesta_det<<"<img src='#{servicio.imagen}' style='vertical-align: middle;margin-right:5px;'><b>#{servicio.service.descripcion}</b><br>#{servicio.descripcion}<br>" 
             end
           respuesta_det<<finTab
          respuesta_det<< dameTabNew("Historia")
