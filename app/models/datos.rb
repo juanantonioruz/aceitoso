@@ -55,32 +55,38 @@ class Datos
           respuesta_det<<dameTabNew("Horario")
           respuesta_det<<"#{self.data.ficha.horario}" 
           respuesta_det<<finTab
+          if(!self.data.servicios.empty?)
           respuesta_det<<dameTabNew("Servicios")
             self.data.servicios.each do |servicio|
               respuesta_det<<"<img src='#{servicio.imagen}' style='vertical-align: middle;margin-right:5px;'><b>#{servicio.service.descripcion}</b><br>#{servicio.descripcion}<br>" 
             end
           respuesta_det<<finTab
+        end
+          if(!self.data.eventos.empty?)
          respuesta_det<< dameTabNew("Historia")
-                   self.data.eventos.each do |evento|
-
-        respuesta_det<<imagen_details(evento.imagen) unless evento.imagen.blank?
+         self.data.eventos.each do |evento|
+          respuesta_det<<imagen_details(evento.imagen) unless evento.imagen.blank?
           respuesta_det<<"<br><b>#{evento.titulo}</b>"
           respuesta_det<<"#{evento.descripcion.html_safe}<br><hr>"
           end
           respuesta_det<<finTab
+        end
+          if(!self.data.publicacions.empty?)
 
           respuesta_det<<dameTabNew("Publicaciones")
             self.data.publicacions.each do |publicacion|
               respuesta_det<<"<b>#{publicacion.nombre}</b><br>#{publicacion.descripcion}<br>#{(publicacion.url)}" 
             end
           respuesta_det<<finTab
-          respuesta_det<<dameTabNew("Premios")
+            end
+             if(!self.data.premios.empty?)
+       respuesta_det<<dameTabNew("Premios")
             self.data.premios.each do |premio|
               respuesta_det<<"<b>#{premio.nombre}</b><br>#{premio.descripcion}<br>#{(premio.url)}" 
             end
 
           respuesta_det<<finTab
-
+        end
     
           self.data.varios.each do |vario|
             respuesta_det<<dameTabNew(vario.nombre)
