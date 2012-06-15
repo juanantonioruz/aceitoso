@@ -1,6 +1,7 @@
 Olearum::Application.routes.draw do
   
   resources :email
+      match "email"=> "email#new"
 
 
 
