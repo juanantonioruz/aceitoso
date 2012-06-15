@@ -1,8 +1,12 @@
 include ActionView::Helpers::AssetTagHelper
 
 class Datos
-
   attr_accessor   :data, :resultado_html, :coordenadas, :clase
+  
+  def initialize
+    @museos_hitos_rutas_implicitos=[]
+    
+  end
   def dameNombre
     if [Museo].include? self.data.class then
       self.data.nombre_select
@@ -124,15 +128,63 @@ else
   def imagen_details url
    "<img class='summary-img' width='150' src='#{url}'>"   
   end
-  
+  def llena_destinos mapa
+                 puts "llllllllllllenando destinos mapa"
+   self.data.relaciones_fin.each do |rel| 
+          nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.fin.id}" 
+          if [Museo, Hito, Camino].include? rel.origen.heir.class then
+            @museos_hitos_rutas_implicitos <<rel.origen
+          end
+
+        if !mapa.key?nombre then 
+          mapa[nombre]=[rel.origen] 
+        else
+          mapa[nombre] << rel.origen 
+        end 
+        end
+
+  end
+
   def llena mapa
-        self.data.relaciones_origen.each{|rel| nombre="#{dameNombreRelacion(rel)}xxx#{rel.origen.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.fin] else mapa[nombre] << rel.fin end }
+            puts "llllllllllllenando mapa"
+        self.data.relaciones_origen.each do |rel| 
+          nombre="#{dameNombreRelacion(rel)}xxx#{rel.origen.id}"
+          if [Museo, Hito, Camino].include? rel.fin.heir.class then
+            @museos_hitos_rutas_implicitos<< rel.fin
+          end
+          if !mapa.key?nombre then 
+            mapa[nombre]=[rel.fin] 
+          else
+            mapa[nombre] << rel.fin 
+          end 
+        end
 
   end
   def llenaMuseo mapa
         self.data.piezas.each{|pieza| nombre="Piezas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[pieza.predecessor] else mapa[nombre] << pieza.predecessor end }
-        self.data.entorno.caminos.each{|camino| nombre="Rutas Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
-        self.data.entorno.hitos.each{|hito| nombre="Hitos Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
+        if !self.data.entorno.blank? then
+          self.data.entorno.caminos.each do |camino| 
+          if !@museos_hitos_rutas_implicitos.include? camino.predecessor
+
+            nombre="Rutas Relacionadasxxxxxx#{self.data.id}" 
+             if !mapa.key?nombre then 
+               mapa[nombre]=[camino.predecessor] 
+           else
+             mapa[nombre] << camino.predecessor 
+             end 
+          end
+          end
+          self.data.entorno.hitos.each do |hito| 
+            if !@museos_hitos_rutas_implicitos.include? hito.predecessor
+            nombre="Hitos Relacionadasxxxxxx#{self.data.id}" 
+             if !mapa.key?nombre then 
+               mapa[nombre]=[hito.predecessor] 
+              else
+             mapa[nombre] << hito.predecessor 
+           end
+           end
+          end
+        end 
         self.data.espacios.each{|espacio| nombre="Espacios Visitablesxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio.predecessor] else mapa[nombre] << espacio.predecessor end }
         self.data.eventos.each{|evento| nombre="Historiaxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[evento.predecessor] else mapa[nombre] << evento.predecessor end }
         self.data.infos.each{|ri| nombre="Recursos Interpretativosxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[ri.generica.predecessor] else mapa[nombre] << ri.generica.predecessor end }
@@ -147,16 +199,20 @@ else
 
   end
   def llenaCamino mapa
+            if !@museos_hitos_rutas_implicitos.include? self.data.entorno.museo.predecessor
+
          nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
-         Rails.logger.warn nombre+" camino"
+
          mapa[nombre] = [self.data.entorno.museo.predecessor] 
+         end
         self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
   def llenaHito mapa
+            if !@museos_hitos_rutas_implicitos.include? self.data.entorno.museo.predecessor
          nombre="Cerca dexxx#{self.data.entorno.museo.predecessor.id}"
-         Rails.logger.warn nombre+" hito"
          mapa[nombre] = [self.data.entorno.museo.predecessor] 
+         end
         self.data.genericas.each{|generica| nombre="Articulos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[generica.predecessor] else mapa[nombre] << generica.predecessor end }
 
   end
@@ -183,10 +239,6 @@ else
         self.data.caminos.each{|camino| nombre="Rutas Relacionadasxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[camino.predecessor] else mapa[nombre] << camino.predecessor end }
         self.data.hitos.each{|hito| nombre="Hitos relacionadosxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[hito.predecessor] else mapa[nombre] << hito.predecessor end }
         self.data.infos.each{|info| nombre="Es recurso int. xxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[info.museo.predecessor] else mapa[nombre] << info.museo.predecessor end }
-
-  end
-  def llena_destinos mapa
-        self.data.relaciones_fin.each{|rel| nombre="#{dameNombreRelacionDestino(rel)}xxx#{rel.fin.id}" and if !mapa.key?nombre then mapa[nombre]=[rel.origen] else mapa[nombre] << rel.origen end }
 
   end
   def dameRutas museo

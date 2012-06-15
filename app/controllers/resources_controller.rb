@@ -40,7 +40,6 @@ end
      for hito in museo.hitos do
         v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{hito.descripcion.gsub(/\n/, "")}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
      end
-    
   
      render :text => v.html_safe 
   end

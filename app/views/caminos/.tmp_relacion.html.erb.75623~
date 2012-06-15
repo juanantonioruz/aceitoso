@@ -1,4 +1,4 @@
-<h1>Ruta: <%=raw @camino.descripcion%></h1>
+<h1>Ruta: <%=@camino.descripcion%></h1>
 <%=render(:file => "/shared/formrelaciones.html.erb",:locals => {:pathito=>"camino", :relacionable=>@camino} )  %>
 <br/>
 <%=link_to 'Volver a lista de rutas',museo_entorno_caminos_path(@museo)%>
