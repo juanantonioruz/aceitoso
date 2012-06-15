@@ -1,9 +1,8 @@
 Olearum::Application.routes.draw do
   
-  get "email/new"
-  get "email/create"
+  resources :email
 
- 
+
 
   resources :services
   resources :relaciones

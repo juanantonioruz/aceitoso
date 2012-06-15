@@ -6,12 +6,12 @@ class EmailController < ApplicationController
 
   	def create
     	@email = Email.new(params[:email])
-        @url=params[:email][:url]
+      @email.destino='juanantonioruz@gmail.com'
     	if @email.valid?
       		ContactoMailer.contactar(@email).deliver
-      		redirect_to(@email.url, :notice => t("enviook"))
+      		#redirect_to(@email.url, :notice => t("enviook"))
     	else
-      	redirect_to(@url,:notice=>t('enviobad'))
+      	#redirect_to(@url,:notice=>t('enviobad'))
       	
     	end
   	end
