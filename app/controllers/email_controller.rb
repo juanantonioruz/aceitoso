@@ -17,5 +17,8 @@ class EmailController < ApplicationController
       	#redirect_to(@url,:notice=>t('enviobad'))
       	
     	end
-  	end
+  end
+ 
+ 
+ 
 end
