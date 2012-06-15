@@ -1,10 +1,9 @@
 Olearum::Application.routes.draw do
   
+  get "email/new"
+  get "email/create"
 
-  resources :email do
-         post :create, :on => :member
-    
-  end
+ 
 
   resources :services
   resources :relaciones
@@ -69,7 +68,8 @@ Olearum::Application.routes.draw do
   get "admin/seleccionar"
 
   get "olearum/index"
-  get "olearum/admin" => "admin#index"
+      match "admin"=> "admin#index"
+
   get "resources/show"
   get "resources/detalla"
   get "resources/museostextfile"
