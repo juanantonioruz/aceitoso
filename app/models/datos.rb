@@ -85,12 +85,17 @@ class Datos
           respuesta_det<<finTab
         end
           if(!self.data.publicacions.empty?)
-
+            existe=false
+            self.data.publicacions.each do |publicacion|
+              if !publicacion.url=="" && !publicacion.url=="http://" then existe=true end 
+            end
+            if existe then
           respuesta_det<<dameTabNew("Publicaciones")
             self.data.publicacions.each do |publicacion|
-              respuesta_det<<"<b>#{publicacion.nombre}</b><br>#{publicacion.descripcion}<br>#{(publicacion.url)}" 
+              if !publicacion.url=="" && !publicacion.url=="http://" then respuesta_det<<"<b>#{publicacion.nombre}</b><br>#{publicacion.descripcion}<br>#{(publicacion.url)}" end 
             end
           respuesta_det<<finTab
+          end
             end
              if(!self.data.premios.empty?)
        respuesta_det<<dameTabNew("Premios")

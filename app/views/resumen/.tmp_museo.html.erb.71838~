@@ -137,7 +137,7 @@
 <b>Descripcion</b>
 <%=raw publicacion.descripcion%></p>
 <%end%>
-<%if  !publicacion.url=="" && !publicacion.url=="http://"   then%>
+<%if publicacion.url!="http://" && publicacion.url!=""  then%>
 <b>URL</b>
 
 <a href='<%=publicacion.url%>'><%=publicacion.url%></a>
