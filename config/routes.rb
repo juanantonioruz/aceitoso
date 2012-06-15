@@ -1,6 +1,10 @@
 Olearum::Application.routes.draw do
   
 
+  resources :email do
+         post :create, :on => :member
+    
+  end
 
   resources :services
   resources :relaciones

@@ -1,0 +1,34 @@
+<%= form_for @email, :url => new_email_path do |form| %>
+ 
+  <fieldset class="fields">
+    <div class="field">
+      <%= form.label :nombre %>
+      <%= form.text_field :nombre %>
+    </div>
+     <div class="field">
+      <%= form.label :apellido %>
+      <%= form.text_field :apellido %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :organizacion %>
+      <%= form.text_field :organizacion %>
+    </div>
+    <div class="field">
+      <%= form.label :ciudad %>
+      <%= form.text_field :ciudad %>
+    </div>
+     <div class="field">
+      <%= form.label :telefono %>
+      <%= form.text_field :telefono %>
+    </div>
+    <div class="field">
+      <%= form.label :mensaje %>
+      <%= form.text_area :mensaje %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="actions">
+    <%= form.submit "Enviar" %>
+  </fieldset>
+<% end %>

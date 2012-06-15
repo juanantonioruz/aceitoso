@@ -1,0 +1,2 @@
+<h1>Nueva publicación del museo: <%=@museo.nombre%></h1>
+<%=render 'form'%>

@@ -35,4 +35,16 @@ Olearum::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+      #ActionMailer::Base.smtp_settings = 
+ config.action_mailer.smtp_settings ={
+
+:address => "mail.gandi.net",
+:port => 587,
+:authentication => :login,
+:user_name => 'qdm@miao.es',
+:domain=>'miao.es',
+:password => 'quartiers',
+:enable_starttls_auto=>true
+}
+
 end

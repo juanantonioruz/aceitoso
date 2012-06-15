@@ -11,5 +11,6 @@
 <p><%=raw @publicacion.descripcion%>&nbsp;</p>
 
 
+<%=etiquetas @publicacion%>
 <br/>
 <%=link_to 'Editar',edit_museo_publicacion_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a publicaciones',museo_publicacions_path(@museo)%>

@@ -10,6 +10,7 @@
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:class=>'tinymce'%>
 
+    <%=etiquetar @publicacion%>
     <br/>
     <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_publicacions_path(@museo)%>
 <%end%>
