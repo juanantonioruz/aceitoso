@@ -1,3 +1,4 @@
+<h1>Formulario de contacto</h1>
 <%= form_for @email, :url => { :action => :create} do |form| %>
  
   <fieldset class="fields">
@@ -8,6 +9,11 @@
      <div class="field">
       <%= form.label :apellido %>
       <%= form.text_field :apellido %>
+    </div>
+    
+     <div class="field">
+      <%= form.label :mail %>
+      <%= form.text_field :email %>
     </div>
     
     <div class="field">
