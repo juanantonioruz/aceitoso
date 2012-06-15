@@ -1,0 +1,15 @@
+<h1>Publicación del museo <%=@publicacion.museo.nombre%></h1>
+
+
+<label class='label'>Nombre</label>
+<p><%=@publicacion.nombre%>&nbsp;</p>
+
+<label class='label'>Enlace a la publicación</label>
+<p><%=link_to @publicacion.enlace%></p>
+
+<label class='label'>Descripción de la publicacion</label>
+<p><%=raw @publicacion.descripcion%>&nbsp;</p>
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_publicacion_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a publicaciones',museo_publicacions_path(@museo)%>

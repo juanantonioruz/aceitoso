@@ -1,0 +1,27 @@
+<h1>Listado de publicaciones: <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre / enlace</th>
+<!--<th>Enlace a la publicación</th>-->
+<th>Etiquetas</th>
+<th>Acciones</th>
+</tr>
+<%@publicacions.each do |publicacion|%>
+<tr>
+
+<td><%=link_to_unless publicacion.url=='', publicacion.nombre,publicacion.url%></td>
+<!--<td><%=publicacion.url%></td>-->
+
+
+
+<td>
+<%= link_to 'Ver',museo_publicacion_path(:museo_id=>publicacion.museo,:id=>publicacion),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_publicacion_path(:museo_id=>publicacion.museo,:id=>publicacion),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_publicacion_path(:museo_id=>publicacion.museo,:id=>publicacion),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta publicacion?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir publicacion',new_museo_publicacion_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

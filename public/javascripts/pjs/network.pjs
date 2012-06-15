@@ -213,7 +213,12 @@ void mousePressed() {
       	return false;
 	}
 		if(compruebaPress(origenReset, finReset)){
-	println("le has dado al reset");
+	//println("le has dado al reset");
+	resourceId=null;
+	setup();
+	        $('aside').html("");
+	        $('#fb-suggest').val("");
+	
 	}
 	
   
