@@ -1,6 +1,8 @@
 /* @pjs font="/fonts/GraublauWeb.otf, /fonts/GraublauWebBold.otf"; */
 /* @pjs preload="javascripts/pjs/images/LOGO_OLEARUM.jpg"; */
 /* @pjs preload="javascripts/pjs/images/EducacionCulturaYDeporte.jpg"; */
+/* @pjs preload="javascripts/pjs/images/contacto.png"; */
+/* @pjs preload="javascripts/pjs/images/reset.png"; */
 
 String mensaje="hola";
 boolean depurando=true;
@@ -61,6 +63,8 @@ resourceId=v;
 }
     PImage olearumImage;
     PImage ministerioImage;
+    PImage contactoImage;
+    PImage resetImage;
 
 
 
@@ -68,6 +72,8 @@ resourceId=v;
 void setup() {	
     olearumImage = loadImage("javascripts/pjs/images/LOGO_OLEARUM.jpg");
     ministerioImage = loadImage("javascripts/pjs/images/EducacionCulturaYDeporte.jpg");
+    contactoImage = loadImage("javascripts/pjs/images/contacto.png");
+    resetImage = loadImage("javascripts/pjs/images/reset.png");
 	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -87,6 +93,12 @@ void setup() {
 
 		$('aside').html(r.html);
 	}
+
+	 origenContacto=new PVector(width-385, 118);
+ 	finContacto=new PVector(35, 26);
+		 origenReset=new PVector(width-380, 88);
+ 	finReset=new PVector(25, 26);
+
 }
 
 void printMensaje(boolean fondo){
@@ -99,6 +111,10 @@ if(fondo){
 }
 }
 
+PVector origenContacto;
+PVector finContacto;
+PVector origenReset;
+PVector finReset;
 void draw() {
 strokeCap(SQUARE);
   if (g.nodes.size()>0) {
@@ -112,9 +128,13 @@ strokeCap(SQUARE);
     
   //  printMensaje();
   }else{
+       
         image(olearumImage, 0, 0);
         image(ministerioImage, 40, 200);
 	}
+	
+	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
+     image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
 }
 
 void mouseMoved() {
@@ -175,10 +195,26 @@ void mouseMoved() {
 		}
 	}
 }
+
+boolean compruebaPress(PVector inicio, PVector fin ){
+return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mouseY<=(inicio.y+fin.y));
+}
+
 String lineCap;
 boolean debug=false;
 void mousePressed() {
 	//if (!resourceId) return;
+	
+	if(compruebaPress(origenContacto, finContacto)){
+	//println("le has dado al contacto");
+	//link("./email/new", "_new"); 
+      	var caracteristicas = "height=700,width=800,scrollTo,resizable=1,scrollbars=1,location=0";
+      	nueva=window.open("./email/new", 'Popup', caracteristicas);
+      	return false;
+	}
+		if(compruebaPress(origenReset, finReset)){
+	println("le has dado al reset");
+	}
 	
   
   if (mouseButton == LEFT) {
