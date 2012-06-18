@@ -13,9 +13,16 @@ class HitosController < ApplicationController
     def create
         @museo=Museo.find(params[:museo_id])
         @entorno=@museo.entorno
+            if params[:hito][:service_id].nil?
+                    flash[:notice] = "tienes que seleccionar una imagen para este hito!" 
+                    redirect_to request.referer
+                    elsif
         @hito=@entorno.hitos.create(params[:hito])
+       
         @hito.save
         redirect_to museo_entorno_hito_path(:museo_id=>@museo,:id=>@hito)
+        end
+        
     end
     def show
         @hito=Hito.find(params[:id])
@@ -43,8 +50,10 @@ class HitosController < ApplicationController
         @hito = Hito.find(params[:hito][:id])
         @entorno=@hito.entorno
         @museo=@entorno.museo
-
-            if @hito.update_attributes(params[:hito])
+            if params[:hito][:service_id].nil?
+                    flash[:notice] = "tienes que seleccionar una imagen para este hito!" 
+                    redirect_to request.referer
+              elsif @hito.update_attributes(params[:hito])
                   redirect_to museo_entorno_hito_path(:museo_id=>@museo,:id=>@hito), :notice => 'Informacion actualizada'
             end
     end
