@@ -2,8 +2,6 @@
 <thead>
 <tr>
 <th>Título</th>
-<th>Descripcion</th>
-<th>Imagen</th>
 <th>Acciones</th>
 </tr>
 </thead>
@@ -11,9 +9,6 @@
 <%resultados.each do |generica|%>
 <tr>
 <td><%=generica.titulo%></td>
-<td><%=generica.descripcion[0,200]%></td>
-<td><%=imagentam(generica,'64x64')%></td>
-
 <td>
 <%= link_to 'Ver',generica,:class=>'btn btn-success'%>
 <%= link_to 'Relaciones',relacion_generica_path(generica),:class=>'btn btn-success'%>&nbsp;
