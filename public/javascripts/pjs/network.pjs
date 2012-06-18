@@ -98,6 +98,16 @@ void setup() {
  	finContacto=new PVector(35, 26);
 		 origenReset=new PVector(width-380, 88);
  	finReset=new PVector(25, 26);
+ 	
+	 origenOlearum_1=new PVector(0,0);
+ 	finOlearum_1=new PVector(200, 190);
+	 origenMinisterio_1=new PVector(40,200);
+ 	finMinisterio_1=new PVector(150, 45);
+ 	
+	 origenOlearum_2=new PVector(width-225,height-38);
+ 	finOlearum_2=new PVector(40, 38);
+	 origenMinisterio_2=new PVector(width-175,height-38);
+ 	finMinisterio_2=new PVector(125, 38);
 
 }
 
@@ -113,6 +123,14 @@ if(fondo){
 
 PVector origenContacto;
 PVector finContacto;
+PVector origenOlearum_1;
+PVector finOlearum_1;
+PVector origenOlearum_2;
+PVector finOlearum_2;
+PVector origenMinisterio_1;
+PVector finMinisterio_1;
+PVector origenMinisterio_2;
+PVector finMinisterio_2;
 PVector origenReset;
 PVector finReset;
 void draw() {
@@ -120,17 +138,21 @@ strokeCap(SQUARE);
   if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
-        image(olearumImage, width-125-50-50, height-38,40,38);
-        image(ministerioImage, width-125-50, height-38, 125, 38);
+           	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
+           	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
+    
     
     g.draw();
 			//console.log("***!.............");
     
   //  printMensaje();
   }else{
+       	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
+       	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
        
-        image(olearumImage, 0, 0);
-        image(ministerioImage, 40, 200);
+      //  image(ministerioImage, 40, 200);
+      //  println(ministerioImage.width);150
+      //  println(ministerioImage.height+" height");45
 	}
 	
 	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
@@ -212,13 +234,23 @@ void mousePressed() {
       	nueva=window.open("./email/new", 'Popup', caracteristicas);
       	return false;
 	}
-		if(compruebaPress(origenReset, finReset)){
+	if(compruebaPress(origenReset, finReset)){
 	//println("le has dado al reset");
 	resourceId=null;
 	setup();
 	        $('aside').html("");
 	        $('#fb-suggest').val("");
 	
+	}
+	
+	if(g.nodes.size()>0){
+		if(compruebaPress(origenOlearum_2, finOlearum_2)){
+			link("http://www.olearum.es/", "_new"); 
+		}
+	}else{
+		if(compruebaPress(origenOlearum_1, finOlearum_1)){
+			link("http://www.olearum.es/", "_new"); 
+		}
 	}
 	
   
