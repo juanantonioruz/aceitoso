@@ -145,11 +145,24 @@ else
         end
 
   end
-
+ def dameNombreRelacion rel
+    if rel.sentido_relacion.creciente.to_s=="1"
+      rel.sentido_relacion.nombre_relacion.nombre1 
+    else
+    rel.sentido_relacion.nombre_relacion.nombre2 
+    end
+    
+  end
+  def dameNombreRelacionDestino rel
+    rel.sentido_relacion.titulo_destino_desde_destino
+    
+  end
   def llena mapa
-            puts "llllllllllllenando mapa"
+            #puts "llllllllllllenando mapa"
         self.data.relaciones_origen.each do |rel| 
           nombre="#{dameNombreRelacion(rel)}xxx#{rel.origen.id}"
+            #          puts "llllllllllllenando mapa #{rel.origen.nombre_select}"+rel.sentido_relacion.nombre_relacion.id.to_s+"----"+rel.sentido_relacion.creciente.to_s+"-- "+nombre+" #{rel.fin.nombre_select}"
+
           if [Museo, Hito, Camino].include? rel.fin.heir.class then
             @museos_hitos_rutas_implicitos<< rel.fin
           end
@@ -282,18 +295,7 @@ else
     lista.map { |relacionable| {:name=>if  relacionable.class==Espacio then relacionable.nombre_ask else relacionable.heir.nombre_ask end ,:id=>relacionable.id}}
   end
   
-  def dameNombreRelacion rel
-    if rel.sentido_relacion.creciente
-      rel.sentido_relacion.nombre_relacion.nombre1 
-    else
-    rel.sentido_relacion.nombre_relacion.nombre2 
-    end
-    
-  end
-  def dameNombreRelacionDestino rel
-    rel.sentido_relacion.titulo_destino_desde_destino
-    
-  end
+ 
   
   def coincide nombre_atributo, relacion, relaciones
       relaciones.each{|rel| dameNombreRelacion rel unless relacion==rel}
