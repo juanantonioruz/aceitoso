@@ -1,0 +1,14 @@
+<h1>Vario del museo <%=@vario.museo.nombre%></h1>
+
+
+<label class='label'>Nombre</label>
+<p><%=@vario.nombre%>&nbsp;</p>
+
+
+<label class='label'>Descripción de la vario</label>
+<p><%= raw @vario.descripcion%>&nbsp;</p>
+
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_vario_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a varios',museo_varios_path(@museo)%>

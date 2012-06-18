@@ -1,5 +1,6 @@
 Olearum::Application.routes.draw do
   
+
   resources :email
       match "email"=> "email#new"
 
@@ -43,6 +44,8 @@ Olearum::Application.routes.draw do
     resources :eventos
     resources :premios
     resources :varios
+      resources :medios
+
     resources :publicacions
     resources :infos do
       get :relacion, :on => :member
@@ -75,6 +78,7 @@ Olearum::Application.routes.draw do
   get "resources/museostextfile"
   match "resources/hitostextfile/:id" => "resources#hitostextfile"
     match "resumen/museo/:id"=> "resumen#museo"
+    match "resources/medio/:id"=> "resources#medio"
 
   match 'mapa' => 'resources#show'
 

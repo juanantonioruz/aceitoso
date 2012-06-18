@@ -1,0 +1,27 @@
+<h1> audiovisuales de : <%=@museo.nombre%></h1>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>HTML EMBED</th>
+<th>Es video?</th>
+<th>Acciones</th>
+</tr>
+<%@medios.each do |medio|%>
+<tr>
+<td><%=medio.nombre%></td>
+<td><%=raw medio.descripcion%></td>
+<td><%=medio.esvideo%></td>
+
+
+
+<td>
+<%= link_to 'Ver',museo_medio_path(:museo_id=>medio.museo,:id=>medio),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_medio_path(:museo_id=>medio.museo,:id=>medio),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',museo_medio_path(:museo_id=>medio.museo,:id=>medio),:method=>:delete,:confirm=>'¿Seguro que desea borrar esta audiovisual?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir vario',new_museo_medio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al museo,',museo_path(@museo)%>
+

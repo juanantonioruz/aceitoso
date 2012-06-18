@@ -19,7 +19,6 @@
 
 <tr><th>Entorno</th><td>Información sobre el entorno del museo: rutas, hitos, ciudades</td><td><%=link_to 'Ver',museo_entorno_path(museo),:class=>'btn '%></td></tr>
 <tr><th>Varios</th><td>... campos varios</td><td><%=link_to 'Ver',museo_varios_path(museo),:class=>'btn '%></td></tr>
-<tr><th>Audios/Videos</th><td>...</td><td><%=link_to 'Ver',museo_medios_path(museo),:class=>'btn '%></td></tr>
 
 </tbody>
 </table>

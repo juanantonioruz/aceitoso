@@ -1,0 +1,9 @@
+<h1><%=@museo.nombre%></h1>
+<br>
+<p><i>* Puede ver y modificar la información asociada al museo pulsando ver en cada una de las opciones</i></p>
+
+<!--<label class='label'>Secciones</label>-->
+<%= render :partial=>'shared/opcionesmuseo',:locals=>{:museo=>@museo} %>
+<br>
+
+<%=link_to 'Editar detalles de museo',edit_museo_path(@museo),:class=>'btn btn-success'%> o <%=link_to 'Ir a lista de museos',museos_path%>

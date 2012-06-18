@@ -75,6 +75,13 @@ class Datos
             end
           respuesta_det<<finTab
         end
+          if(!self.data.medios.empty?)
+          respuesta_det<<dameTabNew("Audiovisuales")
+            self.data.medios.each do |medio|
+              respuesta_det<<"<br><b class='medio_popup' id_medio='#{medio.id}'>#{medio.nombre}</b><br><hr>" 
+            end
+          respuesta_det<<finTab
+        end
           if(!self.data.eventos.empty?)
          respuesta_det<< dameTabNew("Historia")
          self.data.eventos.each do |evento|

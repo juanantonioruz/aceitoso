@@ -1,0 +1,34 @@
+<%=cargaeditor%>
+<%=form_for [@museo,@pieza],:html=>{:multipart=>true} do |f|%>
+
+<%=f.label "Articulos relacionados",:class=>'label'%>
+<%= f.select :generica_ids, Generica.all.sort{|a,b| b.titulo <=> a.titulo}.collect {|x| [x.titulo, x.id]}, {}, :multiple => true, :empty=>true %>
+
+
+    <%=f.label :nombre,:class=>'label'%>
+    <%=f.text_field :nombre%>    
+
+
+    <%=f.label :imagen,:class=>'label'%>
+    <%if @pieza.imagen_url.to_s!='' %>
+        <%=imagentam(@pieza,'64x64')%>
+        <%= f.check_box :remove_imagen %>
+        Borrar imagen
+    <%end%>
+    <br/>
+    <%= f.file_field :imagen %> 
+
+    <!-------------------
+    <%=etiquetar @pieza%>
+    -->
+    <%=f.label 'es pieza original?',:class=>'label'%>
+  <%= f.radio_button :coleccion,  false %> NO
+  <%= f.radio_button :coleccion,  true %> SI
+
+
+    <%=f.label :descripcion,:class=>'label'%>
+    <%=f.text_area :descripcion,:class=>'tinymce'%>
+
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_piezas_path(@museo)%>
+<%end%>

@@ -4,6 +4,12 @@ class ResourcesController < ApplicationController
    require 'csv'
    require 'cgi'
 
+  def medio
+             
+
+     render :text =>  Medio.find(params[:id]).descripcion.html_safe
+end
+
 def genera
   museos=Museo.find(:all)
   CSV.generate({:col_sep => "\t"}) do |csv| 

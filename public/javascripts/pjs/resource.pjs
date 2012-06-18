@@ -17,8 +17,12 @@ function activaDesplegablesMuseo(){
               desplegable.slideToggle('fast');
               event.preventDefault();
               })
+ $(".medio_popup").click(function(event){
+      	var caracteristicas = "height=400,width=400,scrollTo,resizable=1,scrollbars=1,location=0";
+      	nueva=window.open("./resources/medio/"+$(this).attr("id_medio"), 'Popup', caracteristicas);
+      	return false;
 
-        
+})
 }
 	activa();
   }

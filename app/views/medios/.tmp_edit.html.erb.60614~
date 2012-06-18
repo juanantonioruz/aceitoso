@@ -1,0 +1,6 @@
+<h1>Editing medio</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @medio %> |
+<%= link_to 'Back', medios_path %>

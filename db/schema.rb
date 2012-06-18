@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120611094011) do
+ActiveRecord::Schema.define(:version => 20120618120356) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -194,6 +194,15 @@ ActiveRecord::Schema.define(:version => 20120611094011) do
   end
 
   add_index "labels", ["label_id"], :name => "index_labels_on_label_id"
+
+  create_table "medios", :force => true do |t|
+    t.string  "nombre"
+    t.string  "descripcion"
+    t.boolean "es_audio",    :default => false
+    t.integer "museo_id"
+  end
+
+  add_index "medios", ["museo_id"], :name => "index_medios_on_museo_id"
 
   create_table "museos", :force => true do |t|
     t.string   "nombre"

@@ -1,0 +1,16 @@
+<h1>AudioVisual del museo <%=@medio.museo.nombre%></h1>
+
+
+<label class='label'>Nombre</label>
+<p><%=@medio.nombre%>&nbsp;</p>
+
+
+<label class='label'>HTML EMBED</label>
+<p><%= raw @medio.descripcion%>&nbsp;</p>
+<label class='label'>Es Video?</label>
+<p><%=  @medio.esvideo%>&nbsp;</p>
+
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_medio_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a audiovisuales',museo_medios_path(@museo)%>
