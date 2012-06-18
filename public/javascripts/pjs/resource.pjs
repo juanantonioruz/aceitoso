@@ -5,6 +5,24 @@ function easeInOutCubic(pos) {
   return 0.5 * (Math.pow((pos-2),3) + 2);
 }
 
+function activaDesplegablesMuseo(){
+  
+   var activa=function(){
+          $("dd").hide();
+ 	$("dt").mouseover(function() {$(this).css('cursor','pointer');})
+ 	$("dt").mouseleave(function() {$(this).css('cursor','default');})
+    $("dt").click(function(event){
+             var desplegable = $(this).next();
+             $('dd').not(desplegable).slideUp('fast');
+              desplegable.slideToggle('fast');
+              event.preventDefault();
+              })
+
+        
+}
+	activa();
+  }
+
 public class Resource {
   boolean selected = false;
   boolean hovering = false;
@@ -137,21 +155,8 @@ public class Resource {
         that.frameCount = 0;
         
         $('aside').html(g.getSelectedNode().getSubject().html);
-       
-       var activa=function(){
-          $("dd").hide();
- 	$("dt").mouseover(function() {$(this).css('cursor','pointer');})
- 	$("dt").mouseleave(function() {$(this).css('cursor','default');})
-    $("dt").click(function(event){
-             var desplegable = $(this).next();
-             $('dd').not(desplegable).slideUp('fast');
-              desplegable.slideToggle('fast');
-              event.preventDefault();
-              })
-
-        
-}
-	activa();
+       g.getSelectedNode().clasi=that.clasi;
+      activaDesplegablesMuseo();
 
        
          if(that.clasi=="Museo"){

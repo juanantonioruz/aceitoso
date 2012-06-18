@@ -263,14 +263,17 @@ void mousePressed() {
 		} else if (selectedNodeIndex != null) {
 			// TODO: Zoom to node
 			if(debug)println("// selectedNodeIndex != null");			
-			
 			selectedNode = g.nodes.get(selectedNodeIndex);
+			
+			//println("juan tengo un museo");
 			g.setDragNode(selectedNode);
 			if (g.getSelectedNode()!=selectedNode) {
   			r.setClosed();
   			selectedNode.getSubject().setOpen();
   			$('aside').html(selectedNode.getSubject().html);
   			g.setSelectedNode(selectedNode);
+  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
+			activaDesplegablesMuseo();
 			}
 		}else{
 					if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		

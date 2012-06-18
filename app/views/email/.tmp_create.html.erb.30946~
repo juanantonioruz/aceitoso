@@ -1,1 +1,0 @@
-mensaje enviado ok!<%=@mensaje%>

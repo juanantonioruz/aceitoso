@@ -3,7 +3,7 @@ class Node {
 	boolean visited = false;
 	boolean hovering = false;
 	boolean dragging = false;
-	
+	String clasi;
   Particle particula;
   ParticleSystem ps;
   Object subject;
