@@ -56,7 +56,7 @@ class Datos
           respuesta_det<<dameTabNew("Como llegar...")
           respuesta_det<<"#{self.data.ficha.llegar}" 
           respuesta_det<<finTab
-          respuesta_det<<dameTabNew("Horario")
+          respuesta_det<<dameTabNew("Horarios y tarifas")
           respuesta_det<<"#{self.data.ficha.horario}" 
           respuesta_det<<finTab
           if(!self.data.servicios.empty?)
