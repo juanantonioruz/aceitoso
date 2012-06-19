@@ -1,0 +1,33 @@
+<h1>Rutas disponibles para el museo: <%=@museo.nombre%></h1>
+<br/>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@caminos.each do |camino|%>
+<tr>
+<td><%=camino.nombre%></td>
+<td><%=raw camino.descripcion%></td>
+<td><%=imagentam(camino,'64x64')%></td>
+<td>
+<%= link_to 'Ver',museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-warning'%>
+<%= link_to 'Relaciones',relacion_museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:class=>'btn btn-success'%>&nbsp;
+
+<%= link_to 'Borrar',museo_entorno_camino_path(:museo_id=>@museo,:id=>camino),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+
+<hr>
+<i> * Para añadir puntos a una ruta existente o ver los punto que la componen haga click en "ver" en dicha ruta</i>
+<hr>
+
+
+<%= link_to 'Añadir camino',new_museo_entorno_camino_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al entorno',museo_entorno_path(@museo)%>
+

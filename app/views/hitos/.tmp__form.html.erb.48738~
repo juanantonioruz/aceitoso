@@ -21,18 +21,6 @@
     <%=f.label :descripcion,:class=>'label'%>
         <%= f.text_area :descripcion,  :class => "tinymce", :rows => 10, :cols => 120 %>
     
-		<%=f.label "KML",:class=>'label'%>
-	 <%= f.file_field :archivo %>
-  <%if @hito.archivo_url.to_s!=''%>
- <br> <b> Archivo KML ya adjuntado</b><br>
-   <%= link_to @hito.archivo, @hito.archivo_url.to_s %>
-   <br>
-          <%= f.check_box :remove_archivo %>
-          <%= t('destroy')%>
-  <%end%>
-	
-
-	
      <%=f.label :imagen,:class=>'label'%>
     <%if @hito.imagen_url.to_s!='' %>
         <%=imagentam(@hito,'64x64')%>

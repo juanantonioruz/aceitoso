@@ -11,13 +11,7 @@
 
 <label class='label'>Descripción de la hito</label>
 <p><%=raw @hito.descripcion%>&nbsp;</p>
-<label class='label'>KML</label>
 
-<p> 
-  <% if @hito.archivo_url.to_s != "" %>
-  <%= link_to @hito.archivo, @hito.archivo_url.to_s %>
-  <% end %>
- </p>
 
 	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@hito} )  %>
 

@@ -1,0 +1,32 @@
+<h1>Ruta:  <%=@camino.nombre%> de <%=@camino.entorno.museo.nombre%></h1>
+<br/>
+
+<label class='label'>Imagen</label>
+<p><%=imagentam(@camino,'64x64')%>&nbsp;</p>
+
+<label class='label'>Nombre</label>
+<p><%=@camino.nombre%>&nbsp;</p>
+
+<label class='label'>Descripción de la ruta</label>
+<p><%=raw @camino.descripcion%>&nbsp;</p>
+<label class='label'>KML</label>
+
+ <p> 
+  <% if @camino.archivo_url.to_s != "" %>
+  <%= link_to @camino.archivo, @camino.archivo_url.to_s %>
+  <% end %>
+ </p>
+<!-- %=etiquetas @camino% -->
+
+<!-- Aqui render las coordenadas y opcion de añadir como con las etiquetas
+<label class='label'>Coordenadas de la ruta</label>
+%= render :partial=>'coordenadas/coordenada', :collection=>@camino.coordenadas%
+%=render :partial =>'coordenadas/form'%
+-->
+<label class='label'>Articulos Relacionados</label>
+<p><%=@camino.genericas.map {|x| x.titulo}%>&nbsp;</p>
+
+<!----->
+
+<br/>
+<%=link_to 'Editar',edit_museo_entorno_camino_path(@museo),:class=>'btn'%> o <%=link_to 'Volver a rutas',museo_entorno_caminos_path(@museo)%>
