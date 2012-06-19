@@ -37,7 +37,7 @@ end
   end
   
   def resumenInfoHTML info
-    sanitize(info.gsub(/\n/, ""),:tags=>[])[0,100]+"..."
+    sanitize(info.gsub(/\n/, ""),:tags=>[])[0,130]+"..."
   end
   
   def hitostextfile
