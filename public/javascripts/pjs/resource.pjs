@@ -17,6 +17,8 @@ function activaDesplegablesMuseo(){
               desplegable.slideToggle('fast');
               event.preventDefault();
               })
+$(".medio_popup").mouseover(function() {$(this).css('cursor','pointer');})
+ 	$(".medio_popup").mouseleave(function() {$(this).css('cursor','default');})
  $(".medio_popup").click(function(event){
       	var caracteristicas = "height=400,width=400,scrollTo,resizable=1,scrollbars=1,location=0";
       	nueva=window.open("./resources/medio/"+$(this).attr("id_medio"), 'Popup', caracteristicas);
