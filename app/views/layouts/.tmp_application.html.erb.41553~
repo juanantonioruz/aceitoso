@@ -368,7 +368,7 @@ $("#footer").animate({
                 popup = new OpenLayers.Popup.FramedCloud("featurePopup",
                                          feature.geometry.getBounds().getCenterLonLat(),
                                          new OpenLayers.Size(100,100),
-                                         "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>(+info)</a>"+feature.attributes.title + "</h2>" +
+                                         "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>[search]</a>"+feature.attributes.title + "</h2>" +
                                          feature.attributes.description,
                                          null, true, onPopupClose);
 //				 popup.autoSize=false;

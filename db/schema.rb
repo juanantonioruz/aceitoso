@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619102424) do
+ActiveRecord::Schema.define(:version => 20120619112704) do
 
   create_table "books", :force => true do |t|
     t.string "name"
@@ -96,10 +96,12 @@ ActiveRecord::Schema.define(:version => 20120619102424) do
   add_index "espacios_labels", ["label_id", "espacio_id"], :name => "index_espacios_labels_on_label_id_and_espacio_id"
 
   create_table "eventos", :force => true do |t|
-    t.string  "titulo"
-    t.string  "imagen"
-    t.text    "descripcion"
-    t.integer "museo_id"
+    t.string   "titulo"
+    t.string   "imagen"
+    t.text     "descripcion"
+    t.integer  "museo_id"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "eventos", ["museo_id"], :name => "index_eventos_on_museo_id"

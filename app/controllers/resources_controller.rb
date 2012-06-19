@@ -29,22 +29,27 @@ end
       museos=Museo.find(:all)
    for museo in museos do 
         ficha=museo.ficha
-    ne="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
+    ne="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
     v+=ne
     
     end
      render :text => v.html_safe 
   end
+  
+  def resumenInfoHTML info
+    sanitize(info.gsub(/\n/, ""),:tags=>[])[0,100]+"..."
+  end
+  
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon".split("|").join("\t")+"\n"
   
 
         ficha=museo.ficha
-    v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{ficha.descripcion.gsub(/\n/, "")}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
+    v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
  #   v+=ne
      for hito in museo.hitos do
-        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{hito.descripcion.gsub(/\n/, "")}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
      end
   
      render :text => v.html_safe 
