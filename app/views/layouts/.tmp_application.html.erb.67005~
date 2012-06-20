@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript">
-
-var canvasSupported = !!window.HTMLCanvasElement;
-if(!canvasSupported) window.location.href="no_compatible";
-
-
-</script>
-
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
   <title>Olearum: Red de museos del aceite de oliva</title>
@@ -66,7 +58,6 @@ if(!canvasSupported) window.location.href="no_compatible";
 <style>
 dt{background-color:#003A6B; color:white;margin-bottom:5px;}
 </style>
-
   <script type="text/javascript">
   	 var controls; 
 
