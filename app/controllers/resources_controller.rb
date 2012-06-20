@@ -56,7 +56,7 @@ end
   end
   
   def dameIcoMuseo
-          return "/uploads/service/26/museum_industry.png"
+          return "/uploads/service/imagen/26/museum_industry.png"
 
 end
 
