@@ -64,7 +64,7 @@ if(!canvasSupported) window.location.href="no_compatible";
         }
 </style>
 <style>
-dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
+dt{background-color:#003A6B; color:white;margin-bottom:5px;}
 </style>
 
   <script type="text/javascript">
@@ -377,7 +377,7 @@ $("#footer").animate({
                 popup = new OpenLayers.Popup.FramedCloud("featurePopup",
                                          feature.geometry.getBounds().getCenterLonLat(),
                                          new OpenLayers.Size(100,100),
-                                         "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>(ir a)</a>"+feature.attributes.title + "</h2>" +
+                                         "<h2><a href='#' onclick='circles("+feature.attributes.id+")'>(+info)</a>"+feature.attributes.title + "</h2>" +
                                          feature.attributes.description,
                                          null, true, onPopupClose);
 //				 popup.autoSize=false;

@@ -120,6 +120,9 @@ class Datos
           respuesta_det<<"</dl>" 
 
 else
+   if (Hito==self.data.class)
+        respuesta_det<<imagen_servicio(self.data.imagen_servicio) unless self.data.imagen_servicio.blank?
+      end
    if ([Pieza, Generica, Hito, Camino, Espacio].include?self.data.class)
         respuesta_det<<imagen_details(self.data.imagen) unless self.data.imagen.blank?
       end
@@ -134,7 +137,10 @@ else
    end
   
   def imagen_details url
-   "<img class='summary-img' width='250' style='border:1px solid gray' src='#{url}'>"   
+   "<div style='margin-bottom:5px;width:250;'><img class='summary-img' width='250' style='border:1px solid gray' src='#{url}'></div>"   
+  end
+  def imagen_servicio url
+   "<img class='summary-img'   src='#{url}'><br><br>"   
   end
   def llena_destinos mapa
                  puts "llllllllllllenando destinos mapa"

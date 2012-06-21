@@ -64,7 +64,7 @@ end
     if(hito.service.nil?) then
     return "/uploads/service/imagen/6/17_jardindevariedades.png"
   else
-    return hito.imagen
+    return hito.imagen_servicio
     end
   end
   

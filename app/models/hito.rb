@@ -9,7 +9,7 @@ class Hito < ActiveRecord::Base
   has_many :genericas, :through => :hito_genericas
 
   acts_as_heir_of :relacionable
- def imagen
+ def imagen_servicio
     if self.service!=nil
         return self.service.imagen
     else
