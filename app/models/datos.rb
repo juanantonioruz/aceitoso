@@ -46,7 +46,7 @@ class Datos
     respuesta_det<<"<p class='summary'>"
     if (self.data.class==Museo) then
           respuesta_det<<"<dl>" 
-          respuesta_det<< dameTabNew("Descripcion")
+          respuesta_det<< dameTabNew('Descripci&oacute;n')
         respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
           respuesta_det<<"#{self.data.ficha.descripcion}" 
           respuesta_det<<finTab
