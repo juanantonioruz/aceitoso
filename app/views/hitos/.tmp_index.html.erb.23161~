@@ -12,7 +12,7 @@
 <%@hitos.each do |hito|%>
 <tr>
 <td><%=hito.nombre%></td>
-    <td><%=image_tag(hito.imagen_servicio,:size=>'64x64')%></td>
+    <td><%=image_tag(hito.imagen,:size=>'64x64')%></td>
 
 <td><%=raw hito.descripcion%></td>
 <td><%=imagentam(hito,'64x64')%></td>

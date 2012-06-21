@@ -7,7 +7,7 @@
 <label class='label'>Nombre</label>
 <p><%=@hito.nombre%>&nbsp;</p>
 <label class='label'>Servicio</label>
-<p><%=image_tag(@hito.imagen_servicio,:size=>'64x64')%> <%=@hito.service.descripcion%></p>
+<p><%=image_tag(@hito.imagen,:size=>'64x64')%> <%=@hito.service.descripcion%></p>
 
 <label class='label'>Descripción de la hito</label>
 <p><%=raw @hito.descripcion%>&nbsp;</p>
