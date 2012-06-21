@@ -69,7 +69,7 @@ class Datos
           if(!self.data.espacios.empty?)
           respuesta_det<<dameTabNew("Espacios")
             self.data.espacios.each do |espacio|
-        respuesta_det<<imagen_details(espacio.imagen) unless espacio.imagen.blank?
+#        respuesta_det<<imagen_details(espacio.imagen) unless espacio.imagen.blank?
 
               respuesta_det<<"<br><b>#{espacio.nombre}</b><br>#{espacio.descripcion.html_safe}<br><hr>" 
             end
@@ -120,7 +120,7 @@ class Datos
           respuesta_det<<"</dl>" 
 
 else
-   if ([Pieza, Generica, Hito, Camino].include?self.data.class)
+   if ([Pieza, Generica, Hito, Camino, Espacio].include?self.data.class)
         respuesta_det<<imagen_details(self.data.imagen) unless self.data.imagen.blank?
       end
       if(self.data.descripcion.blank?)
@@ -134,7 +134,7 @@ else
    end
   
   def imagen_details url
-   "<img class='summary-img' width='150' src='#{url}'>"   
+   "<img class='summary-img' width='250' style='border:1px solid gray' src='#{url}'>"   
   end
   def llena_destinos mapa
                  puts "llllllllllllenando destinos mapa"
