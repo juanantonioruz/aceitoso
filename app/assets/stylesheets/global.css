@@ -57,8 +57,9 @@ header {
 	padding: 5px;
 	position: absolute;
 	top: 5px;
-	left: 0px;
 	right: 0px;
+	width:290px;
+	float:right;
 }
 
 header section#title {
