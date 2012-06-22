@@ -52,9 +52,11 @@ end
        point="#{hito.x},#{hito.y}"
        if (!hito.archivo.blank?) then
          begin
-
+              if(request.domain=="localhost") then
+              doc = Nokogiri::XML(open("http://"+request.domain+":"+request.port.to_s+hito.archivo.to_s))
+              else
              doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+hito.archivo.to_s))
-               
+               end
           point="#{doc.at_css("latitude").content},#{doc.at_css("longitude").content}"
 
         rescue

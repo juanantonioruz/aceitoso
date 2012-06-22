@@ -88,7 +88,7 @@ dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
 	} 
   },500);
   if(!$.mapita)
-	$.mapita=init_mapa(new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'),4);
+	$.mapita=init_mapa();
 
 });
 var map, layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
@@ -235,7 +235,7 @@ function add_events_to_ruta(ruta){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(altura, anchura, center,zoom){
+	function cambiaDimension(altura, anchura){
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
@@ -248,7 +248,7 @@ $("#container_mapa").animate({
 $("#mapa_div").animate({
     anchura: anchura, height:altura
   }, 1500, function(){
-  	init_mapa(center,zoom);
+  	init_mapa();
   } );
 $("#footer").animate({
     width: anchura, height:altura
@@ -260,16 +260,16 @@ $("#footer").animate({
 	function ampliaMapa(evt){
 		var altura=$(document).height()-100;
 		var anchura=$(document).width()-$('aside').width()-100;
-		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
+		cambiaDimension(altura +"px",anchura +"px");
 		es_ampliado=true;
 	}
 
 	function reduceMapa(evt){
-		cambiaDimension("200px","200px",map.center,map.zoom);
+		cambiaDimension("200px","200px");
 		es_ampliado=false;
 	}
 	
- function init_mapa(center, zoom){
+ function init_mapa(){
 	actuales=[];
  	capas_sensibles=[];
 	    mercator = new OpenLayers.Projection("EPSG:900913");
@@ -312,7 +312,7 @@ $("#footer").animate({
 			activar_selectControl();
     		
               
-            map.setCenter( center, zoom);
+            map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
 			if(hitos_peticion!=null) loadMarcas(hitos_peticion);
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
