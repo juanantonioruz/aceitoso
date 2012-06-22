@@ -53,7 +53,7 @@ end
        if (!hito.archivo.blank?) then
          begin
 
-             doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+request.port.to_s+hito.archivo.to_s))
+             doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+hito.archivo.to_s))
                
           point="#{doc.at_css("latitude").content},#{doc.at_css("longitude").content}"
 
