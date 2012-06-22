@@ -13,6 +13,7 @@ gem 'rmagick'
 gem 'json'
 gem 'execjs'
 gem 'therubyracer'
+gem 'nokogiri'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
 

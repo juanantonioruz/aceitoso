@@ -1,0 +1,48 @@
+<%= cargaeditor%>
+<%=form_for( [@museo,@entorno, @hito]) do |f|%>
+    <%=f.hidden_field :id%>  
+
+    <%=f.label :nombre,:class=>'label'%>
+    <%=f.text_field :nombre%>  
+<%=f.label "Articulos relacionados",:class=>'label'%>
+<%= f.select :generica_ids, Generica.all.collect {|x| [x.titulo, x.id]}, {}, :multiple => true, :empty=>true %>
+
+
+    <!-- Servicios vinculados service_id  -->
+     <%=f.label :imagen,:class=>'label'%>
+      <% Service.all.each do |ser| %>
+        <%= image_tag(ser.imagen,:size=>'32x32') %>       
+        <b><%=ser.descripcion %></b>       
+        <%= f.radio_button :service_id, ser.id %>
+       </span>
+     <% end %>
+
+
+    <%=f.label :descripcion,:class=>'label'%>
+        <%= f.text_area :descripcion,  :class => "tinymce", :rows => 10, :cols => 120 %>
+    
+		<%=f.label "KML",:class=>'label'%>
+	 <%= f.file_field :archivo %>
+  <%if @hito.archivo_url.to_s!=''%>
+ <br> <b> Archivo KML ya adjuntado</b><br>
+   <%= link_to @hito.archivo, @hito.archivo_url.to_s %>
+   <br>
+          <%= f.check_box :remove_archivo %>
+          <%= t('destroy')%>
+  <%end%>
+	
+
+	
+     <%=f.label :imagen,:class=>'label'%>
+    <%if @hito.imagen_url.to_s!='' %>
+        <%=imagentam(@hito,'64x64')%>
+        <%= f.check_box :remove_imagen %>
+        Borrar imagen
+    <%end%>
+    <br/>
+    <%= f.file_field :imagen %> 
+	<%=render(:file => "/shared/coordenadas_edit",:locals => {:input_form=>"hito", :modelo=>@hito, :formulario=>f} )  %>
+
+    <br/>
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',museo_entorno_hitos_path(@museo)%>
+<%end%>

@@ -3,6 +3,8 @@ class ResourcesController < ApplicationController
   layout 'application'
    require 'csv'
    require 'cgi'
+         require 'nokogiri'
+
 
   def medio
              
@@ -42,14 +44,24 @@ end
   
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
-    v="id|point|title|description|icon".split("|").join("\t")+"\n"
-  
-
+    v="id|point|title|description|icon|kml".split("|").join("\t")+"\n"
         ficha=museo.ficha
     v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
  #   v+=ne
      for hito in museo.hitos do
-        v+="#{hito.predecessor.id}|#{hito.x},#{hito.y}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
+       point="#{hito.x},#{hito.y}"
+       if (!hito.archivo.blank?) then
+         begin
+
+             doc = Nokogiri::XML(open("http://"+request.domain+":"+request.port.to_s+hito.archivo.to_s))
+               
+          point="#{doc.at_css("latitude").content},#{doc.at_css("longitude").content}"
+
+        rescue
+          puts "Error leyendo el doc!"
+          end
+      end 
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
      end
   
      render :text => v.html_safe 
