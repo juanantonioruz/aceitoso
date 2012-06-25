@@ -1,97 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script type="text/javascript">
-
-var canvasSupported = !!window.HTMLCanvasElement;
-if(!canvasSupported) window.location.href="no_compatible";
-
-
-</script>
-
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
-  <title>Olearum: Red de museos del aceite de oliva</title>
-  <%= stylesheet_link_tag    "global", :media => "all" %>
-
-        <script src="/javascripts/jquery-1.7.2.js"></script>
-        <script src="/javascripts/processing-1.3.6.js"></script>
-        <script src="/javascripts/suggest.js"></script>
-        <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-
-        <link rel="stylesheet" href="/pruebas/theme/default/style.css" type="text/css">
-        <link rel="stylesheet" href="/pruebas/style.css" type="text/css">
-        
-        <script src="/pruebas/OpenLayers.js"></script>
-
-
-  <%= csrf_meta_tags %>
-  
-  
-<style>
-     .olControlPanel button {
-          position: relative;
-          display: block;
-          margin: 2px;
-          border: 1px solid;
-          padding: 0 5px;
-          border-radius: 4px;
-          height: 35px;
-          background-color: white;
-          float: left;
-          overflow: visible; /* needed to remove padding from buttons in IE */
-        }
-        .olControlPanel button span {
-          padding-left: 25px;
-        }
-        .olControlPanel button span:first-child {
-          padding-left: 0;
-          display: block;
-          position: absolute;
-          left: 2px;
-        }
-        .olControlPanel .ampliaItemActive span:first-child { 
-          background-image: url("/images/expand.gif");
-          height: 29px;
-          width: 29px;
-          top: 2px;
-        }
-        .olControlPanel .reduceItemInactive span:first-child { 
-          background-image: url("/images/minimize.gif");
-          height: 29px;
-          width: 29px;
-          top: 2px;
-        }
-</style>
-<style>
-dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
-</style>
-
-  <script type="text/javascript">
-  	 var controls; 
-
-  	var tId,pjs,cnt=0;
-
- $(document).ready(
- 
- 
- function() {
- $('footer').width($(document).width()-$('aside').width()-100);
-  pjs = Processing.getInstanceById("kenviz");
-  //console.log(cnt+':'+pjs);
-  if (!pjs) tId=setInterval(function() {
-    pjs = Processing.getInstanceById("kenviz");
-  //  console.log(cnt+':'+pjs);
-    if (pjs){
-	clearInterval(tId);
-	inicia(pjs);		
-	} 
-  },500);
-  if(!$.mapita)
-	$.mapita=init_mapa();
-
-});
-var map, layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
+/**
+ * @author juanitu
+ */
+var map, controls,layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
 
 
 function inicia_capas_base(map){
@@ -146,6 +56,8 @@ function add_events_to_ruta(ruta){
 		   	// antes recibia un parametro que era   selectSun
 			//	selectorito.unselectAll();
             }
+			
+			
 	function load_KML(nombre_capa, url_kml){
 		 return new OpenLayers.Layer.Vector(nombre_capa, {
                 projection: geographic,
@@ -235,7 +147,7 @@ function add_events_to_ruta(ruta){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(altura, anchura){
+	function cambiaDimension(altura, anchura, center,zoom){
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
@@ -248,7 +160,7 @@ $("#container_mapa").animate({
 $("#mapa_div").animate({
     anchura: anchura, height:altura
   }, 1500, function(){
-  	init_mapa();
+  	init_mapa(center,zoom);
   } );
 $("#footer").animate({
     width: anchura, height:altura
@@ -260,79 +172,26 @@ $("#footer").animate({
 	function ampliaMapa(evt){
 		var altura=$(document).height()-100;
 		var anchura=$(document).width()-$('aside').width()-100;
-		cambiaDimension(altura +"px",anchura +"px");
+		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
 		es_ampliado=true;
 	}
 
 	function reduceMapa(evt){
-		cambiaDimension("200px","200px");
+		cambiaDimension("200px","200px",map.center,map.zoom);
 		es_ampliado=false;
 	}
 	
- function init_mapa(){
-	actuales=[];
- 	capas_sensibles=[];
-	    mercator = new OpenLayers.Projection("EPSG:900913");
-	    geographic = new OpenLayers.Projection("EPSG:4326");
-        map = new OpenLayers.Map('mapa_div', { 
-		projection: mercator,
-		controls: [
-            new OpenLayers.Control.Navigation(),
-            new OpenLayers.Control.PanPanel(),
-            new OpenLayers.Control.ZoomPanel(),
-			new OpenLayers.Control.LayerSwitcher()
-        ]
-		});
-			
-		
 
-		panel_ampliable= creaPanelAmpliable();
-		map.addControl(panel_ampliable);
-				
-			inicia_capas_base(map);
-
-			 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
-					projection: geographic,
-
-                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
-                    protocol: new OpenLayers.Protocol.HTTP({
-                        url: "/resources/museostextfile",
-                        format: new OpenLayers.Format.Text()
-                    })
-                });
-
-			add_capa_seleccionable(map, layer_new);
-			
-			 layer_new.events.on({
-                'featureselected': onFeatureSelect,
-                'featureunselected': onFeatureUnselect
-            });
-			
-		
-			activar_selectControl();
-    		
-              
-            map.setCenter( new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'), 4);
-			if(hitos_peticion!=null) loadMarcas(hitos_peticion);
-			if(kmls!=null){
-				for(var i=0; i<kmls.length; i++) {
-					var value = kmls[i];
-					addLayerKML(value[0],value[1]);
-				}
-
-			}
-			return map;
-            }
 			
 			function creaPanelAmpliable(){
 				 botonAmpliaMapa = new OpenLayers.Control.Button({
 			displayClass: "amplia",
-	        title: "Zoom box: zoom clicking and dragging",
+	        title: "Ampliar Dimension de Mapa",
 	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
 	    );
 				    botonReduceMapa = new OpenLayers.Control.Button({
 						displayClass: "reduce",
-	        title: "Zoom box: zoom clicking and dragging",
+	        title: "Reducir Dimension de mapa",
 	        text: "REDUCIR MAPA",trigger:reduceMapa}
 	    );
 					 var panel = new OpenLayers.Control.Panel({
@@ -407,131 +266,57 @@ $("#footer").animate({
 			}
 			
 			
-  function inicia() {
-    p = Processing.getInstanceById("kenviz");
+			 function init_mapa(center, zoom){
+	actuales=[];
+ 	capas_sensibles=[];
+	    mercator = new OpenLayers.Projection("EPSG:900913");
+	    geographic = new OpenLayers.Projection("EPSG:4326");
+        map = new OpenLayers.Map('mapa_div', { 
+		projection: mercator,
+		controls: [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanPanel(),
+            new OpenLayers.Control.ZoomPanel(),
+			new OpenLayers.Control.LayerSwitcher()
+        ]
+		});
+			
+		
 
-    function canvasSupported() {
-      var canvas_compatible = false;
-      try {
-       canvas_compatible = !!(document.createElement('canvas').getContext('2d')); // S60
-      } catch(e) {
-       canvas_compatible = !!(document.createElement('canvas').getContext); // IE
-      }
-      return canvas_compatible;
-    }
+		panel_ampliable= creaPanelAmpliable();
+		map.addControl(panel_ampliable);
+				
+			inicia_capas_base(map);
 
-    if (canvasSupported()) {
-      
-  
-  
-      var search = $("#fb-suggest");
-	  var debugueo=false;
-      search.suggest({"type": "/common/topic"})
-      .bind("fb-select", function(e, data) {
-	  	//console.dir(p.resourceId);
-        if (debugueo) {
-			p.setR(1);
-		}
-		else 
-			p.setR(data.id);
-		 //alert("val:"+p.resourceId);
-           p.setup();
-		    if(es_ampliado){
-		   reduceMapa();
-		   	
-		   } 
-      })
-      .focus(function(e) {
-        if ($(this).val() == $(this).attr('default')) {
-          $(this).val("");
-        }
-        else {
-          $(this).select();
-        }
-        $(this).removeClass('ghost-input');
-      })
-      .blur(function(e) {
-        if (!$(this).val()) {
-          $(this).val($(this).attr('default')).addClass('ghost-input');
-        }
-      });
-      
-      search.val(search.attr('default')).addClass('ghost-input');
+			 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
+					projection: geographic,
 
-      // init
-     // p.init(p.ajax("/javascripts/pjs/physics.pjs")+p.ajax("/javascripts/pjs/value.pjs")+p.ajax("/javascripts/pjs/attribute.pjs")+p.ajax("/javascripts/pjs/resource.pjs")+p.ajax("/javascripts/pjs/node.pjs")+p.ajax("/javascripts/pjs/edge.pjs")+p.ajax("/javascripts/pjs/graph.pjs")+p.ajax("/javascripts/pjs/network.pjs"));
-      //initialized = true;
-               //p.setR(null);
+                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: "/resources/museostextfile",
+                        format: new OpenLayers.Format.Text()
+                    })
+                });
 
-      $(window).resize(function(){
-        p.resize();
-      });
-    } else {
-      $('#browser_not_supported').show();
-      $('#explanation').hide();
-    }
-  }
+			add_capa_seleccionable(map, layer_new);
+			
+			 layer_new.events.on({
+                'featureselected': onFeatureSelect,
+                'featureunselected': onFeatureUnselect
+            });
+			
+		
+			activar_selectControl();
+    		
+              
+            map.setCenter( center, zoom);
+			if(hitos_peticion!=null) loadMarcas(hitos_peticion);
+			if(kmls!=null){
+				for(var i=0; i<kmls.length; i++) {
+					var value = kmls[i];
+					addLayerKML(value[0],value[1]);
+				}
 
-
-
-
-</script>
-
-</head>
-<body>
-<canvas id="kenviz" data-processing-sources="/javascripts/pjs/network.pjs 
-/javascripts/pjs/physics.pjs 
-/javascripts/pjs/value.pjs 
-/javascripts/pjs/attribute.pjs 
-/javascripts/pjs/resource.pjs 
-/javascripts/pjs/edge.pjs 
-/javascripts/pjs/node.pjs 
-/javascripts/pjs/graph.pjs"></canvas>  
-<header >
-<section id="title" >
-</section>
-<section id="search">
-<input autocomplete="off" default="Search  interconnected topics ..." id="fb-suggest" name="fb-suggest" type="text" class="">
-</section>
-<br style="clear: both;">
-</header>
-<section id="content" style="position:relative;">
-<%= yield %>
-</section>
-<aside>
-<div id="explanation">
-<!-- askken introduction -->
-<h1>Olearum: Red de museos del aceite de oliva </h1>
-<p>Navegador de información relacionada con el aceite de oliva</p>
-
-<h2>¿cómo se usa?</h2>
-<p>
-instrucciones</p>
-<h3>Comenzar</h3>
-<p>
-...
-</p>
-<h3>Claves de uso</h3>
-<p>
-...</p>
-<h3>Creditos</h3>
-<p>
-...
-</p>
-</div>
-<div id="browser_not_supported">
-Your Browser is currently not supported.<br><br>Try one of these:<br>
-<a href="http://www.mozilla.com/en-US/firefox/firefox.html">Firefox 3.5</a><br>
-<a href="http://www.apple.com/safari/">Safari 4.0</a><br>
-<a href="http://www.google.com/chrome/">Chrome</a><br>
-</div>
-</aside>
-<footer style="">
-	<div id="container_mapa" style="top:-20px;width:200px; height:200px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #c1c1c1;line-height: 1.5em;background: #fff;opacity: 0.9;overflow: auto;padding:5px;">
-	<div id="mapa_div" style="width:200px; height:200px;">
-		</div>
-</div>
-</footer>
-
-</body>
-</html>
+			}
+			return map;
+            }
