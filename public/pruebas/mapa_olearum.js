@@ -1,7 +1,7 @@
 /**
  * @author juanitu
  */
-var map, controls,layer_new, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
+var map, controls,layer_museos, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
 
 
 function inicia_capas_base(map){
@@ -144,6 +144,10 @@ function add_events_to_ruta(ruta){
 	
 	function add_capa_seleccionable(mapa, vector){
 		 mapa.addLayer(vector);
+		console.log(mapa.getNumLayers());
+		console.log("antes"+mapa.getLayerIndex(layer_museos));
+		mapa.raiseLayer(layer_museos, mapa.getNumLayers()-1);
+		console.log("despues"+mapa.getLayerIndex(layer_museos));
 		capas_sensibles.push(vector);
 			
 	}
@@ -221,7 +225,7 @@ $("#footer").animate({
             function onPopupClose(evt) {
                 // 'this' is the popup.
                 var feature = this.feature;
-                if (feature!=undefined && feature.layer_new) { // The feature is not destroyed
+                if (feature!=undefined && feature.layer_museos) { // The feature is not destroyed
                     selectControl.unselect(feature);
                 } else { // After "moveend" or "refresh" events on POIs layer all 
                          //     features have been destroyed by the Strategy.BBOX
@@ -288,7 +292,7 @@ $("#footer").animate({
 				
 			inicia_capas_base(map);
 
-			 layer_new = new OpenLayers.Layer.Vector("MUSEOS", {
+			 layer_museos = new OpenLayers.Layer.Vector("MUSEOS", {
 					projection: geographic,
 
                     strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
@@ -298,9 +302,9 @@ $("#footer").animate({
                     })
                 });
 
-			add_capa_seleccionable(map, layer_new);
+			add_capa_seleccionable(map, layer_museos);
 			
-			 layer_new.events.on({
+			 layer_museos.events.on({
                 'featureselected': onFeatureSelect,
                 'featureunselected': onFeatureUnselect
             });

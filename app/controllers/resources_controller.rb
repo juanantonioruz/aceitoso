@@ -46,7 +46,6 @@ end
     museo=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon|kml".split("|").join("\t")+"\n"
         ficha=museo.ficha
-    v+="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
  #   v+=ne
      for hito in museo.hitos do
        point="#{hito.x},#{hito.y}"
