@@ -97,9 +97,9 @@ void setup() {
 		$('aside').html(r.html);
 	}
 
-	 origenTitulo=new PVector(20,20);
+	 origenTitulo=new PVector(20,10);
  	finTitulo=new PVector(600, 66);
-	 origenContacto=new PVector(width-320, height-30);
+	 origenContacto=new PVector(width-320, height-80);
  	finContacto=new PVector(37, 28);
 		 origenReset=new PVector(width-392, 5);
  	finReset=new PVector(48, 48);
@@ -109,9 +109,9 @@ void setup() {
 	 origenMinisterio_1=new PVector(40,180);
  	finMinisterio_1=new PVector(150, 55);
  	
-	 origenOlearum_2=new PVector(width-265,height-38);
+	 origenOlearum_2=new PVector(width-265,height-88);
  	finOlearum_2=new PVector(107, 38);
-	 origenMinisterio_2=new PVector(width-150,height-38);
+	 origenMinisterio_2=new PVector(width-150,height-88);
  	finMinisterio_2=new PVector(104, 38);
 
 }
@@ -149,8 +149,6 @@ strokeCap(SQUARE);
     		tint(255, 120);
        	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
        	 popStyle();
-           	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
-           	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
     
     
     g.draw();
@@ -160,16 +158,26 @@ strokeCap(SQUARE);
   }else{	
   		
        	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
-       	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
-       	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
+     //  	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
+      // 	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
        
       //  image(ministerioImage, 40, 200);
       //  println(ministerioImage.width);150
       //  println(ministerioImage.height+" height");45
 	}
+	           	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
+           	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
 	
 	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
      image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
+     pushStyle();
+     textAlign(LEFT);
+     fill(234,239,224);
+     noStroke();
+     rect(origenContacto.x-95, origenContacto.y+40,400,15);
+     fill(0);
+     text("proyecto realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-80,origenContacto.y+50);
+     popStyle();
 }
 
 void mouseMoved() {
