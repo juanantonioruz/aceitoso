@@ -9,11 +9,11 @@ class Datos
   end
   def dameNombre
     if [Museo].include? self.data.class then
-      self.data.nombre_select
+      self.data.nombre_relacionable
     elsif [Pieza, Hito, Camino].include? self.data.class then
-      self.data.nombre_select
+      self.data.nombre_relacionable
     else
-      self.data.nombre_select
+      self.data.nombre_relacionable
     end
   end
     def as_json(options = {})
@@ -57,6 +57,12 @@ class Datos
       devuelveCoordenadasSiExisten self.data.entorno.museo.ficha
     elsif self.data.class==Camino then
       devuelveCoordenadasSiExisten self.data.entorno.museo.ficha
+    elsif self.data.class==Pieza then
+      devuelveCoordenadasSiExisten self.data.museo.ficha
+    elsif self.data.class==Espacio then
+      devuelveCoordenadasSiExisten self.data.museo.ficha
+    elsif self.data.class==Evento then
+      devuelveCoordenadasSiExisten self.data.museo.ficha
     else 
       ""
     end

@@ -18,7 +18,7 @@ def nombre_select
 end
 
 def nombre_relacionable
-nombre_select
+nombre
 end
 
   def nombre_ask

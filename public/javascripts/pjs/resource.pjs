@@ -179,6 +179,13 @@ public class Resource {
          }else if(that.clasi=="Camino"){
          
         	 url_museos= "/resources/museostextfile/c"+that.id;
+         }else if(that.clasi=="Pieza"){
+         
+        	 url_museos= "/resources/museostextfile/p"+that.id;
+         }else if(that.clasi=="Espacio"){
+        	 url_museos= "/resources/museostextfile/e"+that.id;
+         }else if(that.clasi=="Evento"){
+        	 url_museos= "/resources/museostextfile/t"+that.id;
          }else{
          	url_museos= "/resources/museostextfile/";
          }
@@ -491,7 +498,7 @@ public class Resource {
     
     if (!loading) {
   		fill(33);
-  		textFont(defaultFont, 13);
+  		textFont(defaultFont, 15);
   		//fontWidth = textWidth((idx+1)+". "+this.getName()) * fontSize;
   		textAlign(CENTER);
   		text((idx+1)+". "+this.getName(), this.x, this.y+10+labelOffset+30);

@@ -41,6 +41,12 @@ end
         id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
       elsif (id[0]=="c") then
         id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
+      elsif (id[0]=="p") then
+        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
+      elsif (id[0]=="e") then
+        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
+      elsif (id[0]=="t") then
+        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
       else
         id_arra<<id
         end

@@ -116,6 +116,8 @@ public class Value {
        }else{
        textAlign(LEFT);
        }
+            textFont(defaultFont, 13);
+       
        text(this.getName(), 2, 2);
        
        popMatrix();

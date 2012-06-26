@@ -80,9 +80,9 @@ public class Attribute {
      textFont(defaultFont, 45);
      textAlign(CENTER);
      text(resource.selectedAttribute.getValues().size()+"", resource.x, resource.y-45, 100);
-     textFont(defaultFont, 13);
+     textFont(defaultFont, 12);
      
-     text("Resources", resource.x, resource.y-33, 100);
+     text("Artículos", resource.x, resource.y-33, 100);
      textFont(defaultFont, 18);
      text(this.getName(), resource.x, resource.y-10, 100);
      
