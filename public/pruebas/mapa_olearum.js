@@ -104,11 +104,11 @@ function borrando(event){
 }
 	
 function deleteAllLayersSensibles(centro, zoomito){
-	layer_hitos=null;
 	kmls=[];
-	layer_museos=null;
 	capas_sensibles=[]
 	actuales=[];
+	layer_museos=null;
+	layer_hitos=null;
 		cambiaDimension("200px","200px",centro, zoomito );
 		es_ampliado=false;
 		
@@ -349,7 +349,7 @@ function centerMapaPeninsula(){
     		
               
             map.setCenter( center, zoom);
-			if(hitos_peticion!=null && layer_hitos==null) loadMarcas(hitos_peticion);
+			if(hitos_peticion!=null ) loadMarcas(hitos_peticion);
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
 					var value = kmls[i];

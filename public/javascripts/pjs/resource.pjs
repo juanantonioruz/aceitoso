@@ -173,6 +173,8 @@ public class Resource {
          }else if(that.clasi=="Generica"){
         	 url_museos= "/resources/museostextfile/g"+that.id;
          }else if(that.clasi=="Hito"){
+                 hitos_peticion="hitotextf/"+that.id;
+         
         	 url_museos= "/resources/museostextfile/h"+that.id;
          }else{
          	url_museos= "/resources/museostextfile/";

@@ -69,13 +69,30 @@ museo_se=""
     sanitize(info.gsub(/\n/, ""),:tags=>[])[0,130]+"..."
   end
   
+  def hitotextf
+        hito=Relacionable.find(params[:id]).heir
+    puts "hitohito#{hito}"
+    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+        point=damePointHito hito
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+         render :text => v.html_safe 
+
+  end
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
         ficha=museo.ficha
  #   v+=ne
      for hito in museo.hitos do
-       point="#{hito.x},#{hito.y}"
+        point=damePointHito hito
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+     end
+  
+     render :text => v.html_safe 
+  end
+  
+  def damePointHito hito
+     point="#{hito.x},#{hito.y}"
        if (!hito.archivo.blank?) then
          begin
               if(request.domain=="localhost") then
@@ -89,10 +106,7 @@ museo_se=""
           puts "Error leyendo el doc!"
           end
       end 
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
-     end
-  
-     render :text => v.html_safe 
+      return point
   end
   
   def dameIcoMuseo seleccionado
