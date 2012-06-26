@@ -26,17 +26,37 @@ class Datos
     :details_html=>dameDetails, 
     :coords=>dameCoordenadas,
     :clasi=>self.clase,
-    :rutas=>(self.data.class==Museo)?dameRutas(self.data) :""
+    :rutas=>dameRutasDeDato
 
 
     }
   end
   
+  def dameRutasDeDato
+    if self.data.class==Museo 
+      dameRutas(self.data) 
+    elsif self.data.class==Camino
+            dameRutasCamino(self.data) 
+    else
+      ""
+      end
+  end
+   def dameRutas museo
+        
+       museo.caminos.map{|k|  {:nombre => k.nombre, :archivo => k.archivo.to_s}}
+  end
+   def dameRutasCamino k
+        
+      [{:nombre => k.nombre, :archivo => k.archivo.to_s}]
+      
+  end
   def dameCoordenadas
     if self.data.class==Museo then
       devuelveCoordenadasSiExisten self.data.ficha
     elsif self.data.class==Hito then
-      devuelveCoordenadasSiExisten self.data
+      devuelveCoordenadasSiExisten self.data.entorno.museo.ficha
+    elsif self.data.class==Camino then
+      devuelveCoordenadasSiExisten self.data.entorno.museo.ficha
     else 
       ""
     end
@@ -285,10 +305,7 @@ else
         self.data.infos.each{|info| nombre="Es recurso int. xxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[info.museo.predecessor] else mapa[nombre] << info.museo.predecessor end }
 
   end
-  def dameRutas museo
-        
-       museo.caminos.map{|k|  {:nombre => k.nombre, :archivo => k.archivo.to_s}}
-  end
+ 
   def dameAtributos
 #    if self.data.class==Museo
 #      value=self.data.ficha

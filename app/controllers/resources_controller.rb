@@ -39,6 +39,8 @@ end
         puts "---------------"+id_arra.to_s
       elsif (id[0]=="h") then
         id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
+      elsif (id[0]=="c") then
+        id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
       else
         id_arra<<id
         end

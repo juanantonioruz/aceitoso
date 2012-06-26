@@ -176,6 +176,9 @@ public class Resource {
                  hitos_peticion="hitotextf/"+that.id;
          
         	 url_museos= "/resources/museostextfile/h"+that.id;
+         }else if(that.clasi=="Camino"){
+         
+        	 url_museos= "/resources/museostextfile/c"+that.id;
          }else{
          	url_museos= "/resources/museostextfile/";
          }
@@ -190,6 +193,7 @@ public class Resource {
 
         	 }
         }
+        
 			activar_selectControl();
 					
       },
