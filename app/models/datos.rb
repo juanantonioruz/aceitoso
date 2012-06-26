@@ -257,7 +257,7 @@ else
         end 
         self.data.espacios.each{|espacio| nombre="Espacios Visitablesxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio.predecessor] else mapa[nombre] << espacio.predecessor end }
         self.data.eventos.each{|evento| nombre="Historiaxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[evento.predecessor] else mapa[nombre] << evento.predecessor end }
-        self.data.infos.each{|ri| nombre="Recursos Interpretativosxxxxxx#{self.data.id}" and if (!mapa.key?nombre && !ri.generica.nil?) then mapa[nombre]=[ri.generica.predecessor] else mapa[nombre] << ri.generica.predecessor end }
+        self.data.infos.each{|ri| nombre="Recursos Interpretativosxxxxxx#{self.data.id}" and if(!ri.generica.nil?) then if (!mapa.key?nombre ) then mapa[nombre]=[ri.generica.predecessor] else mapa[nombre] << ri.generica.predecessor end end }
         #self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio] else mapa[nombre] << espacio end }
 
   end
