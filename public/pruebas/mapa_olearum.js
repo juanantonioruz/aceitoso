@@ -1,7 +1,10 @@
 /**
  * @author juanitu
  */
-var map, controls,layer_museos, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
+var map, controls,layer_museos,layer_hitos, indexLayerMuseos, mercator, geographic,p,selectControl, selectControl,capas_sensibles, panel_ampliable, es_ampliado;
+  var centroLonLatPeninsula=new OpenLayers.LonLat('-666497.4453543', '4493995.6445449');
+  var zoomCentroPeninsula=4;
+var	zoomMapa=8;
 
 
 function inicia_capas_base(map){
@@ -91,16 +94,33 @@ function add_events_to_ruta(ruta){
 						add_capa_seleccionable(map, vector);
 						//selectControl.map.layers.push(vector);
 						actuales.push(nombre);
-						activar_selectControl();
 						//console.log(actuales);
 				 }
 		
 	}
+	
+function borrando(event){
+	//alert("borrando"+event.layer);
+}
+	
+function deleteAllLayersSensibles(centro, zoomito){
+	layer_hitos=null;
+	kmls=[];
+	layer_museos=null;
+	capas_sensibles=[]
+	actuales=[];
+		cambiaDimension("200px","200px",centro, zoomito );
+		es_ampliado=false;
+		
+
+}
+
+	
 	var hitos_peticion;
 		function loadMarcas(peticion){
 				hitos_peticion=peticion;
 
-				 hitos = new OpenLayers.Layer.Vector("HITOS", {
+				 layer_hitos = new OpenLayers.Layer.Vector("HITOS", {
 					projection: geographic,
 
                     strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
@@ -113,12 +133,11 @@ function add_events_to_ruta(ruta){
 			
 
 					
-				 hitos.events.on({
+				 layer_hitos.events.on({
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
-				add_capa_seleccionable(map, hitos);
-				activar_selectControl();
+				add_capa_seleccionable(map, layer_hitos);
 
 
 				
@@ -143,11 +162,11 @@ function add_events_to_ruta(ruta){
 		
 	
 	function add_capa_seleccionable(mapa, vector){
+		
 		 mapa.addLayer(vector);
-		console.log(mapa.getNumLayers());
-		console.log("antes"+mapa.getLayerIndex(layer_museos));
-		mapa.raiseLayer(layer_museos, mapa.getNumLayers()-1);
-		console.log("despues"+mapa.getLayerIndex(layer_museos));
+		if(layer_hitos!=null)mapa.raiseLayer(layer_hitos, mapa.getNumLayers()-2);
+		if(layer_museos!=null)mapa.raiseLayer(layer_museos, mapa.getNumLayers()-1);
+		// console.log("despues"+mapa.getLayerIndex(layer_museos));
 		capas_sensibles.push(vector);
 			
 	}
@@ -178,6 +197,7 @@ $("#footer").animate({
 		var anchura=$(document).width()-$('aside').width()-100;
 		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
 		es_ampliado=true;
+		
 	}
 
 	function reduceMapa(evt){
@@ -263,16 +283,44 @@ $("#footer").animate({
                     feature.popup = null;
                 }
             }
-			function coloca(lon, lat) {
-				var lonlat = new OpenLayers.LonLat(lon, lat).transform(geographic, mercator);
-				//map.panTo(lonlat);
-				map.setCenter(lonlat,8);
+			function load_layer_museos( url_museos_int){
+				url_museos=url_museos_int;
+					 layer_museos = new OpenLayers.Layer.Vector("MUSEOS", {
+					projection: geographic,
+
+                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
+                    protocol: new OpenLayers.Protocol.HTTP({
+                        url: url_museos_int,
+                        format: new OpenLayers.Format.Text()
+                    })
+                });
+
+			add_capa_seleccionable(map, layer_museos);
+	
+	
+			layer_museos.events.on({
+                'featureselected': onFeatureSelect,
+                'featureunselected': onFeatureUnselect
+            });
+	
+			indexLayerMuseos=map.getNumLayers()-1;
 			}
 			
+function coloca(lon, lat) {
+	var lonlat = new OpenLayers.LonLat(lon, lat).transform(geographic, mercator);
+	//map.panTo(lonlat);
+	return lonlat;
+	
+}
 			
-			 function init_mapa(center, zoom){
-	actuales=[];
- 	capas_sensibles=[];
+function centerMapaPeninsula(){
+	            map.setCenter( centroLonLatPeninsula, zoomCentroPeninsula);
+
+}
+			var url_museos="/resources/museostextfile";
+ function init_mapa(center, zoom){
+		actuales=[];
+	 	capas_sensibles=[];
 	    mercator = new OpenLayers.Projection("EPSG:900913");
 	    geographic = new OpenLayers.Projection("EPSG:4326");
         map = new OpenLayers.Map('mapa_div', { 
@@ -285,36 +333,23 @@ $("#footer").animate({
         ]
 		});
 			
-		
+		map.events.on({
+		    "removelayer": borrando
+		});
+
 
 		panel_ampliable= creaPanelAmpliable();
 		map.addControl(panel_ampliable);
 				
 			inicia_capas_base(map);
-
-			 layer_museos = new OpenLayers.Layer.Vector("MUSEOS", {
-					projection: geographic,
-
-                    strategies: [new OpenLayers.Strategy.BBOX({resFactor: 1.1})],
-                    protocol: new OpenLayers.Protocol.HTTP({
-                        url: "/resources/museostextfile",
-                        format: new OpenLayers.Format.Text()
-                    })
-                });
-
-			add_capa_seleccionable(map, layer_museos);
-			
-			 layer_museos.events.on({
-                'featureselected': onFeatureSelect,
-                'featureunselected': onFeatureUnselect
-            });
-			
+			if(url_museos!=null)
+			load_layer_museos( url_museos);
 		
-			activar_selectControl();
+		
     		
               
             map.setCenter( center, zoom);
-			if(hitos_peticion!=null) loadMarcas(hitos_peticion);
+			if(hitos_peticion!=null && layer_hitos==null) loadMarcas(hitos_peticion);
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
 					var value = kmls[i];
@@ -322,5 +357,6 @@ $("#footer").animate({
 				}
 
 			}
+			activar_selectControl();
 			return map;
             }

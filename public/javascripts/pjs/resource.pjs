@@ -133,7 +133,7 @@ public class Resource {
         that.clasi=response.clasi;
       
         var lon_lat=that.coords.split("x");
-        if(that.coords!=null) coloca(lon_lat[1], lon_lat[0]);
+       
         
        
         
@@ -163,22 +163,31 @@ public class Resource {
         $('aside').html(g.getSelectedNode().getSubject().html);
        g.getSelectedNode().clasi=that.clasi;
       activaDesplegablesMuseo();
-
+     
        
          if(that.clasi=="Museo"){
          //  println(that.clasi);
+         					url_museos= "/resources/museostextfile/"+that.id;
        
-        loadMarcas("hitostextfile/"+that.id);
+        hitos_peticion="hitostextfile/"+that.id;
+         }else if(that.clasi=="Generica"){
+        	 url_museos= "/resources/museostextfile/g"+that.id;
+         }else{
+         					url_museos= "/resources/museostextfile/";
          }
-          if(that.rutas!=""){
+           if(that.coords!=null &&  that.clasi!="Generica"){
+		deleteAllLayersSensibles(coloca(lon_lat[1], lon_lat[0]), zoomMapa);
+        }else{
+		deleteAllLayersSensibles(centroLonLatPeninsula, zoomCentroPeninsula);
+        }
+         if(that.rutas!=""){
         	 for (int r = 0; r < that.rutas.length(); r++) {
-	        	//println(that.rutas.length());
 	        	addLayerKML(that.rutas[r].nombre, that.rutas[r].archivo);
-			//add_events_to_ruta(aceite);
-			 //map.addLayer(aceite);
 
         	 }
         }
+									activar_selectControl();
+					
       },
       error: function() {
       

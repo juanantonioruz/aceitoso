@@ -27,15 +27,38 @@ def genera
 end
 
   def museostextfile
-    v="id|point|title|description|icon".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
       museos=Museo.find(:all)
+      id=params[:id]
+      
+      id_arra=Array.new
+      if(!id.nil? && id[0]=="g") then 
+      puts "la genericaaaaaaaaaaaaaaaaaaa"+id[2..-1]
+      Relacionable.find(id[2..-1]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
+      puts "iiiiiiiiiiiiiiiiiiiiii  "+id_arra.to_s
+      else
+      id_arra<<id
+      end 
+      
+      museo_se=""
    for museo in museos do 
-        ficha=museo.ficha
-    ne="#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo}".split("|").join("\t")+"\n"
-    v+=ne
+        if id_arra.include? museo.predecessor.id.to_s then
+          museo_se=museo_cvs(museo,true)
+          else
+          ne=museo_cvs(museo,false)
+          v+=ne
+          end 
+        
     
-    end
+  end
+  if(museo_se!="") then v+=museo_se end
      render :text => v.html_safe 
+  end
+  
+  def museo_cvs(museo, sel)
+            ficha=museo.ficha
+    
+    return "#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo(sel)}|#{dimensionIco(sel)}".split("|").join("\t")+"\n"
   end
   
   def resumenInfoHTML info
@@ -44,7 +67,7 @@ end
   
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
-    v="id|point|title|description|icon|kml".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
         ficha=museo.ficha
  #   v+=ne
      for hito in museo.hitos do
@@ -62,14 +85,26 @@ end
           puts "Error leyendo el doc!"
           end
       end 
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
      end
   
      render :text => v.html_safe 
   end
   
-  def dameIcoMuseo
+  def dameIcoMuseo seleccionado
+    if(seleccionado) then return dameIcoMuseoSeleccionado end
           return "/uploads/service/imagen/26/museum_industry.png"
+  end
+  def dameIcoMuseoSeleccionado
+          return "/images/museo_seleccionado.gif"
+  end
+  def dimensionIco amplia
+    if amplia then
+          return "40,46"
+      else
+          return "32,37"
+        
+        end
 
 end
 
@@ -93,16 +128,9 @@ end
   end
   def text_cvs vv
     vv.split().each do |csv|
-
-
-
-   if csv =~ /\A".*"\z/m then csv.gsub!(/\A"(.*)"\z/m, '\1') end  # remove double-quotes at string beginning & end
-
-
-  end
-
-  vv
-
+     if csv =~ /\A".*"\z/m then csv.gsub!(/\A"(.*)"\z/m, '\1') end  # remove double-quotes at string beginning & end
+    end
+   vv
   end
 
   #este metodo es invocado por el suggest del interactivo

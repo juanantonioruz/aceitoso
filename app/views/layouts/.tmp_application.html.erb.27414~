@@ -88,7 +88,7 @@ dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
 	} 
   },500);
   if(!$.mapita)
-	$.mapita=init_mapa(centroLonLatPeninsula,zoomCentroPeninsula);
+	$.mapita=init_mapa(new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'),4);
 
 });
 
