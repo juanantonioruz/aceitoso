@@ -32,15 +32,18 @@ end
       id=params[:id]
       
       id_arra=Array.new
-      if(!id.nil? && id[0]=="g") then 
-      puts "la genericaaaaaaaaaaaaaaaaaaa"+id[2..-1]
-      Relacionable.find(id[2..-1]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
-      puts "iiiiiiiiiiiiiiiiiiiiii  "+id_arra.to_s
+      if(!id.nil?) then
+        if (id[0]=="g") then 
+          puts id[1..id.length]
+        Relacionable.find(id[1..id.length]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
+        puts "---------------"+id_arra.to_s
+      elsif (id[0]=="h") then
+        id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
       else
-      id_arra<<id
-      end 
-      
-      museo_se=""
+        id_arra<<id
+        end
+      end
+museo_se=""
    for museo in museos do 
         if id_arra.include? museo.predecessor.id.to_s then
           museo_se=museo_cvs(museo,true)
@@ -49,6 +52,7 @@ end
           v+=ne
           end 
         
+          v+=museo_se
     
   end
   if(museo_se!="") then v+=museo_se end

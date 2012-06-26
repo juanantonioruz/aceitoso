@@ -30,15 +30,20 @@ if(!canvasSupported) window.location.href="no_compatible";
   
   
 <style>
+	.olControlPanPanel{
+		display:none;
+	}
+	 .olControlPanel{
+	 }
      .olControlPanel button {
           position: relative;
           display: block;
           margin: 2px;
-          border: 1px solid;
-          padding: 0 5px;
-          border-radius: 4px;
-          height: 35px;
-          background-color: white;
+          border: none;
+          height: 25px;
+          background-color: "transparent";
+		          width: 23px;
+  paadin:0px;
           float: left;
           overflow: visible; /* needed to remove padding from buttons in IE */
         }
@@ -52,15 +57,17 @@ if(!canvasSupported) window.location.href="no_compatible";
           left: 2px;
         }
         .olControlPanel .ampliaItemActive span:first-child { 
-          background-image: url("/images/expand.gif");
-          height: 29px;
-          width: 29px;
+          background-image: url("/images/maximizar_def.gif");
+		  background-repeat:no-repeat;
+          height: 25px;
+          width: 23px;
           top: 2px;
         }
         .olControlPanel .reduceItemInactive span:first-child { 
-          background-image: url("/images/minimize.gif");
-          height: 29px;
-          width: 29px;
+          background-image: url("/images/minimizar_def.gif");
+		  background-repeat:no-repeat;
+          height: 25px;
+          width: 23px;
           top: 2px;
         }
 </style>
@@ -88,7 +95,7 @@ dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
 	} 
   },500);
   if(!$.mapita)
-	$.mapita=init_mapa(new OpenLayers.LonLat('-666497.4453543', '4493995.6445449'),4);
+	$.mapita=init_mapa(centroLonLatPeninsula,zoomCentroPeninsula);
 
 });
 

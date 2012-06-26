@@ -24,12 +24,29 @@ class Datos
     :id=>self.data.predecessor.id.to_s
     },
     :details_html=>dameDetails, 
-    :coords=>(self.data.class==Museo and !self.data.ficha.x.blank?)? self.data.ficha.x+"x"+self.data.ficha.y : "",
+    :coords=>dameCoordenadas,
     :clasi=>self.clase,
     :rutas=>(self.data.class==Museo)?dameRutas(self.data) :""
 
 
     }
+  end
+  
+  def dameCoordenadas
+    if self.data.class==Museo then
+      devuelveCoordenadasSiExisten self.data.ficha
+    elsif self.data.class==Hito then
+      devuelveCoordenadasSiExisten self.data
+    else 
+      ""
+    end
+     
+  end
+  
+  def devuelveCoordenadasSiExisten objCoordenadas
+    if !objCoordenadas.x.blank? then
+        objCoordenadas.x+"x"+objCoordenadas.y
+      end
   end
   
   def dameTabNew titulo

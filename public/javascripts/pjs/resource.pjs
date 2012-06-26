@@ -167,15 +167,17 @@ public class Resource {
        
          if(that.clasi=="Museo"){
          //  println(that.clasi);
-         					url_museos= "/resources/museostextfile/"+that.id;
+         	url_museos= "/resources/museostextfile/"+that.id;
        
         hitos_peticion="hitostextfile/"+that.id;
          }else if(that.clasi=="Generica"){
         	 url_museos= "/resources/museostextfile/g"+that.id;
+         }else if(that.clasi=="Hito"){
+        	 url_museos= "/resources/museostextfile/h"+that.id;
          }else{
-         					url_museos= "/resources/museostextfile/";
+         	url_museos= "/resources/museostextfile/";
          }
-           if(that.coords!=null &&  that.clasi!="Generica"){
+        if(that.coords!=null &&  that.clasi!="Generica"){
 		deleteAllLayersSensibles(coloca(lon_lat[1], lon_lat[0]), zoomMapa);
         }else{
 		deleteAllLayersSensibles(centroLonLatPeninsula, zoomCentroPeninsula);
@@ -186,7 +188,7 @@ public class Resource {
 
         	 }
         }
-									activar_selectControl();
+			activar_selectControl();
 					
       },
       error: function() {
