@@ -1,7 +1,8 @@
 /* @pjs font="/fonts/GraublauWeb.otf, /fonts/GraublauWebBold.otf"; */
-/* @pjs preload="javascripts/pjs/images/LOGO_OLEARUM.jpg"; */
-/* @pjs preload="javascripts/pjs/images/EducacionCulturaYDeporte.jpg"; */
-/* @pjs preload="javascripts/pjs/images/contacto.png"; */
+/* @pjs preload="javascripts/pjs/images/olearum.jpg"; */
+/* @pjs preload="javascripts/pjs/images/ministerio.jpg"; */
+/* @pjs preload="javascripts/pjs/images/contacto.jpg"; */
+/* @pjs preload="javascripts/pjs/images/titulo.png"; */
 /* @pjs preload="javascripts/pjs/images/icon-reload.gif"; */
 
 String mensaje="hola";
@@ -65,15 +66,17 @@ resourceId=v;
     PImage ministerioImage;
     PImage contactoImage;
     PImage resetImage;
+    PImage tituloImage;
 
 
 
 
 void setup() {	
-    olearumImage = loadImage("javascripts/pjs/images/LOGO_OLEARUM.jpg");
-    ministerioImage = loadImage("javascripts/pjs/images/EducacionCulturaYDeporte.jpg");
-    contactoImage = loadImage("javascripts/pjs/images/contacto.png");
+    olearumImage = loadImage("javascripts/pjs/images/olearum.jpg");
+    ministerioImage = loadImage("javascripts/pjs/images/ministerio.jpg");
+    contactoImage = loadImage("javascripts/pjs/images/contacto.jpg");
     resetImage = loadImage("javascripts/pjs/images/icon-reload.gif");
+    tituloImage = loadImage("javascripts/pjs/images/titulo.png");
 	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -94,20 +97,22 @@ void setup() {
 		$('aside').html(r.html);
 	}
 
-	 origenContacto=new PVector(width-290, height-30);
- 	finContacto=new PVector(35, 26);
-		 origenReset=new PVector(width-390, 5);
+	 origenTitulo=new PVector(20,20);
+ 	finTitulo=new PVector(600, 66);
+	 origenContacto=new PVector(width-320, height-30);
+ 	finContacto=new PVector(37, 28);
+		 origenReset=new PVector(width-392, 5);
  	finReset=new PVector(48, 48);
  	
-	 origenOlearum_1=new PVector(0,0);
- 	finOlearum_1=new PVector(200, 190);
-	 origenMinisterio_1=new PVector(40,200);
- 	finMinisterio_1=new PVector(150, 45);
+	 origenOlearum_1=new PVector(0,100);
+ 	finOlearum_1=new PVector(200, 71);
+	 origenMinisterio_1=new PVector(40,180);
+ 	finMinisterio_1=new PVector(150, 55);
  	
-	 origenOlearum_2=new PVector(width-225,height-38);
- 	finOlearum_2=new PVector(40, 38);
-	 origenMinisterio_2=new PVector(width-175,height-38);
- 	finMinisterio_2=new PVector(125, 38);
+	 origenOlearum_2=new PVector(width-265,height-38);
+ 	finOlearum_2=new PVector(107, 38);
+	 origenMinisterio_2=new PVector(width-150,height-38);
+ 	finMinisterio_2=new PVector(104, 38);
 
 }
 
@@ -121,6 +126,8 @@ if(fondo){
 }
 }
 
+PVector origenTitulo;
+PVector finTitulo;
 PVector origenContacto;
 PVector finContacto;
 PVector origenOlearum_1;
@@ -138,6 +145,10 @@ strokeCap(SQUARE);
   if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
+    		pushStyle();
+    		tint(255, 120);
+       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
+       	 popStyle();
            	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
            	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
     
@@ -146,7 +157,9 @@ strokeCap(SQUARE);
 			//console.log("***!.............");
     
   //  printMensaje();
-  }else{
+  }else{	
+  		
+       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
        	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
        	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
        
