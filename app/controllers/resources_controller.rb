@@ -38,7 +38,7 @@ end
       if(!id.nil?) then
         if (id[0]=="g") then 
         Relacionable.find(id[1..id.length]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
-        logger.info "#{id_arra} ----------------------------"
+        logger.warn "#{id_arra} ----------------------------"
 
       elsif (id[0]=="i") then
         
