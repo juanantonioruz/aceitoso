@@ -3,6 +3,7 @@
 <thead>
 <tr>
 <th>Nombre</th>
+<th>Nombre_corto</th>
 <th>Acciones</th>
 </tr>
 </thead>
@@ -10,6 +11,7 @@
 <%@museos.each do |museo|%>
 <tr>
 <td><%=museo.nombre%></td>
+<td><%=museo.nombre_corto%></td>
 <td>
 <%= link_to 'Ver',museo,:class=>'btn btn-success'%>&nbsp;
 <%= link_to 'Relaciones',relacion_museo_path(museo),:class=>'btn btn-success'%>&nbsp;

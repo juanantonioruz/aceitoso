@@ -1,0 +1,16 @@
+<h1>Enlace a recurso interpretativo: </h1>
+<h3><%=@info.museo.nombre%></h3>
+
+
+<label class='label'>Título</label>
+<p><%=titulo(@info)%> &nbsp;</p>
+<label class='label'>Tipo</label>
+<p><%=@info.tipo_ri%>&nbsp;</p>
+
+<label class='label'>Enlace al contenido</label>
+<p><%=url(@info)%>&nbsp;</p>
+
+<br/>
+<%=link_to 'Editar',edit_museo_info_path(@museo),:class=>'btn'%> o 
+
+<%=link_to 'Volver a recursos interpretativos del museo ',museo_infos_path(@museo)%>

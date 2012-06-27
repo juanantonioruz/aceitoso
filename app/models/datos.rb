@@ -259,7 +259,7 @@ else
         end 
         self.data.espacios.each{|espacio| nombre="Espacios Visitablesxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio.predecessor] else mapa[nombre] << espacio.predecessor end }
         self.data.eventos.each{|evento| nombre="Historiaxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[evento.predecessor] else mapa[nombre] << evento.predecessor end }
-        self.data.infos.each{|ri| nombre="Recursos Interpretativosxxxxxx#{self.data.id}" and if(!ri.generica.nil?) then if (!mapa.key?nombre ) then mapa[nombre]=[ri.generica.predecessor] else mapa[nombre] << ri.generica.predecessor end end }
+        self.data.infos.each{|ri| nombre="Info Museograficaxxxxxx#{self.data.id}" and if(!ri.generica.nil?) then if (!mapa.key?nombre ) then mapa[nombre]=[ri.predecessor] else mapa[nombre] << ri.predecessor end end }
         #self.data.espacios.each{|espacio| nombre="Espacios Relacionadasxxxxxx#{self.data.id}" and if !mapa.key?nombre then mapa[nombre]=[espacio] else mapa[nombre] << espacio end }
 
   end
@@ -347,7 +347,7 @@ else
   
    def dameValuesRelacionables lista
      ## esto es una chapuza llamar relacionable al espacio que por ahora no lo es.. .
-    lista.map { |relacionable| {:name=>if  relacionable.class==Espacio then relacionable.nombre_ask else relacionable.heir.nombre_ask end ,:id=>relacionable.id}}
+    lista.map { |relacionable| {:name=>if  relacionable.class==Espacio then relacionable.nombre_ask elsif relacionable.heir.class==Info then relacionable.heir.tipo_ri.capitalize+": "+relacionable.heir.nombre_ask else relacionable.heir.nombre_ask end ,:id=>if  relacionable.class==Espacio then relacionable.heir.generica.predecessor.id else relacionable.id end}}
   end
   
  
