@@ -37,9 +37,10 @@ end
       id_arra=Array.new
       if(!id.nil?) then
         if (id[0]=="g") then 
-          puts id[1..id.length]
         Relacionable.find(id[1..id.length]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
-        puts "---------------"+id_arra.to_s
+      elsif (id[0]=="i") then
+        
+        Relacionable.find(id[1..id.length]).heir.generica.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
       elsif (id[0]=="h") then
         id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
       elsif (id[0]=="c") then

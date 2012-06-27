@@ -170,6 +170,8 @@ public class Resource {
          	url_museos= "/resources/museostextfile/"+that.id;
        
         hitos_peticion="hitostextfile/"+that.id;
+         }else if(that.clasi=="Info"){
+        	 url_museos= "/resources/museostextfile/i"+that.id;
          }else if(that.clasi=="Generica"){
         	 url_museos= "/resources/museostextfile/g"+that.id;
          }else if(that.clasi=="Hito"){
@@ -189,7 +191,8 @@ public class Resource {
          }else{
          	url_museos= "/resources/museostextfile/";
          }
-        if(that.coords!=null &&  that.clasi!="Generica"){
+         
+        if(that.coords!="" &&  that.clasi!="Generica"){
 		deleteAllLayersSensibles(coloca(lon_lat[1], lon_lat[0]), zoomMapa);
         }else{
 		deleteAllLayersSensibles(centroLonLatPeninsula, zoomCentroPeninsula);
