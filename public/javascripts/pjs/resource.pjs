@@ -171,23 +171,23 @@ public class Resource {
        
         hitos_peticion="hitostextfile/"+that.id;
          }else if(that.clasi=="Info"){
-        	 url_museos= "/resources/museostextfile/i"+that.id;
+        	 url_museos= "/resources/museostextfile/i-"+that.id;
          }else if(that.clasi=="Generica"){
-        	 url_museos= "/resources/museostextfile/g"+that.id;
+        	 url_museos= "/resources/museostextfile/g-"+that.id;
          }else if(that.clasi=="Hito"){
                  hitos_peticion="hitotextf/"+that.id;
          
-        	 url_museos= "/resources/museostextfile/h"+that.id;
+        	 url_museos= "/resources/museostextfile/h-"+that.id;
          }else if(that.clasi=="Camino"){
          
-        	 url_museos= "/resources/museostextfile/c"+that.id;
+        	 url_museos= "/resources/museostextfile/c-"+that.id;
          }else if(that.clasi=="Pieza"){
          
-        	 url_museos= "/resources/museostextfile/p"+that.id;
+        	 url_museos= "/resources/museostextfile/p-"+that.id;
          }else if(that.clasi=="Espacio"){
-        	 url_museos= "/resources/museostextfile/e"+that.id;
+        	 url_museos= "/resources/museostextfile/e-"+that.id;
          }else if(that.clasi=="Evento"){
-        	 url_museos= "/resources/museostextfile/t"+that.id;
+        	 url_museos= "/resources/museostextfile/t-"+that.id;
          }else{
          	url_museos= "/resources/museostextfile/";
          }

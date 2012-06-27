@@ -38,25 +38,28 @@ end
       if(!id.nil?) then
               logger.warn "#{id} ----------------------------"
               logger.warn "#{id[0]} ----------------------------"
-              logger.warn "#{id[1..id.length]} ----------------------------"
+              
+        caracter=id.split("-")[0]      
+        numero=id.split("-")[1]      
+              logger.warn "#{caracter} #{numero} ----------------------------"
 
-        if (id[0]=="g") then 
-        Relacionable.find(id[1..id.length]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
+        if (caracter=="g") then 
+        Relacionable.find(numero).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
         logger.warn "#{id_arra} ----------------------------"
 
-      elsif (id[0]=="i") then
+      elsif (caracter=="i") then
         
-        Relacionable.find(id[1..id.length]).heir.generica.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
-      elsif (id[0]=="h") then
-        id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
-      elsif (id[0]=="c") then
-        id_arra<<Relacionable.find(id[1..id.length]).heir.entorno.museo.predecessor.id.to_s
-      elsif (id[0]=="p") then
-        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
-      elsif (id[0]=="e") then
-        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
-      elsif (id[0]=="t") then
-        id_arra<<Relacionable.find(id[1..id.length]).heir.museo.predecessor.id.to_s
+        Relacionable.find(numero).heir.generica.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
+      elsif (caracter=="h") then
+        id_arra<<Relacionable.find(numero).heir.entorno.museo.predecessor.id.to_s
+      elsif (caracter=="c") then
+        id_arra<<Relacionable.find(numero).heir.entorno.museo.predecessor.id.to_s
+      elsif (caracter=="p") then
+        id_arra<<Relacionable.find(numero).heir.museo.predecessor.id.to_s
+      elsif (caracter=="e") then
+        id_arra<<Relacionable.find(numero).heir.museo.predecessor.id.to_s
+      elsif (caracter=="t") then
+        id_arra<<Relacionable.find(numero).heir.museo.predecessor.id.to_s
       else
         id_arra<<id
         end
