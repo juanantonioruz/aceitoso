@@ -137,6 +137,7 @@ function deleteAllLayersSensibles(centro, zoomito){
                     'featureselected': onFeatureSelect,
                     'featureunselected': onFeatureUnselect
                 });
+				
 				add_capa_seleccionable(map, layer_hitos);
 
 
@@ -162,7 +163,7 @@ function deleteAllLayersSensibles(centro, zoomito){
 		
 	
 	function add_capa_seleccionable(mapa, vector){
-		
+		//if (mapa.getLayersByName(vector.name).length>0) return ; 
 		 mapa.addLayer(vector);
 		if(layer_hitos!=null)mapa.raiseLayer(layer_hitos, mapa.getNumLayers()-2);
 		if(layer_museos!=null)mapa.raiseLayer(layer_museos, mapa.getNumLayers()-1);

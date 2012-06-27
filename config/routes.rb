@@ -82,6 +82,7 @@ Olearum::Application.routes.draw do
   match "resources/museostextfile/:id" => "resources#museostextfile"
     match "resumen/museo/:id"=> "resumen#museo"
     match "resources/medio/:id"=> "resources#medio"
+    match "resources/camino/:url"=> "resources#camino"
 
   match 'mapa' => 'resources#show'
 

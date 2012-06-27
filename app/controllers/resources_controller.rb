@@ -103,6 +103,19 @@ museo_se=""
      render :text => v.html_safe 
   end
   
+  
+  def camino
+    url=params[:url]
+        url.gsub!(/qqq/, "/")
+      puts url+"pppppppppppppppppppppppppppppppppppppppppppppppppppppppp"
+      if(request.domain=="localhost") then
+              doc = Nokogiri::XML(open("http://"+request.domain+":"+request.port.to_s+url))
+              else
+             doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+url))
+         end
+         send_file doc
+         end
+  
   def damePointHito hito
      point="#{hito.x},#{hito.y}"
        if (!hito.archivo.blank?) then
