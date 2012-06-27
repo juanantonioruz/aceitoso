@@ -25,7 +25,7 @@ class Pieza < ActiveRecord::Base
   end
 
   def nombre_relacionable
-    "#{nombre} - #{museo.nombre}"
+    "#{nombre} - #{museo.nombre_corto}"
   end
   def nombre_ask
     nombre_relacionable
