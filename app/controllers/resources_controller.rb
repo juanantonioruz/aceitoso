@@ -6,6 +6,9 @@ class ResourcesController < ApplicationController
          require 'nokogiri'
 
 
+  
+
+
   def medio
              
 

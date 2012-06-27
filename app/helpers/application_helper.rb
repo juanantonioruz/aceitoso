@@ -1,4 +1,24 @@
 module ApplicationHelper
+@@enlaces={}
+
+  def get_enlaces
+    if @@enlaces=={} then
+     # Relacionable.find(:all).map{|r| @@enlaces[r.nombre_relacionable]=r.id}
+     Museo.find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
+     Generica.find(:all).map{|r| @@enlaces[r.titulo]=r.predecessor.id}
+     Hito.find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
+    end
+      return @@enlaces
+  end
+  def reset_enlaces
+    @@enlaces={}
+  end
+
+    def texto_con_enlaces texto
+      get_enlaces.each{|e,v| texto.gsub!(/[^\*]#{e}[^\*]/, " <a href='#' onclick='circles(#{v})'>*#{e}*</a> ")}
+      texto
+    end
+
 
     def imagentam(modelo,tam)
         if modelo.imagen_url.to_s!='' 

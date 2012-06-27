@@ -1,6 +1,8 @@
 include ActionView::Helpers::AssetTagHelper
 
 class Datos
+    include ApplicationHelper
+
   attr_accessor   :data, :resultado_html, :coordenadas, :clase
   
   def initialize
@@ -91,7 +93,7 @@ class Datos
           respuesta_det<<"<dl>" 
           respuesta_det<< dameTabNew('Descripci&oacute;n')
         respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
-          respuesta_det<<"#{self.data.ficha.descripcion}" 
+          respuesta_det<<"#{texto_con_enlaces(self.data.ficha.descripcion)}" 
           respuesta_det<<finTab
           respuesta_det<<dameTabNew("Contacto")
           respuesta_det<<"#{self.data.ficha.contacto}" 
@@ -172,7 +174,7 @@ else
       if(self.data.descripcion.blank?)
           respuesta_det<<"Actualmente no hay descripcion para este tema"
     else
-    respuesta_det<<self.data.descripcion 
+    respuesta_det<<texto_con_enlaces(self.data.descripcion) 
       end
   end
       respuesta_det<<"</p>"
