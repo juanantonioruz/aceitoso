@@ -36,6 +36,10 @@ end
       
       id_arra=Array.new
       if(!id.nil?) then
+              logger.warn "#{id} ----------------------------"
+              logger.warn "#{id[0]} ----------------------------"
+              logger.warn "#{id[1..id.length]} ----------------------------"
+
         if (id[0]=="g") then 
         Relacionable.find(id[1..id.length]).heir.piezas.each{|pieza| id_arra << pieza.museo.predecessor.id.to_s}
         logger.warn "#{id_arra} ----------------------------"
