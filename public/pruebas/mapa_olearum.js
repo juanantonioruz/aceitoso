@@ -74,6 +74,7 @@ function add_events_to_ruta(ruta){
                 })
             });
 	}
+	
 	var actuales=[];
 	//llamade desde processing resource.pjs parece que no accede a la variable map
 	var kmls=[];
