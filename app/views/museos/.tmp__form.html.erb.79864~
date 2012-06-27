@@ -2,9 +2,6 @@
     <%=f.label :nombre,:class=>'label'%>
     <%=f.text_field :nombre%>
     <br/>
-    <%=f.label :nombre_corto,:class=>'label'%>
-    <%=f.text_field :nombre_corto%>
-    <br/>
   
     <br/>
 	

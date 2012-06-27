@@ -1,5 +1,4 @@
 <h1><%=@museo.nombre%></h1>
-<h3><%=@museo.nombre_corto%></h3>
 <br>
 <p><i>* Puede ver y modificar la información asociada al museo pulsando ver en cada una de las opciones</i></p>
 
