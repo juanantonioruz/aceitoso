@@ -1,5 +1,6 @@
 class Generica < ActiveRecord::Base
-    
+    include ActionView::Helpers::SanitizeHelper
+
     mount_uploader :imagen,ImagenUploader
     has_and_belongs_to_many :labels,:join_table=>'genericas_labels'
 
@@ -24,8 +25,13 @@ class Generica < ActiveRecord::Base
   def nombre_relacionable
     titulo
   end
+
   def nombre_ask
     "#{titulo}"    
   end
+
+def desc_san
+    sanitize(descripcion, :tags=>[])  
+end
 
 end

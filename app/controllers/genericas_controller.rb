@@ -1,7 +1,7 @@
 class GenericasController < ApplicationController
 
     def index
-        @genericas=Generica.paginate(:page => params[:page], :per_page => 20).all(:order=>:titulo)
+        @genericas=Generica.paginate(:page => params[:page], :per_page => 20).all(:order=>'titulo ASC')
     end
 
     def new

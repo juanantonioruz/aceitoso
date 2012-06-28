@@ -1,0 +1,11 @@
+<h1>Articulos</h1>
+<%=render(:file => "/shared/autocomplete.html.erb", :locals => {:modelos_de_busqueda=>"Generica", :template=>"bir"} )  %>
+<div id="resultados">
+	<%= will_paginate @genericas %>
+
+<%=render :file=>"/genericas/_tabla_genericas.html.erb", :locals=>{:resultados=>@genericas}%>
+</div>
+
+<%= link_to 'Añadir articulo',new_generica_path,:class=>'btn'%>
+
+
