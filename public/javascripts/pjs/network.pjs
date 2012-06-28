@@ -140,7 +140,16 @@ PVector origenMinisterio_2;
 PVector finMinisterio_2;
 PVector origenReset;
 PVector finReset;
+
+boolean iniciar=true;
 void draw() {
+
+if(iniciar){
+setR(515);
+iniciar=false;
+setup();
+}
+
 strokeCap(SQUARE);
   if (g.nodes.size()>0) {
     g.tick();
