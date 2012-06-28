@@ -79,6 +79,7 @@ Olearum::Application.routes.draw do
   get "resources/museostextfile"
   match "resources/hitostextfile/:id" => "resources#hitostextfile"
   match "resources/hitotextf/:id" => "resources#hitotextf"
+  match "resources/hitotextfg/:id" => "resources#hitotextfg"
   match "resources/museostextfile/:id" => "resources#museostextfile"
     match "resumen/museo/:id"=> "resumen#museo"
     match "resources/medio/:id"=> "resources#medio"

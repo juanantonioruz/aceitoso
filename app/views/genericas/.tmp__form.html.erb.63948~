@@ -5,16 +5,6 @@
     <%=f.text_field :titulo%>
     <%=f.label :descripcion,:class=>'label'%>
     <%=f.text_area :descripcion,:class=>'tinymce'%>
-			<%=f.label "KML",:class=>'label'%>
-	 <%= f.file_field :archivo %>
-  <%if @generica.archivo_url.to_s!=''%>
- <br> <b> Archivo KML ya adjuntado</b><br>
-   <%= link_to @generica.archivo, @generica.archivo_url.to_s %>
-   <br>
-          <%= f.check_box :remove_archivo %>
-          <%= t('destroy')%>
-  <%end%>
-
 <br>
 <br>
 		<%=f.label "Piezas relacionadas",:class=>'label'%>

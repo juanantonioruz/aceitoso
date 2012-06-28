@@ -1,0 +1,30 @@
+<h1>Hito: <%=@hito.nombre%> de <%=@hito.entorno.museo.nombre%></h1>
+<br/>
+
+<label class='label'>Imagen</label>
+<p><%=imagentam(@hito,'64x64')%>&nbsp;</p>
+
+<label class='label'>Nombre</label>
+<p><%=@hito.nombre%>&nbsp;</p>
+<label class='label'>Servicio</label>
+<p><%=image_tag(@hito.imagen_servicio,:size=>'64x64')%> <%=@hito.service.descripcion%></p>
+
+<label class='label'>Descripción de la hito</label>
+<p><%=raw @hito.descripcion%>&nbsp;</p>
+<label class='label'>KML</label>
+
+<p> 
+  <% if @hito.archivo_url.to_s != "" %>
+  <%= link_to @hito.archivo, @hito.archivo_url.to_s %>
+  <% end %>
+ </p>
+
+	<%=render(:file => "/shared/coordenadas_show",:locals => { :modelo=>@hito} )  %>
+
+
+<label class='label'>Articulos Relacionados</label>
+<p><%=@hito.genericas.map {|x| x.titulo}%>&nbsp;</p>
+
+
+<br/>
+<%=link_to 'Editar',edit_museo_entorno_hito_path(@museo, @entorno),:class=>'btn'%> o <%=link_to 'Volver a hitos',museo_entorno_hitos_path(@museo)%>

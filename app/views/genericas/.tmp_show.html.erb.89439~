@@ -1,16 +1,6 @@
 <h1>Mostrando articulo: <%=@generica.titulo%></h1>
 <label class='label'>Descripción</label>
 <p><%=raw @generica.descripcion%></p>
-
-<label class='label'>KML</label>
-
-<p> 
-  <% if @generica.archivo_url.to_s != "" %>
-  <%= link_to @generica.archivo, @generica.archivo_url.to_s %>
-  <% end %>
- </p>
-
-
 <!--Aqui las etiquetas-->
 <!--%= etiquetas @generica% -->
 <label class='label'>Imagen</label>

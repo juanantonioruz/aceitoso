@@ -3,7 +3,7 @@ include ActionView::Helpers::AssetTagHelper
 class Datos
     include ApplicationHelper
 
-  attr_accessor   :data, :resultado_html, :coordenadas, :clase
+  attr_accessor   :data, :resultado_html, :coordenadas, :clase, :point
   
   def initialize
     @museos_hitos_rutas_implicitos=[]
@@ -65,6 +65,12 @@ class Datos
       devuelveCoordenadasSiExisten self.data.museo.ficha
     elsif self.data.class==Evento then
       devuelveCoordenadasSiExisten self.data.museo.ficha
+    elsif self.data.class==Generica then
+      if !self.point.nil? then
+        self.point.gsub(",","x")
+        else
+    ""
+      end
     else 
       ""
     end

@@ -1,8 +1,10 @@
 class Generica < ActiveRecord::Base
+
     include ActionView::Helpers::SanitizeHelper
 
     mount_uploader :imagen,ImagenUploader
-    has_and_belongs_to_many :labels,:join_table=>'genericas_labels'
+    mount_uploader :archivo,DocumentoUploader
+   has_and_belongs_to_many :labels,:join_table=>'genericas_labels'
 
   has_many :pieza_genericas
   has_many :piezas, :through => :pieza_genericas
@@ -14,6 +16,7 @@ class Generica < ActiveRecord::Base
     has_many :infos
 
     acts_as_heir_of :relacionable
+
 
     def etiquetas
        self.labels.collect { |l| l.nombre+' ' } 
@@ -33,5 +36,6 @@ class Generica < ActiveRecord::Base
 def desc_san
     sanitize(descripcion, :tags=>[])  
 end
+
 
 end

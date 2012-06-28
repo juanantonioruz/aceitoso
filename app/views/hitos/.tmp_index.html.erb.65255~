@@ -1,0 +1,31 @@
+<h1>Hitos para el museo: <%=@museo.nombre%></h1>
+<br/>
+<table class='table zebra-striped'>
+<tr>
+<th>Nombre</th>
+<th>Servicio</th>
+
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+<%@hitos.each do |hito|%>
+<tr>
+<td><%=hito.nombre%></td>
+    <td><%=image_tag(hito.imagen_servicio,:size=>'64x64')%></td>
+
+<td><%=raw hito.descripcion%></td>
+<td><%=imagentam(hito,'64x64')%></td>
+<td>
+<%= link_to 'Ver',museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-success'%>
+<%= link_to 'Editar',edit_museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-warning'%>
+<%= link_to 'Relaciones',relacion_museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:class=>'btn btn-success'%>&nbsp;
+
+<%= link_to 'Borrar',museo_entorno_hito_path(:museo_id=>@museo,:id=>hito),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
+
+</td>
+</tr>
+<%end%>
+</table>
+<%= link_to 'Añadir hito',new_museo_entorno_hito_path(@museo),:class=>'btn'%> o <%=link_to 'Volver al entorno',museo_entorno_path(@museo)%>
+

@@ -99,6 +99,14 @@ museo_se=""
          render :text => v.html_safe 
 
   end
+  def hitotextfg
+        generica=Relacionable.find(params[:id]).heir
+    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+        point=check_kml generica
+        v+="#{generica.predecessor.id}|#{point}|#{generica.titulo}|#{resumenInfoHTML(generica.descripcion)}|#{dameIcoGenerica}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+         render :text => v.html_safe 
+
+  end
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
@@ -125,14 +133,14 @@ museo_se=""
          send_file doc
          end
   
-  def damePointHito hito
-     point="#{hito.x},#{hito.y}"
-       if (!hito.archivo.blank?) then
+  
+  def check_kml elemento_con_kml
+    if (!elemento_con_kml.archivo.blank?) then
          begin
               if(request.domain=="localhost") then
-              doc = Nokogiri::XML(open("http://"+request.domain+":"+request.port.to_s+hito.archivo.to_s))
+              doc = Nokogiri::XML(open("http://"+request.domain+":"+request.port.to_s+elemento_con_kml.archivo.to_s))
               else
-             doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+hito.archivo.to_s))
+             doc = Nokogiri::XML(open("http://www.museos.olearum.es/"+elemento_con_kml.archivo.to_s))
                end
           point="#{doc.at_css("latitude").content},#{doc.at_css("longitude").content}"
 
@@ -140,6 +148,14 @@ museo_se=""
           puts "Error leyendo el doc!"
           end
       end 
+  end
+  def damePointHito hito
+     point="#{hito.x},#{hito.y}"
+     
+      elemento_con_kml=hito
+      point_kml=check_kml elemento_con_kml
+      if !point_kml.nil? then point=point_kml end 
+       
       return point
   end
   
@@ -160,6 +176,10 @@ museo_se=""
 
 end
 
+  def dameIcoGenerica
+    return "/uploads/service/imagen/6/17_jardindevariedades.png"
+    
+  end
   def dameIcoHito(hito)
     if(hito.service.nil?) then
     return "/uploads/service/imagen/6/17_jardindevariedades.png"
@@ -274,11 +294,16 @@ end
 
     @resource=resultado
     data=Datos.new
+      if resultado.class.to_s=="Generica"
+        punto_kml=check_kml resultado
+          if(!punto_kml.nil?)
+        data.point=punto_kml
+        end
+      end
     data.data=@resource
     data.clase= resultado.class.to_s
     logger.info "clase:"+data.clase.to_s
     data.resultado_html=html
-    
      
     # respond_to do |format|
  #format.html # show.html.erb
