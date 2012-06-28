@@ -79,7 +79,9 @@ header section#title p {
 header section#search {
 	float: right;
 	padding: 12px;
+	padding-top:0px;
 	margin-right: 0px;
+	margin-top: 24px;
 }
 
 html {

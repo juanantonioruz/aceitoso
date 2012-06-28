@@ -827,10 +827,10 @@
     defaults: {
 
       status: [
-        'Start typing to get suggestions...',
-        'Searching...',
-        'Select an item from the list:',
-        'Sorry, something went wrong. Please try again later'
+        'Introduce un término de busqueda...',
+        'Buscando...',
+        'Selecciona un elemento de la lista:',
+        'Lo sentimos, ha ocurrido un error en la aplicacion, intentalo mas tarde'
       ],
 
       soft: false,

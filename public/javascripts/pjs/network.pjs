@@ -2,8 +2,8 @@
 /* @pjs preload="javascripts/pjs/images/olearum.jpg"; */
 /* @pjs preload="javascripts/pjs/images/ministerio.jpg"; */
 /* @pjs preload="javascripts/pjs/images/contacto.jpg"; */
-/* @pjs preload="javascripts/pjs/images/titulo.png"; */
-/* @pjs preload="javascripts/pjs/images/icon-reload.gif"; */
+/* @pjs preload="javascripts/pjs/images/titulo_new2.jpg"; */
+/* @pjs preload="javascripts/pjs/images/inicio.jpg"; */
 
 String mensaje="hola";
 boolean depurando=true;
@@ -75,8 +75,8 @@ void setup() {
     olearumImage = loadImage("javascripts/pjs/images/olearum.jpg");
     ministerioImage = loadImage("javascripts/pjs/images/ministerio.jpg");
     contactoImage = loadImage("javascripts/pjs/images/contacto.jpg");
-    resetImage = loadImage("javascripts/pjs/images/icon-reload.gif");
-    tituloImage = loadImage("javascripts/pjs/images/titulo.png");
+    resetImage = loadImage("javascripts/pjs/images/inicio.jpg");
+    tituloImage = loadImage("javascripts/pjs/images/titulo_new2.jpg");
 	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -97,12 +97,12 @@ void setup() {
 		$('aside').html(r.html);
 	}
 
-	 origenTitulo=new PVector(20,10);
- 	finTitulo=new PVector(600, 66);
+	 origenTitulo=new PVector(-10,5);
+ 	finTitulo=new PVector(800, 66);
 	 origenContacto=new PVector(width-320, height-80);
  	finContacto=new PVector(37, 28);
-		 origenReset=new PVector(width-392, 5);
- 	finReset=new PVector(48, 48);
+		 origenReset=new PVector(width-358, 1);
+ 	finReset=new PVector(68, 23);
  	
 	 origenOlearum_1=new PVector(0,100);
  	finOlearum_1=new PVector(200, 71);
@@ -154,10 +154,7 @@ strokeCap(SQUARE);
   if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
-    		pushStyle();
-    		tint(255, 120);
        	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
-       	 popStyle();
     
     
     g.draw();
@@ -185,7 +182,7 @@ strokeCap(SQUARE);
      noStroke();
      rect(origenContacto.x-95, origenContacto.y+40,400,15);
      fill(0);
-     text("proyecto realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-80,origenContacto.y+50);
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
      popStyle();
 }
 
@@ -266,8 +263,9 @@ void mousePressed() {
 	}
 	if(compruebaPress(origenReset, finReset)){
 	//println("le has dado al reset");
-	resourceId=null;
-	setup();
+	setR(515);
+setup();
+
 	        $('aside').html("");
 	        $('#fb-suggest').val("");
 	
