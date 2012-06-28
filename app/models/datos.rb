@@ -202,19 +202,34 @@ else
         end 
         end
 
+end
+
+def check_mapa_key mopa, nombre
+  existe=false
+  puts "------------" 
+  mopa.each do |c,v| 
+  clave_p=c.split("xxx")[0].gsub(/\s+/, "")
+  nombre_p= nombre.split("xxx")[0].gsub(/\s+/, "")
+
+  if clave_p==nombre_p then existe=true end
   end
+  puts mopa 
+  puts existe 
+  puts "------------" 
+  return existe
+end
+
  def dameNombreRelacion rel
     if rel.sentido_relacion.creciente.to_s=="1"
-      rel.sentido_relacion.nombre_relacion.nombre1 
-    else
-    rel.sentido_relacion.nombre_relacion.nombre2 
+      return rel.sentido_relacion.nombre_relacion.nombre1
+      else
+    return rel.sentido_relacion.nombre_relacion.nombre2
     end
     
   end
   def dameNombreRelacionDestino rel
-    rel.sentido_relacion.titulo_destino_desde_destino
-    
-  end
+    return rel.sentido_relacion.titulo_destino_desde_destino
+    end
   def llena mapa
             #puts "llllllllllllenando mapa"
         self.data.relaciones_origen.each do |rel| 

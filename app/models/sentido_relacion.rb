@@ -38,7 +38,7 @@ class SentidoRelacion < ActiveRecord::Base
     end
     
     def titulo_destino_desde_destino
-        titulo_destino.gsub(">", "")
+        titulo_destino.gsub(">", "").lstrip.rstrip
     
     end
 end
