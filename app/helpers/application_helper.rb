@@ -17,7 +17,11 @@ module ApplicationHelper
   end
 
     def texto_con_enlaces texto
-      get_enlaces.each{|e,v| texto.gsub!(/[^"\\]\b#{e}[^"\\]/im, " <a href='#' onclick='circles(#{v})'>\"#{e}\"</a> ")}
+      
+     # get_enlaces.each do |e,v|
+      #texto.gsub!(/[^"\\]\b#{e}[^"\\]/im, " <a href='#' onclick='circles(#{v})'>\"#{e}\"</a> ")
+      
+      #end
       texto
     end
 
