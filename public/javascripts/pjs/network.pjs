@@ -187,6 +187,12 @@ strokeCap(SQUARE);
 }
 
 void mouseMoved() {
+	if(compruebaPress(origenContacto, finContacto) || compruebaPress(origenReset, finReset) || compruebaPress(origenOlearum_2, finOlearum_2) || compruebaPress(origenMinisterio_2, finMinisterio_2)){
+	cursor(HAND);
+	}else{
+	cursor(ARROW);
+	}
+
 	if (!resourceId) return;
 	
 	if (g.getDragNode()==null) {
@@ -255,8 +261,6 @@ void mousePressed() {
 	//if (!resourceId) return;
 	
 	if(compruebaPress(origenContacto, finContacto)){
-	//println("le has dado al contacto");
-	//link("./email/new", "_new"); 
       	var caracteristicas = "height=700,width=800,scrollTo,resizable=1,scrollbars=1,location=0";
       	nueva=window.open("./email/new", 'Popup', caracteristicas);
       	return false;

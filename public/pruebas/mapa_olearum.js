@@ -195,16 +195,16 @@ $("#footer").animate({
 	
 	
 	function ampliaMapa(evt){
+		es_ampliado=true;
 		var altura=$(document).height()-100;
 		var anchura=$(document).width()-$('aside').width()-100;
 		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
-		es_ampliado=true;
 		
 	}
 
 	function reduceMapa(evt){
-		cambiaDimension("200px","200px",map.center,map.zoom);
 		es_ampliado=false;
+		cambiaDimension("200px","200px",map.center,map.zoom);
 	}
 	
 
@@ -360,5 +360,10 @@ function centerMapaPeninsula(){
 
 			}
 			activar_selectControl();
+			if(!es_ampliado)
+					$("#OpenLayers_Control_MaximizeDiv").hide();
+				else
+					$("#OpenLayers_Control_MaximizeDiv").show();
+
 			return map;
             }

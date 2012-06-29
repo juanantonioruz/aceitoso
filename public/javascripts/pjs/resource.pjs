@@ -493,10 +493,13 @@ public class Resource {
 			labelOffset = 30;
 		}
 		
-		if (hovering)
+		if (hovering){
 		  fill(0,0,0,150);
-    else
+		  			cursor(MOVE);
+		  
+    }else{
       fill(66, 66, 66, 100);
+      }
 
     noStroke();
 		ellipse(this.x,this.y, diameter, diameter);
@@ -506,7 +509,7 @@ public class Resource {
   		textFont(defaultFont, 15);
   		//fontWidth = textWidth((idx+1)+". "+this.getName()) * fontSize;
   		textAlign(CENTER);
-  		text((idx+1)+". "+this.getName(), this.x, this.y+10+labelOffset+30);
+  		text(this.getName(), this.x, this.y+10+labelOffset+30);
   		textFont(defaultFont, fontSize);
     }
 	}
@@ -515,7 +518,7 @@ public class Resource {
 	  float disX = this.x - mouseX;
 	  float disY = this.y - mouseY;
 		
-	  if(sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
+	  if(sqrt(sq(disX) + sq(disY)) < diameter/2+70 ) {
 			hovering = true;
 	    return true;
 		} else {
