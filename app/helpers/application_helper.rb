@@ -4,7 +4,9 @@ module ApplicationHelper
   def get_enlaces
     if @@enlaces=={} then
      # Relacionable.find(:all).map{|r| @@enlaces[r.nombre_relacionable]=r.id}
-     Museo.find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
+     Museo.find(:all).map do |r| 
+       @@enlaces[r.nombre]=r.predecessor.id 
+     end
      Generica.find(:all).map{|r| @@enlaces[r.titulo]=r.predecessor.id}
      Hito.find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
     end
@@ -15,7 +17,7 @@ module ApplicationHelper
   end
 
     def texto_con_enlaces texto
-      get_enlaces.each{|e,v| texto.gsub!(/[^\*]#{e}[^\*]/, " <a href='#' onclick='circles(#{v})'>*#{e}*</a> ")}
+      get_enlaces.each{|e,v| texto.gsub!(/^[^\*]#{e}[^\*]$/im, " <a href='#' onclick='circles(#{v})'>*#{e}*</a> ")}
       texto
     end
 
