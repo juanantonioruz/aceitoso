@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   layout 'admin'
   protect_from_forgery
 
-  before_filter :basic_authenticate 
+  #before_filter :basic_authenticate 
 
 
   private
