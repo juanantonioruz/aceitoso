@@ -25,6 +25,12 @@
 
   </head>
   <body onload="<%=if(defined? @onload) then @onload end%>" >
+
+   
+
+
+
+
           <%= yield %>
 
   </body>
