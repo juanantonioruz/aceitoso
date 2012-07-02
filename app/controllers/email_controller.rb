@@ -7,9 +7,7 @@ class EmailController < ApplicationController
   	def create
     	@email = Email.new(params[:email])
     	if @email.valid?
-      		ContactoMailer.contactar(@email, "juanantonioruz@gmail.com").deliver
-      		ContactoMailer.contactar(@email, "arquibernardo@gmail.com").deliver
-      		ContactoMailer.contactar(@email, "marionn.pa@gmail.com").deliver
+      		ContactoMailer.contactar(@email, "juanantonioruz@gmail.com, arquibernardo@gmail.com, marionn.pa@gmail.com").deliver
           @mensaje="buen envio"
       		#redirect_to(@email.url, :notice => t("enviook"))
     	else
