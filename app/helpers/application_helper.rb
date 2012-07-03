@@ -1,14 +1,16 @@
+# encoding: utf-8
+require 'htmlentities'
 module ApplicationHelper
 @@enlaces={}
 
   def get_enlaces
     if @@enlaces=={} then
      # Relacionable.find(:all).map{|r| @@enlaces[r.nombre_relacionable]=r.id}
-     Museo.find(:all).map do |r| 
-       @@enlaces[r.nombre]=r.predecessor.id 
+     Museo.order("CHAR_LENGTH(nombre_corto)").find(:all).map do |r| 
+       @@enlaces[r.nombre_corto]=r.predecessor.id 
      end
-     Generica.find(:all).map{|r| @@enlaces[r.titulo]=r.predecessor.id}
-     Hito.find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
+     Generica.order("CHAR_LENGTH(titulo)").find(:all).map{|r| @@enlaces[r.titulo]=r.predecessor.id}
+     Hito.order("CHAR_LENGTH(nombre)").find(:all).map{|r| @@enlaces[r.nombre]=r.predecessor.id}
     end
       return @@enlaces
   end
@@ -18,10 +20,11 @@ module ApplicationHelper
 
     def texto_con_enlaces texto
       
-     # get_enlaces.each do |e,v|
-      #texto.gsub!(/[^"\\]\b#{e}[^"\\]/im, " <a href='#' onclick='circles(#{v})'>\"#{e}\"</a> ")
-      
-      #end
+      get_enlaces.each do |e,v|
+      coder = HTMLEntities.new
+      pepe=coder.encode(e, :named)
+      texto.gsub!(/(?!(?i)<a([^>]+)>)#{pepe}(?!<\/a>)/im, " <a href='#' onclick='circles(#{v})'>#{pepe}</a> ")
+      end
       texto
     end
 

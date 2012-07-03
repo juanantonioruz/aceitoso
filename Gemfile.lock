@@ -46,6 +46,7 @@ GEM
       multi_json (~> 1.0)
     heritage (0.3.1)
     hike (1.2.1)
+    htmlentities (4.3.1)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -132,6 +133,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   execjs
   heritage
+  htmlentities
   jquery-rails
   json
   mysql2

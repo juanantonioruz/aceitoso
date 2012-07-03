@@ -7,6 +7,7 @@ gem 'rails', '3.2.1'
 gem 'will_paginate'
 gem 'heritage'
 gem 'mysql2'
+gem 'htmlentities'
 gem "twitter-bootstrap-rails"
 gem 'carrierwave'
 gem 'rmagick' 
