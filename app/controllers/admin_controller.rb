@@ -6,6 +6,10 @@ class AdminController < ApplicationController
       render :layout=> 'resumen'
 
   end
+  def no_screen
+      render :layout=> 'resumen'
+
+  end
   def seleccionar
     gen=params[:search_class].constantize.find(params[:search])
         @res=[]

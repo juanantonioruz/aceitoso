@@ -73,6 +73,7 @@ Olearum::Application.routes.draw do
   get "olearum/index"
       match "admin"=> "admin#index"
       match "no_compatible"=> "admin#no_compatible"
+      match "no_screen"=> "admin#no_screen"
 
   get "resources/show"
   get "resources/detalla"
