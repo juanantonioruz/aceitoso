@@ -23,7 +23,7 @@ module ApplicationHelper
       get_enlaces.each do |e,v|
       coder = HTMLEntities.new
       pepe=coder.encode(e, :named)
-      texto.gsub!(/(?!(?i)<a([^>]+)>)#{pepe}(?!<\/a>)/im, " <a href='#' onclick='circles(#{v})'>#{pepe}</a> ")
+      texto.gsub!(/(?!(?i)<a([^>]+)>)\b#{pepe}\b(?!<\/a>)/im, " <a href='#' onclick='circles(#{v})'>#{pepe}</a> ")
       end
       texto
     end
