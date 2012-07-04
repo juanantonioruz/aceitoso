@@ -48,12 +48,14 @@ class Graph {
 	}
 	
 	public void setDragNode(Node n) {
-	  if (this.dragNode != null) {
+	if(is_touch_device()) return ;
+	 if (this.dragNode != null) {
 	    this.dragNode.setDragging(false);
 	  }
 	  this.dragNode = n;
 	  if (n != null)
 	    n.setDragging(true);
+	    
 	}
 	
 	public Node getDragNode() {

@@ -76,8 +76,9 @@ public class Value {
     fill(0,0,0);
     
     if (hovering) {
+    if(!is_touch_device()){
     			cursor(HAND);
-    
+    }
       lineCap = "butt"; // processing.js patch!
       noFill();
       stroke(0,0,0,20);
@@ -153,7 +154,6 @@ public class Value {
 				return true;
 			}
 		}
-		
 		if (radius >= this.attr.getResource().radiusOuter-20 && radius <= this.attr.getResource().radiusOuter+20 && 
 				((angle>start && angle<stop) || (start>stop && (angle > start || angle < stop)))    ) {
 			hovering = true;

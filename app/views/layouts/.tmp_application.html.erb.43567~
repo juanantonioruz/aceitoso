@@ -6,7 +6,6 @@
 var canvasSupported = !!window.HTMLCanvasElement;
 if(!canvasSupported) window.location.href="no_compatible";
 
-alert($(document).width());
 
 </script>
 
@@ -16,6 +15,17 @@ alert($(document).width());
   <%= stylesheet_link_tag    "global", :media => "all" %>
 
         <script src="/javascripts/jquery-1.7.2.js"></script>
+		<script>
+			function is_touch_device() {
+  return !!('ontouchstart' in window);
+}
+
+			//alert(is_touch_device());
+			if($(window).width()<700 || $(window).height()<400){
+			window.location.href="no_screen";
+			//alert("size!!");
+			}
+			</script>
         <script src="/javascripts/processing-1.3.6.js"></script>
         <script src="/javascripts/suggest.js"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 

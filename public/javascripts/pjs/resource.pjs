@@ -159,8 +159,12 @@ public class Resource {
         that.radiusOuter = 40;
         that.targetRadiusOuter = 110;
         that.frameCount = 0;
+        String tactil="";
+        	if(is_touch_device() && that.id=="515"){
+         tactil="<i>** Le aconsejamos que para mayor comodidad utilice el ratón en lugar de su pantalla táctil siempre que le sea posible** </i>";
+	}
         
-        $('aside').html(g.getSelectedNode().getSubject().html);
+        $('aside').html(tactil+g.getSelectedNode().getSubject().html);
        g.getSelectedNode().clasi=that.clasi;
       activaDesplegablesMuseo();
      

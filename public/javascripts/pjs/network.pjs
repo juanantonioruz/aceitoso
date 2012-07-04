@@ -185,11 +185,13 @@ strokeCap(SQUARE);
      text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
      popStyle();
 }
-
 void mouseMoved() {
 	if(compruebaPress(origenContacto, finContacto) || compruebaPress(origenReset, finReset) || compruebaPress(origenOlearum_2, finOlearum_2) || compruebaPress(origenMinisterio_2, finMinisterio_2)){
+	    if(!is_touch_device())
 	cursor(HAND);
 	}else{
+	    if(!is_touch_device())
+	
 	cursor(ARROW);
 	}
 
@@ -355,8 +357,47 @@ setup();
 		Resource r = selectedNode.getSubject();
 	}
 }
+float lastX;
+float lastY;
+float beginX;
+float beginY;
+void touchMove(TouchEvent touchEvent) {
+	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
+	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
+	//println("t_move__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+	
+}
+void touchStart(TouchEvent touchEvent) {
+	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
+	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
+	//println("t_start__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+	if(hover){
+	hover=false;
+	}else{
+	hover=true;
+	}
+}
+void touchCancel(TouchEvent touchEvent) {
+	println("t_cancel");
+}
+boolean hover=true;
+void touchEnd(TouchEvent touchEvent) {
+//			println("t_end__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+			mouseX=lastX;
+			mouseY=lastY;
+			if(!hover){
+				mouseMoved();
+			}else{
+			mouseButton=LEFT;
+			mousePressed();
 
+			
+			}
+		
+	
+}
 void mouseReleased() {
+
   g.setDragNode(null);
 }
 
