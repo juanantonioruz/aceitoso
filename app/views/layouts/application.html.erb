@@ -6,7 +6,6 @@
 var canvasSupported = !!window.HTMLCanvasElement;
 if(!canvasSupported) window.location.href="no_compatible";
 
-
 </script>
 
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -119,6 +118,7 @@ dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
 			
   function inicia() {
     p = Processing.getInstanceById("kenviz");
+	ondblclick = function () { p.mousePressedd() }
 
     function canvasSupported() {
       var canvas_compatible = false;

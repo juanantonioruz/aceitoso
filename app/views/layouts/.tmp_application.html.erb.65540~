@@ -19,7 +19,6 @@ if(!canvasSupported) window.location.href="no_compatible";
 			function is_touch_device() {
   return !!('ontouchstart' in window);
 }
-
 			//alert(is_touch_device());
 			if($(window).width()<700 || $(window).height()<400){
 			window.location.href="no_screen";

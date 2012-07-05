@@ -260,6 +260,19 @@ return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mo
 String lineCap;
 boolean debug=false;
 void mousePressed() {
+ if (selectedNodeIndex != null) {
+			// TODO: Zoom to node
+			if(debug)println("// selectedNodeIndex != null");			
+			selectedNode = g.nodes.get(selectedNodeIndex);
+			
+			//println("juan tengo un museo");
+			g.setDragNode(selectedNode);
+}else{
+mouseMoved();
+}
+}
+void mousePressedd() {
+
 	//if (!resourceId) return;
 	
 	if(compruebaPress(origenContacto, finContacto)){
@@ -381,6 +394,7 @@ void touchCancel(TouchEvent touchEvent) {
 	println("t_cancel");
 }
 boolean hover=true;
+String lastResourceId;
 void touchEnd(TouchEvent touchEvent) {
 //			println("t_end__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
 			mouseX=lastX;
@@ -389,15 +403,13 @@ void touchEnd(TouchEvent touchEvent) {
 				mouseMoved();
 			}else{
 			mouseButton=LEFT;
-			mousePressed();
-
+			mousePressedd();
 			
 			}
 		
 	
 }
 void mouseReleased() {
-
   g.setDragNode(null);
 }
 
