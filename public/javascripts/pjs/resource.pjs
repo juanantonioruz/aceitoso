@@ -168,7 +168,7 @@ public class Resource {
        g.getSelectedNode().clasi=that.clasi;
       activaDesplegablesMuseo();
      
-       
+       hitos_peticion=null;
          if(that.clasi=="Museo"){
          //  println(that.clasi);
          	url_museos= "/resources/museostextfile/"+that.id;

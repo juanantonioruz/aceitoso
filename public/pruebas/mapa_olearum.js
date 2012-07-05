@@ -166,7 +166,7 @@ function deleteAllLayersSensibles(centro, zoomito){
 	function add_capa_seleccionable(mapa, vector){
 		//if (mapa.getLayersByName(vector.name).length>0) return ; 
 		 mapa.addLayer(vector);
-		if(layer_hitos!=null)mapa.raiseLayer(layer_hitos, mapa.getNumLayers()-2);
+//		if(layer_hitos!=null)mapa.raiseLayer(layer_hitos, mapa.getNumLayers()-2);
 		if(layer_museos!=null)mapa.raiseLayer(layer_museos, mapa.getNumLayers()-1);
 		// console.log("despues"+mapa.getLayerIndex(layer_museos));
 		capas_sensibles.push(vector);
@@ -351,7 +351,6 @@ function centerMapaPeninsula(){
     		
               
             map.setCenter( center, zoom);
-			if(hitos_peticion!=null ) loadMarcas(hitos_peticion);
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
 					var value = kmls[i];
@@ -359,6 +358,7 @@ function centerMapaPeninsula(){
 				}
 
 			}
+			 if(hitos_peticion!=null ) loadMarcas(hitos_peticion);
 			activar_selectControl();
 			if(!es_ampliado)
 					$("#OpenLayers_Control_MaximizeDiv").hide();
