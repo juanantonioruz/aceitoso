@@ -1,0 +1,17 @@
+<h1>Acceso a la zona de gesti&oacute;n</h1>
+
+<%= form_tag sesiones_path do %>
+ <div class="field">
+   <p><%= label_tag  :usuario %> 
+   <%= text_field_tag :nombre,params[:nombre]%></p>
+ </div> 
+ <div class="field"> 
+  <p> <%= label_tag  :password  %> 
+   <%= password_field_tag :password%></p>
+ </div>
+  <div class="actions">
+   <%=submit_tag(('Entrar'), :class=>"btn") %>
+ </div>
+ <%end%>
+
+ 

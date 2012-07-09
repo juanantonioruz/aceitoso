@@ -1,4 +1,7 @@
 class MuseosController < ApplicationController
+ 
+    before_filter :pide_login
+    
 
     def index
         @museos=Museo.all(:order=>:nombre)

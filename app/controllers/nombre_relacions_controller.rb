@@ -1,5 +1,7 @@
 class NombreRelacionsController < ApplicationController
     
+    before_filter :pide_login
+
     def index
         @relaciones=NombreRelacion.all(:order=>:nombre1)
     end

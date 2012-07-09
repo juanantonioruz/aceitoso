@@ -1,5 +1,7 @@
 class GenericasController < ApplicationController
 
+    before_filter :pide_login
+  layout 'admin'
     def index
         @genericas=Generica.paginate(:page => params[:page], :per_page => 20).all(:order=>'titulo ASC')
     end

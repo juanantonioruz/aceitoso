@@ -1,5 +1,7 @@
 class ServicesController < ApplicationController
     
+    before_filter :pide_login
+
     def index
         @services=Service.all
     end

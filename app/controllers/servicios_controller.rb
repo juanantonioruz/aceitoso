@@ -1,5 +1,8 @@
 class ServiciosController < ApplicationController
-    def index
+   
+   before_filter :pide_login
+
+ def index
         @museo=Museo.find(params[:museo_id])
         @servicios=@museo.servicios
     end

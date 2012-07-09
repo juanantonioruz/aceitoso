@@ -1,6 +1,8 @@
 Olearum::Application.routes.draw do
   
-
+  resources :sesiones
+  get 'login' => 'sesiones#new', :as => 'login'
+  get 'logout' => 'sesiones#destroy', :as => 'logout'
   resources :email
       match "email"=> "email#new"
 
