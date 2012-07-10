@@ -73,7 +73,7 @@ Olearum::Application.routes.draw do
   get "admin/seleccionar"
 
   get "olearum/index"
-      match "admin"=> "admin#index"
+      match "admin"=> "inicio#index"
       match "no_compatible"=> "admin#no_compatible"
       match "no_screen"=> "admin#no_screen"
 
