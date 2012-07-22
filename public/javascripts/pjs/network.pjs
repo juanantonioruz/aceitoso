@@ -259,7 +259,7 @@ return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mo
 
 String lineCap;
 boolean debug=false;
-void mousePressedd() {
+void mousePressed() {
  if (selectedNodeIndex != null) {
 			// TODO: Zoom to node
 			if(debug)println("// selectedNodeIndex != null");			
@@ -271,7 +271,7 @@ void mousePressedd() {
 mouseMoved();
 }
 }
-void mousePressed() {
+void mousePressedd() {
 
 	//if (!resourceId) return;
 	

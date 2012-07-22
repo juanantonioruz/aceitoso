@@ -301,7 +301,7 @@ $("#footer").animate({
 				disableaLinks();
             }
 			function disableaLinks(){
-				/*
+				
 				$("a").each(function(){
 			if ((!this.href.match(document.domain))) {
 			
@@ -310,7 +310,7 @@ $("#footer").animate({
 				
 			}
 		});
-		*/
+		
 			}
 			function circles(id){
 				 p.setR(id);
