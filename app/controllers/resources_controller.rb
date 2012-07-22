@@ -91,11 +91,15 @@ museo_se=""
   end
   
   def hitotextf
-        hito=Relacionable.find(params[:id]).heir
-    puts "hitohito#{hito}"
+        hitito=Relacionable.find(params[:id]).heir
+    puts "hitohito#{hitito}"
     v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
+           for hito in hitito.entorno.hitos do 
+
         point=damePointHito hito
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        sel=hito==hitito
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dameIcoOffsetMuseo(sel)}|#{dimensionIco(sel)}".split("|").join("\t")+"\n"
+        end
          render :text => v.html_safe 
 
   end
@@ -103,7 +107,8 @@ museo_se=""
         generica=Relacionable.find(params[:id]).heir
     v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
         point=check_kml generica
-        v+="#{generica.predecessor.id}|#{point}|#{generica.titulo}|#{resumenInfoHTML(generica.descripcion)}|#{dameIcoGenerica}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        sel=false
+        v+="#{generica.predecessor.id}|#{point}|#{generica.titulo}|#{resumenInfoHTML(generica.descripcion)}|#{dameIcoGenerica}|#{dameIcoOffsetMuseo(sel)}|#{dimensionIco(sel)}".split("|").join("\t")+"\n"
          render :text => v.html_safe 
 
   end
@@ -114,7 +119,7 @@ museo_se=""
  #   v+=ne
      for hito in museo.hitos do
         point=damePointHito hito
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dameIcoOffsetMuseo(false)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
      end
   
      render :text => v.html_safe 

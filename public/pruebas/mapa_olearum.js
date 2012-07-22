@@ -113,8 +113,18 @@ function deleteAllLayersSensibles(centro, zoomito){
 	actuales=[];
 	layer_museos=null;
 	layer_hitos=null;
-		cambiaDimension("200px","200px",centro, zoomito );
-		es_ampliado=false;
+	map.center=centro;
+	map.zoom=zoomito;
+	if(es_ampliado){
+		
+		ampliaMapa();
+		
+	}else{
+		
+	 reduceMapa();
+	}
+		//cambiaDimension("200px","200px",centro, zoomito );
+		//es_ampliado=false;
 		
 
 }
@@ -198,14 +208,21 @@ $("#footer").animate({
 	
 	
 	function ampliaMapa(evt){
+				
+
 		es_ampliado=true;
 		var altura=$(document).height()-100;
 		var anchura=$(document).width()-$('aside').width()-100;
+		if(centroLonLatPeninsula==map.center)
+		z=map.zoom;
+		else
+		z=8;
 		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
 		
 	}
 
 	function reduceMapa(evt){
+	
 		es_ampliado=false;
 		cambiaDimension("200px","200px",map.center,map.zoom);
 	}

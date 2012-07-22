@@ -167,7 +167,7 @@ public class Resource {
         $('aside').html(tactil+g.getSelectedNode().getSubject().html);
        g.getSelectedNode().clasi=that.clasi;
       activaDesplegablesMuseo();
-     
+     disableaLinks();
        hitos_peticion=null;
          if(that.clasi=="Museo"){
          //  println(that.clasi);

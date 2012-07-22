@@ -39,6 +39,8 @@ class Datos
       dameRutas(self.data) 
     elsif self.data.class==Camino
             dameRutasCamino(self.data) 
+    elsif self.data.class==Hito
+            dameRutas(self.data.entorno.museo) 
     else
       ""
       end
