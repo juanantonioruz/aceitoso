@@ -32,20 +32,23 @@ function add_events_to_ruta(ruta){
 }
 
 
-	function onFeatureSelectSun(event) {
-			var feature = event.feature;
-			// Since KML is user-generated, do naive protection against
-			// Javascript.
-			var content = "<h2>"+feature.attributes.name + "</h2>" + feature.attributes.description;
-				if (content.search("<script") != -1) {
-					content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
-				}
-				$("#explanation").append(content);
-			popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100,100),content,null, true, onPopupCloseSun());
-			popup.maxSize=new  OpenLayers.Size(300, 300);
-			feature.popup = popup;
-			map.addPopup(popup);
+	function onFeatureSelectSun(event){
+		var feature = event.feature;
+		// Since KML is user-generated, do naive protection against
+		// Javascript.
+		var content = "<h2>" + feature.attributes.name + "</h2>" + feature.attributes.description;
+		if (content.search("<script") != -1) {
+			content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
 		}
+		$("#explanation").append(content);
+		popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(100, 100), content, null, true, onPopupCloseSun());
+		popup.maxSize = new OpenLayers.Size(300, 300);
+		feature.popup = popup;
+		map.addPopup(popup);
+		disableaLinks();
+
+		
+	}
         function onFeatureUnselectSun(event) {
             var feature = event.feature;
             if(feature.popup) {
@@ -278,7 +281,20 @@ $("#footer").animate({
                 feature.popup = popup;
                 popup.feature = feature;
                 map.addPopup(popup, true);
+				disableaLinks();
             }
+			function disableaLinks(){
+				/*
+				$("a").each(function(){
+			if ((!this.href.match(document.domain))) {
+			
+				console.log(this.href);
+				this.href = "#";
+				
+			}
+		});
+		*/
+			}
 			function circles(id){
 				 p.setR(id);
 		         p.setup();
