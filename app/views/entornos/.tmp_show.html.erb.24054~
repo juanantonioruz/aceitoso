@@ -1,0 +1,12 @@
+<h1>Entorno del museo <%=@entorno.museo.nombre%></h1>
+<br/>
+<table class='table'>
+ <tbody>
+ <tr><th>Hitos</th> <td>Ver, crear o editar el listado de hitos </td><td><%=link_to 'Ver',museo_entorno_hitos_path(@museo),:class=>'btn '%></td></tr>
+ <tr><th>Rutas</th> <td>Ver, crear o editar las rutas de interés </td><td><%=link_to 'Ver',museo_entorno_caminos_path(@museo),:class=>'btn'%></td></tr>
+
+</tbody>
+</table>
+
+
+<%=link_to 'Volver al museo',@museo%>

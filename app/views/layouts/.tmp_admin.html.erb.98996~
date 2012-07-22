@@ -57,11 +57,11 @@
         </div>
          <div class="span3">
           <div class=" sidebar-nav">
+                <%if logado%>              
             <ul class="nav nav-list">
               
                 <!--Opciones de desconexion-->
                 
-                <%if logado%>              
                   <li class="nav-header">Opciones de usuario</li>           
                   <li><%=link_to 'Desconectar',logout_url%></li>
                   <li>&nbsp;</li>                
@@ -71,13 +71,13 @@
                   <li><%=link_to 'Articulos',genericas_path%></li>
                   <li><%= link_to "Museos",museos_path  %></li>
                   <li><%= link_to "Tipos de Relaciones",nombre_relacions_path  %></li>
-                <%else%>
-                  <p>Introduzca usuario y clave para visualizar las opciones del sitio</p>
-                <%end%>
                
 
               
             </ul>
+                <%else%>
+                  <p>Introduzca usuario y clave para visualizar las opciones del sitio</p>
+                <%end%>
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
