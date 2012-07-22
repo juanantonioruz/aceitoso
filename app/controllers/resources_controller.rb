@@ -30,7 +30,7 @@ def genera
 end
 
   def museostextfile
-    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
       museos=Museo.find(:all)
       id=params[:id]
       
@@ -83,7 +83,7 @@ museo_se=""
   def museo_cvs(museo, sel)
             ficha=museo.ficha
     
-    return "#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo(sel)}|#{dimensionIco(sel)}".split("|").join("\t")+"\n"
+    return "#{museo.predecessor.id}|#{ficha.x},#{ficha.y}|#{museo.nombre}|#{resumenInfoHTML(ficha.descripcion)}|#{dameIcoMuseo(sel)}|#{dameIcoOffsetMuseo(sel)}|#{dimensionIco(sel)}".split("|").join("\t")+"\n"
   end
   
   def resumenInfoHTML info
@@ -93,28 +93,28 @@ museo_se=""
   def hitotextf
         hito=Relacionable.find(params[:id]).heir
     puts "hitohito#{hito}"
-    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
         point=damePointHito hito
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
          render :text => v.html_safe 
 
   end
   def hitotextfg
         generica=Relacionable.find(params[:id]).heir
-    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
         point=check_kml generica
-        v+="#{generica.predecessor.id}|#{point}|#{generica.titulo}|#{resumenInfoHTML(generica.descripcion)}|#{dameIcoGenerica}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        v+="#{generica.predecessor.id}|#{point}|#{generica.titulo}|#{resumenInfoHTML(generica.descripcion)}|#{dameIcoGenerica}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
          render :text => v.html_safe 
 
   end
   def hitostextfile
     museo=Relacionable.find(params[:id]).heir
-    v="id|point|title|description|icon|iconSize".split("|").join("\t")+"\n"
+    v="id|point|title|description|icon|iconOffset|iconSize".split("|").join("\t")+"\n"
         ficha=museo.ficha
  #   v+=ne
      for hito in museo.hitos do
         point=damePointHito hito
-        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|#{dimensionIco(false)}".split("|").join("\t")+"\n"
+        v+="#{hito.predecessor.id}|#{point}|#{hito.nombre}|#{resumenInfoHTML(hito.descripcion)}|#{dameIcoHito(hito)}|-16,-37|#{dimensionIco(false)}".split("|").join("\t")+"\n"
      end
   
      render :text => v.html_safe 
@@ -162,6 +162,10 @@ museo_se=""
   def dameIcoMuseo seleccionado
     if(seleccionado) then return dameIcoMuseoSeleccionado end
           return "/uploads/service/imagen/26/museum_industry.png"
+  end
+  def dameIcoOffsetMuseo seleccionado
+    if(seleccionado) then return "-20,-46" end
+          return "-16,-37"
   end
   def dameIcoMuseoSeleccionado
           return "/images/museo_seleccionado.gif"
