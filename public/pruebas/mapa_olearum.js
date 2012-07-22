@@ -209,19 +209,27 @@ $("#footer").animate({
 	
 
 			
-			function creaPanelAmpliable(){
-				 botonAmpliaMapa = new OpenLayers.Control.Button({
-			displayClass: "amplia",
-	        title: "Ampliar Dimension de Mapa",
-	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
-	    );
-				    botonReduceMapa = new OpenLayers.Control.Button({
+			function creaPanelAmpliable(es_ampliado){
+				botonDefault=null;
+				if(es_ampliado){
+				    botonDefault = new OpenLayers.Control.Button({
 						displayClass: "reduce",
 	        title: "Reducir Dimension de mapa",
 	        text: "REDUCIR MAPA",trigger:reduceMapa}
 	    );
-					 var panel = new OpenLayers.Control.Panel({
-			        defaultControl: botonAmpliaMapa,
+					
+				}else{
+					
+				 botonDefault = new OpenLayers.Control.Button({
+			displayClass: "amplia",
+	        title: "Ampliar Dimension de Mapa",
+	        text: "AMPLIAR MAPA",trigger: ampliaMapa}
+	    );
+				}
+	
+	 var panel = new OpenLayers.Control.Panel({
+	 				        defaultControl: botonDefault,
+
 			        createControlMarkup: function(control) {
 		            var button = document.createElement('button'),
 		                iconSpan = document.createElement('span'),
@@ -236,9 +244,8 @@ $("#footer").animate({
 		        }
 				
    				 });
-	
+				 	  	  panel.addControls([botonDefault]);
 
-	  	  panel.addControls([botonAmpliaMapa,botonReduceMapa ]);
 			return panel;
 			}
 		
@@ -340,7 +347,7 @@ function centerMapaPeninsula(){
 		});
 
 
-		panel_ampliable= creaPanelAmpliable();
+		panel_ampliable= creaPanelAmpliable(es_ampliado);
 		map.addControl(panel_ampliable);
 				
 			inicia_capas_base(map);
