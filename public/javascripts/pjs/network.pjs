@@ -182,7 +182,7 @@ strokeCap(SQUARE);
      noStroke();
      rect(origenContacto.x-95, origenContacto.y+40,400,15);
      fill(0);
-     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+     text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
      popStyle();
 }
 void mouseMoved() {
