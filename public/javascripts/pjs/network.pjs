@@ -186,12 +186,13 @@ strokeCap(SQUARE);
      popStyle();
 }
 void mouseMoved() {
-	if(compruebaPress(origenContacto, finContacto) || compruebaPress(origenReset, finReset) || compruebaPress(origenOlearum_2, finOlearum_2) || compruebaPress(origenMinisterio_2, finMinisterio_2)){
+	
+	if( compruebaPress(origenReset, finReset) ){
 	    if(!is_touch_device())
 	cursor(HAND);
 	}else{
 	    if(!is_touch_device())
-	
+
 	cursor(ARROW);
 	}
 
@@ -275,11 +276,8 @@ void mousePressedd() {
 
 	//if (!resourceId) return;
 	
-	if(compruebaPress(origenContacto, finContacto)){
-      	var caracteristicas = "height=700,width=800,scrollTo,resizable=1,scrollbars=1,location=0";
-      	nueva=window.open("./email/new", 'Popup', caracteristicas);
-      	return false;
-	}
+	
+
 	if(compruebaPress(origenReset, finReset)){
 	//println("le has dado al reset");
 	setR(515);
@@ -290,21 +288,8 @@ setup();
 	
 	}
 	
-	if(g.nodes.size()>0){
-		if(compruebaPress(origenOlearum_2, finOlearum_2)){
-			link("http://www.olearum.es/", "_new"); 
-		}
-		if(compruebaPress(origenMinisterio_2, finMinisterio_2)){
-			link("http://www.mcu.es/", "_new"); 
-		}
-	}else{
-		if(compruebaPress(origenOlearum_1, finOlearum_1)){
-			link("http://www.olearum.es/", "_new"); 
-		}
-		if(compruebaPress(origenMinisterio_1, finMinisterio_1)){
-			link("http://www.mcu.es/", "_new"); 
-		}
-	}
+	
+
 	
   
   if (mouseButton == LEFT) {
