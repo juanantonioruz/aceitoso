@@ -830,7 +830,7 @@
         'Introduce un término de busqueda...',
         'Buscando...',
         'Selecciona un elemento de la lista:',
-        '...'
+        'Lo sentimos, ha ocurrido un error en la aplicacion, intentalo mas tarde'
       ],
 
       soft: false,

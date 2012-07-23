@@ -103,9 +103,9 @@ void setup() {
  	finReset=new PVector(68, 23);
 	 origenContacto=new PVector(width-320, height-80);
  	finContacto=new PVector(37, 28);
-	 origenOlearum_2=new PVector(width-260,height-80);
+	 origenOlearum_2=new PVector(width-260,height-88);
  	finOlearum_2=new PVector(107, 38);
-	 origenMinisterio_2=new PVector(width-135,height-80);
+	 origenMinisterio_2=new PVector(width-135,height-88);
  	finMinisterio_2=new PVector(104, 38);
  	
 	 origenOlearum_1=new PVector(0,100);
