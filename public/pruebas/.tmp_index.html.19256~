@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>prueba ol</title>
+	<script type='text/javascript' src='OpenLayers.js'>
+	</script>
+	
+	<script type='text/javascript'>
+		var map;
+		function init(){
+			map=new OpenLayers.Map('map_element', {});
+			var wms= new OpenLayers.Layer.WMS(
+				'OpenLayers WMS',
+				'http://vmap0.tiles.osgeo.org/wms/vmap0',
+				{layers:'basic'},
+				{}
+			);
+			map.addLayer(wms);
+			if(!map.getCenter()){
+				map.zoomToMaxExtent();
+			}
+			alert('hola');
+		}
+	</script>
+	
+	<body onload='init();'>
+	<div id='map_element' style='width:500px; height:500px;'/>
+	</body>
+</head>
+</html>

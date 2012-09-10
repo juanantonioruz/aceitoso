@@ -8,16 +8,10 @@ var	zoomMapa=8;
 
 
 function inicia_capas_base(map){
-		            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", "http://localhost/osm/${z}/${x}/${y}.png", {
-    "tileOptions": {
-        "crossOriginKeyword": null
-    }
-});
-
+		            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", 
+					"http://localhost/osm/${z}/${x}/${y}.png", {"tileOptions": {"crossOriginKeyword": null}}
+					);
             map.addLayer(newLayer);
-
-
-
 
 }
 
