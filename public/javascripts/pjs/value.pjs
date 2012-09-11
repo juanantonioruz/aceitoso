@@ -76,9 +76,9 @@ public class Value {
     fill(0,0,0);
     
     if (hovering) {
-    if(!is_touch_device()){
+    //if(!is_touch_device()){
     			cursor(HAND);
-    }
+   // }
       lineCap = "butt"; // processing.js patch!
       noFill();
       stroke(0,0,0,20);

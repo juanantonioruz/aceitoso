@@ -1,35 +1,5 @@
-/* @pjs font="/fonts/GraublauWeb.otf, /fonts/GraublauWebBold.otf"; */
-/* @pjs preload="javascripts/pjs/images/olearum.jpg"; */
-/* @pjs preload="javascripts/pjs/images/ministerio.jpg"; */
-/* @pjs preload="javascripts/pjs/images/contacto.jpg"; */
-/* @pjs preload="javascripts/pjs/images/titulo_new2.jpg"; */
-/* @pjs preload="javascripts/pjs/images/inicio.jpg"; */
-
 String mensaje="hola";
-boolean depurando=true;
 
-color[] colors = new color[12];
-
-colors[0] = color(128, 128, 0);
-colors[1] = color(107, 142, 35);
-colors[2] = color(85, 107, 47);
-colors[3] = color(177, 159, 69);
-colors[4] = color(222, 106, 235);
-colors[5] = color(192, 194, 84);
-colors[6] = color(120, 047, 128);
-colors[7] = color(192, 130, 199);
-colors[8] = color(141, 143, 98);
-colors[9] = color(81, 6, 89);
-colors[10] = color(161, 154, 69);
-colors[11] = color(64, 15, 69);
-
-PFont defaultFont = createFont("/fonts/GraublauWeb.otf",50);
-PFont boldFont = createFont("/fonts/GraublauWebBold.otf", 50);
-//PFont defaultFont = loadFont("/fonts/GraublauWeb-Regular.svg");
-//PFont boldFont = loadFont("/fonts/GraublauWeb-Bold.svg");
-
-int fontSize = 11.3;
-int fontSizeCaption = 16;
 
 int nodeCount = 0;
 
@@ -62,21 +32,10 @@ void resize() {
 void setR(String v){
 resourceId=v;
 }
-    PImage olearumImage;
-    PImage ministerioImage;
-    PImage contactoImage;
-    PImage resetImage;
-    PImage tituloImage;
-
-
 
 
 void setup() {	
-    olearumImage = loadImage("javascripts/pjs/images/olearum.jpg");
-    ministerioImage = loadImage("javascripts/pjs/images/ministerio.jpg");
-    contactoImage = loadImage("javascripts/pjs/images/contacto.jpg");
-    resetImage = loadImage("javascripts/pjs/images/inicio.jpg");
-    tituloImage = loadImage("javascripts/pjs/images/titulo_new2.jpg");
+	loadImagenesHome();
 	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -96,86 +55,28 @@ void setup() {
 
 		$('aside').html(r.html);
 	}
-
-	 origenTitulo=new PVector(-10,5);
- 	finTitulo=new PVector(800, 66);
-		 origenReset=new PVector(width-333, 1);
- 	finReset=new PVector(68, 23);
-	 origenContacto=new PVector(width-320, height-80);
- 	finContacto=new PVector(37, 28);
-	 origenOlearum_2=new PVector(width-260,height-80);
- 	finOlearum_2=new PVector(107, 38);
-	 origenMinisterio_2=new PVector(width-135,height-80);
- 	finMinisterio_2=new PVector(104, 38);
+	iniciaPVectors();
+	
  	
-	 origenOlearum_1=new PVector(0,100);
- 	finOlearum_1=new PVector(200, 71);
-	 origenMinisterio_1=new PVector(40,180);
- 	finMinisterio_1=new PVector(150, 55);
- 	
-
 }
 
-void printMensaje(boolean fondo){
-if(depurando){
-if(fondo){
-// background(234,239,224);
-}
-//textFont(defaultFont, 103);
-//text(mensaje, 100,100);
-}
-}
 
-PVector origenTitulo;
-PVector finTitulo;
-PVector origenContacto;
-PVector finContacto;
-PVector origenOlearum_1;
-PVector finOlearum_1;
-PVector origenOlearum_2;
-PVector finOlearum_2;
-PVector origenMinisterio_1;
-PVector finMinisterio_1;
-PVector origenMinisterio_2;
-PVector finMinisterio_2;
-PVector origenReset;
-PVector finReset;
 
 boolean iniciar=true;
+
 void draw() {
-
-if(iniciar){
-setR(515);
-iniciar=false;
-setup();
-}
-
-strokeCap(SQUARE);
-  if (g.nodes.size()>0) {
+	if(iniciar){
+		setR(515);
+		iniciar=false;
+		setup();
+	}
+	strokeCap(SQUARE);
+ // esto se evaluaba cuando existia la posibilidad de aparecer la pantalla en blanco 
+ // if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
-       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
-    
-    
+	paintBackgroundImages();
     g.draw();
-			//console.log("***!.............");
-    
-  //  printMensaje();
-  }else{	
-  		
-       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
-     //  	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
-      // 	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
-       
-      //  image(ministerioImage, 40, 200);
-      //  println(ministerioImage.width);150
-      //  println(ministerioImage.height+" height");45
-	}
-	           	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
-           	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
-	
-	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
-     image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
      pushStyle();
      textAlign(LEFT);
      fill(234,239,224);
@@ -185,14 +86,11 @@ strokeCap(SQUARE);
      text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-24,origenContacto.y+50);
      popStyle();
 }
-void mouseMoved() {
+void mouseMovedd() {
 	
 	if( compruebaPress(origenReset, finReset) ){
-	    if(!is_touch_device())
 	cursor(HAND);
 	}else{
-	    if(!is_touch_device())
-
 	cursor(ARROW);
 	}
 
@@ -216,7 +114,6 @@ void mouseMoved() {
 		if (selectedValueIndex!=null) {
 			if (oldSelectedAttribute != r.getSelectedAttribute()) {								
 				float offset = 0;
-				if (selectedValueIndex != null) {
 					
 					if (r.previousSelectedAttribute!=null) r.previousSelectedAttribute.weight = 1.0;
 					r.selectedAttribute.weight = 4.0;
@@ -234,7 +131,6 @@ void mouseMoved() {
 						targetAdjustment = TWO_PI - targetAdjustment;
 					}
 					r.setAngleAdjustment(targetAdjustment);
-				}				
 			}
 		}
 
@@ -260,19 +156,12 @@ return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mo
 
 String lineCap;
 boolean debug=false;
+
+
 void mousePressed() {
- if (selectedNodeIndex != null) {
-			// TODO: Zoom to node
-			if(debug)println("// selectedNodeIndex != null");			
-			selectedNode = g.nodes.get(selectedNodeIndex);
-			
-			//println("juan tengo un museo");
-			g.setDragNode(selectedNode);
-}else{
-mouseMoved();
-}
-}
-void mousePressedd() {
+
+
+println("mousePressedd");
 
 	//if (!resourceId) return;
 	
@@ -281,7 +170,7 @@ void mousePressedd() {
 	if(compruebaPress(origenReset, finReset)){
 	//println("le has dado al reset");
 	setR(515);
-setup();
+	setup();
 
 	        $('aside').html("");
 	        $('#fb-suggest').val("");
@@ -355,45 +244,9 @@ setup();
 		Resource r = selectedNode.getSubject();
 	}
 }
-float lastX;
-float lastY;
-float beginX;
-float beginY;
-void touchMove(TouchEvent touchEvent) {
-	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
-	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
-	//println("t_move__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
-	
-}
-void touchStart(TouchEvent touchEvent) {
-	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
-	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
-	//println("t_start__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
-	if(hover){
-	hover=false;
-	}else{
-	hover=true;
-	}
-}
-void touchCancel(TouchEvent touchEvent) {
-	println("t_cancel");
-}
 boolean hover=true;
 String lastResourceId;
-void touchEnd(TouchEvent touchEvent) {
-//			println("t_end__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
-			mouseX=lastX;
-			mouseY=lastY;
-			if(!hover){
-				mouseMoved();
-			}else{
-			mouseButton=LEFT;
-			mousePressedd();
-			
-			}
-		
-	
-}
+
 void mouseReleased() {
   g.setDragNode(null);
 }

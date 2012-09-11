@@ -48,7 +48,7 @@ class Graph {
 	}
 	
 	public void setDragNode(Node n) {
-	if(is_touch_device()) return ;
+	//if(is_touch_device()) return ;
 	 if (this.dragNode != null) {
 	    this.dragNode.setDragging(false);
 	  }

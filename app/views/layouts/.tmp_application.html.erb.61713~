@@ -191,7 +191,6 @@ dt{background-color:rgb(141,143,98); color:white;margin-bottom:5px;}
 </head>
 <body>
 <canvas id="kenviz" data-processing-sources="/javascripts/pjs/network.pjs 
-/javascripts/pjs/setup_p5.pjs 
 /javascripts/pjs/physics.pjs 
 /javascripts/pjs/value.pjs 
 /javascripts/pjs/attribute.pjs 
