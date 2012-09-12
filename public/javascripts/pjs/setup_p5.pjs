@@ -102,3 +102,16 @@ void paintBackgroundImages(){
      image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
 
 }
+
+boolena compruebaResetButton(){
+	if(compruebaPress(origenReset, finReset)){
+		println("le has dado al reset");
+		setR(515);
+		setup();
+		$('aside').html("");
+		$('#fb-suggest').val("");
+		return true;
+	}
+	return false;
+
+}

@@ -95,7 +95,8 @@ void mouseMovedd() {
 	}
 
 	if (!resourceId) return;
-	
+
+	// si no hay dragging	
 	if (g.getDragNode()==null) {
 	
 		Resource r = g.getSelectedNode().getSubject();
@@ -159,24 +160,11 @@ boolean debug=false;
 
 
 void mousePressed() {
+	if (compruebaResetButton()) return;
 
-
-
+	mouseMovedd();
+	return;
 	//if (!resourceId) return;
-	
-	
-
-	if(compruebaPress(origenReset, finReset)){
-	//println("le has dado al reset");
-	setR(515);
-	setup();
-
-	        $('aside').html("");
-	        $('#fb-suggest').val("");
-	
-	}
-	
-	
 
 	
   

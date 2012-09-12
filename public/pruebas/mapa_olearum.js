@@ -24,9 +24,12 @@ function add_events_to_ruta(ruta){
 
 
 	function onFeatureSelectSun(event){
+						//console.dir(event.feature.data);
+
 		var feature = event.feature;
 		// Since KML is user-generated, do naive protection against
 		// Javascript.
+		if(feature.attributes.description==null) return;
 		var content = "<h2>" + feature.attributes.name + "</h2>" + feature.attributes.description;
 		if (content.search("<script") != -1) {
 			content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
