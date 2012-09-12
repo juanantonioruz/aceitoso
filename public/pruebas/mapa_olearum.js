@@ -114,7 +114,7 @@ function deleteAllLayersSensibles(centro, zoomito){
 		
 	 reduceMapa();
 	}
-		//cambiaDimension("200px","200px",centro, zoomito );
+		//cambiaDimension("200","200",centro, zoomito );
 		//es_ampliado=false;
 		
 
@@ -176,7 +176,9 @@ function deleteAllLayersSensibles(centro, zoomito){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(altura, anchura, center,zoom){
+	function cambiaDimension(altur, anchur, center,zoom){
+		altura=altur+"px";
+		anchura=anchur+"px";
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
@@ -186,15 +188,15 @@ function deleteAllLayersSensibles(centro, zoomito){
 $("#container_mapa").animate({
     width: anchura, height:altura
   }, 1500 );
+$("footer").animate({
+    width: (parseInt(anchur)+20+"px"), height:(parseInt(altur)+20+"px")
+  }, 1500 );
 $("#mapa_div").animate({
     anchura: anchura, height:altura
   }, 1500, function(){
   	init_mapa(center,zoom);
   } );
-$("#footer").animate({
-    width: anchura, height:altura
-  }, 1500 );
-
+$("footer").css('background-color', 'green');
 	}
 	
 	
@@ -208,14 +210,14 @@ $("#footer").animate({
 		z=map.zoom;
 		else
 		z=8;
-		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
+		cambiaDimension(altura ,anchura, map.center,map.zoom);
 		
 	}
 
 	function reduceMapa(evt){
 	
 		es_ampliado=false;
-		cambiaDimension("200px","200px",map.center,map.zoom);
+		cambiaDimension("200","200",map.center,map.zoom);
 	}
 	
 

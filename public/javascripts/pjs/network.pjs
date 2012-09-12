@@ -161,7 +161,6 @@ boolean debug=false;
 void mousePressed() {
 
 
-println("mousePressedd");
 
 	//if (!resourceId) return;
 	
