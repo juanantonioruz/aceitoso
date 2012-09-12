@@ -86,22 +86,28 @@ void draw() {
      text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-24,origenContacto.y+50);
      popStyle();
 }
+Attribute oldSelectedAttribute;
 void mouseMovedd() {
-	
+		println("entrando a mouseMoved");
+
 	if( compruebaPress(origenReset, finReset) ){
 	cursor(HAND);
 	}else{
 	cursor(ARROW);
 	}
-
+	if(oldSelectedAttribute!=null){
+	println("ee"+oldSelectedAttribute.id+" - "+oldSelectedAttribute.name);
+	}else{
+	println("primera vez! "+  g.getSelectedNode().getSubject().name);
+	}
 	if (!resourceId) return;
 
 	// si no hay dragging	
 	if (g.getDragNode()==null) {
-	
-		Resource r = g.getSelectedNode().getSubject();
+
+	Resource r = g.getSelectedNode().getSubject();
 		ArrayList values = r.getValues();
-		Attribute oldSelectedAttribute = r.getSelectedAttribute();
+		 oldSelectedAttribute = r.getSelectedAttribute();
 		int oldValueIndex = selectedValueIndex;
 		selectedValueIndex = null;
 		
@@ -135,20 +141,29 @@ void mouseMovedd() {
 			}
 		}
 
-		
-		if (selectedValueIndex==null && r.selectedAttribute!=null) {
-			// r.selectedAttribute.weight = 1.0;
-			// r.setSelectedAttribute(null);
+		codigoSinUtilizar();
+		selectedNodeIndex=seleccionNodeIndex();
 		}
-		
-		selectedNodeIndex = null;
+	
+	
+}
+
+void seleccionNodeIndex(){
+	selectedNodeIndex = null;
 		// Iterate over nodes
 		for (int i=0; i< g.nodes.size(); i++) {
 			if (g.nodes.get(i).mouseOver()) {
 				selectedNodeIndex = i;
 			}
 		}
-	}
+
+}
+void codigoSinUtilizar(){
+		if (selectedValueIndex==null && r.selectedAttribute!=null) {
+			// r.selectedAttribute.weight = 1.0;
+			// r.setSelectedAttribute(null);
+		}		
+
 }
 
 boolean compruebaPress(PVector inicio, PVector fin ){
