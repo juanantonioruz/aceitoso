@@ -88,7 +88,7 @@ void draw() {
 }
 Attribute oldSelectedAttribute;
 void mouseMovedd() {
-     	println("entrando a mouseMoved");
+
 
 	if( compruebaPress(origenReset, finReset) ){
 	cursor(HAND);
@@ -107,7 +107,7 @@ void mouseMovedd() {
 
 	   	Resource r = g.getSelectedNode().getSubject();
 		ArrayList values = r.getValues();
-println(oldSelectedAttribute+"..."+r.getSelectedAttribute());
+	if(debug)println(oldSelectedAttribute+"..."+r.getSelectedAttribute());
 		oldSelectedAttribute = r.getSelectedAttribute();
 		int oldValueIndex = selectedValueIndex;
 		selectedValueIndex = null;
@@ -117,6 +117,7 @@ println(oldSelectedAttribute+"..."+r.getSelectedAttribute());
 	
 		
 		if (selectedValueIndex!=null) {
+		if(debug)println("cambio de valor!!");
 		  // si hay un cambio de attribute actualiza el resource!
 		  actualizaResourcePorCambioDeAttribute(r, values);
 		}
@@ -168,7 +169,7 @@ void seleccionNodeIndex(){
 				selectedNodeIndex = i;
 			}
 		}
-
+		return selectedNodeIndex;
 }
 void siNoHaySeleccionLimpiaResource(r){
 		if (selectedValueIndex==null && r.selectedAttribute!=null) {
@@ -190,7 +191,7 @@ void mousePressed() {
 	if (compruebaResetButton()) return;
 
 	mouseMovedd();
-	return;
+//	return;
 	//if (!resourceId) return;
 
 	
@@ -203,15 +204,8 @@ void mousePressed() {
 			// Close current resource... ya hay un circulo anterior
 			if(debug)println("// Close current resource selectedValueIndex != null");		
 			r.setClosed();
-			//console.log(selectedValueIndex);
-			//console.dir(r.getValues().size());
-			//console.dir(r.getValues().get(selectedValueIndex));
-			//println("x="+r.getX());
-			//println("y="+r.getY());
+	
 			r2 = fetchResource(r.getValues().get(selectedValueIndex).getId());
-			//r2 = fetchResource(selectedValueIndex);
-			//console.dir(r2);
-			//println("selectedNode"+selectedNode.getSubject().getX());
 			
 			// Check if resource already exists
 	    int i = 0;
@@ -230,15 +224,17 @@ void mousePressed() {
 			} else {
 				g.addEdge(new Edge(selectedNode, n));
 				g.setSelectedNode(n);
-				if(debug)println("node n!=null"); n.getSubject().setOpen();				
+				if(debug)println("node n!=null");
+				 n.getSubject().setOpen();				
 		}
 			
 		} else if (selectedNodeIndex != null) {
-			// TODO: Zoom to node
-			if(debug)println("// selectedNodeIndex != null");			
+			// selectedNodeIndex != null
+			//  quiere decir que el nodo existe en pantalla/grafo
+
 			selectedNode = g.nodes.get(selectedNodeIndex);
 			
-			//println("juan tengo un museo");
+
 			g.setDragNode(selectedNode);
 			if (g.getSelectedNode()!=selectedNode) {
   			r.setClosed();
@@ -249,7 +245,7 @@ void mousePressed() {
 			activaDesplegablesMuseo();
 			}
 		}else{
-					if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		
+			if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		
 		
 		}
 				
