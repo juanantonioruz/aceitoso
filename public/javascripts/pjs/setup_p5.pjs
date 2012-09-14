@@ -5,6 +5,8 @@
 /* @pjs preload="javascripts/pjs/images/titulo_new2.jpg"; */
 /* @pjs preload="javascripts/pjs/images/inicio.jpg"; */
 
+int nodeCount = 0;
+
 boolean depurando=true;
 color[] colors = new color[12];
 
@@ -114,4 +116,29 @@ boolena compruebaResetButton(){
 	}
 	return false;
 
+}
+
+
+Resource fetchResource(String resourceId) {
+
+  // init dummy resource
+ // println("fecthing resource::: "+resourceId);
+  Resource resource = new Resource(resourceId, "", "");
+	resource.idx = nodeCount;
+  nodeCount++;
+  resource.fetchData(); // start fetching data from freebase
+	return resource;
+}
+float NODE_SIZE = 10;
+float EDGE_LENGTH = 20;
+float EDGE_STRENGTH = 0.2;
+float SPACER_STRENGTH = 1000;
+
+
+void resize() {
+	size(1356-10, 752-15);
+}
+
+void setR(String v){
+resourceId=v;
 }

@@ -172,4 +172,14 @@ class Graph {
 		selectedNode.draw();
 
   }
+	
+	int dameIndiceNodo(Node busca){
+			for (int i=0; i < nodes.size(); i++) {
+			if (nodes.get(i).getId()==busca.getId()){
+				return i;
+				}
+		}
+	
+	}
+
 }

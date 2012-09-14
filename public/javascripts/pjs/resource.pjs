@@ -82,7 +82,7 @@ public class Resource {
   String name = "";
   String html = "";
   String coords = "";
-
+	Node nod;
   public Resource(String id, String name, String html) {
 		this.attributes = new ArrayList();
 		this.id = id;

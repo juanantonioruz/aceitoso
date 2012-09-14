@@ -9,6 +9,7 @@ class Node {
   Object subject;
   public Node(Object s) {
 		this.subject = s;
+		s.nod=this;
   }
   
   public void setGraph(Graph g) {
