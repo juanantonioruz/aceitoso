@@ -107,7 +107,6 @@ void paintBackgroundImages(){
 
 boolena compruebaResetButton(){
 	if(compruebaPress(origenReset, finReset)){
-		println("le has dado al reset");
 		setR(515);
 		setup();
 		$('aside').html("");

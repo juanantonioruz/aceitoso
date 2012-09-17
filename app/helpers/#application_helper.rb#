@@ -40,7 +40,7 @@ enlaces={}
         end
 
       puts texto
-      texto
+
     end
 
 

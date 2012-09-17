@@ -22,7 +22,7 @@ Node miNewNode;
 
 
 void printState(){
-println("selectedValueIndex:"+selectedValueIndex+" value: "+selectedValue.getId());
+println("selectedValueIndex:"+selectedValueIndex+" value: "+((selectedValue!=null) ? selectedValue.getId() : "nulo"));
 println("oldSelectedValueIndex:"+oldSelectedValueIndex+" value: "+((oldSelectedValue!=null) ? oldSelectedValue.getId():"nulo"));
 if(debug){
 if(oldSelectedAttribute!=null )println("oldSelectedAttribute:"+oldSelectedAttribute.getName());
@@ -167,6 +167,9 @@ void actualizaSelectedValueIndex(values){
 				miNewNode=newSelectedAttribute.getResource().nod;
 			}
 		}
+		if(selectedValueIndex==null){
+		println("eeeeeeeeeeeeee");
+		 }
 		return 	selectedValueIndex;
 
 }
@@ -183,6 +186,7 @@ void seleccionNodeIndex(){
 
 void siNoHaySeleccionLimpiaResource(rrr){
 		if (selectedValueIndex==null && rrr.selectedAttribute!=null) {
+
 			rrr.selectedAttribute.weight = 1.0;
 			 rrr.setSelectedAttribute(null);
 		}		
@@ -195,7 +199,7 @@ void mousePressed() {
 
 	marcaPosicion();
 	
-	//	printState();
+		printState();
 	if(oldSelectedValue==null){
 		//primera vez que hace click en pelota
 		oldSelectedValue=selectedValue;
