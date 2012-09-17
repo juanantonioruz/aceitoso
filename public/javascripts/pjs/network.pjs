@@ -7,6 +7,9 @@ String resourceId;
 //marcaPosicion : behavior implementado en metodo: 
 	// si se hace click en value no se selecciona el node y viceversa
 int selectedValueIndex;
+int oldSelectedValueIndex;
+Value selectedValue;
+Value oldSelectedValue;
 Attribute oldSelectedAttribute;
 //este sirve para identificar numericamente en la lista de nodos exitentes del grafo
 // solo se selecciona si se pincha en el blanco del circulo
@@ -19,7 +22,9 @@ Node miNewNode;
 
 
 void printState(){
-println("selectedValueIndex:"+selectedValueIndex);
+println("selectedValueIndex:"+selectedValueIndex+" value: "+selectedValue.getId());
+println("oldSelectedValueIndex:"+oldSelectedValueIndex+" value: "+((oldSelectedValue!=null) ? oldSelectedValue.getId():"nulo"));
+if(debug){
 if(oldSelectedAttribute!=null )println("oldSelectedAttribute:"+oldSelectedAttribute.getName());
 else println("oldSelectedAttribute null");
 if(newSelectedAttribute!=null )println("newSelectedAttribute:"+newSelectedAttribute.getName());
@@ -29,7 +34,7 @@ if(miNewNode!=null)
 println("miNewNode.getId():"+miNewNode.getGraph().dameIndiceNodo(miNewNode));
 else println("miNewNode null");
 println("g.getDragNode():"+g.getDragNode());
-
+}
 }
 
 
@@ -155,6 +160,7 @@ void actualizaSelectedValueIndex(values){
 	for (int i = 0; i < values.size(); i++) {
 			Value valor=values.get(i);
 			if (valor.mouseOver()) {
+			   	selectedValue=valor;	       
 				selectedValueIndex = i;
 				newSelectedAttribute=valor.getAttribute();
 				if(newSelectedAttribute!=null)
@@ -188,8 +194,25 @@ void mousePressed() {
 	if (compruebaResetButton()) return;
 
 	marcaPosicion();
-	printState();
-	return;
+	
+	//	printState();
+	if(oldSelectedValue==null){
+		//primera vez que hace click en pelota
+		oldSelectedValue=selectedValue;
+		return;
+	}else{
+		//no es la primera vez que hace click en pelota	
+		if(oldSelectedValue==selectedValue){
+			//continua con la accion			
+		}else if(selectedValue.getAttribute()==oldSelectedValue.getAttribute()){
+		      oldSelectedValue=selectedValue;
+		      //continua con la accion
+		}else{
+		      oldSelectedValue=selectedValue;
+			return;
+		}		
+	}
+	
 	
   if (mouseButton == LEFT) {
   		//este selectedNode es el ultimo seleccionado o cargado con fetchResource
