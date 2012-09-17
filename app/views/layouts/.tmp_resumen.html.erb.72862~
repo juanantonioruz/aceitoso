@@ -27,11 +27,5 @@
   <body onload="<%=if(defined? @onload) then @onload end%>" >
           <%= yield %>
 
-      <script >
-  $(function() {
-    $(".table").tablesorter({ sortList: [[1,0]] });
-  });
-</script>
-
   </body>
 </html>

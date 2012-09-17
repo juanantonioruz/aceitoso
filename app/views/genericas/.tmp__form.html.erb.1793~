@@ -1,0 +1,39 @@
+<%=cargaeditor%>
+
+<%=form_for @generica,:html=>{:multipart=>true} do |f|%>
+    <%=f.label :titulo,:class=>'label'%>
+    <%=f.text_field :titulo%>
+    <%=f.label :descripcion,:class=>'label'%>
+    <%=f.text_area :descripcion,:class=>'tinymce'%>
+			<%=f.label "KML",:class=>'label'%>
+	 <%= f.file_field :archivo %>
+  <%if @generica.archivo_url.to_s!=''%>
+ <br> <b> Archivo KML ya adjuntado</b><br>
+   <%= link_to @generica.archivo, @generica.archivo_url.to_s %>
+   <br>
+          <%= f.check_box :remove_archivo %>
+          <%= t('destroy')%>
+  <%end%>
+
+<br>
+<br>
+		<%=f.label "Piezas relacionadas",:class=>'label'%>
+		<%= f.select :pieza_ids, Pieza.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
+		<%=f.label "Hitos relacionados",:class=>'label'%>
+		<%= f.select :hito_ids, Hito.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
+		<%=f.label "Rutas relacionados",:class=>'label'%>
+		<%= f.select :camino_ids, Camino.all.collect {|x| [x.nombre_relacionable, x.id]}, {}, :multiple => true, :empty=>true %>
+
+    <%=f.label :imagen,:class=>'label'%>
+    <%if @generica.imagen_url.to_s!='' %>
+        <%=imagentam(@generica,'64x64')%>
+        <%= f.check_box :remove_imagen %>
+        Borrar imagen
+    <%end%>
+    <br/>
+    <%= f.file_field :imagen %>  
+    <br/>
+   
+    <%=f.submit 'Guardar',:class=>'btn btn-success'%> o <%=link_to 'cancelar',genericas_path%>
+<%end%>
+

@@ -71,7 +71,6 @@
                   <li><%=link_to 'Articulos',genericas_path%></li>
                   <li><%= link_to "Museos",museos_path  %></li>
                   <li><%= link_to "Tipos de Relaciones",nombre_relacions_path  %></li>
-                  <li><a href='/resumen/articulos'>resumen articulos</a> </li>
                
 
               

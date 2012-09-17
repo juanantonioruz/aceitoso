@@ -1,0 +1,56 @@
+<style>
+	h1.resumen_museo{
+	color:black;font-size:20px;
+	}
+	h2.resumen_museo{
+	background-color:black; color:white;
+	}
+	div.resumen_museo{
+	margin:50px; 
+	}
+</style>
+<%
+       if    session[:usuario_id]==1 then  
+%>
+
+<div id="resultados2">
+	<%= will_paginate @resultados %>
+</div>
+
+<table class="table zebra-striped" border=1>
+<thead>
+<tr>
+<th>Título</th>
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Archivo</th>
+</tr>
+</thead>
+<tbody>
+<%@resultados.each do |generica|%>
+<tr>
+<td><%=generica.titulo%></td>
+<td>
+	<%if ! defined? desc%>
+		<%=raw generica.descripcion%>
+		<%else%>
+		...
+	<%end%>
+	
+</td>
+<td><%=imagentam(generica,'64x64')%></td>
+<td>
+	   <%= link_to generica.archivo, generica.archivo_url.to_s %>
+
+	</td>
+</tr>
+<%end%>
+</tbody>
+</table>
+
+<div id="resultados">
+	<%= will_paginate @resultados %>
+</div>
+<%else%>
+NO TIENE PERMISOS PARA ESTO
+<%end%>

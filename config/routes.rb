@@ -85,6 +85,7 @@ Olearum::Application.routes.draw do
   match "resources/hitotextfg/:id" => "resources#hitotextfg"
   match "resources/museostextfile/:id" => "resources#museostextfile"
     match "resumen/museo/:id"=> "resumen#museo"
+  match "resumen/articulos"=> "resumen#articulos"
     match "resources/medio/:id"=> "resources#medio"
     match "resources/camino/:url"=> "resources#camino"
 

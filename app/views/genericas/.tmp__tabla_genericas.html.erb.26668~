@@ -1,0 +1,33 @@
+<table class="table zebra-striped">
+<thead>
+<tr>
+<th>Título</th>
+<th>Descripcion</th>
+<th>Imagen</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+<%resultados.each do |generica|%>
+<tr>
+<td><%=generica.titulo%></td>
+<td>
+	<%if ! defined? desc%>
+		<%=generica.desc_san[0,200]%>
+		<%else%>
+		...
+	<%end%>
+	
+</td>
+<td><%=imagentam(generica,'64x64')%></td>
+
+<td>
+<%= link_to 'Ver',generica,:class=>'btn btn-success'%>
+<%= link_to 'Relaciones',relacion_generica_path(generica),:class=>'btn btn-success'%>&nbsp;
+<%= link_to 'Editar',edit_generica_path(generica),:class=>'btn btn-warning'%>
+<%= link_to 'Borrar',generica_path(generica),:method=>:delete,:confirm=>'¿Seguro que desea borrar la información?',:class=>'btn btn-danger'%>
+</td>
+</tr>
+<%end%>
+</tbody>
+</table>
