@@ -30,7 +30,7 @@ function add_events_to_ruta(ruta){
 		// Since KML is user-generated, do naive protection against
 		// Javascript.
 		if(feature.attributes.description==null) return;
-		var content = "<h2>" + feature.attributes.name + "</h2>" + feature.attributes.description;
+		var content = "<h2><a href='#' onclick='circles("+feature.id+")'>(ir a)</a>" + feature.attributes.name + "</h2>" + feature.attributes.description;
 		if (content.search("<script") != -1) {
 			content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
 		}

@@ -214,6 +214,20 @@ end
    vv
   end
 
+  def graba_stats
+    sid=request.session_options[:id]
+    s=Stat.find_by_sid(sid.to_s)
+    if !s.nil?
+      s.busquedas+=1
+        s.save
+      else
+      s=Stat.new
+      s.sid=sid
+      s.busquedas=1
+      s.save
+    end
+end
+
   #este metodo es invocado por el suggest del interactivo
   def search
         logger.info "search::: > buscando .... "+params[:query].to_s
@@ -265,6 +279,7 @@ end
             render :text => respuesta
   end
   def busca(id_param)
+    graba_stats
         resultado=Relacionable.find_by_id(id_param).heir
         
         if [Generica, Pieza, Hito, Camino].include?resultado.class
@@ -277,7 +292,6 @@ end
 
   #este metodo es invocado por el suggest para detallar info en mouse-over ... ahora no anda...
   def fly
-
         logger.info "consulta suggest por mid > id .... "+params[:id].to_s
       
       resultado, html=busca(params[:id])      

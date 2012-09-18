@@ -2,3 +2,9 @@
 <hr>
 <p>Seleccione una opción del menu</p>
 
+<h1>stats</h1>
+<%
+numero=Stat.find(:all).size
+%>
+total visitantes (sesiones de uso):<b><%=numero%></b><br>
+total busquedas: <b><%=Stat.sum(:busquedas)%></b><br>
