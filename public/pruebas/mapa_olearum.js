@@ -25,12 +25,12 @@ function add_events_to_ruta(ruta){
 
 	function onFeatureSelectSun(event){
 						//console.dir(event.feature.data);
-
+//		alert(event.feature.layer.clase+"---"+event.feature.layer.ider);
 		var feature = event.feature;
 		// Since KML is user-generated, do naive protection against
 		// Javascript.
 		if(feature.attributes.description==null) return;
-		var content = "<h2><a href='#' onclick='circles("+feature.id+")'>(ir a)</a>" + feature.attributes.name + "</h2>" + feature.attributes.description;
+		var content = "<h2><a href='#' onclick='circles("+event.feature.layer.ider+")'>(ir a)</a>" + feature.attributes.name + "</h2>" + feature.attributes.description;
 		if (content.search("<script") != -1) {
 			content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
 		}
@@ -58,8 +58,8 @@ function add_events_to_ruta(ruta){
             }
 			
 			
-	function load_KML(nombre_capa, url_kml){
-		 return new OpenLayers.Layer.Vector(nombre_capa, {
+	function load_KML(nombre_capa, url_kml, clase, ider){
+		 la_capa= new OpenLayers.Layer.Vector(nombre_capa, {
                 projection: geographic,
                 strategies: [new OpenLayers.Strategy.Fixed()],
                 protocol: new OpenLayers.Protocol.HTTP({
@@ -70,12 +70,16 @@ function add_events_to_ruta(ruta){
                     })
                 })
             });
+			la_capa.ider=ider;
+			la_capa.clase=clase;
+			console.dir(la_capa)
+			return la_capa;
 	}
 	
 	var actuales=[];
 	//llamade desde processing resource.pjs parece que no accede a la variable map
 	var kmls=[];
-	function addLayerKML(nombre, url_kml){
+	function addLayerKML(nombre, url_kml, clase, ider){
 				 var idx = actuales.indexOf(nombre); // Find the index
 				 if(idx!=-1){
 				 	// se encuentra
@@ -85,9 +89,9 @@ function add_events_to_ruta(ruta){
 				 } else{
 				 						//  map.removeControl(selectControl);
 				 	//console.info("no se encuentra"+nombre);
-					
-				 		vector=load_KML(nombre, url_kml);
-						kmls.push([nombre, url_kml]);
+						//alert(clase+"--"+ider);
+				 		vector=load_KML(nombre, url_kml, clase, ider);
+						kmls.push([nombre, url_kml, clase, ider]);
 						add_events_to_ruta(vector);
 						add_capa_seleccionable(map, vector);
 						//selectControl.map.layers.push(vector);
@@ -390,7 +394,7 @@ function centerMapaPeninsula(){
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
 					var value = kmls[i];
-					addLayerKML(value[0],value[1]);
+					addLayerKML(value[0],value[1],value[2],value[3]);
 				}
 
 			}

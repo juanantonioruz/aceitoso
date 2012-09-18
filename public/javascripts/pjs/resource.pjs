@@ -205,7 +205,7 @@ public class Resource {
          if(that.rutas!=""){
         	 for (int r = 0; r < that.rutas.length(); r++) {
 	        	//addLayerKML(that.rutas[r].nombre, "/resources/camino/"+that.rutas[r].archivo.replace(new RegExp(/\//g), "qqq"));
-	        	addLayerKML(that.rutas[r].nombre, that.rutas[r].archivo);
+	        	addLayerKML(that.rutas[r].nombre, that.rutas[r].archivo, that.clasi, that.rutas[r].id);
 
         	 }
         }

@@ -47,11 +47,11 @@ class Datos
   end
    def dameRutas museo
         
-       museo.caminos.map{|k|  {:nombre => k.nombre, :archivo => k.archivo.to_s}}
+       museo.caminos.map{|k|  {:nombre => k.nombre, :archivo => k.archivo.to_s, :id => k.predecessor.id.to_s}}
   end
    def dameRutasCamino k
         
-      [{:nombre => k.nombre, :archivo => k.archivo.to_s}]
+      [{:nombre => k.nombre, :archivo => k.archivo.to_s, :id => k.predecessor.id.to_s}]
       
   end
   def dameCoordenadas
