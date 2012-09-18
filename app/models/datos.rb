@@ -101,7 +101,7 @@ class Datos
           respuesta_det<<"<dl>" 
           respuesta_det<< dameTabNew('Descripci&oacute;n')
         respuesta_det<<imagen_details(self.data.ficha.imagen) unless self.data.ficha.imagen.blank?
-          respuesta_det<<"#{texto_con_enlaces(self.data.ficha.descripcion)}" 
+          respuesta_det<<"#{texto_con_enlaces(self.data.ficha.descripcion, self.data.id, self.data.class)}" 
           respuesta_det<<finTab
           respuesta_det<<dameTabNew("Contacto")
           respuesta_det<<"#{self.data.ficha.contacto}" 
@@ -182,7 +182,7 @@ else
       if(self.data.descripcion.blank?)
           respuesta_det<<"Actualmente no hay descripcion para este tema"
     else
-    respuesta_det<<texto_con_enlaces(self.data.descripcion) 
+    respuesta_det<<texto_con_enlaces(self.data.descripcion, self.data.id, self.data.class) 
       end
   end
       respuesta_det<<"</p>"
