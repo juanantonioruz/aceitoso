@@ -203,7 +203,7 @@ $("#mapa_div").animate({
   }, 1500, function(){
   	init_mapa(center,zoom);
   } );
-$("footer").css('background-color', 'green');
+$("footer").css('background-color', 'gray');
 	}
 	
 	
@@ -211,8 +211,8 @@ $("footer").css('background-color', 'green');
 				
 
 		es_ampliado=true;
-		var altura=$(document).height()-100;
-		var anchura=$(document).width()-$('aside').width()-100;
+		var altura=600;
+		var anchura=900;
 		if(centroLonLatPeninsula==map.center)
 		z=map.zoom;
 		else
