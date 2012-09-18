@@ -279,7 +279,7 @@ end
             render :text => respuesta
   end
   def busca(id_param)
-    graba_stats
+    #graba_stats
         resultado=Relacionable.find_by_id(id_param).heir
         
         if [Generica, Pieza, Hito, Camino].include?resultado.class

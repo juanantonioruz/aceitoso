@@ -189,20 +189,21 @@ function deleteAllLayersSensibles(centro, zoomito){
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
-		$("#OpenLayers_Map_13_OpenLayers_ViewPort").animate({
-    width: anchura, height:altura
-  }, 1500 );
-$("#container_mapa").animate({
-    width: anchura, height:altura
-  }, 1500 );
-$("footer").animate({
-    width: (parseInt(anchur)+20+"px"), height:(parseInt(altur)+20+"px")
-  }, 1500 );
-$("#mapa_div").animate({
-    anchura: anchura, height:altura
-  }, 1500, function(){
+$("footer").css('width', (parseInt(anchur)+20+"px"));
+$("footer").css('height', (parseInt(altur)+20+"px"));
+$("#container_mapa").css('width', anchura);
+$("#container_mapa").css('height', altura);
+
+$("#mapa_div").css('width', anchura);
+$("#mapa_div").css('height', altura);
+
+
+
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('width', (parseInt(anchur)-20+"px"));
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('height', (parseInt(altur)-20+"px"));
   	init_mapa(center,zoom);
-  } );
+
+
 $("footer").css('background-color', 'gray');
 	}
 	
