@@ -189,15 +189,15 @@ function deleteAllLayersSensibles(centro, zoomito){
 	}else{
 		//altura=min
 	}
-//		altur=400;
-//		anchur=400;
+		altur=200;
+		anchur=700;
 		altura=altur+"px";
 		anchura=anchur+"px";
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
-$("footer").css('width', (parseInt(anchur)+20+"px"));
-$("footer").css('height', (parseInt(altur)+20+"px"));
+$("footer").css('width', (parseInt(anchur)+3+"px"));
+$("footer").css('height', (parseInt(altur)+3+"px"));
 $("#container_mapa").css('width', anchura);
 $("#container_mapa").css('height', altura);
 
@@ -206,8 +206,8 @@ $("#mapa_div").css('height', altura);
 
 
 
-$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('width', (parseInt(anchur)-20+"px"));
-$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('height', (parseInt(altur)-20+"px"));
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('width', anchura);
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('height', altura);
   	init_mapa(center,zoom);
 
 
@@ -389,7 +389,7 @@ function centerMapaPeninsula(){
 
 
 		panel_ampliable= creaPanelAmpliable(es_ampliado);
-		map.addControl(panel_ampliable);
+		//map.addControl(panel_ampliable);
 				
 			inicia_capas_base(map);
 			if(url_museos!=null)
@@ -411,6 +411,7 @@ function centerMapaPeninsula(){
 			if(!es_ampliado)
 					$("#OpenLayers_Control_MaximizeDiv").hide();
 				else
+					$("#OpenLayers_Control_MaximizeDiv").show();
 					$("#OpenLayers_Control_MaximizeDiv").show();
 
 			return map;

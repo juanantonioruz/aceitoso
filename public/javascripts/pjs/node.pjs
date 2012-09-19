@@ -15,7 +15,7 @@ class Node {
   public void setGraph(Graph g) {
     this.g = g;
 		this.ps = g.ps;
-		this.particula = ps.makeParticle(1.0,300,200,0);
+		this.particula = ps.makeParticle(1.0,500,300,0);
   }
 	
 	public Object getSubject() {
