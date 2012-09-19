@@ -128,13 +128,7 @@ class Datos
             end
           respuesta_det<<finTab
         end
-          if(!self.data.medios.empty?)
-          respuesta_det<<dameTabNew("Audiovisuales")
-            self.data.medios.each do |medio|
-              respuesta_det<<"<br><b class='medio_popup' id_medio='#{medio.id}'>#{medio.nombre}</b><br><hr>" 
-            end
-          respuesta_det<<finTab
-        end
+        
           if(!self.data.eventos.empty?)
          respuesta_det<< dameTabNew("Historia")
          self.data.eventos.each do |evento|
@@ -186,7 +180,9 @@ else
       end
   end
       respuesta_det<<"</p>"
-    respuesta_det
+    respuesta_det.gsub!(/target="([^"]+)"/, '')
+respuesta_det.gsub!(/href="([^"]+)"/, 'href="#"')
+respuesta_det
    end
   
   def imagen_details url

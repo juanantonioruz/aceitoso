@@ -315,6 +315,7 @@ end
   def detalla
      resultado, html=busca(params[:id])      
 
+    html.gsub!(/href="([^"]+)"/, 'href="#"')
     @resource=resultado
     data=Datos.new
       if resultado.class.to_s=="Generica"
@@ -326,6 +327,7 @@ end
     data.data=@resource
     data.clase= resultado.class.to_s
     logger.info "clase:"+data.clase.to_s
+
     data.resultado_html=html
      
     # respond_to do |format|
