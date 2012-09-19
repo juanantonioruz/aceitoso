@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>OpenLayers Click Handler Example</title>
+        
+        <link rel="stylesheet" href="theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="style.css" type="text/css">
+        
+        <script src="lib/Firebug/firebug.js"></script>
+        <script src="OpenLayers.js"></script>
+        <script type="text/javascript">
+
+            OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+                defaultHandlerOptions: {
+                    'single': true,
+                    'double': false,
+                    'pixelTolerance': 0,
+                    'stopSingle': false,
+                    'stopDouble': false
+                },
+
+                initialize: function(options) {
+                    this.handlerOptions = OpenLayers.Util.extend(
+                        {}, this.defaultHandlerOptions
+                    );
+                    OpenLayers.Control.prototype.initialize.apply(
+                        this, arguments
+                    ); 
+                    this.handler = new OpenLayers.Handler.Click(
+                        this, {
+                            'click': this.onClick,
+                            'dblclick': this.onDblclick 
+                        }, this.handlerOptions
+                    );
+                }, 
+
+                onClick: function(evt) {
+                    var output = document.getElementById(this.key + "Output");
+                    var msg = "click " + evt.xy;
+                    output.value = output.value + msg + "\r\n";
+                    var lonlat = map.getLonLatFromViewPortPx(evt.xy);
+                    output.value = output.value+"You clicked near " + lonlat.lat + " N, " +
+                                              + lonlat.lon + " E";
+                }
+
+            });
+
+            var map, controls; 
+
+            function init(){
+        
+                map = new OpenLayers.Map('map');
+				var layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+
+                map.addLayers([layer]);
+                  map.setCenter(
+    new OpenLayers.LonLat(-5.98689436912537, 37.3927590250969).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ), 18
+);
+                controls = {
+                    "single": new OpenLayers.Control.Click({
+                        handlerOptions: {
+                            "single": true
+                        }
+                    })
+                };
+
+
+                var control;
+                for(var key in controls) {
+                    control = controls[key];
+                    // only to route output here
+                    control.key = key;
+                    map.addControl(control);
+                }
+                
+
+                var control=controls['single']
+              //  map.addControl(control);
+                control.activate();
+
+  
+              
+
+            }
+            
+          
+        </script>
+    </head>
+    <body onload="init()">
+        <h1 id="title">Click Handler Example</h1>
+       
+    
+            <div id="map" class="smallmap" style="width: 540px;
+                height: 370px; border: 1px solid gray;float:left;margin-right:100px;"></div>
+            <div style="">
+                        <textarea class="output" id="singleOutput" style="text-align: left;font-size: 0.9em;width: 350px;height: 265px;overflow: auto;" ></textarea>
+                        </div>
+    </body>
+</html>

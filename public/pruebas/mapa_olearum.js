@@ -184,6 +184,13 @@ function deleteAllLayersSensibles(centro, zoomito){
 			
 	}
 	function cambiaDimension(altur, anchur, center,zoom){
+	if(es_ampliado){
+		//altura=max
+	}else{
+		//altura=min
+	}
+//		altur=400;
+//		anchur=400;
 		altura=altur+"px";
 		anchura=anchur+"px";
 		$("#container_mapa").empty();
