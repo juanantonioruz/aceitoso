@@ -23,7 +23,7 @@ class Node {
 	}
 	
   public String getId() {
-    return subject.getId;
+    return subject.getId();
   }
 
   public String getName() {

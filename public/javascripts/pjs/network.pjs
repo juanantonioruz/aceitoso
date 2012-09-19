@@ -14,6 +14,7 @@ Attribute oldSelectedAttribute;
 //este sirve para identificar numericamente en la lista de nodos exitentes del grafo
 // solo se selecciona si se pincha en el blanco del circulo
 int selectedNodeIndex;
+int oldSelectedNodeIndex;
 
 // //////////////INCORPORADOS POR MI
 Attribute newSelectedAttribute;
@@ -22,9 +23,10 @@ Node miNewNode;
 
 
 void printState(){
+//if(selectedValue!=null && selectedValueIndex=) selectedValueIndex=selectedValue.getId();
 println("selectedValueIndex:"+selectedValueIndex+" value: "+((selectedValue!=null) ? selectedValue.getId() : "nulo"));
 println("oldSelectedValueIndex:"+oldSelectedValueIndex+" value: "+((oldSelectedValue!=null) ? oldSelectedValue.getId():"nulo"));
-if(debug){
+
 if(oldSelectedAttribute!=null )println("oldSelectedAttribute:"+oldSelectedAttribute.getName());
 else println("oldSelectedAttribute null");
 if(newSelectedAttribute!=null )println("newSelectedAttribute:"+newSelectedAttribute.getName());
@@ -34,7 +36,9 @@ if(miNewNode!=null)
 println("miNewNode.getId():"+miNewNode.getGraph().dameIndiceNodo(miNewNode));
 else println("miNewNode null");
 println("g.getDragNode():"+g.getDragNode());
-}
+println("");
+println("#######################");
+println("");
 }
 
 
@@ -104,7 +108,7 @@ void marcaPosicion() {
 	if (!resourceId) return;
 
 	// si no hay dragging	
-	if (g.getDragNode()==null) {
+//	if (g.getDragNode()==null) {
 	   			   
 
 	   	Resource rrr = g.getSelectedNode().getSubject();
@@ -119,11 +123,18 @@ void marcaPosicion() {
 		if (selectedValueIndex!=null) {
 		  // si hay un cambio de attribute actualiza el resource!
 		  actualizaResourcePorCambioDeAttribute(rrr, values);
+		}else{
+		//pincha fuera pierde antigua selecccion!
+		//println("jolin"+g.getSelectedNode().getName());
+			oldSelectedValueIndex=null;
+			selectedValue=null;
+			oldSelectedValue=null;
 		}
 
 		siNoHaySeleccionLimpiaResource(rrr);
 		selectedNodeIndex=seleccionNodeIndex();
-		}
+		//println("selectedNodeIndex: "+selectedNodeIndex);
+	//	}
 	
 	
 }
@@ -174,6 +185,7 @@ void actualizaSelectedValueIndex(values){
 
 }
 void seleccionNodeIndex(){
+	if(selectedNodeIndex!=null)oldSelectedNodeIndex=selectedNodeIndex; 
 	selectedNodeIndex = null;
 		// Iterate over nodes
 		for (int i=0; i< g.nodes.size(); i++) {
@@ -189,7 +201,37 @@ void siNoHaySeleccionLimpiaResource(rrr){
 
 			rrr.selectedAttribute.weight = 1.0;
 			 rrr.setSelectedAttribute(null);
+
 		}		
+
+}
+
+void compruebaPelotaOff(){
+if (selectedNodeIndex != null) {
+			// ocurre cuando se activa un nodo pasivo ... pasa a 1 primer plano
+		
+
+			selectedNode = g.nodes.get(selectedNodeIndex);
+			
+
+			g.setDragNode(selectedNode);
+			if (oldSelectedNodeIndex!=selectedNodeIndex) {
+		
+			for(Node n:g.nodes){
+			if(n!=selectedNode)n.getSubject().setClosed();
+			}
+//		Resource lastResourceSelected = g.nodes.get(oldSelectedNodeIndex).getSubject();
+			 
+  //		lastResourceSelected.setClosed();
+  			selectedNode.getSubject().setOpen();
+  			$('aside').html(selectedNode.getSubject().html);
+  			g.setSelectedNode(selectedNode);
+  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
+			activaDesplegablesMuseo();
+			}
+
+		
+		}
 
 }
 
@@ -198,7 +240,7 @@ void mousePressed() {
 	if (compruebaResetButton()) return;
 
 	marcaPosicion();
-	
+	compruebaPelotaOff();
 		//printState();
 	if(oldSelectedValue==null){
 		//primera vez que hace click en pelota
@@ -231,7 +273,8 @@ void mousePressed() {
 			lastResourceSelected.setClosed();
 	
 			r2 = fetchResource(lastResourceSelected.getValues().get(selectedValueIndex).getId());
-			
+			selectedValueIndex=null;
+			selectedValue=null;
 			// Check if resource already exists
 	    int i = 0;
 	    Node n = null;
@@ -252,29 +295,9 @@ void mousePressed() {
 				 n.getSubject().setOpen();				
 		}
 			
-		} else if (selectedNodeIndex != null) {
-			// ocurre cuando se activa un nodo pasivo ... pasa a 1 primer plano
-
-			selectedNode = g.nodes.get(selectedNodeIndex);
-			
-
-			g.setDragNode(selectedNode);
-			if (g.getSelectedNode()!=selectedNode) {
-  			lastResourceSelected.setClosed();
-  			selectedNode.getSubject().setOpen();
-  			$('aside').html(selectedNode.getSubject().html);
-  			g.setSelectedNode(selectedNode);
-  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
-			activaDesplegablesMuseo();
-			}
-		}else{
-			if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		
-		
-		}
+		} 
 				
-  } else { // Right click
-		Node selectedNode = g.getSelectedNode();
-		Resource r = selectedNode.getSubject();
+
 	}
 }
 

@@ -258,6 +258,9 @@ public class Resource {
 		return this.id;
 	}
 
+public Node getNode(){
+       return nod;
+ }
   public String getName() {
     return this.name;
   }
