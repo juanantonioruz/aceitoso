@@ -68,13 +68,13 @@ void loadImagenesHome(){
 void iniciaPVectors(){
  origenTitulo=new PVector(-10,5);
  	finTitulo=new PVector(800, 66);
-		 origenReset=new PVector(width-333, 1);
+		 origenReset=new PVector(width-473, 1);
  	finReset=new PVector(68, 23);
-	 origenContacto=new PVector(width-320, height-80);
+	 origenContacto=new PVector(width-320-140, height-80-60);
  	finContacto=new PVector(37, 28);
-	 origenOlearum_2=new PVector(width-260,height-80);
+	 origenOlearum_2=new PVector(width-260-140,height-80-60);
  	finOlearum_2=new PVector(107, 38);
-	 origenMinisterio_2=new PVector(width-135,height-80);
+	 origenMinisterio_2=new PVector(width-135-140,height-80-60);
  	finMinisterio_2=new PVector(104, 38);
  	
 	 origenOlearum_1=new PVector(0,100);

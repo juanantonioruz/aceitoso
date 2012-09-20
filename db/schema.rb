@@ -64,13 +64,6 @@ ActiveRecord::Schema.define(:version => 20120918074113) do
 
   add_index "coordenadas", ["camino_id"], :name => "index_coordenadas_on_camino_id"
 
-  create_table "elemento_relacionables", :force => true do |t|
-    t.integer  "heir_id"
-    t.string   "heir_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "entornos", :force => true do |t|
     t.integer "museo_id"
   end
