@@ -68,13 +68,13 @@ void loadImagenesHome(){
 void iniciaPVectors(){
  origenTitulo=new PVector(-10,5);
  	finTitulo=new PVector(800, 66);
-		 origenReset=new PVector(width-473, 1);
+		 origenReset=new PVector(width-455, 1);
  	finReset=new PVector(194, 23);
-	 origenContacto=new PVector(width-320-140, height-80-60);
+	 origenContacto=new PVector(width-320-100, height-70);
  	finContacto=new PVector(37, 28);
-	 origenOlearum_2=new PVector(width-260-140,height-80-60);
+	 origenOlearum_2=new PVector(width-260-100,height-80);
  	finOlearum_2=new PVector(107, 38);
-	 origenMinisterio_2=new PVector(width-135-140,height-80-60);
+	 origenMinisterio_2=new PVector(width-135-100,height-80);
  	finMinisterio_2=new PVector(104, 38);
  	
 	 origenOlearum_1=new PVector(0,100);
@@ -100,7 +100,6 @@ void paintBackgroundImages(){
    	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
    	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
 	
-	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
      image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
 
 }
@@ -135,7 +134,7 @@ float SPACER_STRENGTH = 1000;
 
 
 void resize() {
-	size(1356-10, 752-15);
+	size(1356-10, 670);
 }
 
 void setR(String v){

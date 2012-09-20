@@ -189,8 +189,8 @@ function deleteAllLayersSensibles(centro, zoomito){
 	}else{
 		//altura=min
 	}
-		altur=200;
-		anchur=700;
+		altur=250;
+		anchur=250;
 		altura=altur+"px";
 		anchura=anchur+"px";
 		$("#container_mapa").empty();

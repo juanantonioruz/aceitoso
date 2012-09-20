@@ -222,7 +222,7 @@ div.olControlSaveFeaturesItemInactive {
 }
 
 .olControlZoomPanel {
-    top: 71px;
+    top: 11px;
     left: 14px;
 } 
 
@@ -306,7 +306,7 @@ div.olControlSaveFeaturesItemInactive {
  */
 .olControlLayerSwitcher {
     position: absolute;
-    top: 25px;
+    top: 15px;
     right: 0;
     width: 20em;
     font-family: sans-serif;
