@@ -59,7 +59,7 @@ void loadImagenesHome(){
     olearumImage = loadImage("javascripts/pjs/images/olearum.jpg");
     ministerioImage = loadImage("javascripts/pjs/images/ministerio.jpg");
     contactoImage = loadImage("javascripts/pjs/images/contacto.jpg");
-    resetImage = loadImage("javascripts/pjs/images/inicio.jpg");
+    resetImage = loadImage("javascripts/pjs/images/inicio_instrucciones.jpg");
     tituloImage = loadImage("javascripts/pjs/images/titulo_new2.jpg");
 
 }
@@ -69,7 +69,7 @@ void iniciaPVectors(){
  origenTitulo=new PVector(-10,5);
  	finTitulo=new PVector(800, 66);
 		 origenReset=new PVector(width-473, 1);
- 	finReset=new PVector(68, 23);
+ 	finReset=new PVector(194, 23);
 	 origenContacto=new PVector(width-320-140, height-80-60);
  	finContacto=new PVector(37, 28);
 	 origenOlearum_2=new PVector(width-260-140,height-80-60);
