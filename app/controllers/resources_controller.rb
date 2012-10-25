@@ -74,6 +74,7 @@ museo_se=""
           end 
         
           v+=museo_se
+
     
   end
   if(museo_se!="") then v+=museo_se end
@@ -155,8 +156,11 @@ museo_se=""
       end 
   end
   def damePointHito hito
-     point="#{hito.x},#{hito.y}"
-     
+    if (!hito.x.nil? && !hito.y.nil?)
+     return "#{hito.x},#{hito.y}"
+    end
+     #TODO conditional
+
       elemento_con_kml=hito
       point_kml=check_kml elemento_con_kml
       if !point_kml.nil? then point=point_kml end 

@@ -1,3 +1,4 @@
+
 /**
  * @author juanitu
  */
@@ -7,12 +8,14 @@ var map, controls,layer_museos,layer_hitos, indexLayerMuseos, mercator, geograph
 var	zoomMapa=8;
 
 
+
 function inicia_capas_base(map){
 		            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", 
 					"http://localhost/osm/${z}/${x}/${y}.png", {"tileOptions": {"crossOriginKeyword": null}}
 					);
             map.addLayer(newLayer);
 
+    
 }
 
 function add_events_to_ruta(ruta){
