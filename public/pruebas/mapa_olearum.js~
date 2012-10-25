@@ -8,11 +8,10 @@ var	zoomMapa=8;
 
 
 function inicia_capas_base(map){
-		            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", "http://localhost/osm/${z}/${x}/${y}.png", {numZoomLevels: 19});
+		            var newLayer = new OpenLayers.Layer.OSM("Local Tiles", 
+					"http://localhost/osm/${z}/${x}/${y}.png", {"tileOptions": {"crossOriginKeyword": null}}
+					);
             map.addLayer(newLayer);
-
-
-
 
 }
 
@@ -25,10 +24,13 @@ function add_events_to_ruta(ruta){
 
 
 	function onFeatureSelectSun(event){
+						//console.dir(event.feature.data);
+//		alert(event.feature.layer.clase+"---"+event.feature.layer.ider);
 		var feature = event.feature;
 		// Since KML is user-generated, do naive protection against
 		// Javascript.
-		var content = "<h2>" + feature.attributes.name + "</h2>" + feature.attributes.description;
+		if(feature.attributes.description==null) return;
+		var content = "<h2><a href='#' onclick='circles("+event.feature.layer.ider+")'>(ir a)</a>" + feature.attributes.name + "</h2>" + feature.attributes.description;
 		if (content.search("<script") != -1) {
 			content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
 		}
@@ -56,8 +58,8 @@ function add_events_to_ruta(ruta){
             }
 			
 			
-	function load_KML(nombre_capa, url_kml){
-		 return new OpenLayers.Layer.Vector(nombre_capa, {
+	function load_KML(nombre_capa, url_kml, clase, ider){
+		 la_capa= new OpenLayers.Layer.Vector(nombre_capa, {
                 projection: geographic,
                 strategies: [new OpenLayers.Strategy.Fixed()],
                 protocol: new OpenLayers.Protocol.HTTP({
@@ -68,12 +70,16 @@ function add_events_to_ruta(ruta){
                     })
                 })
             });
+			la_capa.ider=ider;
+			la_capa.clase=clase;
+			console.dir(la_capa)
+			return la_capa;
 	}
 	
 	var actuales=[];
 	//llamade desde processing resource.pjs parece que no accede a la variable map
 	var kmls=[];
-	function addLayerKML(nombre, url_kml){
+	function addLayerKML(nombre, url_kml, clase, ider){
 				 var idx = actuales.indexOf(nombre); // Find the index
 				 if(idx!=-1){
 				 	// se encuentra
@@ -83,9 +89,9 @@ function add_events_to_ruta(ruta){
 				 } else{
 				 						//  map.removeControl(selectControl);
 				 	//console.info("no se encuentra"+nombre);
-					
-				 		vector=load_KML(nombre, url_kml);
-						kmls.push([nombre, url_kml]);
+						//alert(clase+"--"+ider);
+				 		vector=load_KML(nombre, url_kml, clase, ider);
+						kmls.push([nombre, url_kml, clase, ider]);
 						add_events_to_ruta(vector);
 						add_capa_seleccionable(map, vector);
 						//selectControl.map.layers.push(vector);
@@ -115,7 +121,7 @@ function deleteAllLayersSensibles(centro, zoomito){
 		
 	 reduceMapa();
 	}
-		//cambiaDimension("200px","200px",centro, zoomito );
+		//cambiaDimension("200","200",centro, zoomito );
 		//es_ampliado=false;
 		
 
@@ -177,25 +183,35 @@ function deleteAllLayersSensibles(centro, zoomito){
 		capas_sensibles.push(vector);
 			
 	}
-	function cambiaDimension(altura, anchura, center,zoom){
+	function cambiaDimension(altur, anchur, center,zoom){
+	if(es_ampliado){
+		//altura=max
+	}else{
+		//altura=min
+	}
+		altur=250;
+		anchur=250;
+		altura=altur+"px";
+		anchura=anchur+"px";
 		$("#container_mapa").empty();
 		$('#container_mapa').append('<div id="mapa_div" ></div>');
 
-		$("#OpenLayers_Map_13_OpenLayers_ViewPort").animate({
-    width: anchura, height:altura
-  }, 1500 );
-$("#container_mapa").animate({
-    width: anchura, height:altura
-  }, 1500 );
-$("#mapa_div").animate({
-    anchura: anchura, height:altura
-  }, 1500, function(){
-  	init_mapa(center,zoom);
-  } );
-$("#footer").animate({
-    width: anchura, height:altura
-  }, 1500 );
+$("footer").css('width', (parseInt(anchur)+3+"px"));
+$("footer").css('height', (parseInt(altur)+3+"px"));
+$("#container_mapa").css('width', anchura);
+$("#container_mapa").css('height', altura);
 
+$("#mapa_div").css('width', anchura);
+$("#mapa_div").css('height', altura);
+
+
+
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('width', anchura);
+$("#OpenLayers_Map_13_OpenLayers_ViewPort").css('height', altura);
+  	init_mapa(center,zoom);
+
+
+$("footer").css('background-color', 'gray');
 	}
 	
 	
@@ -203,20 +219,20 @@ $("#footer").animate({
 				
 
 		es_ampliado=true;
-		var altura=$(document).height()-100;
-		var anchura=$(document).width()-$('aside').width()-100;
+		var altura=600;
+		var anchura=900;
 		if(centroLonLatPeninsula==map.center)
 		z=map.zoom;
 		else
 		z=8;
-		cambiaDimension(altura +"px",anchura +"px", map.center,map.zoom);
+		cambiaDimension(altura ,anchura, map.center,map.zoom);
 		
 	}
 
 	function reduceMapa(evt){
 	
 		es_ampliado=false;
-		cambiaDimension("200px","200px",map.center,map.zoom);
+		cambiaDimension("200","200",map.center,map.zoom);
 	}
 	
 
@@ -365,6 +381,7 @@ function centerMapaPeninsula(){
             new OpenLayers.Control.ZoomPanel(),
 			new OpenLayers.Control.LayerSwitcher()
         ]
+	minZoomLevel:8
 		});
 			
 		map.events.on({
@@ -373,7 +390,7 @@ function centerMapaPeninsula(){
 
 
 		panel_ampliable= creaPanelAmpliable(es_ampliado);
-		map.addControl(panel_ampliable);
+		//map.addControl(panel_ampliable);
 				
 			inicia_capas_base(map);
 			if(url_museos!=null)
@@ -386,7 +403,7 @@ function centerMapaPeninsula(){
 			if(kmls!=null){
 				for(var i=0; i<kmls.length; i++) {
 					var value = kmls[i];
-					addLayerKML(value[0],value[1]);
+					addLayerKML(value[0],value[1],value[2],value[3]);
 				}
 
 			}
@@ -395,6 +412,7 @@ function centerMapaPeninsula(){
 			if(!es_ampliado)
 					$("#OpenLayers_Control_MaximizeDiv").hide();
 				else
+					$("#OpenLayers_Control_MaximizeDiv").show();
 					$("#OpenLayers_Control_MaximizeDiv").show();
 
 			return map;

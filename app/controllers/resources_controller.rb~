@@ -281,7 +281,9 @@ end
   def busca(id_param)
     #graba_stats
         resultado=Relacionable.find_by_id(id_param).heir
-        if [Generica, Pieza, Hito, Camino, Info].include?resultado.class
+        puts resultado
+	puts "***************************************************************************************************************************************************************************"
+        if [Generica, Pieza, Hito, Camino].include?resultado.class
           html=resultado.descripcion
         elsif resultado.class==Museo
           html=resultado.ficha.descripcion

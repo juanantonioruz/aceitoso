@@ -381,6 +381,7 @@ function centerMapaPeninsula(){
             new OpenLayers.Control.ZoomPanel(),
 			new OpenLayers.Control.LayerSwitcher()
         ]
+
 		});
 			
 		map.events.on({
