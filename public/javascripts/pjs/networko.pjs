@@ -1,0 +1,336 @@
+Graph g;
+// se carga en el setup y en marcaPosicion a partir del resourceId... 
+//Resource r...   refactorizado a rir
+String resourceId;
+
+
+//marcaPosicion : behavior implementado en metodo: 
+	// si se hace click en value no se selecciona el node y viceversa
+int selectedValueIndex;
+int oldSelectedValueIndex;
+Value selectedValue;
+Value oldSelectedValue;
+Attribute oldSelectedAttribute;
+//este sirve para identificar numericamente en la lista de nodos exitentes del grafo
+// solo se selecciona si se pincha en el blanco del circulo
+int selectedNodeIndex;
+int oldSelectedNodeIndex;
+
+// //////////////INCORPORADOS POR MI
+Attribute newSelectedAttribute;
+Node miNewNode;
+
+
+
+void printState(){
+//if(selectedValue!=null && selectedValueIndex=) selectedValueIndex=selectedValue.getId();
+println("selectedValueIndex:"+selectedValueIndex+" value: "+((selectedValue!=null) ? selectedValue.getId() : "nulo"));
+println("oldSelectedValueIndex:"+oldSelectedValueIndex+" value: "+((oldSelectedValue!=null) ? oldSelectedValue.getId():"nulo"));
+
+if(oldSelectedAttribute!=null )println("oldSelectedAttribute:"+oldSelectedAttribute.getName());
+else println("oldSelectedAttribute null");
+if(newSelectedAttribute!=null )println("newSelectedAttribute:"+newSelectedAttribute.getName());
+else println("newSelectedAttribute null");
+println("selectedNodeIndex:"+selectedNodeIndex);
+if(miNewNode!=null)
+println("miNewNode.getId():"+miNewNode.getGraph().dameIndiceNodo(miNewNode));
+else println("miNewNode null");
+println("g.getDragNode():"+g.getDragNode());
+println("");
+println("#######################");
+println("");
+}
+
+
+boolean iniciar=true;
+String lineCap;
+boolean debug=false;
+boolean hover=true;
+String mensaje="hola";
+
+
+void setup() {	
+	loadImagenesHome();
+	//console.info("resourceId: "+resourceId);
+	g = new Graph();
+	// Activate font for output
+	textFont(defaultFont, fontSize);
+
+  resize();
+  fill(0);
+  smooth();
+  frameRate(30);
+	background(234,239,224);
+
+	if (resourceId) {
+	Resource rir;
+	
+		rir = fetchResource(resourceId);
+		
+		g.addNode(root = new Node(rir));
+		g.setSelectedNode(root);
+
+		$('aside').html(rir.html);
+	}
+	iniciaPVectors();
+	
+ 	
+}
+
+
+
+
+void draw() {
+	if(iniciar){
+		setR(515);
+		iniciar=false;
+		setup();
+	}
+	strokeCap(SQUARE);
+ // esto se evaluaba cuando existia la posibilidad de aparecer la pantalla en blanco 
+ // if (g.nodes.size()>0) {
+    g.tick();
+    background(234,239,224);
+	paintBackgroundImages();
+    g.draw();
+     pushStyle();
+     textAlign(LEFT);
+     fill(234,239,224);
+     noStroke();
+     rect(origenContacto.x-95, origenContacto.y+40,400,15);
+     fill(0);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+     text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-24,origenContacto.y+50);
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
+     popStyle();
+}
+//carga ::: oldSelectedAttribute, selectedValueIndex,selectedNodeIndex
+void marcaPosicion() {
+
+	if (!resourceId) return;
+
+	// si no hay dragging	
+//	if (g.getDragNode()==null) {
+	   			   
+
+	   	Resource rrr = g.getSelectedNode().getSubject();
+		ArrayList values = rrr.getValues();
+
+		oldSelectedAttribute = rrr.getSelectedAttribute();
+
+		
+		//aqui selectedValueIndex se actualiza iterando por los attributes y values del resource
+		selectedValueIndex=actualizaSelectedValueIndex(values);
+		// si hay value seleccionado... es decir si ha hecho click en alguno
+		if (selectedValueIndex!=null) {
+		  // si hay un cambio de attribute actualiza el resource!
+		  actualizaResourcePorCambioDeAttribute(rrr, values);
+		}else{
+		//pincha fuera pierde antigua selecccion!
+		//println("jolin"+g.getSelectedNode().getName());
+			oldSelectedValueIndex=null;
+			selectedValue=null;
+			oldSelectedValue=null;
+		}
+
+		siNoHaySeleccionLimpiaResource(rrr);
+		selectedNodeIndex=seleccionNodeIndex();
+		//println("selectedNodeIndex: "+selectedNodeIndex);
+	//	}
+	
+	
+}
+
+void actualizaResourcePorCambioDeAttribute(rrr, values){
+
+		   if (oldSelectedAttribute != rrr.getSelectedAttribute()) {							  		   float offset = 0;
+					
+		   if (rrr.previousSelectedAttribute!=null) rrr.previousSelectedAttribute.weight = 1.0;
+		   rrr.selectedAttribute.weight = 4.0;
+		   // r.transitioning = true;
+		   float targetAngle = (values.get(selectedValueIndex).angleStart +values.get(selectedValueIndex).angleStop) / 2;
+		   if (oldSelectedAttribute!=null) oldSelectedAttribute.targetWeight = 1.0;
+		   rrr.getSelectedAttribute().targetWeight = 4.0;
+
+		   rrr.update();
+		   currentAngle = (rrr.getValues().get(selectedValueIndex).angleStart +rrr.getValues().get(selectedValueIndex).angleStop) / 2
+
+		   offset = targetAngle-currentAngle;
+		   float targetAdjustment = rrr.angleAdjustment+offset;
+		   if (targetAdjustment<0) {
+			   targetAdjustment = TWO_PI - targetAdjustment;
+		   }
+					 rrr.setAngleAdjustment(targetAdjustment);
+			}
+
+}
+
+void actualizaSelectedValueIndex(values){
+//inicializa valor a devolver
+		selectedValueIndex = null;
+
+		// Iterate over values
+	for (int i = 0; i < values.size(); i++) {
+			Value valor=values.get(i);
+			if (valor.mouseOver()) {
+			   	selectedValue=valor;	       
+				selectedValueIndex = i;
+				newSelectedAttribute=valor.getAttribute();
+				if(newSelectedAttribute!=null)
+				miNewNode=newSelectedAttribute.getResource().nod;
+			}
+		}
+		if(selectedValueIndex==null){
+		//println("eeeeeeeeeeeeee");
+		 }
+		return 	selectedValueIndex;
+
+}
+void seleccionNodeIndex(){
+	if(selectedNodeIndex!=null)oldSelectedNodeIndex=selectedNodeIndex; 
+	selectedNodeIndex = null;
+		// Iterate over nodes
+		for (int i=0; i< g.nodes.size(); i++) {
+			if (g.nodes.get(i).mouseOver()) {
+				selectedNodeIndex = i;
+			}
+		}
+		return selectedNodeIndex;
+}
+
+void siNoHaySeleccionLimpiaResource(rrr){
+		if (selectedValueIndex==null && rrr.selectedAttribute!=null) {
+
+			rrr.selectedAttribute.weight = 1.0;
+			 rrr.setSelectedAttribute(null);
+
+		}		
+
+}
+
+void compruebaPelotaOff(){
+if (selectedNodeIndex != null) {
+			// ocurre cuando se activa un nodo pasivo ... pasa a 1 primer plano
+		
+
+			selectedNode = g.nodes.get(selectedNodeIndex);
+			
+
+			g.setDragNode(selectedNode);
+			if (oldSelectedNodeIndex!=selectedNodeIndex) {
+		
+			for(Node n:g.nodes){
+			if(n!=selectedNode)n.getSubject().setClosed();
+			}
+//		Resource lastResourceSelected = g.nodes.get(oldSelectedNodeIndex).getSubject();
+			 
+  //		lastResourceSelected.setClosed();
+  			selectedNode.getSubject().setOpen();
+  			$('aside').html(selectedNode.getSubject().html);
+  			g.setSelectedNode(selectedNode);
+  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
+			activaDesplegablesMuseo();
+			}
+
+		
+		}
+
+}
+
+
+void mousePressed() {
+	if (compruebaResetButton()) return;
+
+	marcaPosicion();
+	compruebaPelotaOff();
+		//printState();
+	if(oldSelectedValue==null){
+		//primera vez que hace click en pelota
+		oldSelectedValue=selectedValue;
+		return;
+	}else{
+		//no es la primera vez que hace click en pelota	
+		if(oldSelectedValue==selectedValue){
+			//continua con la accion			
+		}else if(selectedValue.getAttribute()==oldSelectedValue.getAttribute()){
+		      oldSelectedValue=selectedValue;
+		      //continua con la accion
+		}else{
+		      oldSelectedValue=selectedValue;
+			return;
+		}		
+	}
+	
+	
+  if (mouseButton == LEFT) {
+  		//este selectedNode es el ultimo seleccionado o cargado con fetchResource
+		Node selectedNode = g.getSelectedNode();
+		//println(selectedNode.getSubject().name);
+
+		if(selectedNode==null) return;
+
+		Resource lastResourceSelected = selectedNode.getSubject();
+		if (selectedValueIndex != null) {
+			// Close current resource... ya hay un circulo anterior
+			lastResourceSelected.setClosed();
+	
+			r2 = fetchResource(lastResourceSelected.getValues().get(selectedValueIndex).getId());
+			selectedValueIndex=null;
+			selectedValue=null;
+			// Check if resource already exists
+	    int i = 0;
+	    Node n = null;
+	    
+	    while (i < g.nodes.size() && !n) {
+				if (g.nodes.get(i).getSubject().getId()==r2.getId())
+					n = g.nodes.get(i);
+	      i++;
+	    }
+
+	    if (!n) {
+				g.addNode(newNode = new Node(r2));
+				g.addEdge(new Edge(selectedNode, newNode));
+				g.setSelectedNode(newNode);
+			} else {
+				g.addEdge(new Edge(selectedNode, n));
+				g.setSelectedNode(n);
+				 n.getSubject().setOpen();				
+		}
+			
+		} 
+				
+
+	}
+}
+
+void mouseReleased() {
+  g.setDragNode(null);
+}
+
+void mouseDragged() {
+  if (g.getDragNode() != null) {
+    g.getDragNode().setPos(mouseX, mouseY, 0);
+  }
+}
+
+boolean compruebaPress(PVector inicio, PVector fin ){
+return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mouseY<=(inicio.y+fin.y));
+}
