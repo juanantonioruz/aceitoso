@@ -1,56 +1,82 @@
-Graph g;
-// se carga en el setup y en marcaPosicion a partir del resourceId... 
-//Resource r...   refactorizado a rir
-String resourceId;
+/* @pjs font="/fonts/GraublauWeb.otf, /fonts/GraublauWebBold.otf"; */
+/* @pjs preload="javascripts/pjs/images/olearum.jpg"; */
+/* @pjs preload="javascripts/pjs/images/ministerio.jpg"; */
+/* @pjs preload="javascripts/pjs/images/contacto.jpg"; */
+/* @pjs preload="javascripts/pjs/images/titulo_new2.jpg"; */
+/* @pjs preload="javascripts/pjs/images/inicio.jpg"; */
 
+String mensaje="hola";
+boolean depurando=true;
 
-//marcaPosicion : behavior implementado en metodo: 
-	// si se hace click en value no se selecciona el node y viceversa
-int selectedValueIndex;
-int oldSelectedValueIndex;
-Value selectedValue;
-Value oldSelectedValue;
-Attribute oldSelectedAttribute;
-//este sirve para identificar numericamente en la lista de nodos exitentes del grafo
-// solo se selecciona si se pincha en el blanco del circulo
-int selectedNodeIndex;
-int oldSelectedNodeIndex;
+color[] colors = new color[12];
 
-// //////////////INCORPORADOS POR MI
-Attribute newSelectedAttribute;
-Node miNewNode;
+colors[0] = color(128, 128, 0);
+colors[1] = color(107, 142, 35);
+colors[2] = color(85, 107, 47);
+colors[3] = color(177, 159, 69);
+colors[4] = color(222, 106, 235);
+colors[5] = color(192, 194, 84);
+colors[6] = color(120, 047, 128);
+colors[7] = color(192, 130, 199);
+colors[8] = color(141, 143, 98);
+colors[9] = color(81, 6, 89);
+colors[10] = color(161, 154, 69);
+colors[11] = color(64, 15, 69);
 
+PFont defaultFont = createFont("/fonts/GraublauWeb.otf",50);
+PFont boldFont = createFont("/fonts/GraublauWebBold.otf", 50);
+//PFont defaultFont = loadFont("/fonts/GraublauWeb-Regular.svg");
+//PFont boldFont = loadFont("/fonts/GraublauWeb-Bold.svg");
 
+int fontSize = 11.3;
+int fontSizeCaption = 16;
 
-void printState(){
-//if(selectedValue!=null && selectedValueIndex=) selectedValueIndex=selectedValue.getId();
-println("selectedValueIndex:"+selectedValueIndex+" value: "+((selectedValue!=null) ? selectedValue.getId() : "nulo"));
-println("oldSelectedValueIndex:"+oldSelectedValueIndex+" value: "+((oldSelectedValue!=null) ? oldSelectedValue.getId():"nulo"));
+int nodeCount = 0;
 
-if(oldSelectedAttribute!=null )println("oldSelectedAttribute:"+oldSelectedAttribute.getName());
-else println("oldSelectedAttribute null");
-if(newSelectedAttribute!=null )println("newSelectedAttribute:"+newSelectedAttribute.getName());
-else println("newSelectedAttribute null");
-println("selectedNodeIndex:"+selectedNodeIndex);
-if(miNewNode!=null)
-println("miNewNode.getId():"+miNewNode.getGraph().dameIndiceNodo(miNewNode));
-else println("miNewNode null");
-println("g.getDragNode():"+g.getDragNode());
-println("");
-println("#######################");
-println("");
+Resource fetchResource(String resourceId) {
+
+    // init dummy resource
+ // println("fecthing resource::: "+resourceId);
+  Resource resource = new Resource(resourceId, "", "");
+	resource.idx = nodeCount;
+  nodeCount++;
+  resource.fetchData(); // start fetching data from freebase
+	return resource;
 }
 
+Graph g;
+Resource r;
 
-boolean iniciar=true;
-String lineCap;
-boolean debug=false;
-boolean hover=true;
-String mensaje="hola";
+float NODE_SIZE = 10;
+float EDGE_LENGTH = 20;
+float EDGE_STRENGTH = 0.2;
+float SPACER_STRENGTH = 1000;
+
+int selectedValueIndex;
+int selectedNodeIndex;
+
+void resize() {
+	size(window.innerWidth-10, window.innerHeight-15);
+}
+ String resourceId;
+void setR(String v){
+resourceId=v;
+}
+    PImage olearumImage;
+    PImage ministerioImage;
+    PImage contactoImage;
+    PImage resetImage;
+    PImage tituloImage;
+
+
 
 
 void setup() {	
-	loadImagenesHome();
+    olearumImage = loadImage("javascripts/pjs/images/olearum.jpg");
+    ministerioImage = loadImage("javascripts/pjs/images/ministerio.jpg");
+    contactoImage = loadImage("javascripts/pjs/images/contacto.jpg");
+    resetImage = loadImage("javascripts/pjs/images/inicio.jpg");
+    tituloImage = loadImage("javascripts/pjs/images/titulo_new2.jpg");
 	//console.info("resourceId: "+resourceId);
 	g = new Graph();
 	// Activate font for output
@@ -63,218 +89,242 @@ void setup() {
 	background(234,239,224);
 
 	if (resourceId) {
-	Resource rir;
-	
-		rir = fetchResource(resourceId);
+		r = fetchResource(resourceId);
 		
-		g.addNode(root = new Node(rir));
+		g.addNode(root = new Node(r));
 		g.setSelectedNode(root);
 
-		$('aside').html(rir.html);
+		$('aside').html(r.html);
 	}
-	iniciaPVectors();
-	
+
+	 origenTitulo=new PVector(-10,5);
+ 	finTitulo=new PVector(800, 66);
+	 origenContacto=new PVector(width-320, height-80);
+ 	finContacto=new PVector(37, 28);
+		 origenReset=new PVector(width-358, 1);
+ 	finReset=new PVector(68, 23);
  	
+	 origenOlearum_1=new PVector(0,100);
+ 	finOlearum_1=new PVector(200, 71);
+	 origenMinisterio_1=new PVector(40,180);
+ 	finMinisterio_1=new PVector(150, 55);
+ 	
+	 origenOlearum_2=new PVector(width-265,height-88);
+ 	finOlearum_2=new PVector(107, 38);
+	 origenMinisterio_2=new PVector(width-150,height-88);
+ 	finMinisterio_2=new PVector(104, 38);
+
 }
 
+void printMensaje(boolean fondo){
+if(depurando){
+if(fondo){
+// background(234,239,224);
+}
+//textFont(defaultFont, 103);
+//text(mensaje, 100,100);
+}
+}
 
+PVector origenTitulo;
+PVector finTitulo;
+PVector origenContacto;
+PVector finContacto;
+PVector origenOlearum_1;
+PVector finOlearum_1;
+PVector origenOlearum_2;
+PVector finOlearum_2;
+PVector origenMinisterio_1;
+PVector finMinisterio_1;
+PVector origenMinisterio_2;
+PVector finMinisterio_2;
+PVector origenReset;
+PVector finReset;
 
-
+boolean iniciar=true;
 void draw() {
-	if(iniciar){
-		setR(515);
-		iniciar=false;
-		setup();
-	}
-	strokeCap(SQUARE);
- // esto se evaluaba cuando existia la posibilidad de aparecer la pantalla en blanco 
- // if (g.nodes.size()>0) {
+
+if(iniciar){
+setR(515);
+iniciar=false;
+setup();
+}
+
+strokeCap(SQUARE);
+  if (g.nodes.size()>0) {
     g.tick();
     background(234,239,224);
-	paintBackgroundImages();
+       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
+    
+    
     g.draw();
+			//console.log("***!.............");
+    
+  //  printMensaje();
+  }else{	
+  		
+       	 image(tituloImage, origenTitulo.x, origenTitulo.y,finTitulo.x,finTitulo.y);
+     //  	 image(olearumImage, origenOlearum_1.x, origenOlearum_1.y,finOlearum_1.x,finOlearum_1.y);
+      // 	 image(ministerioImage, origenMinisterio_1.x, origenMinisterio_1.y,finMinisterio_1.x,finMinisterio_1.y);
+       
+      //  image(ministerioImage, 40, 200);
+      //  println(ministerioImage.width);150
+      //  println(ministerioImage.height+" height");45
+	}
+	           	 image(olearumImage, origenOlearum_2.x, origenOlearum_2.y,finOlearum_2.x,finOlearum_2.y);
+           	 image(ministerioImage, origenMinisterio_2.x, origenMinisterio_2.y,finMinisterio_2.x,finMinisterio_2.y);
+	
+	 image(contactoImage, origenContacto.x, origenContacto.y,finContacto.x,finContacto.y);
+     image(resetImage, origenReset.x, origenReset.y,finReset.x,finReset.y);
      pushStyle();
      textAlign(LEFT);
      fill(234,239,224);
      noStroke();
      rect(origenContacto.x-95, origenContacto.y+40,400,15);
      fill(0);
-     text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-24,origenContacto.y+50);
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
      popStyle();
 }
-//carga ::: oldSelectedAttribute, selectedValueIndex,selectedNodeIndex
-void marcaPosicion() {
+void mouseMoved() {
+	if(compruebaPress(origenContacto, finContacto) || compruebaPress(origenReset, finReset) || compruebaPress(origenOlearum_2, finOlearum_2) || compruebaPress(origenMinisterio_2, finMinisterio_2)){
+	    if(!is_touch_device())
+	cursor(HAND);
+	}else{
+	    if(!is_touch_device())
+	
+	cursor(ARROW);
+	}
 
 	if (!resourceId) return;
-
-	// si no hay dragging	
-//	if (g.getDragNode()==null) {
-	   			   
-
-	   	Resource rrr = g.getSelectedNode().getSubject();
-		ArrayList values = rrr.getValues();
-
-		oldSelectedAttribute = rrr.getSelectedAttribute();
+	
+	if (g.getDragNode()==null) {
+	
+		Resource r = g.getSelectedNode().getSubject();
+		ArrayList values = r.getValues();
+		Attribute oldSelectedAttribute = r.getSelectedAttribute();
+		int oldValueIndex = selectedValueIndex;
+		selectedValueIndex = null;
+		
+		// Iterate over values
+		for (int i = 0; i < values.size(); i++) {
+			if (values.get(i).mouseOver()) {
+				selectedValueIndex = i;
+			}
+		}
+		
+		if (selectedValueIndex!=null) {
+			if (oldSelectedAttribute != r.getSelectedAttribute()) {								
+				float offset = 0;
+				if (selectedValueIndex != null) {
+					
+					if (r.previousSelectedAttribute!=null) r.previousSelectedAttribute.weight = 1.0;
+					r.selectedAttribute.weight = 4.0;
+					// r.transitioning = true;
+					float targetAngle = (values.get(selectedValueIndex).angleStart +values.get(selectedValueIndex).angleStop) / 2;
+					if (oldSelectedAttribute!=null) oldSelectedAttribute.targetWeight = 1.0;
+					r.getSelectedAttribute().targetWeight = 4.0;
+					
+					r.update();
+					currentAngle = (r.getValues().get(selectedValueIndex).angleStart +r.getValues().get(selectedValueIndex).angleStop) / 2
+					
+					offset = targetAngle-currentAngle;
+					float targetAdjustment = r.angleAdjustment+offset;
+					if (targetAdjustment<0) {
+						targetAdjustment = TWO_PI - targetAdjustment;
+					}
+					r.setAngleAdjustment(targetAdjustment);
+				}				
+			}
+		}
 
 		
-		//aqui selectedValueIndex se actualiza iterando por los attributes y values del resource
-		selectedValueIndex=actualizaSelectedValueIndex(values);
-		// si hay value seleccionado... es decir si ha hecho click en alguno
-		if (selectedValueIndex!=null) {
-		  // si hay un cambio de attribute actualiza el resource!
-		  actualizaResourcePorCambioDeAttribute(rrr, values);
-		}else{
-		//pincha fuera pierde antigua selecccion!
-		//println("jolin"+g.getSelectedNode().getName());
-			oldSelectedValueIndex=null;
-			selectedValue=null;
-			oldSelectedValue=null;
+		if (selectedValueIndex==null && r.selectedAttribute!=null) {
+			// r.selectedAttribute.weight = 1.0;
+			// r.setSelectedAttribute(null);
 		}
-
-		siNoHaySeleccionLimpiaResource(rrr);
-		selectedNodeIndex=seleccionNodeIndex();
-		//println("selectedNodeIndex: "+selectedNodeIndex);
-	//	}
-	
-	
-}
-
-void actualizaResourcePorCambioDeAttribute(rrr, values){
-
-		   if (oldSelectedAttribute != rrr.getSelectedAttribute()) {							  		   float offset = 0;
-					
-		   if (rrr.previousSelectedAttribute!=null) rrr.previousSelectedAttribute.weight = 1.0;
-		   rrr.selectedAttribute.weight = 4.0;
-		   // r.transitioning = true;
-		   float targetAngle = (values.get(selectedValueIndex).angleStart +values.get(selectedValueIndex).angleStop) / 2;
-		   if (oldSelectedAttribute!=null) oldSelectedAttribute.targetWeight = 1.0;
-		   rrr.getSelectedAttribute().targetWeight = 4.0;
-
-		   rrr.update();
-		   currentAngle = (rrr.getValues().get(selectedValueIndex).angleStart +rrr.getValues().get(selectedValueIndex).angleStop) / 2
-
-		   offset = targetAngle-currentAngle;
-		   float targetAdjustment = rrr.angleAdjustment+offset;
-		   if (targetAdjustment<0) {
-			   targetAdjustment = TWO_PI - targetAdjustment;
-		   }
-					 rrr.setAngleAdjustment(targetAdjustment);
-			}
-
-}
-
-void actualizaSelectedValueIndex(values){
-//inicializa valor a devolver
-		selectedValueIndex = null;
-
-		// Iterate over values
-	for (int i = 0; i < values.size(); i++) {
-			Value valor=values.get(i);
-			if (valor.mouseOver()) {
-			   	selectedValue=valor;	       
-				selectedValueIndex = i;
-				newSelectedAttribute=valor.getAttribute();
-				if(newSelectedAttribute!=null)
-				miNewNode=newSelectedAttribute.getResource().nod;
-			}
-		}
-		if(selectedValueIndex==null){
-		//println("eeeeeeeeeeeeee");
-		 }
-		return 	selectedValueIndex;
-
-}
-void seleccionNodeIndex(){
-	if(selectedNodeIndex!=null)oldSelectedNodeIndex=selectedNodeIndex; 
-	selectedNodeIndex = null;
+		
+		selectedNodeIndex = null;
 		// Iterate over nodes
 		for (int i=0; i< g.nodes.size(); i++) {
 			if (g.nodes.get(i).mouseOver()) {
 				selectedNodeIndex = i;
 			}
 		}
-		return selectedNodeIndex;
+	}
 }
 
-void siNoHaySeleccionLimpiaResource(rrr){
-		if (selectedValueIndex==null && rrr.selectedAttribute!=null) {
-
-			rrr.selectedAttribute.weight = 1.0;
-			 rrr.setSelectedAttribute(null);
-
-		}		
-
+boolean compruebaPress(PVector inicio, PVector fin ){
+return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mouseY<=(inicio.y+fin.y));
 }
 
-void compruebaPelotaOff(){
-if (selectedNodeIndex != null) {
-			// ocurre cuando se activa un nodo pasivo ... pasa a 1 primer plano
-		
-
+String lineCap;
+boolean debug=false;
+void mousePressedd() {
+ if (selectedNodeIndex != null) {
+			// TODO: Zoom to node
+			if(debug)println("// selectedNodeIndex != null");			
 			selectedNode = g.nodes.get(selectedNodeIndex);
 			
-
+			//println("juan tengo un museo");
 			g.setDragNode(selectedNode);
-			if (oldSelectedNodeIndex!=selectedNodeIndex) {
-		
-			for(Node n:g.nodes){
-			if(n!=selectedNode)n.getSubject().setClosed();
-			}
-//		Resource lastResourceSelected = g.nodes.get(oldSelectedNodeIndex).getSubject();
-			 
-  //		lastResourceSelected.setClosed();
-  			selectedNode.getSubject().setOpen();
-  			$('aside').html(selectedNode.getSubject().html);
-  			g.setSelectedNode(selectedNode);
-  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
-			activaDesplegablesMuseo();
-			}
-
-		
-		}
-
+}else{
+mouseMoved();
 }
-
-
+}
 void mousePressed() {
-	if (compruebaResetButton()) return;
 
-	marcaPosicion();
-	compruebaPelotaOff();
-		//printState();
-	if(oldSelectedValue==null){
-		//primera vez que hace click en pelota
-		oldSelectedValue=selectedValue;
-		return;
-	}else{
-		//no es la primera vez que hace click en pelota	
-		if(oldSelectedValue==selectedValue){
-			//continua con la accion			
-		}else if(selectedValue.getAttribute()==oldSelectedValue.getAttribute()){
-		      oldSelectedValue=selectedValue;
-		      //continua con la accion
-		}else{
-		      oldSelectedValue=selectedValue;
-			return;
-		}		
+	//if (!resourceId) return;
+	
+	if(compruebaPress(origenContacto, finContacto)){
+      	var caracteristicas = "height=700,width=800,scrollTo,resizable=1,scrollbars=1,location=0";
+      	nueva=window.open("./email/new", 'Popup', caracteristicas);
+      	return false;
+	}
+	if(compruebaPress(origenReset, finReset)){
+	//println("le has dado al reset");
+	setR(515);
+setup();
+
+	        $('aside').html("");
+	        $('#fb-suggest').val("");
+	
 	}
 	
+	if(g.nodes.size()>0){
+		if(compruebaPress(origenOlearum_2, finOlearum_2)){
+			link("http://www.olearum.es/", "_new"); 
+		}
+		if(compruebaPress(origenMinisterio_2, finMinisterio_2)){
+			link("http://www.mcu.es/", "_new"); 
+		}
+	}else{
+		if(compruebaPress(origenOlearum_1, finOlearum_1)){
+			link("http://www.olearum.es/", "_new"); 
+		}
+		if(compruebaPress(origenMinisterio_1, finMinisterio_1)){
+			link("http://www.mcu.es/", "_new"); 
+		}
+	}
 	
+  
   if (mouseButton == LEFT) {
-  		//este selectedNode es el ultimo seleccionado o cargado con fetchResource
 		Node selectedNode = g.getSelectedNode();
-		//println(selectedNode.getSubject().name);
-
 		if(selectedNode==null) return;
-
-		Resource lastResourceSelected = selectedNode.getSubject();
+		Resource r = selectedNode.getSubject();
 		if (selectedValueIndex != null) {
 			// Close current resource... ya hay un circulo anterior
-			lastResourceSelected.setClosed();
-	
-			r2 = fetchResource(lastResourceSelected.getValues().get(selectedValueIndex).getId());
-			selectedValueIndex=null;
-			selectedValue=null;
+			if(debug)println("// Close current resource selectedValueIndex != null");		
+			r.setClosed();
+			//console.log(selectedValueIndex);
+			//console.dir(r.getValues().size());
+			//console.dir(r.getValues().get(selectedValueIndex));
+			//println("x="+r.getX());
+			//println("y="+r.getY());
+			r2 = fetchResource(r.getValues().get(selectedValueIndex).getId());
+			//r2 = fetchResource(selectedValueIndex);
+			//console.dir(r2);
+			//println("selectedNode"+selectedNode.getSubject().getX());
+			
 			// Check if resource already exists
 	    int i = 0;
 	    Node n = null;
@@ -292,15 +342,73 @@ void mousePressed() {
 			} else {
 				g.addEdge(new Edge(selectedNode, n));
 				g.setSelectedNode(n);
-				 n.getSubject().setOpen();				
+				if(debug)println("node n!=null"); n.getSubject().setOpen();				
 		}
 			
-		} 
+		} else if (selectedNodeIndex != null) {
+			// TODO: Zoom to node
+			if(debug)println("// selectedNodeIndex != null");			
+			selectedNode = g.nodes.get(selectedNodeIndex);
+			
+			//println("juan tengo un museo");
+			g.setDragNode(selectedNode);
+			if (g.getSelectedNode()!=selectedNode) {
+  			r.setClosed();
+  			selectedNode.getSubject().setOpen();
+  			$('aside').html(selectedNode.getSubject().html);
+  			g.setSelectedNode(selectedNode);
+  			if(selectedNode.clasi!=null && selectedNode.clasi=="Museo")
+			activaDesplegablesMuseo();
+			}
+		}else{
+					if(debug)println("// selectedValueIndex == null and selectedNodeIndex == null");		
+		
+		}
 				
-
+  } else { // Right click
+		Node selectedNode = g.getSelectedNode();
+		Resource r = selectedNode.getSubject();
 	}
 }
-
+float lastX;
+float lastY;
+float beginX;
+float beginY;
+void touchMove(TouchEvent touchEvent) {
+	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
+	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
+	//println("t_move__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+	
+}
+void touchStart(TouchEvent touchEvent) {
+	lastX=touchEvent.touches[touchEvent.touches.length-1].offsetX;
+	lastY=touchEvent.touches[touchEvent.touches.length-1].offsetY;
+	//println("t_start__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+	if(hover){
+	hover=false;
+	}else{
+	hover=true;
+	}
+}
+void touchCancel(TouchEvent touchEvent) {
+	println("t_cancel");
+}
+boolean hover=true;
+String lastResourceId;
+void touchEnd(TouchEvent touchEvent) {
+//			println("t_end__ hover"+hover+"mouseX"+lastX+"mouseY"+lastY);
+			mouseX=lastX;
+			mouseY=lastY;
+			if(!hover){
+				mouseMoved();
+			}else{
+			mouseButton=LEFT;
+			mousePressedd();
+			
+			}
+		
+	
+}
 void mouseReleased() {
   g.setDragNode(null);
 }
@@ -309,8 +417,4 @@ void mouseDragged() {
   if (g.getDragNode() != null) {
     g.getDragNode().setPos(mouseX, mouseY, 0);
   }
-}
-
-boolean compruebaPress(PVector inicio, PVector fin ){
-return (mouseX>=inicio.x && mouseX<=(inicio.x+fin.x)) && (mouseY>=inicio.y && mouseY<=(inicio.y+fin.y));
 }
