@@ -102,7 +102,11 @@ void draw() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
      text("Realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-24,origenContacto.y+50);
+=======
+     text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
+>>>>>>> parent of 3dcdfa6... casi cerrando  #218
 =======
      text("realizado con la ayuda del Ministerio de Educación, Cultura y Deporte",origenContacto.x-34,origenContacto.y+50);
 >>>>>>> parent of 3dcdfa6... casi cerrando  #218
